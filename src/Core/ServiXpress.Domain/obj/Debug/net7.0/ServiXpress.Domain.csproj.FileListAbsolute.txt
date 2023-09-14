@@ -9,3 +9,4 @@ C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Core\ServiXpress.Domain\obj\D
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\refint\ServiXpress.Domain.dll
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.pdb
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ref\ServiXpress.Domain.dll
+C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.csproj.AssemblyReference.cache

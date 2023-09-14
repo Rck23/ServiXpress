@@ -15,3 +15,5 @@ C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\obj\Debug\net7
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\obj\Debug\net7.0\refint\ServiXpress.Infrastructure.dll
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\obj\Debug\net7.0\ServiXpress.Infrastructure.pdb
 C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\obj\Debug\net7.0\ref\ServiXpress.Infrastructure.dll
+C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\bin\Debug\net7.0\ServiXpress.Infrastructure.runtimeconfig.json
+C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Infrastructure\obj\Debug\net7.0\ServiXpress.Infrastructure.genruntimeconfig.cache
