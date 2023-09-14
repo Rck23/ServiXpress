@@ -15,7 +15,7 @@ IDGS 10-A-II
 - ****
 - ****
 
-### Inicial Backend  
+# Inicial Backend  
 
 INICIO: 
 
@@ -55,6 +55,14 @@ dotnet add src/Api/ServiXpress.Api.csproj reference src/Infrastructure/ServiXpre
 
 ```
 
-### Comando base de datos
+## Comando base de datos
 
+### Para crear las migraciones
+```
+dotnet ef migrations add InitMigration -p src/Infrastructure/ -s src/Api/
+```
 
+### Para crear la base de datos
+```
+update-database
+```
