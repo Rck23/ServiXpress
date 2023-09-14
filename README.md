@@ -1,5 +1,5 @@
 
-# ServiXpress .Net 7.
+# ServiXpress
 
 Proyecto desarrollado en la clase de Desarrollo movil Integral 
 IDGS 10-A-II 
@@ -7,7 +7,7 @@ IDGS 10-A-II
 ## Realizado con
 
 - **.Net 7**
-
+- **React-native**
 
 ## Librerias 
 
