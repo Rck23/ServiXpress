@@ -178,4 +178,4 @@ C:/Users/ulimx/OneDrive/Escritorio/ServiXpress/src/Api/bin/Debug/net7.0/runtimes
 /Users/rck23/Desktop/ServiXpress/src/Api/obj/Debug/net7.0/ServiXpress.Api.pdb
 /Users/rck23/Desktop/ServiXpress/src/Api/obj/Debug/net7.0/ServiXpress.Api.genruntimeconfig.cache
 /Users/rck23/Desktop/ServiXpress/src/Api/obj/Debug/net7.0/ref/ServiXpress.Api.dll
-/Users/rck23/Desktop/ServiXpress/src/Api/bin/Debug/net7.0/appsettings.Mac.json
+/Users/rck23/Desktop/ServiXpress/src/Api/bin/Debug/net7.0/appsettings.Macbook.json

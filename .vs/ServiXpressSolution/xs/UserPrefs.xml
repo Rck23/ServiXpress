@@ -1,49 +1,40 @@
-﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Development">
+﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Macbook">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/rck23/Desktop/ServiXpress/src/Api/Program.cs" relfile="src/Api/Program.cs" line="31" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="src/Api/Program.cs">
     <Files>
-      <File FileName="src/Api/appsettings.json" Line="2" Column="3" />
-      <File FileName="src/Api/Program.cs" Line="7" Column="1" />
-      <File FileName="src/Api/WeatherForecast.cs" Line="1" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/Common/BaseDomainModel.cs" Line="1" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/Usuario.cs" Line="12" Column="9" />
-      <File FileName="src/Api/Properties/launchSettings.json" Line="12" Column="1" />
-      <File FileName="src/Api/appsettings.Development.json" Line="3" Column="13" />
-      <File FileName="src/Api/appsettings (copiar).Development.json" Line="3" Column="6" />
-      <File FileName="src/Core/ServiXpress.Application/ApplicationServiceRegistration.cs" Line="13" Column="15" />
-      <File FileName="src/Infrastructure/InfrastructureServiceRegistration.cs" Line="15" Column="1" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Authorization/Role.cs" Line="1" Column="1" />
+      <File FileName="src/Api/appsettings.json" />
+      <File FileName="src/Api/Program.cs" Line="117" Column="1" />
+      <File FileName="src/Api/WeatherForecast.cs" />
+      <File FileName="src/Core/ServiXpress.Domain/Common/BaseDomainModel.cs" />
+      <File FileName="src/Core/ServiXpress.Domain/Usuario.cs" />
+      <File FileName="src/Api/Properties/launchSettings.json" Line="36" Column="47" />
+      <File FileName="src/Api/appsettings.Development.json" />
+      <File FileName="src/Core/ServiXpress.Application/Models/Authorization/Role.cs" />
+      <File FileName="src/Api/appsettings.Macbook.json" Line="2" Column="21" />
+      <File FileName="src/Infrastructure/Context/ServiXpressDbContext.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="ServiXpressSolution">
+          <Node name="ServiXpressSolution" expanded="True">
             <Node name="src" expanded="True">
-              <Node name="Core" expanded="True">
-                <Node name="ServiXpress.Application" expanded="True">
-                  <Node name="Models" expanded="True">
-                    <Node name="Authorization" expanded="True" />
-                  </Node>
-                </Node>
-                <Node name="ServiXpress.Domain" expanded="True">
-                  <Node name="Common" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="ServiXpress.Api" expanded="True">
-                <Node name="Controllers" expanded="True" />
+              <Node name="ServiXpress.Api">
+                <Node name="Properties" expanded="True" />
+                <Node name="appsettings.json" expanded="True" />
                 <Node name="Program.cs" selected="True" />
               </Node>
-              <Node name="ServiXpress.Infrastructure" expanded="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
