@@ -9,6 +9,7 @@ namespace ServiXpress.Domain
         public string Telefono { get; set; }
         public bool IsActive { get; set; } = true;
 
+        
 
         // PUEDE CONTENER LA IMAGEN DE PERFIL DEL USUARIO
         public string? AvatarUrl { get; set; }
