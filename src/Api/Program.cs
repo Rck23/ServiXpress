@@ -1,8 +1,11 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.IdentityModel.Tokens;
 using ServiXpress.Application;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure;
@@ -36,25 +39,40 @@ builder.Services.AddDbContext<ServiXpressDbContext>(options =>
     // para que aparezca en consola todos los querys que se hacen en la utilizacion del sistema.
 });
 
-//IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<Usuario>();
+IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<Usuario>();
+identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
 
-//identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
+identityBuilder.AddRoles<IdentityRole>().AddDefaultTokenProviders();
+identityBuilder.AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Usuario, IdentityRole>>();
 
-//identityBuilder.AddRoles<IdentityRole>().AddDefaultTokenProviders();
-//identityBuilder.AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Usuario, IdentityRole>>();
+identityBuilder.AddEntityFrameworkStores<ServiXpressDbContext>();
+identityBuilder.AddSignInManager<SignInManager<Usuario>>();
 
-//identityBuilder.AddEntityFrameworkStores<ServiXpressDbContext>();
-//identityBuilder.AddSignInManager<SignInManager<Usuario>>();
+builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 
-//builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin()
-//        .AllowAnyMethod()
-//        .AllowAnyHeader()
-//    );
-//});
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]!));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(opt =>
+{
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = key,
+        ValidateAudience = false,
+        ValidateIssuer = false
+    };
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+        builder => builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+    );
+
+});
 
 
 
@@ -85,32 +103,32 @@ app.UseCors("CorsPolicy");
 app.MapControllers();
 
 //// PONER DATOS AUTOMATICAMENTE EN LA BASE DE DATOS
-//using (var scope = app.Services.CreateScope())
-//{
-//    var service = scope.ServiceProvider;
-//    var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+using (var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    var loggerFactory = service.GetRequiredService<ILoggerFactory>();
 
-//    // INSTANCIAR EL CONTEXT, ROLES, USUARIOS, ETC....
-//    try
-//    {
-//        var context = service.GetRequiredService<ServiXpressDbContext>();
-//        var usuarioManager = service.GetRequiredService<UserManager<Usuario>>();
-//        var rolManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+    // INSTANCIAR EL CONTEXT, ROLES, USUARIOS, ETC....
+    try
+    {
+        var context = service.GetRequiredService<ServiXpressDbContext>();
+        var usuarioManager = service.GetRequiredService<UserManager<Usuario>>();
+        var rolManager = service.GetRequiredService<RoleManager<IdentityRole>>();
 
-//        // MIGRAR 
-//        await context.Database.MigrateAsync();
+        // MIGRAR 
+        await context.Database.MigrateAsync();
 
-//        //LLAMAR A LA DATA
-//        await ServiXpressDbContextData.LoadDataAsync(context, usuarioManager, rolManager, loggerFactory);
+        //LLAMAR A LA DATA
+        await ServiXpressDbContextData.LoadDataAsync(context, usuarioManager, rolManager, loggerFactory);
 
-//    }
-//    catch (Exception ex)
-//    {
-//        var logger = loggerFactory.CreateLogger<Program>();
-//        logger.LogError(ex, "Error al migrar los datos");
-//    }
+    }
+    catch (Exception ex)
+    {
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError(ex, "Error al migrar los datos");
+    }
 
-//}
+}
 
 
 

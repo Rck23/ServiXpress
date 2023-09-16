@@ -5,6 +5,8 @@
 
         public const string ADMIN = nameof(ADMIN);
 
-        public const string USER = nameof(USER);
+        public const string TRABAJADOR = nameof(TRABAJADOR);
+
+        public const string CLIENTE = nameof(CLIENTE);
     }
 }

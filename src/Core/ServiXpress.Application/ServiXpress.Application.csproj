@@ -4,6 +4,14 @@
     <ProjectReference Include="..\ServiXpress.Domain\ServiXpress.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Persistence\" />
+    <None Remove="Models\Token\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
+    <Folder Include="Models\Token\" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

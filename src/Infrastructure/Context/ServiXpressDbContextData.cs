@@ -19,7 +19,8 @@ namespace ServiXpress.Infrastructure.Context
                 if (!roleManager.Roles.Any())
                 {
                     await roleManager.CreateAsync(new IdentityRole(Role.ADMIN));
-                    await roleManager.CreateAsync(new IdentityRole(Role.USER));
+                    await roleManager.CreateAsync(new IdentityRole(Role.CLIENTE));
+                    await roleManager.CreateAsync(new IdentityRole(Role.TRABAJADOR));
 
                     if (!userManager.Users.Any())
                     {
@@ -35,18 +36,30 @@ namespace ServiXpress.Infrastructure.Context
                         await userManager.CreateAsync(usuarioAdmin, "PasswordAdmin123*");
                         await userManager.AddToRoleAsync(usuarioAdmin, Role.ADMIN);
 
+                        var usuarioTrabajador = new Usuario
+                        {
+                            Nombre = "River",
+                            Apellidos = "Gonzales",
+                            Email = "Trabajador1@gmail.com",
+                            UserName = "TrabajadorM",
+                            Telefono = "4495108094",
+                            AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
+                        };
+                        await userManager.CreateAsync(usuarioTrabajador, "PasswordUser123$54");
+                        await userManager.AddToRoleAsync(usuarioTrabajador, Role.TRABAJADOR);
 
-                        var usuario = new Usuario
+
+                        var usuarioCliente = new Usuario
                         {
                             Nombre = "Kevin",
                             Apellidos = "Michelin",
-                            Email = "SoyUSER@gmail.com",
-                            UserName = "Usuario21",
+                            Email = "Cliente1@gmail.com",
+                            UserName = "Usuario1",
                             Telefono = "4495108974",
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
-                        await userManager.CreateAsync(usuario, "PasswordUser123$");
-                        await userManager.AddToRoleAsync(usuario, Role.USER);
+                        await userManager.CreateAsync(usuarioCliente, "PasswordUser123$");
+                        await userManager.AddToRoleAsync(usuarioCliente, Role.CLIENTE);
 
                     }
                 }

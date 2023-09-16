@@ -20,10 +20,9 @@
     "Macbook": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7086;http://localhost:5002",
+      "applicationUrl": "http://localhost:21888",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Macbook"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true
     },

@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiXpress.Application.Models.Token;
+using ServiXpress.Application.Persistence;
+using ServiXpress.Infrastructure.Repositories;
 
 namespace ServiXpress.Infrastructure
 {
@@ -13,7 +16,12 @@ namespace ServiXpress.Infrastructure
             // AQUI IRAN TODOS LOS SERVICIOS DEL PROYECTO
 
 
-            return services; 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(RepositoryBase<>));
+
+            services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            return services;
         }
     }
 }

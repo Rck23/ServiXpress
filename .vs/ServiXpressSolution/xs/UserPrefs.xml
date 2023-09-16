@@ -1,35 +1,52 @@
-﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Macbook">
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/rck23/Desktop/ServiXpress/src/Api/Program.cs" relfile="src/Api/Program.cs" line="31" column="1" />
-    </BreakpointStore>
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Development">
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/Api/Program.cs">
+  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Api/appsettings.Development.json">
     <Files>
       <File FileName="src/Api/appsettings.json" />
-      <File FileName="src/Api/Program.cs" Line="117" Column="1" />
+      <File FileName="src/Api/Program.cs" Line="73" Column="7" />
       <File FileName="src/Api/WeatherForecast.cs" />
       <File FileName="src/Core/ServiXpress.Domain/Common/BaseDomainModel.cs" />
-      <File FileName="src/Core/ServiXpress.Domain/Usuario.cs" />
-      <File FileName="src/Api/Properties/launchSettings.json" Line="36" Column="47" />
-      <File FileName="src/Api/appsettings.Development.json" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Authorization/Role.cs" />
-      <File FileName="src/Api/appsettings.Macbook.json" Line="2" Column="21" />
-      <File FileName="src/Infrastructure/Context/ServiXpressDbContext.cs" />
+      <File FileName="src/Core/ServiXpress.Domain/Usuario.cs" Line="1" Column="1" />
+      <File FileName="src/Api/Properties/launchSettings.json" />
+      <File FileName="src/Api/appsettings.Development.json" Line="20" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Models/Authorization/Role.cs" Line="13" Column="1" />
+      <File FileName="src/Api/appsettings.Macbook.json" Line="11" Column="34" />
+      <File FileName="src/Infrastructure/Context/ServiXpressDbContext.cs" Line="1" Column="1" />
+      <File FileName="src/Infrastructure/Repositories/RepositoryBase.cs" Line="10" Column="45" />
+      <File FileName="src/Core/ServiXpress.Application/Persistence/IAsyncRepository.cs" Line="48" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Persistence/IUnitOfWork.cs" Line="8" Column="30" />
+      <File FileName="src/Infrastructure/Repositories/UnitOfWork.cs" Line="57" Column="10" />
+      <File FileName="src/Infrastructure/InfrastructureServiceRegistration.cs" Line="15" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Models/Token/JwtSettings.cs" Line="8" Column="9" />
+      <File FileName="src/Core/ServiXpress.Domain/AppRole.cs" Line="10" Column="59" />
+      <File FileName="src/Infrastructure/Context/ServiXpressDbContextData.cs" Line="48" Column="93" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="ServiXpressSolution" expanded="True">
-            <Node name="src" expanded="True">
+          <Node name="ServiXpressSolution">
+            <Node name="src">
+              <Node name="Core" expanded="True">
+                <Node name="ServiXpress.Application">
+                  <Node name="Dependencies" expanded="True" />
+                  <Node name="Models" expanded="True">
+                    <Node name="Authorization" expanded="True" />
+                  </Node>
+                  <Node name="Persistence" expanded="True" />
+                </Node>
+              </Node>
               <Node name="ServiXpress.Api">
-                <Node name="Properties" expanded="True" />
-                <Node name="appsettings.json" expanded="True" />
-                <Node name="Program.cs" selected="True" />
+                <Node name="appsettings.json" selected="True" />
+              </Node>
+              <Node name="ServiXpress.Infrastructure">
+                <Node name="Context" expanded="True" />
+                <Node name="Repositories" expanded="True" />
               </Node>
             </Node>
           </Node>
