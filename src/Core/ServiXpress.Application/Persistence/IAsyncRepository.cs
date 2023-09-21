@@ -3,10 +3,24 @@ using System.Linq.Expressions;
 
 namespace ServiXpress.Application.Persistence
 {
+     /// <summary>
+    /// Representa una interfaz de repositorio asíncrono para entidades de tipo T.
+    /// </summary>
+    /// <typeparam name="T">El tipo de entidad.</typeparam>
 	public interface IAsyncRepository<T> where T : class
     {
+
+        /// <summary>
+        /// Obtiene todas las entidades de forma asíncrona.
+        /// </summary>
+        /// <returns>Una tarea asíncrona que representa la operación. El resultado de la tarea contiene una lista de solo lectura de entidades.</returns>
         Task<IReadOnlyList<T>> GetAllAsync();
 
+        /// <summary>
+        /// Obtiene entidades de forma asíncrona basadas en un predicado.
+        /// </summary>
+        /// <param name="predicate">El predicado para filtrar entidades.</param>
+        /// <returns>Una tarea asíncrona que representa la operación. El resultado de la tarea contiene una lista de solo lectura de entidades.</returns>
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
 
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>>? predicate,

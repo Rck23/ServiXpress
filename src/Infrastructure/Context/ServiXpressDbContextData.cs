@@ -8,6 +8,13 @@ namespace ServiXpress.Infrastructure.Context
 {
     public class ServiXpressDbContextData
     {
+        /// <summary>
+        /// Carga los datos iniciales en el contexto de la base de datos.
+        /// </summary>
+        /// <param name="context">Contexto de la base de datos.</param>
+        /// <param name="userManager">Administrador de usuarios.</param>
+        /// <param name="roleManager">Administrador de roles.</param>
+        /// <param name="loggerFactory">Factoría de registros.</param>
         public static async Task LoadDataAsync(ServiXpressDbContext context,
               UserManager<Usuario> userManager,
               RoleManager<IdentityRole> roleManager,

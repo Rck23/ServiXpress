@@ -1,20 +1,21 @@
-﻿using System;
+using System;
 namespace ServiXpress.Application.Models.Token
 {
-	public class JwtSettings
-	{
-		
 
-        public string? Key { get; set; }
+        public class JwtSettings
+        {
 
-        public string? Issuer { get; set; }
 
-        public string? Audience { get; set; }
+                public string? Key { get; set; }
 
-        public double DurationInMinutes { get; set; }
+                public string? Issuer { get; set; }
 
-        public TimeSpan ExpireTime { get; set; }
-    
-	}
+                public string? Audience { get; set; }
+
+                public double DurationInMinutes { get; set; }
+
+                public TimeSpan ExpireTime { get; set; }
+
+        }
 }
 

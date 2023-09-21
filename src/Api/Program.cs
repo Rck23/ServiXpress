@@ -12,33 +12,33 @@ using ServiXpress.Infrastructure;
 using ServiXpress.Infrastructure.Context;
 
 
-
+// Crear el constructor de la aplicación web
 var builder = WebApplication.CreateBuilder(args);
 
+// Obtener el entorno de hospedaje
 IWebHostEnvironment _env = builder.Environment;
 
-// Add services to the container.
-
+// Agregar servicios al contenedor
 builder.Services.AddControllers();
 
-// AGARRA DATA DE INFRAESTRUCTURE 
+// Agregar servicios de infraestructura
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// AGARRA DATA DE APPLICATION
+// Agregar servicios de aplicación
 builder.Services.AddApplicationServices(builder.Configuration);
 
-
+// Agregar archivo de configuración JSON basado en el entorno
 builder.Configuration.AddJsonFile($"appsettings.{_env.EnvironmentName}.json", optional: false, reloadOnChange: true);
 
-// AGREGACION DE CONTEXT
+// Agregar contexto de base de datos
 builder.Services.AddDbContext<ServiXpressDbContext>(options =>
 {
-   
     options.UseSqlServer(builder.Configuration.GetConnectionString("Conexion"),
         b => b.MigrationsAssembly(typeof(ServiXpressDbContext).Assembly.FullName));
     // para que aparezca en consola todos los querys que se hacen en la utilizacion del sistema.
 });
 
+// Configurar la identidad
 IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<Usuario>();
 identityBuilder = new IdentityBuilder(identityBuilder.UserType, identityBuilder.Services);
 
@@ -50,20 +50,21 @@ identityBuilder.AddSignInManager<SignInManager<Usuario>>();
 
 builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 
-
+// Configurar autenticación JWT
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]!));
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-.AddJwtBearer(opt =>
-{
-    opt.TokenValidationParameters = new TokenValidationParameters
+    .AddJwtBearer(opt =>
     {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = key,
-        ValidateAudience = false,
-        ValidateIssuer = false
-    };
-});
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = key,
+            ValidateAudience = false,
+            ValidateIssuer = false
+        };
+    });
 
+// Configurar CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
@@ -71,26 +72,18 @@ builder.Services.AddCors(options =>
                             .AllowAnyMethod()
                             .AllowAnyHeader()
     );
-
 });
 
-
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configurar Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Construir la aplicación
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
-   
-//}
-
+// Configurar el pipeline de solicitudes HTTP
 app.UseSwagger();
 app.UseSwaggerUI();
-
 
 app.UseHttpsRedirection();
 
@@ -102,34 +95,29 @@ app.UseCors("CorsPolicy");
 
 app.MapControllers();
 
-//// PONER DATOS AUTOMATICAMENTE EN LA BASE DE DATOS
+// Poner datos automáticamente en la base de datos
 using (var scope = app.Services.CreateScope())
 {
     var service = scope.ServiceProvider;
     var loggerFactory = service.GetRequiredService<ILoggerFactory>();
 
-    // INSTANCIAR EL CONTEXT, ROLES, USUARIOS, ETC....
     try
     {
         var context = service.GetRequiredService<ServiXpressDbContext>();
         var usuarioManager = service.GetRequiredService<UserManager<Usuario>>();
         var rolManager = service.GetRequiredService<RoleManager<IdentityRole>>();
 
-        // MIGRAR 
+        // Migrar la base de datos
         await context.Database.MigrateAsync();
 
-        //LLAMAR A LA DATA
+        // Cargar datos
         await ServiXpressDbContextData.LoadDataAsync(context, usuarioManager, rolManager, loggerFactory);
-
     }
     catch (Exception ex)
     {
         var logger = loggerFactory.CreateLogger<Program>();
         logger.LogError(ex, "Error al migrar los datos");
     }
-
 }
-
-
 
 app.Run();

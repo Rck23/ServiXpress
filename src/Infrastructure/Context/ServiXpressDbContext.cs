@@ -6,13 +6,26 @@ using ServiXpress.Domain.Common;
 
 namespace ServiXpress.Infrastructure.Context
 {
+    /// <summary>
+    /// Contexto de la base de datos para el proyecto ServiXpress.
+    /// </summary>
     public class ServiXpressDbContext : IdentityDbContext<Usuario>
     {
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase "ServiXpressDbContext".
+        /// </summary>
+        /// <param name="dbContext">Opciones de configuración del contexto de la base de datos.</param>
         public ServiXpressDbContext(DbContextOptions<ServiXpressDbContext> dbContext) : base(dbContext)
         {
 
         }
 
+
+        /// <summary>
+        /// Guarda los cambios asincrónicamente en la base de datos.
+        /// </summary>
+        /// <param name="cancellationToken">Token de cancelación opcional.</param>
+        /// <returns>Un <see cref="Task"/> que representa la operación asincrónica y devuelve el número de entidades afectadas.</returns>
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var username = "system";
@@ -36,6 +49,10 @@ namespace ServiXpress.Infrastructure.Context
             return base.SaveChangesAsync(cancellationToken);
         }
 
+         /// <summary>
+        /// Configura el modelo de la base de datos.
+        /// </summary>
+        /// <param name="builder">Constructor del modelo.</param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

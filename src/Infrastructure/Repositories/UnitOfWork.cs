@@ -5,17 +5,28 @@ using ServiXpress.Infrastructure.Context;
 
 namespace ServiXpress.Infrastructure.Repositories
 {
+    /// <summary>
+    /// Unidad de trabajo que representa una transacción de base de datos.
+    /// </summary>
 	public class UnitOfWork: IUnitOfWork
     {
         private Hashtable? _repositories;
 
         private readonly ServiXpressDbContext _context;
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase "UnitOfWork".
+        /// </summary>
+        /// <param name="context">Contexto de la base de datos.</param>
         public UnitOfWork(ServiXpressDbContext context)
         {
             _context = context;
         }
 
+         /// <summary>
+        /// Guarda los cambios en la base de datos de forma asíncrona.
+        /// </summary>
+        /// <returns>El número de entidades afectadas.</returns>
         public async Task<int> Complete()
         {
 
@@ -30,11 +41,19 @@ namespace ServiXpress.Infrastructure.Repositories
 
         }
 
+        /// <summary>
+        /// Libera los recursos utilizados por la unidad de trabajo.
+        /// </summary>
         public void Dispose()
         {
             _context.Dispose();
         }
 
+ /// <summary>
+        /// Obtiene el repositorio para una entidad específica.
+        /// </summary>
+        /// <typeparam name="TEntity">El tipo de entidad.</typeparam>
+        /// <returns>El repositorio para la entidad especificada.</returns>
         public IAsyncRepository<TEntity> Repository<TEntity>() where TEntity : class
         {
             if (_repositories is null)
