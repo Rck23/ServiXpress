@@ -1,10 +1,10 @@
 namespace ServiXpress.Application.Models.Authorization
 {
 
-public static class Role
+public static class RolesAPI
     {
 
-        public const string ADMIN = nameof(ADMIN);
+        public const string AGENTE = nameof(AGENTE);
 
         public const string TRABAJADOR = nameof(TRABAJADOR);
 

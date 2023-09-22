@@ -7,10 +7,14 @@
   <ItemGroup>
     <None Remove="Persistence\" />
     <None Remove="Models\Token\" />
+    <None Remove="Models\Status\" />
+    <None Remove="Models\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
+    <Folder Include="Models\Status\" />
+    <Folder Include="Models\Services\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>

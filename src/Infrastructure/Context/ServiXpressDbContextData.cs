@@ -25,9 +25,9 @@ namespace ServiXpress.Infrastructure.Context
             {
                 if (!roleManager.Roles.Any())
                 {
-                    await roleManager.CreateAsync(new IdentityRole(Role.ADMIN));
-                    await roleManager.CreateAsync(new IdentityRole(Role.CLIENTE));
-                    await roleManager.CreateAsync(new IdentityRole(Role.TRABAJADOR));
+                    await roleManager.CreateAsync(new IdentityRole(RolesAPI.AGENTE));
+                    await roleManager.CreateAsync(new IdentityRole(RolesAPI.CLIENTE));
+                    await roleManager.CreateAsync(new IdentityRole(RolesAPI.TRABAJADOR));
 
                     if (!userManager.Users.Any())
                     {
@@ -36,24 +36,42 @@ namespace ServiXpress.Infrastructure.Context
                             Nombre = "Administrador",
                             Apellidos = "GE",
                             Email = "admin@gmail.com",
-                            UserName = "Admin",
                             Telefono = "4495231546",
+                            Calle = "Zena",
+                            NumExterior = 342,
+                            NumInterior = 4,
+                            ColoniaFraccionamiento = "Blanca",
+                            CodigoPostal = "23122",
+                            Municipio = "Ags",
+                            Estado = "Aguascalientes",
+                            Descripcion = "Descripcion pro",
+                            FechaHoraRegistro = new DateTime(2023, 9, 15),
+
+
                             AvatarUrl = "https://i.pinimg.com/originals/77/25/6b/77256b860c831fa87472e6d391af51db.png"
                         };
-                        await userManager.CreateAsync(usuarioAdmin, "PasswordAdmin123*");
-                        await userManager.AddToRoleAsync(usuarioAdmin, Role.ADMIN);
+                        await userManager.CreateAsync(usuarioAdmin);
+                        await userManager.AddToRoleAsync(usuarioAdmin, RolesAPI.AGENTE);
 
                         var usuarioTrabajador = new Usuario
                         {
                             Nombre = "River",
                             Apellidos = "Gonzales",
                             Email = "Trabajador1@gmail.com",
-                            UserName = "TrabajadorM",
                             Telefono = "4495108094",
+                            Calle = "Zena",
+                            NumExterior = 331,
+                            
+                            ColoniaFraccionamiento = "Blanca",
+                            CodigoPostal = "23122",
+                            Municipio = "Ags",
+                            Estado = "Aguascalientes",
+                            Descripcion = "Descripcion pro",
+                            FechaHoraRegistro = new DateTime(2023, 7, 23),
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
                         await userManager.CreateAsync(usuarioTrabajador, "PasswordUser123$54");
-                        await userManager.AddToRoleAsync(usuarioTrabajador, Role.TRABAJADOR);
+                        await userManager.AddToRoleAsync(usuarioTrabajador, RolesAPI.TRABAJADOR);
 
 
                         var usuarioCliente = new Usuario
@@ -61,12 +79,21 @@ namespace ServiXpress.Infrastructure.Context
                             Nombre = "Kevin",
                             Apellidos = "Michelin",
                             Email = "Cliente1@gmail.com",
-                            UserName = "Usuario1",
                             Telefono = "4495108974",
+                            Calle = "Sihai",
+                            NumExterior = 653,
+                            NumInterior = 9,
+                            ColoniaFraccionamiento = "Blanca",
+                            CodigoPostal = "81232",
+                            Municipio = "Ags",
+                            Estado = "Aguascalientes",
+                            Descripcion = "Descripcion pro",
+                            
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
                         await userManager.CreateAsync(usuarioCliente, "PasswordUser123$");
-                        await userManager.AddToRoleAsync(usuarioCliente, Role.CLIENTE);
+                        await userManager.AddToRoleAsync(usuarioCliente, RolesAPI.CLIENTE);
+                        
 
                     }
                 }

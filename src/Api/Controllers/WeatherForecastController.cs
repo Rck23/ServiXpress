@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiXpress.Application.Models.Authorization;
 
 namespace ServiXpress.Api.Controllers;
 
@@ -17,6 +19,7 @@ public class WeatherForecastController : ControllerBase
     {
         _logger = logger;
     }
+
 
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
