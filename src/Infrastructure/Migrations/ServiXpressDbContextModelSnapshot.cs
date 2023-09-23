@@ -156,6 +156,380 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ServiXpress.Domain.Calificaciones", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Calificacion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comentarios")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaHoraRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UsuarioCalificaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("UsuarioCalificadoId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioCalificaId");
+
+                    b.HasIndex("UsuarioCalificadoId");
+
+                    b.ToTable("Calificaciones");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.CategoriaReporte", b =>
+                {
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Nombre");
+
+                    b.ToTable("CategoriaReportes");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.CategoriaServicio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaHoraRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriasServicios");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.EstatusReporte", b =>
+                {
+                    b.Property<string>("Estatus")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Estatus");
+
+                    b.ToTable("EstatusReportes");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.EstatusServicio", b =>
+                {
+                    b.Property<string>("Estatus")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Estatus");
+
+                    b.ToTable("EstatusServicios");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.EstatusUsuario", b =>
+                {
+                    b.Property<string>("Estatus")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Estatus");
+
+                    b.ToTable("EstatusUsuarios");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Reporte", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AgenteCierraReporteId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("Categoria")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescripcionAgente")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estatus")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("FechaHoraCierre")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaHoraRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("UsuarioReportarId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgenteCierraReporteId");
+
+                    b.HasIndex("Categoria");
+
+                    b.HasIndex("Estatus");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.HasIndex("UsuarioReportarId");
+
+                    b.ToTable("Reportes");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Servicio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoriaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Correos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("FechaHoraRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("FechaVencimiento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Municipio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OtrosMediosContacto")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Precio")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Telefonos")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("UbicacionMaps")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(36)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoriaId");
+
+                    b.HasIndex("Tipo");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Servicios");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.TipoServicio", b =>
+                {
+                    b.Property<string>("Tipo")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Tipo");
+
+                    b.ToTable("TipoServicios");
+                });
+
             modelBuilder.Entity("ServiXpress.Domain.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -172,8 +546,24 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Property<string>("AvatarUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Calle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CodigoPostal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ColoniaFraccionamiento")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -183,14 +573,25 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Estatus")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("FechaHoraRegistro")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Municipio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -204,6 +605,12 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasMaxLength(90)
                         .HasColumnType("nvarchar(90)");
 
+                    b.Property<int>("NumExterior")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NumInterior")
+                        .HasColumnType("int");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -212,6 +619,9 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -228,6 +638,8 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Estatus");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -289,6 +701,111 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Calificaciones", b =>
+                {
+                    b.HasOne("ServiXpress.Domain.Usuario", "UsuarioCalifica")
+                        .WithMany("CalificacionesHechas")
+                        .HasForeignKey("UsuarioCalificaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.Usuario", "UsuarioCalificado")
+                        .WithMany("CalificacionesRecibidas")
+                        .HasForeignKey("UsuarioCalificadoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("UsuarioCalifica");
+
+                    b.Navigation("UsuarioCalificado");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Reporte", b =>
+                {
+                    b.HasOne("ServiXpress.Domain.Usuario", "AgenteCierraReporte")
+                        .WithMany()
+                        .HasForeignKey("AgenteCierraReporteId")
+                        .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.CategoriaReporte", "CategoriaReporte")
+                        .WithMany()
+                        .HasForeignKey("Categoria");
+
+                    b.HasOne("ServiXpress.Domain.EstatusReporte", "EstatusReporte")
+                        .WithMany()
+                        .HasForeignKey("Estatus");
+
+                    b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
+                        .WithMany("Reportes")
+                        .HasForeignKey("UsuarioId")
+                        .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.Usuario", "UsuarioReportar")
+                        .WithMany()
+                        .HasForeignKey("UsuarioReportarId")
+                        .IsRequired();
+
+                    b.Navigation("AgenteCierraReporte");
+
+                    b.Navigation("CategoriaReporte");
+
+                    b.Navigation("EstatusReporte");
+
+                    b.Navigation("Usuario");
+
+                    b.Navigation("UsuarioReportar");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Servicio", b =>
+                {
+                    b.HasOne("ServiXpress.Domain.CategoriaServicio", "CategoriaServicio")
+                        .WithMany()
+                        .HasForeignKey("CategoriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.TipoServicio", "TipoServicio")
+                        .WithMany()
+                        .HasForeignKey("Tipo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CategoriaServicio");
+
+                    b.Navigation("TipoServicio");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Usuario", b =>
+                {
+                    b.HasOne("ServiXpress.Domain.EstatusUsuario", "EstatusUsuario")
+                        .WithMany("Usuarios")
+                        .HasForeignKey("Estatus");
+
+                    b.Navigation("EstatusUsuario");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.EstatusUsuario", b =>
+                {
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("ServiXpress.Domain.Usuario", b =>
+                {
+                    b.Navigation("CalificacionesHechas");
+
+                    b.Navigation("CalificacionesRecibidas");
+
+                    b.Navigation("Reportes");
                 });
 #pragma warning restore 612, 618
         }

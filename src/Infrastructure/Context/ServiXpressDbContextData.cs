@@ -25,9 +25,9 @@ namespace ServiXpress.Infrastructure.Context
             {
                 if (!roleManager.Roles.Any())
                 {
-                    await roleManager.CreateAsync(new IdentityRole(Role.ADMIN));
-                    await roleManager.CreateAsync(new IdentityRole(Role.CLIENTE));
-                    await roleManager.CreateAsync(new IdentityRole(Role.TRABAJADOR));
+                    await roleManager.CreateAsync(new IdentityRole(RoleAPI.AGENTE));
+                    await roleManager.CreateAsync(new IdentityRole(RoleAPI.CLIENTE));
+                    await roleManager.CreateAsync(new IdentityRole(RoleAPI.TRABAJADOR));
 
                     if (!userManager.Users.Any())
                     {
@@ -41,7 +41,7 @@ namespace ServiXpress.Infrastructure.Context
                             AvatarUrl = "https://i.pinimg.com/originals/77/25/6b/77256b860c831fa87472e6d391af51db.png"
                         };
                         await userManager.CreateAsync(usuarioAdmin, "PasswordAdmin123*");
-                        await userManager.AddToRoleAsync(usuarioAdmin, Role.ADMIN);
+                        await userManager.AddToRoleAsync(usuarioAdmin, RoleAPI.AGENTE);
 
                         var usuarioTrabajador = new Usuario
                         {
@@ -53,7 +53,7 @@ namespace ServiXpress.Infrastructure.Context
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
                         await userManager.CreateAsync(usuarioTrabajador, "PasswordUser123$54");
-                        await userManager.AddToRoleAsync(usuarioTrabajador, Role.TRABAJADOR);
+                        await userManager.AddToRoleAsync(usuarioTrabajador, RoleAPI.TRABAJADOR);
 
 
                         var usuarioCliente = new Usuario
@@ -66,7 +66,7 @@ namespace ServiXpress.Infrastructure.Context
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
                         await userManager.CreateAsync(usuarioCliente, "PasswordUser123$");
-                        await userManager.AddToRoleAsync(usuarioCliente, Role.CLIENTE);
+                        await userManager.AddToRoleAsync(usuarioCliente, RoleAPI.CLIENTE);
 
                     }
                 }
