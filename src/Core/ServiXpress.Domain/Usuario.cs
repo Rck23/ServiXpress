@@ -19,8 +19,8 @@ namespace ServiXpress.Domain
         public string Estado { get; set; }
         public string Descripcion { get; set; }
         public string Telefono { get; set; }
-        public string Correo { get; set; }
-        public string Contrasena { get; set; }
+       // public string Correo { get; set; }
+       // public string Contrasena { get; set; }
         public DateTime FechaHoraRegistro { get; set; }
 
 
@@ -29,7 +29,7 @@ namespace ServiXpress.Domain
         public string Role { get; set; }
 
         public EstatusUsuario EstatusUsuario { get; set; }
-        public Role Rol { get; set; }
+        //public Role Rol { get; set; }
 
 
         // UNO A MUCHOS

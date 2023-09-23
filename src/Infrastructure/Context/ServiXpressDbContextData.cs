@@ -23,6 +23,7 @@ namespace ServiXpress.Infrastructure.Context
 
             try
             {
+            
                 if (!roleManager.Roles.Any())
                 {
                     await roleManager.CreateAsync(new IdentityRole(RolesAPI.AGENTE));
@@ -96,7 +97,13 @@ namespace ServiXpress.Infrastructure.Context
                         
 
                     }
+
+
                 }
+
+                
+              
+                
             }
             catch (Exception ex)
             {

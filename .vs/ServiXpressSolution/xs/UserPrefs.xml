@@ -1,42 +1,36 @@
 ﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Development">
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/Core/ServiXpress.Domain/Usuarios.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Core/ServiXpress.Domain/EstatusReporte.cs">
     <Files>
-      <File FileName="src/Api/appsettings.json" />
-      <File FileName="src/Api/Program.cs" Line="14" Column="1" />
+      <File FileName="src/Api/appsettings.json" Line="1" Column="1" />
+      <File FileName="src/Api/Program.cs" Line="114" Column="1" />
       <File FileName="src/Api/WeatherForecast.cs" />
-      <File FileName="src/Core/ServiXpress.Domain/Common/BaseDomainModel.cs" Line="3" Column="42" />
+      <File FileName="src/Core/ServiXpress.Domain/Common/BaseDomainModel.cs" />
       <File FileName="src/Api/Properties/launchSettings.json" />
-      <File FileName="src/Api/appsettings.Development.json" Line="4" Column="68" />
+      <File FileName="src/Api/appsettings.Development.json" Line="16" Column="23" />
       <File FileName="src/Api/appsettings.Macbook.json" />
-      <File FileName="src/Infrastructure/Context/ServiXpressDbContext.cs" Line="85" Column="1" />
-      <File FileName="src/Infrastructure/Repositories/RepositoryBase.cs" Line="10" Column="18" />
+      <File FileName="src/Infrastructure/Context/ServiXpressDbContext.cs" Line="163" Column="68" />
+      <File FileName="src/Infrastructure/Repositories/RepositoryBase.cs" />
       <File FileName="src/Core/ServiXpress.Application/Persistence/IAsyncRepository.cs" />
       <File FileName="src/Core/ServiXpress.Application/Persistence/IUnitOfWork.cs" />
-      <File FileName="src/Infrastructure/Repositories/UnitOfWork.cs" Line="57" Column="10" />
+      <File FileName="src/Infrastructure/Repositories/UnitOfWork.cs" />
       <File FileName="src/Infrastructure/InfrastructureServiceRegistration.cs" />
       <File FileName="src/Core/ServiXpress.Application/Models/Token/JwtSettings.cs" />
-      <File FileName="src/Infrastructure/Context/ServiXpressDbContextData.cs" Line="32" Column="50" />
-      <File FileName="src/Core/ServiXpress.Domain/EstatusUsuario.cs" Line="16" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/EstatusServicio.cs" Line="8" Column="9" />
-      <File FileName="src/Core/ServiXpress.Domain/EstatusReporte.cs" Line="10" Column="44" />
-      <File FileName="src/Core/ServiXpress.Domain/CategoriaReporte.cs" Line="9" Column="26" />
-      <File FileName="src/Core/ServiXpress.Domain/CategoriasServicios.cs" Line="17" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/TipoServicio.cs" Line="10" Column="41" />
-      <File FileName="src/Core/ServiXpress.Domain/Servicios.cs" Line="46" Column="37" />
-      <File FileName="src/Core/ServiXpress.Domain/Calificaciones.cs" Line="26" Column="56" />
-      <File FileName="src/Core/ServiXpress.Domain/Reportes.cs" Line="31" Column="30" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Status/EstatusUsuario.cs" Line="10" Column="6" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Status/EstatusServicio.cs" Line="14" Column="1" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Services/TipoServicio.cs" Line="10" Column="2" />
-      <File FileName="src/Core/ServiXpress.Application/Models/Authorization/Role.cs" Line="14" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/Roles.cs" Line="12" Column="1" />
-      <File FileName="src/Api/Controllers/WeatherForecastController.cs" Line="24" Column="1" />
-      <File FileName="src/Core/ServiXpress.Domain/Usuarios.cs" Line="55" Column="1" />
+      <File FileName="src/Infrastructure/Context/ServiXpressDbContextData.cs" Line="110" Column="1" />
+      <File FileName="src/Core/ServiXpress.Domain/EstatusUsuario.cs" Line="13" Column="1" />
+      <File FileName="src/Core/ServiXpress.Domain/EstatusServicio.cs" Line="12" Column="1" />
+      <File FileName="src/Core/ServiXpress.Domain/EstatusReporte.cs" Line="7" Column="46" />
+      <File FileName="src/Core/ServiXpress.Domain/CategoriaReporte.cs" Line="9" Column="14" />
+      <File FileName="src/Core/ServiXpress.Domain/TipoServicio.cs" Line="10" Column="27" />
+      <File FileName="src/Core/ServiXpress.Domain/Calificaciones.cs" />
+      <File FileName="src/Core/ServiXpress.Application/Models/Services/TipoServicio.cs" Line="4" Column="37" />
+      <File FileName="src/Core/ServiXpress.Domain/Usuario.cs" Line="23" Column="49" />
+      <File FileName="src/Core/ServiXpress.Application/Models/Status/EstatusUsuarioAPI.cs" Line="4" Column="39" />
+      <File FileName="src/Core/ServiXpress.Domain/CategoriaServicio.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="ServiXpressSolution">
+          <Node name="ServiXpressSolution" expanded="True">
             <Node name="src" expanded="True">
               <Node name="Core" expanded="True">
                 <Node name="ServiXpress.Application" expanded="True">
@@ -47,7 +41,7 @@
                   </Node>
                 </Node>
                 <Node name="ServiXpress.Domain">
-                  <Node name="Usuarios.cs" selected="True" />
+                  <Node name="EstatusReporte.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="ServiXpress.Api">
@@ -55,7 +49,7 @@
               </Node>
               <Node name="ServiXpress.Infrastructure">
                 <Node name="Context" expanded="True" />
-                <Node name="Repositories" expanded="True" />
+                <Node name="Data" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -63,10 +57,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ServiXpress.Application.Models.Services;
+using ServiXpress.Application.Models.Status;
 using ServiXpress.Domain;
 using ServiXpress.Domain.Common;
 
@@ -63,10 +65,10 @@ namespace ServiXpress.Infrastructure.Context
             .WithMany(e => e.Usuarios)
             .HasForeignKey(u => u.Estatus);
 
-            builder.Entity<Usuario>()
+            /*builder.Entity<Usuario>()
                  .HasOne(u => u.Rol)
                  .WithMany(r => r.Usuarios)
-                 .HasForeignKey(u => u.Role);
+                 .HasForeignKey(u => u.Role);*/
 
             builder.Entity<Servicio>()
                .HasOne(s => s.Usuario)
@@ -141,10 +143,10 @@ namespace ServiXpress.Infrastructure.Context
 
         }
 
-
+        
         // AQUI VA LOS  public DbSet<> DE CATEGORIAS, SERVICIOS, ETC..
 
-        public DbSet<Role>? Roles { get; set; }
+        //public DbSet<Role> Roles { get; set; }
         public DbSet<EstatusUsuario> EstatusUsuarios { get; set; }
         public DbSet<EstatusServicio> EstatusServicios { get; set; }
         public DbSet<EstatusReporte> EstatusReportes { get; set; }

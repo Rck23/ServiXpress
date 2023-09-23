@@ -110,6 +110,7 @@ using (var scope = app.Services.CreateScope())
         // Migrar la base de datos
         await context.Database.MigrateAsync();
 
+
         // Cargar datos
         await ServiXpressDbContextData.LoadDataAsync(context, usuarioManager, rolManager, loggerFactory);
     }

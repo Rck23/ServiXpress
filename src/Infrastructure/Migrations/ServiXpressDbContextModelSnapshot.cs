@@ -421,17 +421,6 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.ToTable("Reportes");
                 });
 
-            modelBuilder.Entity("ServiXpress.Domain.Role", b =>
-                {
-                    b.Property<string>("Roles")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Roles");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("ServiXpress.Domain.Servicio", b =>
                 {
                     b.Property<int>("Id")
@@ -573,14 +562,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Contrasena")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -642,7 +623,7 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -669,8 +650,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("Role");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -816,23 +795,10 @@ namespace ServiXpress.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ServiXpress.Domain.Role", "Rol")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("Role")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("EstatusUsuario");
-
-                    b.Navigation("Rol");
                 });
 
             modelBuilder.Entity("ServiXpress.Domain.EstatusUsuario", b =>
-                {
-                    b.Navigation("Usuarios");
-                });
-
-            modelBuilder.Entity("ServiXpress.Domain.Role", b =>
                 {
                     b.Navigation("Usuarios");
                 });
