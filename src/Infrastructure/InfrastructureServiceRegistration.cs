@@ -36,6 +36,7 @@ namespace ServiXpress.Infrastructure
             ///de JwtSettings a través de la inyección de dependencias.
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
+            //Servicio de autenticacion de los usuarios
             services.AddTransient<IAuthService, AuthService>();
 
 

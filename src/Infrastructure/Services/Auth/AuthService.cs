@@ -21,25 +21,31 @@ namespace ServiXpress.Infrastructure.Services.Auth
             _httpContextAccessor = httpContextAccessor;
         }
 
+        // El método CreateToken genera un token JWT basado en el usuario y roles proporcionados
         public string CreateToken(Usuario usuario, IList<string>? roles)
         {
+            // Crea una lista de claims para el token
             var claims = new List<Claim> {
             new Claim(JwtRegisteredClaimNames.NameId, usuario.UserName!),
             new Claim("userId", usuario.Id),
             new Claim("email", usuario.Email!)
             };
 
+            // Agrega los claims de roles a la lista de claims
             foreach (var rol in roles!)
             {
                 var claim = new Claim(ClaimTypes.Role, rol);
                 claims.Add(claim);
             }
 
-
+            // Crea una clave de seguridad simétrica basada en la configuración JWT
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key!));
-            
+
+            // Crea las credenciales de firma del token
             var credenciales = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-            
+
+
+            // Crea la descripción del token
             var tokenDescription = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
@@ -48,11 +54,15 @@ namespace ServiXpress.Infrastructure.Services.Auth
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
+
+            // Crea el token utilizando el token handler y la descripción del token
             var token = tokenHandler.CreateToken(tokenDescription);
-            
+
+            // Devuelve el token como una cadena de texto
             return tokenHandler.WriteToken(token);
         }
 
+        // El método GetSessionUser devuelve el identificador de usuario de la sesión actual
         public string GetSessionUser()
         {
             var userInSession = _httpContextAccessor.HttpContext!.User?.Claims?

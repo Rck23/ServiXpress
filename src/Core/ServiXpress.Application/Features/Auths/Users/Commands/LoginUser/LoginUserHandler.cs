@@ -10,6 +10,8 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
 {
     public class LoginUserHandler : IRequestHandler<LoginUser, AuthResponse>
     {
+        // Inyección de dependencias de los servicios y administradores necesarios.
+
         private readonly UserManager<Usuario> _userManager;
         private readonly SignInManager<Usuario> _sigInManager;
 
@@ -18,6 +20,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
         private readonly IAuthService _authService;
 
         private readonly IUnitOfWork _unitOfWork;
+
 
         public LoginUserHandler(UserManager<Usuario> userManager, 
             SignInManager<Usuario> sigInManager,
@@ -31,13 +34,20 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
             _unitOfWork = unitOfWork;
         }
 
+        // Método principal para manejar la solicitud de inicio de sesión.
+
+
         public async Task<AuthResponse> Handle(LoginUser request, CancellationToken cancellationToken)
         {
+            // Buscar al usuario por su dirección de correo electrónico.
+
             var user = await _userManager.FindByEmailAsync(request.Email!);
             if (user is null)
             {
                 throw new NotFoundException(nameof(Usuario), request.Email!);
             }
+
+            // Verificar la contraseña del usuario.
 
             var resultado = await _sigInManager.CheckPasswordSignInAsync(user, request.Password!, false);
 
@@ -46,9 +56,12 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
                 throw new Exception("Las credenciales del usuario son erroneas");
             }
 
+            // Obtener los roles del usuario.
 
             var roles = await _userManager.GetRolesAsync(user);
-            
+
+            // Crear una respuesta de autenticación.
+
             var authRes = new AuthResponse
             {
                 Id = user.Id,
@@ -57,11 +70,11 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
                 Telefono = user.Telefono,
                 Email = user.Email,
                 //Avatar = user.AvatarUrl,
-                Token = _authService.CreateToken(user, roles),
+                Token = _authService.CreateToken(user, roles), // Generar un token de autenticación.
                 Roles = roles,
             };
 
-            return authRes;
+            return authRes; // Devolver la respuesta de autenticación.
         }
     }
 }

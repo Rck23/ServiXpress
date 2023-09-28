@@ -20,7 +20,7 @@
     "Macbook": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:21888",
+      "applicationUrl": "http://localhost:11516",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

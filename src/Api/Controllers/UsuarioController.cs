@@ -43,18 +43,7 @@ namespace ServiXpress.Api.Controllers
         [HttpPost("register", Name = "Register")]
         public async Task<ActionResult<AuthResponse>> Register([FromForm] RegisterUser register)
         {
-            //if (request.Foto is not null)
-            //{
-            //    var resultImage = await _manageImageService.UploadImage(new ImageData
-            //    {
-            //        ImageStream = request.Foto!.OpenReadStream(),
-            //        Nombre = request.Foto.Name
-            //    }
-            //    );
-
-            //    request.FotoId = resultImage.PublicId;
-            //    request.FotoUrl = resultImage.Url;
-            //}
+           
 
             return await _mediator.Send(register);
 
