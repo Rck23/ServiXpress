@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Models.Token;
 using ServiXpress.Application.Persistence;
 using ServiXpress.Infrastructure.Repositories;
+using ServiXpress.Infrastructure.Services.Auth;
 
 namespace ServiXpress.Infrastructure
 {
@@ -33,6 +35,9 @@ namespace ServiXpress.Infrastructure
             ///utilizando la clase JwtSettings. Esto permite que se acceda a las propiedades
             ///de JwtSettings a través de la inyección de dependencias.
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+
+            services.AddTransient<IAuthService, AuthService>();
+
 
             return services;
         }

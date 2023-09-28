@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7il2fvGN619VDLtbrKf3JIlbtZnr2MLHifQdK4qRyGEIjTSl8+V+poVOkk7egWxCO7S0NQWLItUo51a5Kk3k+A==",
+  "dgSpecHash": "UAp5xZK5uURvehHpGz4Z1k8+UN2N91rGz3iu6XlKK84/XsVuhn50sznivV7WQalIurPskog1ks+xFJLeSsRa7g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+  "projectFilePath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ulimx\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.1.1\\microsoft.aspnetcore.authentication.2.1.1.nupkg.sha512",
     "C:\\Users\\ulimx\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.1.1\\microsoft.aspnetcore.authentication.abstractions.2.1.1.nupkg.sha512",

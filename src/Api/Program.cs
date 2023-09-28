@@ -1,12 +1,18 @@
 using System.Text;
+using System.Text.Json.Serialization;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using ServiXpress.Application;
+using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
+using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure;
 using ServiXpress.Infrastructure.Context;
@@ -19,7 +25,34 @@ var builder = WebApplication.CreateBuilder(args);
 IWebHostEnvironment _env = builder.Environment;
 
 // Agregar servicios al contenedor
-builder.Services.AddControllers();
+
+///Agrega el servicio de controladores a la colección de servicios 
+///de la aplicación. El parámetro opt permite configurar opciones adicionales
+///para los controladores.
+builder.Services.AddControllers(opt =>
+{
+    ///Crea una política de autorización que requiere que el usuario esté autenticado 
+    ///para acceder a los controladores. Esto significa que solo los usuarios 
+    ///autenticados podrán acceder a los controladores protegidos por esta política.
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+    //Agrega un filtro de autorización a los controladores. El filtro de autorización aplica
+    //la política de autorización creada anteriormente a los controladores. Esto significa que
+    //cualquier solicitud a los controladores protegidos por esta política requerirá que el usuario esté autenticado.
+    opt.Filters.Add(new AuthorizeFilter(policy));
+}).AddJsonOptions(x =>
+{
+    //Configura las opciones de serialización JSON para los controladores.
+    //En este caso, se establece la opción ReferenceHandler en IgnoreCycles,
+    //lo que significa que se ignorarán los ciclos de referencia al serializar
+    //objetos JSON. Esto evita errores de serialización causados por referencias circulares
+    //entre objetos.
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
+
+builder.Services.AddMediatR(typeof(LoginUserHandler).Assembly);
+
 
 // Agregar servicios de infraestructura
 builder.Services.AddInfrastructureServices(builder.Configuration);

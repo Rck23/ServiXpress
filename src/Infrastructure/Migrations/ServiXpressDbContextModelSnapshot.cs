@@ -540,22 +540,18 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Apellidos")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("AvatarUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Calle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodigoPostal")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ColoniaFraccionamiento")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -563,7 +559,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -574,13 +569,12 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Estado")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estatus")
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("FechaHoraRegistro")
+                    b.Property<DateTime?>("FechaHoraRegistro")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
@@ -590,11 +584,9 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Municipio")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -605,7 +597,7 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasMaxLength(90)
                         .HasColumnType("nvarchar(90)");
 
-                    b.Property<int>("NumExterior")
+                    b.Property<int?>("NumExterior")
                         .HasColumnType("int");
 
                     b.Property<int?>("NumInterior")
@@ -627,7 +619,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {}
+    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
         "projectName": "ServiXpress.Application",
-        "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj"
+              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj"
               }
             }
           }
@@ -43,6 +43,80 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.22.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[11.3.0, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[11.7.1, )"
+            },
+            "MailKit": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "MediatR.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.1.39, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -63,14 +137,14 @@
         }
       }
     },
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
+    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
         "projectName": "ServiXpress.Domain",
-        "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -128,14 +202,14 @@
         }
       }
     },
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
+    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
         "projectName": "ServiXpress.Infrastructure",
-        "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -152,8 +226,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
+              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
               }
             }
           }
@@ -196,7 +270,7 @@
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[7.0.1, )"
             }
           },
           "imports": [
