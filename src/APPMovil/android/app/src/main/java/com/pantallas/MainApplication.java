@@ -1,4 +1,4 @@
-package com.pantallas;
+package com.servixpress;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
