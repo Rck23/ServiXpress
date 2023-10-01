@@ -8,4 +8,8 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ServiXpress.Domain
+<<<<<<< HEAD
 build_property.ProjectDir = /Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/
+=======
+build_property.ProjectDir = c:\Users\Mago\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\
+>>>>>>> Isaac_Sprint2
