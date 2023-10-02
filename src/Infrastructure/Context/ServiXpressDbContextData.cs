@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using ServiXpress.Application.Models.Authorization;
+using ServiXpress.Application.Models.Service;
+using ServiXpress.Application.Models.Status;
 using ServiXpress.Domain;
 using System.Data;
 
@@ -23,6 +25,37 @@ namespace ServiXpress.Infrastructure.Context
 
             try
             {
+                if (!context.EstatusReportes.Any())
+                {
+                    context.EstatusReportes.Add(new EstatusReporte { Estatus = EstatusReporteAPI.Cerrado });
+                    context.EstatusReportes.Add(new EstatusReporte { Estatus = EstatusReporteAPI.Alta });
+                    context.EstatusReportes.Add(new EstatusReporte { Estatus = EstatusReporteAPI.Revision });
+
+                }
+                if (!context.EstatusUsuarios.Any())
+                {
+                    context.EstatusUsuarios.Add(new EstatusUsuario { Estatus = EstatusUsuarioAPI.Verificado });
+                    context.EstatusUsuarios.Add(new EstatusUsuario { Estatus = EstatusUsuarioAPI.Bloqueado });
+                    context.EstatusUsuarios.Add(new EstatusUsuario { Estatus = EstatusUsuarioAPI.Alta });
+
+                }
+
+                if (!context.EstatusServicios.Any())
+                {
+                    context.EstatusServicios.Add(new EstatusServicio { Estatus = EstatusServicioAPI.Alta });
+                    context.EstatusServicios.Add(new EstatusServicio { Estatus = EstatusServicioAPI.Completado });
+                    context.EstatusServicios.Add(new EstatusServicio { Estatus = EstatusServicioAPI.Cancelado });
+                    context.EstatusServicios.Add(new EstatusServicio { Estatus = EstatusServicioAPI.Rechazado });
+
+                }
+
+                if (!context.TipoServicios.Any())
+                {
+                    context.TipoServicios.Add(new TipoServicio { Tipo = TipoServicioAPI.Ofertado });
+                    context.TipoServicios.Add(new TipoServicio { Tipo = TipoServicioAPI.Requerido });
+
+                }
+
                 if (!roleManager.Roles.Any())
                 {
                     await roleManager.CreateAsync(new IdentityRole(RoleAPI.AGENTE));
@@ -50,6 +83,7 @@ namespace ServiXpress.Infrastructure.Context
                             Apellidos = "Gonzales",
                             Email = "Trabajador1@gmail.com",
                             Telefono = "4495108094",
+                            
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
                         await userManager.CreateAsync(usuarioTrabajador, "PasswordUser123$54");

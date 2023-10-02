@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace ServiXpress.Domain
 {
-    public class EstatusReporte : BaseDomainModel
+    public class EstatusReporte 
     {
         [Key]
         [StringLength(50)]
         public string Estatus { get; set; }
 
-        public int Id { get; set; }
 
     }
 }
