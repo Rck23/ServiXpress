@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiXpress.Application.Contracts.Identity;
+using ServiXpress.Application.Models.ImageManagement;
 using ServiXpress.Application.Models.Token;
 using ServiXpress.Application.Persistence;
 using ServiXpress.Infrastructure.Repositories;
@@ -38,6 +39,12 @@ namespace ServiXpress.Infrastructure
 
             //Servicio de autenticacion de los usuarios
             services.AddTransient<IAuthService, AuthService>();
+
+
+            ///Aquí se está configurando la sección "CloudinarySettings" de la configuración 
+            ///utilizando la clase JwtSettings. Esto permite que se acceda a las propiedades
+            ///de CloudinarySettings a través de la inyección de dependencias.
+            services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
 
             return services;

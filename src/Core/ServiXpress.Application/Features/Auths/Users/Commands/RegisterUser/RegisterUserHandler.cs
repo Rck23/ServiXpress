@@ -59,6 +59,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 Apellidos = request.Apellidos,
                 Telefono = request.Telefono,
                 Email = request.Email,
+                AvatarUrl = request.FotoUrl
 
             };
 
@@ -83,6 +84,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     Telefono = usuario.Telefono,
                     Email = usuario.Email,
                     Token = _authService.CreateToken(usuario, roles),
+                    Avatar = usuario.AvatarUrl,
                     Roles = roles
                 };
             }

@@ -9,7 +9,6 @@
     <None Remove="Models\Token\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\Infrastructure\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
   </ItemGroup>
