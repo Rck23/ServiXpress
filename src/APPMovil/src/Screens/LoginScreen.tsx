@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { useState } from 'react';
@@ -25,71 +25,108 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                 style={styles.backgroundImage}
             >
                 <View style={styles.container}>
+                    <Image
+                        source={require('../Images/Logo.png')}
+                        style={styles.logo}
+                    ></Image>
                     <Text style={styles.title}>Iniciar Sesión</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="Nombre de usuario"
+                        placeholderTextColor="rgb(75, 3, 75)"
                         onChangeText={(text) => setUsername(text)}
                         value={username}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder="Contraseña"
+                        placeholderTextColor="rgb(75, 3, 75)"
                         secureTextEntry={true}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                     />
+
                     <TouchableOpacity style={styles.button} onPress={handleLogin}>
                         <Text style={styles.buttonText}>Iniciar Sesión</Text>
                     </TouchableOpacity>
+                    
+                    <TouchableOpacity style={styles.BotonRegistrar} onPress={handleLogin}>
+                        <Text style={styles.BotonRegistrarText}>Crear cuenta</Text>
+                    </TouchableOpacity>
+
+                    <Text
+                        style={styles.recuperacion}
+                    >¿Olvidaste la contraseña?</Text>
                 </View>
             </ImageBackground>
         </>
     )
 }
 
-
-
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: "rgba(255, 255, 255, 0.78)",
+    },
+    logo: {
+        width: 226.09,
+        height: 100,
+        bottom: 75
     },
     title: {
+        right: 85,
         fontSize: 30,
         marginBottom: 20,
-        color: "black",
+        color: "#545454",
+        fontWeight: 'bold'
     },
     input: {
-        width: 350,
-        height: 50,
+        width: 340,
+        height: 60,
         borderColor: 'black',
         borderWidth: 2,
-        borderRadius: 15,
+        borderRadius: 10,
         paddingLeft: 20,
-        marginBottom: 20,
-        color: "black"
+        marginBottom: 40,
+        color: "black",
+        fontSize: 20
     },
     button: {
         width: 250,
-        backgroundColor: '#586DFA',
+        backgroundColor: '#74BCFF',
         padding: 10,
-        borderRadius: 5,
-        color: "white",
-        fontSize: "20"
+        borderRadius: 20,
+        marginBottom: 10
     },
     buttonText: {
-        color: 'white',
+        fontWeight: "bold",
+        color: 'black',
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 23
     },
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
         justifyContent: 'center',
+    },
+    recuperacion: {
+        color: "black",
+        fontSize: 15,
+        marginBottom: 15
+    },
+    BotonRegistrar: {
+        width: 90,
+        padding: 2,
+        marginBottom: 7,
+        borderBottomColor: 'rgb(75, 3, 75)',
+        borderBottomWidth: 2
+    },
+    BotonRegistrarText: {
+        fontWeight: "bold",
+        color: 'rgb(75, 3, 75)',
+        textAlign: 'center',
+        fontSize: 15
     }
 });
-
