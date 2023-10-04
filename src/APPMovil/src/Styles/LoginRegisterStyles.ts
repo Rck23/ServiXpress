@@ -62,7 +62,7 @@ export const LoginStyles = StyleSheet.create({
         fontSize: 15
     },
     BotonRecuperar: {
-        width: 150,
+        width: 170,
         padding: 2,
         borderBottomColor: 'rgb(75, 3, 75)',
         borderBottomWidth: 2
