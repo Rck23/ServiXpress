@@ -56,7 +56,7 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={LoginStyles.BotonRecuperar} onPress={() => navigation.navigate("recoveryScreen")}>
-                        <Text style={LoginStyles.BotonRecuperarText}>Recuperar contraseña</Text>
+                        <Text style={LoginStyles.BotonRecuperarText}>¿Olvidaste tu contraseña?</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
