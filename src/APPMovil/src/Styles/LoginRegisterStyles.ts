@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { mainColors } from '../Constants/Values';
 
 export const LoginStyles = StyleSheet.create({
     container: {
@@ -16,30 +17,30 @@ export const LoginStyles = StyleSheet.create({
         right: 85,
         fontSize: 30,
         marginBottom: 20,
-        color: "#545454",
+        color: mainColors.textColor,
         fontWeight: 'bold'
     },
     input: {
         width: 340,
         height: 60,
-        borderColor: 'black',
+        borderColor: mainColors.textColor,
         borderWidth: 2,
         borderRadius: 10,
         paddingLeft: 20,
         marginBottom: 40,
-        color: "black",
+        color: mainColors.textColor,
         fontSize: 20
     },
     button: {
         width: 250,
-        backgroundColor: '#74BCFF',
+        backgroundColor: mainColors.purpule3,
         padding: 10,
-        borderRadius: 20,
+        borderRadius: 50,
         marginBottom: 10
     },
     buttonText: {
         fontWeight: "bold",
-        color: 'black',
+        color: mainColors.white,
         textAlign: 'center',
         fontSize: 23
     },
@@ -49,31 +50,32 @@ export const LoginStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     BotonRegistrar: {
-        width: 90,
         padding: 2,
         marginBottom: 10,
-        borderBottomColor: 'rgb(75, 3, 75)',
+        borderBottomColor: mainColors.purpule2,
         borderBottomWidth: 2
     },
     BotonRegistrarText: {
         fontWeight: "bold",
-        color: 'rgb(75, 3, 75)',
+        color: mainColors.purpule2,
         textAlign: 'center',
         fontSize: 15
     },
     BotonRecuperar: {
-        width: 170,
         padding: 2,
-        borderBottomColor: 'rgb(75, 3, 75)',
+        borderBottomColor: mainColors.purpule2,
         borderBottomWidth: 2
     },
     BotonRecuperarText: {
         fontWeight: "bold",
-        color: 'rgb(75, 3, 75)',
+        color: mainColors.purpule2,
         textAlign: 'center',
         fontSize: 15
     }
 });
+
+
+
 
 export const RegisterStyles = StyleSheet.create({
     container: {
@@ -91,30 +93,30 @@ export const RegisterStyles = StyleSheet.create({
         right: 105,
         fontSize: 30,
         marginBottom: 10,
-        color: "#545454",
+        color: mainColors.textColor,
         fontWeight: 'bold'
     },
     input: {
         width: 340,
         height: 50,
-        borderColor: 'black',
+        borderColor: mainColors.textColor,
         borderWidth: 2,
         borderRadius: 10,
         paddingLeft: 20,
         marginBottom: 20,
-        color: "black",
+        color: mainColors.textColor,
         fontSize: 15
     },
     button: {
         width: 250,
-        backgroundColor: '#74BCFF',
+        backgroundColor: mainColors.purpule3,
         padding: 10,
         borderRadius: 20,
         marginBottom: 10
     },
     buttonText: {
         fontWeight: "bold",
-        color: 'black',
+        color: mainColors.white,
         textAlign: 'center',
         fontSize: 23
     },

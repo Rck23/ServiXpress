@@ -6,7 +6,7 @@ import { mainColors } from '../Constants/Values';
 
 const Stack = createStackNavigator();
 
-const signedIn = false;
+const signedIn = true;
 
 export const Navigator = () => {
     return (

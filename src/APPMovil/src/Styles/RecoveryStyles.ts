@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { mainColors } from '../Constants/Values';
+import { GlobalStyles } from './SharedStyles';
 
 export const RecoveryStyles = StyleSheet.create({
     backgroundImage: {
@@ -19,19 +21,21 @@ export const RecoveryStyles = StyleSheet.create({
         marginBottom: 20
     },
     contenedor: {
-        bottom: 10,
-        backgroundColor: "white",
+        backgroundColor: mainColors.white,
         width: "90%",
-        borderRadius: 10
+        borderRadius: 10,
+        ...GlobalStyles.boxShadow,
+        padding: 5
     },
     encabezado: {
         fontSize: 25,
-        color: "#3C3C3C",
+        color: mainColors.textColor,
+        textAlign: 'center',
+        padding: 8,
         fontWeight: "bold",
-        borderBottomColor: "grey",
+        borderBottomColor: mainColors.blackLight,
         borderBottomWidth: 1,
-        marginBottom: 15,
-        paddingLeft: 10
+        marginBottom: 15
     },
     texto: {
         paddingLeft: 10,
@@ -43,26 +47,25 @@ export const RecoveryStyles = StyleSheet.create({
     },
     input: {
         alignSelf: "center",
-        width: "90%",
-        borderColor: "grey",
-        borderWidth: 1,
+        width: "95%",
+        borderColor: mainColors.blackLight,
+        borderWidth: 2,
         marginBottom: 40,
         borderRadius: 10,
-        paddingLeft: 20,
+        padding: 10,
         fontSize: 19,
-        color: "black"
+        color: mainColors.textColor
     },
     boton: {
-        width: 100,
-        backgroundColor: '#74BCFF',
+        backgroundColor: mainColors.purpule3,
         padding: 10,
-        borderRadius: 10,
+        borderRadius: 50,
         marginBottom: 10,
-        left: 260
+        marginHorizontal: 20
     },
     botonText: {
         fontWeight: "bold",
-        color: 'black',
+        color: mainColors.white,
         textAlign: 'center',
         fontSize: 15
     }

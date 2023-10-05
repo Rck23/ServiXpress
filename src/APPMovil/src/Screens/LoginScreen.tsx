@@ -3,6 +3,8 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { useState } from 'react';
 import { LoginStyles } from '../Styles/LoginRegisterStyles';
+import { mainColors } from '../Constants/Values';
+import { Icon } from '../Components/Shared/IconComponents';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
@@ -22,7 +24,6 @@ export const LoginScreen = ({ navigation, route }: Props) => {
         <>
             <ImageBackground
                 source={image}
-
                 style={LoginStyles.backgroundImage}
             >
                 <View style={LoginStyles.container}>
@@ -34,20 +35,21 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                     <TextInput
                         style={LoginStyles.input}
                         placeholder="Nombre de usuario"
-                        placeholderTextColor="rgb(75, 3, 75)"
+                        placeholderTextColor={mainColors.purpule}
                         onChangeText={(text) => setUsername(text)}
                         value={username}
                     />
                     <TextInput
                         style={LoginStyles.input}
                         placeholder="Contraseña"
-                        placeholderTextColor="rgb(75, 3, 75)"
+                        placeholderTextColor={mainColors.purpule}
                         secureTextEntry={true}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                     />
 
                     <TouchableOpacity style={LoginStyles.button} onPress={handleLogin}>
+                        <Icon name='login' library='antDesign' color={mainColors.white}/>
                         <Text style={LoginStyles.buttonText}>Iniciar Sesión</Text>
                     </TouchableOpacity>
 
