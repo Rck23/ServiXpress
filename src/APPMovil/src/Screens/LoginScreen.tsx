@@ -1,7 +1,8 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { useState } from 'react';
+import { LoginStyles } from '../Styles/LoginRegisterStyles';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
@@ -22,74 +23,43 @@ export const LoginScreen = ({ navigation, route }: Props) => {
             <ImageBackground
                 source={image}
 
-                style={styles.backgroundImage}
+                style={LoginStyles.backgroundImage}
             >
-                <View style={styles.container}>
-                    <Text style={styles.title}>Iniciar Sesión</Text>
+                <View style={LoginStyles.container}>
+                    <Image
+                        source={require('../Images/Logo.png')}
+                        style={LoginStyles.logo}
+                    ></Image>
+                    <Text style={LoginStyles.title}>Iniciar Sesión</Text>
                     <TextInput
-                        style={styles.input}
+                        style={LoginStyles.input}
                         placeholder="Nombre de usuario"
+                        placeholderTextColor="rgb(75, 3, 75)"
                         onChangeText={(text) => setUsername(text)}
                         value={username}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={LoginStyles.input}
                         placeholder="Contraseña"
+                        placeholderTextColor="rgb(75, 3, 75)"
                         secureTextEntry={true}
                         onChangeText={(text) => setPassword(text)}
                         value={password}
                     />
-                    <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+
+                    <TouchableOpacity style={LoginStyles.button} onPress={handleLogin}>
+                        <Text style={LoginStyles.buttonText}>Iniciar Sesión</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={LoginStyles.BotonRegistrar} onPress={() => navigation.navigate("registerScreen")}>
+                        <Text style={LoginStyles.BotonRegistrarText}>Crear cuenta</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={LoginStyles.BotonRecuperar} onPress={() => navigation.navigate("recoveryScreen")}>
+                        <Text style={LoginStyles.BotonRecuperarText}>¿Olvidaste tu contraseña?</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
         </>
     )
 }
-
-
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 30,
-        marginBottom: 20,
-        color: "black",
-    },
-    input: {
-        width: 350,
-        height: 50,
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 15,
-        paddingLeft: 20,
-        marginBottom: 20,
-        color: "black"
-    },
-    button: {
-        width: 250,
-        backgroundColor: '#586DFA',
-        padding: 10,
-        borderRadius: 5,
-        color: "white",
-        fontSize: "20"
-    },
-    buttonText: {
-        color: 'white',
-        textAlign: 'center',
-        fontSize: 20
-    },
-    backgroundImage: {
-        flex: 1,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-    }
-});
-

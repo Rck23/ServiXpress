@@ -34,9 +34,9 @@ namespace ServiXpress.Infrastructure.Context
                         var usuarioAdmin = new Usuario
                         {
                             Nombre = "Administrador",
+                            UserName = "Administrador",
                             Apellidos = "GE",
                             Email = "admin@gmail.com",
-                            UserName = "Admin",
                             Telefono = "4495231546",
                             AvatarUrl = "https://i.pinimg.com/originals/77/25/6b/77256b860c831fa87472e6d391af51db.png"
                         };
@@ -46,9 +46,9 @@ namespace ServiXpress.Infrastructure.Context
                         var usuarioTrabajador = new Usuario
                         {
                             Nombre = "River",
+                            UserName = "River",
                             Apellidos = "Gonzales",
                             Email = "Trabajador1@gmail.com",
-                            UserName = "TrabajadorM",
                             Telefono = "4495108094",
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };
@@ -59,9 +59,9 @@ namespace ServiXpress.Infrastructure.Context
                         var usuarioCliente = new Usuario
                         {
                             Nombre = "Kevin",
+                            UserName = "Kevin",
                             Apellidos = "Michelin",
                             Email = "Cliente1@gmail.com",
-                            UserName = "Usuario1",
                             Telefono = "4495108974",
                             AvatarUrl = "https://i.pinimg.com/originals/10/93/63/109363a9ae3feac1613a4d04e8af5e8c.png"
                         };

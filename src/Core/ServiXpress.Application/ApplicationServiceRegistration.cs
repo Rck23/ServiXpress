@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiXpress.Application.Behaviors;
 
 namespace ServiXpress.Application
 {
@@ -15,8 +17,17 @@ namespace ServiXpress.Application
             IConfiguration configuration)
         {
             // AQUI VA LA CONFIGURACION DEL MAPEO 
-
+            
+            
+            
+            
+            
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+           
+            
             return services;
+            
         }
     }
 }
