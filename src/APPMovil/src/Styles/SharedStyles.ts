@@ -51,5 +51,39 @@ export const GlobalStyles = StyleSheet.create({
         color: mainColors.purpule,
         textAlign: 'center',
         fontSize: 15
-    }
+    },
+    GlobalcontainerStyle: {
+        paddingHorizontal: 35,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: "rgba(255, 255, 255, 0.78)"
+    },
+    GlobalBackground: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+    },
+    GlobalButtonPrincipal: {
+        bottom: 20,
+        width: 310,
+        backgroundColor: mainColors.white,
+        borderColor: mainColors.gray,
+        borderWidth: 1,
+        paddingVertical: 35,
+        paddingHorizontal: 30,
+        borderRadius: 10,
+        marginBottom: 25,
+        flexDirection: "column"
+    },
+    GlobalButtonIconPrincipal: {
+        color: mainColors.gray,
+        fontSize: 25,
+        alignSelf: "center"
+    },
+    GlobalButtonTextPrincipal: {
+        color: mainColors.gray,
+        fontSize: 20,
+        alignSelf: "center"
+    },
 })
