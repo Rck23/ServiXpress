@@ -2,12 +2,21 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, I
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { RegisterStyles } from '../Styles/LoginRegisterStyles';
+import { useState } from 'react';
+import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
 interface Props extends StackScreenProps<AuthStackParams, 'registerScreen'> { }
 
 export const RegisterScreen = ({ navigation, route }: Props) => {
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [typeuser, setTypeuser] = useState('');
+
     return (
         <>
             <ImageBackground
@@ -21,51 +30,40 @@ export const RegisterScreen = ({ navigation, route }: Props) => {
                         style={RegisterStyles.logo}
                     ></Image>
 
-                    <Text style={RegisterStyles.title}>Registrate</Text>
+                    <InputGlobal
+                        placeholder='Nombre(s)'
+                        value={name}
+                        onChange={setName} />
+                    
+                    <InputGlobal
+                        placeholder='Apellidos'
+                        value={lastname}
+                        onChange={setLastname} />
+                    
+                    <InputGlobal
+                        placeholder='Numero de telefono'
+                        value={phone}
+                        onChange={setPhone} />
+                    
+                    <InputGlobal
+                        placeholder='Correo electrónico'
+                        value={email}
+                        onChange={setEmail} />
+                    
+                    <InputGlobal
+                        placeholder='Contraseña'
+                        value={password}
+                        onChange={setPassword} />
+                    
+                    <InputGlobal
+                        placeholder='Tipo de trabajador'
+                        value={typeuser}
+                        onChange={setTypeuser} />
 
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Nombre(s)"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                    />
-
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Apellidos"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                        secureTextEntry={true}
-                    />
-
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Teléfono"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                    />
-
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Correo electrónico"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                        secureTextEntry={true}
-                    />
-
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Contraseña"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                        secureTextEntry={true}
-                    />
-
-                    <TextInput
-                        style={RegisterStyles.input}
-                        placeholder="Tipo de usuario"
-                        placeholderTextColor="rgb(75, 3, 75)"
-                        secureTextEntry={true}
-                    />
-
-                    <TouchableOpacity style={RegisterStyles.button}>
-                        <Text style={RegisterStyles.buttonText}>Crear cuenta</Text>
-                    </TouchableOpacity>
+                    <ButtonGlobal
+                        text='Crear cuenta'
+                        icon={{name: 'adduser', library: 'antDesign'}}
+                        onClick={() => navigation.navigate("loginScreen")} />
                 </View>
             </ImageBackground>
         </>

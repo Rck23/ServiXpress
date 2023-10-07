@@ -1,7 +1,7 @@
 export const mainColors = {
-    purpule: '#8429FF',
-    purpule2: '#B807FF',
-    purpule3: '#330070',
+    purpule: '#5503A6',
+    purpule2: '#51168C',
+    purpule3: '#331859',
     black: '#616161',
     white: '#FFF',
     light: '#E8E8E8',

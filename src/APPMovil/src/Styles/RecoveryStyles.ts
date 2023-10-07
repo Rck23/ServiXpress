@@ -57,7 +57,7 @@ export const RecoveryStyles = StyleSheet.create({
         color: mainColors.textColor
     },
     boton: {
-        backgroundColor: mainColors.purpule3,
+        backgroundColor: mainColors.purpule,
         padding: 10,
         borderRadius: 50,
         marginBottom: 10,

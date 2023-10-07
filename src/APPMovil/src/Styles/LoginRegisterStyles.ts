@@ -3,6 +3,7 @@ import { mainColors } from '../Constants/Values';
 
 export const LoginStyles = StyleSheet.create({
     container: {
+        paddingHorizontal: 35,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -20,29 +21,15 @@ export const LoginStyles = StyleSheet.create({
         color: mainColors.textColor,
         fontWeight: 'bold'
     },
-    input: {
-        width: 340,
-        height: 60,
-        borderColor: mainColors.textColor,
-        borderWidth: 2,
-        borderRadius: 10,
-        paddingLeft: 20,
-        marginBottom: 40,
-        color: mainColors.textColor,
-        fontSize: 20
-    },
-    button: {
-        width: 250,
-        backgroundColor: mainColors.purpule3,
-        padding: 10,
-        borderRadius: 50,
-        marginBottom: 10
-    },
     buttonText: {
         fontWeight: "bold",
         color: mainColors.white,
         textAlign: 'center',
         fontSize: 23
+    },
+    buttonicon: {
+        fontSize: 23,
+        margin: "auto"
     },
     backgroundImage: {
         flex: 1,
@@ -52,7 +39,7 @@ export const LoginStyles = StyleSheet.create({
     BotonRegistrar: {
         padding: 2,
         marginBottom: 10,
-        borderBottomColor: mainColors.purpule2,
+        borderBottomColor: mainColors.purpule,
         borderBottomWidth: 2
     },
     BotonRegistrarText: {
@@ -79,6 +66,7 @@ export const LoginStyles = StyleSheet.create({
 
 export const RegisterStyles = StyleSheet.create({
     container: {
+        paddingHorizontal: 35,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -106,19 +94,6 @@ export const RegisterStyles = StyleSheet.create({
         marginBottom: 20,
         color: mainColors.textColor,
         fontSize: 15
-    },
-    button: {
-        width: 250,
-        backgroundColor: mainColors.purpule3,
-        padding: 10,
-        borderRadius: 20,
-        marginBottom: 10
-    },
-    buttonText: {
-        fontWeight: "bold",
-        color: mainColors.white,
-        textAlign: 'center',
-        fontSize: 23
     },
     backgroundImage: {
         flex: 1,

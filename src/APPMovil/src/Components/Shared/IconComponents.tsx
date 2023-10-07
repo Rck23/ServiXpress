@@ -12,7 +12,7 @@ import ZocialIcon from 'react-native-vector-icons/Zocial'
 import { mainColors } from '../../Constants/Values';
 
 
-type IconProps = {
+export type IconProps = {
     name: string
     library: 'material' | 'ion' | 'zocial' | 'antDesign' | 'entypo' | 'evil' | 'fontAwesome' | 'foundation' | 'materialCommunity'
     size?: number
