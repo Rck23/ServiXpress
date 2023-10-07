@@ -1,10 +1,17 @@
-﻿using MediatR;
+﻿using CloudinaryDotNet.Actions;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
+using ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword;
+using ServiXpress.Application.Features.Auths.Users.Commands.ResetPasswordByToken;
+using ServiXpress.Application.Features.Auths.Users.Commands.SendPassword;
+using ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser;
+using ServiXpress.Application.Features.Auths.Users.Queries.GetUserById;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
+using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Application.Models.ImageManagement;
 
 
@@ -17,9 +24,6 @@ namespace ServiXpress.Api.Controllers
         private IMediator _mediator;
         
         private IManageImageService _manageImageService;
-
-
-       
 
         public UsuarioController(IMediator mediator, IManageImageService manageImage)
         {
@@ -58,6 +62,62 @@ namespace ServiXpress.Api.Controllers
             return await _mediator.Send(register);
 
 
+        }
+
+
+        // CAMBIAR CONTRASEÑA 
+        [AllowAnonymous]
+        [HttpPost("ForgotPassword", Name = "ForgotPassword")]
+        public async Task<ActionResult<string>> ForgotPassword([FromBody] SendPassword sendPassword)
+        {
+            return await _mediator.Send(sendPassword);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("ResetPassword", Name = "ResetPassword")]
+        public async Task<ActionResult<string>> ResetPassword([FromBody] ResetPasswordByToken resetPasswordByToken)
+        {
+            return await _mediator.Send(resetPasswordByToken);
+        }
+
+
+        // ACTUALIZAR CONTRASEÑA 
+        [HttpPost("UpdatePassword", Name = "UpdatePassword")]
+        public async Task<ActionResult<Unit>> UpdatePassword([FromBody] ResetPassword resetPassword)
+        {
+            return await _mediator.Send(resetPassword);
+        }
+
+        // ACTUALIZAR USUARIO
+        [HttpPut("Update", Name = "Update")]
+        public async Task<ActionResult<AuthResponse>> Update([FromForm] UpdateUser updateUser)
+        {
+            // VERERIFICAR LA IMAGEN 
+            if (updateUser.Foto is not null)
+            {
+                var resultImage = await _manageImageService.UploadImage(new ImageData
+                {
+                    ImageStream = updateUser.Foto!.OpenReadStream(),
+                    Nombre = updateUser.Foto!.Name
+                });
+
+                updateUser.FotoId = resultImage.PublicId;
+                updateUser.FotoUrl = resultImage.Url;
+            }
+
+
+            return await _mediator.Send(updateUser);
+        }
+
+        // CONSULTA USUARIO POR ID
+        [Authorize(Roles = RoleAPI.AGENTE)]
+        [HttpGet("{id}", Name = "GetUsuarioById")]
+        public async Task<ActionResult<AuthResponse>> GetUsuarioById(string id)
+        {
+            var query = new GetUserById(id);
+
+
+            return await _mediator.Send(query);
         }
     }
 }

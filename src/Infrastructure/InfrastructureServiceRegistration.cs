@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiXpress.Application.Contracts.Identity;
+using ServiXpress.Application.Contracts.Infrastructure;
+using ServiXpress.Application.Models.Email;
 using ServiXpress.Application.Models.ImageManagement;
 using ServiXpress.Application.Models.Token;
 using ServiXpress.Application.Persistence;
+using ServiXpress.Infrastructure.EmailImplementation;
 using ServiXpress.Infrastructure.Repositories;
 using ServiXpress.Infrastructure.Services.Auth;
 
@@ -46,6 +49,9 @@ namespace ServiXpress.Infrastructure
             ///de CloudinarySettings a través de la inyección de dependencias.
             services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
+            services.AddTransient<IEmailService, EmailService>();
+
+            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
 
             return services;
         }

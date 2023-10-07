@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj": {}
+    "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj": {
+    "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
         "projectName": "ServiXpress.Api",
-        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Api\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -29,11 +29,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
+              "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
               },
-              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj"
+              "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj"
               }
             }
           }
@@ -86,14 +86,14 @@
         }
       }
     },
-    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+    "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
         "projectName": "ServiXpress.Application",
-        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -110,8 +110,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj"
+              "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj"
               }
             }
           }
@@ -153,6 +153,10 @@
             "MailKit": {
               "target": "Package",
               "version": "[4.2.0, )"
+            },
+            "Mailjet.Api": {
+              "target": "Package",
+              "version": "[3.0.0, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -219,14 +223,14 @@
         }
       }
     },
-    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
+    "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
         "projectName": "ServiXpress.Domain",
-        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Domain\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -284,14 +288,14 @@
         }
       }
     },
-    "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
+    "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
         "projectName": "ServiXpress.Infrastructure",
-        "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -308,8 +312,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\Source\\Repos\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
+              "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+                "projectPath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
               }
             }
           }
