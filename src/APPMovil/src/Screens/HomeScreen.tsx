@@ -11,7 +11,7 @@ export const HomeScreen = ({ navigation, route }: Props) => {
         <>
             <View style={GlobalStyles.GlobalcontainerStyle}>
                 <ButtonPrincipalGlobal
-                    text='Buscar servicio'
+                    text='Buscar'
                     icon={{ name: 'search1', library: 'antDesign' }} />
 
                 <ButtonPrincipalGlobal
