@@ -20,25 +20,32 @@ export const GlobalStyles = StyleSheet.create({
         fontSize: 15
     },
     GlobalButton: {
-        width: "60%",
-        backgroundColor: mainColors.purpule,
-        padding: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
         borderRadius: 50,
         marginBottom: 10,
         flexDirection: 'row',
-        justifyContent: 'space-evenly'
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    globalButtonSmall: {
+        paddingVertical: 5
     },
     GlobalButtonText: {
-        fontWeight: "bold",
-        color: mainColors.white,
+        fontWeight: "600",
         textAlign: 'center',
-        fontSize: 17
+        fontSize: 16,
+    },
+    globalButtonTextSmall: {
+        fontSize: 13,
+    },
+    globalButtonIconSmall: {
+        fontSize: 14
     },
     GlobalButtonIcon: {
-        fontSize: 17,
-        margin: "auto",
-        color: mainColors.white,
-        fontWeight: "bold"
+        fontSize: 18,
+        fontWeight: "bold",
+        marginRight: 5
     },
     GlobalHipervinculo: {
         padding: 2,

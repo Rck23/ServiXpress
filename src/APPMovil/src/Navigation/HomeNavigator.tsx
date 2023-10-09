@@ -28,6 +28,8 @@ export const HomeNavigator = () => {
                     return TabBarIconsRNode(route, focused, color, size)
                 },
                 headerShown: true,
+                headerStyle: NavigationStyles.headerStyle,
+                headerTitleStyle: NavigationStyles.headerText,
                 tabBarLabelStyle: NavigationStyles.labelText,
                 tabBarStyle: NavigationStyles.styleTabBar,
                 tabBarShowLabel: false

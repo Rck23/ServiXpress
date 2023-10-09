@@ -2,6 +2,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, I
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { RecoveryStyles } from '../Styles/RecoveryStyles';
+import { ButtonGlobal } from '../Components/Shared/FormsComponents';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
@@ -28,13 +29,12 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
                         </Text>
 
                         <TextInput style={RecoveryStyles.input}
-                            placeholder= "Correo electrónico"
-                            placeholderTextColor= "grey"
+                            placeholder="Correo electrónico"
+                            placeholderTextColor="grey"
                         ></TextInput>
 
-                        <TouchableOpacity style={RecoveryStyles.boton} /*onPress={handleLogin}*/>
-                            <Text style={RecoveryStyles.botonText}>Enviar</Text>
-                        </TouchableOpacity>
+
+                        <ButtonGlobal text='Enviar' icon={{ name: 'send', library: 'fontAwesome' }} />
                     </View>
                 </View>
             </ImageBackground>

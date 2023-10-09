@@ -1,5 +1,4 @@
-import { StyleProp, TextStyle, Text, TextInput, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleProp, TextStyle, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -8,6 +7,11 @@ type ButtonPrincipalProps = {
     onClick?: () => void
     text: string
     icon: IconProps
+}
+
+type TextProps = {
+    text?: string
+    style?: StyleProp<TextStyle>
 }
 
 export const ButtonPrincipalGlobal = (props: ButtonPrincipalProps) => {
@@ -21,5 +25,13 @@ export const ButtonPrincipalGlobal = (props: ButtonPrincipalProps) => {
                 {props.text}
             </Text>
         </TouchableOpacity>
+    )
+}
+
+
+
+export const TextComponent = (props: TextProps) => {
+    return (
+        <Text style={[{ color: mainColors.textColor, fontWeight: '400', fontSize: 13 }, props.style]}>{props.text ?? ''}</Text>
     )
 }

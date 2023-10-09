@@ -1,5 +1,4 @@
-import { StyleProp, TextStyle, Text, TextInput, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { StyleProp, TextStyle, Text, TextInput, TouchableOpacity } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -15,6 +14,9 @@ type ButtonProps = {
     onClick?: () => void
     text: string
     icon: IconProps
+    type?: 'normal' | 'big' | 'small'
+    color?: string
+    textColor?: string
 }
 
 type HipervinculoProps = {
@@ -37,11 +39,12 @@ export const InputGlobal = (props: InputProps) => {
 export const ButtonGlobal = (props: ButtonProps) => {
     return (
         <TouchableOpacity
-            style={GlobalStyles.GlobalButton}
-            onPress={() => props.onClick ? props.onClick() : null}
+            style={[GlobalStyles.GlobalButton, { backgroundColor: props.color ?? mainColors.purpule }]}
+            onPress={() => props.onClick ? props.onClick() : {}}
+            activeOpacity={0.7}
         >
-            <Icon name={props.icon.name} library={props.icon.library} style={GlobalStyles.GlobalButtonIcon} />
-            <Text style={GlobalStyles.GlobalButtonText}>
+            <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.GlobalButtonIcon, { color: props.color ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonIconSmall : {}]} />
+            <Text style={[GlobalStyles.GlobalButtonText, { color: props.color ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonTextSmall : {}]}>
                 {props.text}
             </Text>
         </TouchableOpacity>
