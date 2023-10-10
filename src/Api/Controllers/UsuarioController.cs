@@ -9,6 +9,7 @@ using ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword;
 using ServiXpress.Application.Features.Auths.Users.Commands.ResetPasswordByToken;
 using ServiXpress.Application.Features.Auths.Users.Commands.SendPassword;
 using ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser;
+using ServiXpress.Application.Features.Auths.Users.Queries.GetAllUsers;
 using ServiXpress.Application.Features.Auths.Users.Queries.GetUserById;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
 using ServiXpress.Application.Models.Authorization;
@@ -116,6 +117,16 @@ namespace ServiXpress.Api.Controllers
         {
             var query = new GetUserById(id);
 
+
+            return await _mediator.Send(query);
+        }
+
+        // CONSULTA TODOS LOS USUARIOS
+        [Authorize(Roles = RoleAPI.AGENTE)]
+        [HttpGet("all", Name = "GetAllUsers")]
+        public async Task<ActionResult<List<AuthResponse>>> GetAllUsers()
+        {
+            var query = new GetAllUsers();
 
             return await _mediator.Send(query);
         }

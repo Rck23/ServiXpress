@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Win32;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
 using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Domain;
+using static ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser.RegisterUser;
 
 namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
 {
@@ -63,14 +65,26 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
 
             };
 
+       
+
             // Crear el usuario utilizando el UserManager y la contraseña proporcionada
 
             var resultado = await _userManager.CreateAsync(usuario!, request.Password!);
             if (resultado.Succeeded)
             {
+
+                // Validar el rol seleccionado por el usuario
+                switch (request.Rol)
+                {
+                    case Roles.CLIENTE:
+                    case Roles.TRABAJADOR:
+                        break;
+                    default:
+                        throw new BadRequestException("El rol seleccionado no es válido");
+                }
                 // Asignar el rol AGENTE al usuario recién creado
 
-                await _userManager.AddToRoleAsync(usuario, RoleAPI.AGENTE);
+                await _userManager.AddToRoleAsync(usuario, request.Rol.ToString());
                 // Obtener los roles del usuario
                 var roles = await _userManager.GetRolesAsync(usuario);
 

@@ -619,3 +619,4 @@ C:\Users\ulimx\Desktop\ServiXpress\src\Api\obj\Debug\net7.0\refint\ServiXpress.A
 C:\Users\ulimx\Desktop\ServiXpress\src\Api\obj\Debug\net7.0\ServiXpress.Api.pdb
 C:\Users\ulimx\Desktop\ServiXpress\src\Api\obj\Debug\net7.0\ServiXpress.Api.genruntimeconfig.cache
 C:\Users\ulimx\Desktop\ServiXpress\src\Api\obj\Debug\net7.0\ref\ServiXpress.Api.dll
+C:\Users\ulimx\OneDrive\Escritorio\ServiXpress\src\Api\bin\Debug\net7.0\Mailjet.Client.dll

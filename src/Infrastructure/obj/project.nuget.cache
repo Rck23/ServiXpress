@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hv/05HhwsQVm/v95bdfpQWKDE30R8LZAa3OhdTJsT+KWmXWX4dsFY96mqH5RW04g1Bnz7LvhD8XRgQiBXFuoAQ==",
+  "dgSpecHash": "Px86pWDJHPw57IzsKurrEJQpGJAgMCGNlgMpVvrvMQzvopZnu1jmy1lklawNo4vlPMmYz2dd921d57GQ9XkAcw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ulimx\\Desktop\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ulimx\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ulimx\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

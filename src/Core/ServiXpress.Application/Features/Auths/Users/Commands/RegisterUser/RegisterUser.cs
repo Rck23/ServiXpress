@@ -20,5 +20,15 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
         public string? FotoUrl { get; set; }
 
         public string? FotoId { get; set; }
+
+
+
+        public enum Roles
+        {
+            CLIENTE,
+            TRABAJADOR
+        }
+
+        public Roles? Rol { get; set; }
     }
 }
