@@ -7,9 +7,10 @@ import { UsersManageScreen } from '../Screens/UsersManageScreen';
 import { ProfileScreen } from '../Screens/ProfileScreen';
 import { TabBarIconsRNode } from '../Components/Shared/NavigationComponents';
 import { NavigationStyles } from '../Styles/NavigationStyles';
+import { ServiceNavigator } from './ServiceNavigator';
 
 export type HomeStackParams = {
-    homeScreen: undefined
+    serviceNavigatorScreen: undefined
     servicesMapScreen: undefined
     servicesBoardScreen: undefined
     usersManageScreen: undefined
@@ -22,7 +23,7 @@ const Tab = createBottomTabNavigator<HomeStackParams>();
 export const HomeNavigator = () => {
     return (
         <Tab.Navigator
-            initialRouteName="homeScreen"
+            initialRouteName="serviceNavigatorScreen"
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color, size }) => {
                     return TabBarIconsRNode(route, focused, color, size)
@@ -35,7 +36,7 @@ export const HomeNavigator = () => {
                 tabBarShowLabel: false
             })}
         >
-            <Tab.Screen name="homeScreen" options={{ title: 'ServiXpress' }} component={HomeScreen} />
+            <Tab.Screen name="serviceNavigatorScreen" options={{ title: 'ServiXpress' }} component={ServiceNavigator} />
             <Tab.Screen name="servicesMapScreen" options={{ title: 'Servicios' }} component={ServicesMapScreen} />
             <Tab.Screen name="servicesBoardScreen" options={{ title: 'Tablero servicios' }} component={ServicesBoardScreen} />
             <Tab.Screen name="usersManageScreen" options={{ title: 'Gestión de usuarios' }} component={UsersManageScreen} />
