@@ -73,3 +73,13 @@ export const ShootAlert = (title: string, message?: string, icon?: 'success' | '
         OnConfirmAction: confirmEvent
     }
 }
+
+
+export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: 'success' | 'error' | 'info' | 'warning' | 'question'): ResultData => {
+    return {
+        ok,
+        message: constant.message,
+        title: constant.title,
+        icon: icon ?? (ok ? 'success' : 'error')
+    }
+}

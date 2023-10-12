@@ -48,5 +48,17 @@ export const alertStr = {
     permissionsDenied: {
         title: 'Se han rechazado los permisos para esta funcionalidad',
         message: 'Ingrese a ajustes del dispositivo para otorgar los permisos solicitados a la app (ServiXpress).'
+    },
+    tokenNotFound: {
+        title: 'No se ha podido encontrar la información de la sesión.',
+        message: 'Vuelva a intentar o vuelva a iniciar sesión para continuar.'
     }
+}
+
+
+
+
+export const apiEnpoints = {
+    authenticate: "/Usuario/Login",
+    sendEmailUser: "/Usuario/ForgotPassword"
 }
