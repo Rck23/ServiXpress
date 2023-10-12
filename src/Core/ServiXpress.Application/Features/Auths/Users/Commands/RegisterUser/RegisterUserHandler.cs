@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Win32;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
-using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Domain;
 using static ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser.RegisterUser;
+
+
 
 namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
 {
@@ -19,6 +19,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
     {
         private readonly UserManager<Usuario> _userManager;
 
+        
 
         private readonly IAuthService _authService;
 

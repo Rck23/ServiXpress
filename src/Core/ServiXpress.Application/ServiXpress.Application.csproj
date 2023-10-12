@@ -9,6 +9,7 @@
     <None Remove="Models\Token\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\Services\Queries\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
   </ItemGroup>
