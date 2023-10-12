@@ -45,5 +45,13 @@ export const NavigationStyles = StyleSheet.create({
         fontWeight: '600',
         textTransform: 'uppercase',
         fontSize: 8
+    },
+    headerStyle: {
+        backgroundColor: mainColors.purpule3,
+        ...GlobalStyles.boxShadow
+    },
+    headerText: {
+        color: mainColors.white,
+        textTransform: "uppercase"
     }
 })
