@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Application.Models.Service;
 using ServiXpress.Application.Models.Status;
@@ -104,6 +105,20 @@ namespace ServiXpress.Infrastructure.Context
 
                     }
                 }
+
+                // Categorias
+                if (!context.CategoriasServicios!.Any())
+                {
+                    // llamar al archivo JSON para poner informacion 
+                    var categoryServicesData = File.ReadAllText("../Infrastructure/Data/CategoriasServices.json");
+
+                    var categoriesServices = JsonConvert.DeserializeObject<List<CategoriaServicio>>(categoryServicesData);
+
+                    await context.CategoriasServicios!.AddRangeAsync(categoriesServices!);
+
+                    await context.SaveChangesAsync();
+                }
+
             }
             catch (Exception ex)
             {
