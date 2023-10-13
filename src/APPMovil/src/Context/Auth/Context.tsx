@@ -16,6 +16,7 @@ type AuthContextProps = {
     user: Usuario | null;
     status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
     SignIn: (email: string, password: string) => Promise<void>;
+    SignUp: (user: Usuario, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
     RemoveAlert: () => void;
     SendEmailResetPassword: (email: string) => Promise<ResultData>
@@ -74,6 +75,7 @@ export const AuthProvider = ({ children }: any) => {
     const SignIn = async (email: string, password: string) => {
         try {
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
+            console.log(data)
             const userData = ConvertLoginResponseToUser(data)
 
             await AsyncStorage.setItem('token', data.token);
@@ -86,6 +88,35 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
+            dispatch({
+                type: 'showAlert',
+                payload: await HandleException(error)
+            })
+        }
+    };
+
+
+    const SignUp = async (user: Usuario, image?: any) => {
+        try {
+            console.log(user)
+            const formData = new FormData();
+            formData.append('register', JSON.stringify(user));
+
+            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+            const userData = ConvertLoginResponseToUser(data)
+
+            await AsyncStorage.setItem('token', data.token);
+            await LocalStorageStoreData('userData', userData)
+            dispatch({
+                type: 'signUp',
+                payload: {
+                    token: data.token,
+                    usuario: userData
+                }
+            });
+        } catch (error: any) {
+            console.log(error)
+            console.log(error.response)
             dispatch({
                 type: 'showAlert',
                 payload: await HandleException(error)
@@ -128,6 +159,7 @@ export const AuthProvider = ({ children }: any) => {
         <AuthContext.Provider value={{
             ...state,
             SignIn,
+            SignUp,
             LogOut,
             RemoveAlert,
             SendEmailResetPassword

@@ -1,5 +1,5 @@
 export interface Usuario {
-    Id: string;
+    // Id: string;
     Nombre?: string | null;
     Apellidos?: string | null;
     Telefono?: string | null;
@@ -9,7 +9,7 @@ export interface Usuario {
     Email?: string | null;
     NormalizedEmail?: string | null;
     EmailConfirmed?: boolean;
-    PasswordHash?: string | null;
+    Password?: string | null;
     SecurityStamp?: string | null;
     ConcurrencyStamp?: string | null;
     PhoneNumber?: string | null;
@@ -28,5 +28,6 @@ export interface Usuario {
     Municipio?: string | null;
     NumExterior?: number | null;
     NumInterior?: number | null;
-    Role?: string | null;
+    Rol: number;
+    Foto?: any
 }
