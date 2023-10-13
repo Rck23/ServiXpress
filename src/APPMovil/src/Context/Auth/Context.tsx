@@ -17,7 +17,7 @@ type AuthContextProps = {
     status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
     SignIn: (email: string, password: string) => Promise<void>;
     LogOut: () => Promise<void>;
-    RemoveError: () => void;
+    RemoveAlert: () => void;
     SendEmailResetPassword: (email: string) => Promise<ResultData>
 }
 
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }: any) => {
 
 
 
-    const RemoveError = () => {
+    const RemoveAlert = () => {
         dispatch({ type: 'hideAlert' });
     };
 
@@ -129,7 +129,7 @@ export const AuthProvider = ({ children }: any) => {
             ...state,
             SignIn,
             LogOut,
-            RemoveError,
+            RemoveAlert,
             SendEmailResetPassword
         }}>
             {children}
