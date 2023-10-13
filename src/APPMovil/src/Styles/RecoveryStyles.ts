@@ -20,13 +20,6 @@ export const RecoveryStyles = StyleSheet.create({
         height: 100,
         marginBottom: 20
     },
-    contenedor: {
-        backgroundColor: mainColors.white,
-        width: "90%",
-        borderRadius: 10,
-        ...GlobalStyles.boxShadow,
-        padding: 5
-    },
     encabezado: {
         fontSize: 25,
         color: mainColors.textColor,
@@ -44,29 +37,5 @@ export const RecoveryStyles = StyleSheet.create({
         color: "black",
         textAlign: "justify",
         marginBottom: 20
-    },
-    input: {
-        alignSelf: "center",
-        width: "95%",
-        borderColor: mainColors.blackLight,
-        borderWidth: 2,
-        marginBottom: 40,
-        borderRadius: 10,
-        padding: 10,
-        fontSize: 19,
-        color: mainColors.textColor
-    },
-    boton: {
-        backgroundColor: mainColors.purpule,
-        padding: 10,
-        borderRadius: 50,
-        marginBottom: 10,
-        marginHorizontal: 20
-    },
-    botonText: {
-        fontWeight: "bold",
-        color: mainColors.white,
-        textAlign: 'center',
-        fontSize: 15
     }
 });

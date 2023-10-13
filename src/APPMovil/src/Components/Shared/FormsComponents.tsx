@@ -10,6 +10,16 @@ type InputProps = {
     placeholder: string
 }
 
+type TextAreaProps = {
+    value: string
+    onChange?: (Text: string) => void
+    style?: StyleProp<TextStyle>
+    placeholder: string
+    numberOfLines: number
+    maxLength: number
+    multiline: boolean
+}
+
 type ButtonProps = {
     onClick?: () => void
     text: string
@@ -32,6 +42,21 @@ export const InputGlobal = (props: InputProps) => {
             placeholderTextColor={mainColors.purpule}
             onChangeText={(text) => props.onChange ? props.onChange(text) : null}
             value={props.value}
+        />
+    )
+}
+
+export const TextAreaGlobal = (props: TextAreaProps) => {
+    return (
+        <TextInput
+            style={GlobalStyles.GlobalInput}
+            placeholder={props.placeholder}
+            placeholderTextColor={mainColors.purpule}
+            onChangeText={(text) => props.onChange ? props.onChange(text) : null}
+            value={props.value}
+            numberOfLines={props.numberOfLines}
+            maxLength={props.maxLength}
+            multiline ={props.multiline}
         />
     )
 }

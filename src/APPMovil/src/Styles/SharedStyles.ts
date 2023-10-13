@@ -9,6 +9,11 @@ export const GlobalStyles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 3
     },
+    Scrollview: {
+        bottom: 20,
+        marginVertical: 30,
+        padding: 10
+    },
     GlobalInput: {
         width: "100%",
         borderColor: mainColors.textColor,
@@ -20,13 +25,14 @@ export const GlobalStyles = StyleSheet.create({
         fontSize: 15
     },
     GlobalButton: {
+        width: "60%",
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 50,
         marginBottom: 10,
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignSelf: 'center'
     },
     globalButtonSmall: {
         paddingVertical: 5
@@ -45,7 +51,7 @@ export const GlobalStyles = StyleSheet.create({
     GlobalButtonIcon: {
         fontSize: 18,
         fontWeight: "bold",
-        marginRight: 5
+        marginRight: 10
     },
     GlobalHipervinculo: {
         padding: 2,
@@ -59,12 +65,23 @@ export const GlobalStyles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15
     },
-    GlobalcontainerStyle: {
-        paddingHorizontal: 35,
+    Globalcontainerdad: {
+        paddingHorizontal: 15,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "rgba(255, 255, 255, 0.78)"
+    },
+    Globalcontainer: {
+        backgroundColor: mainColors.white,
+        width: "95%",
+        borderRadius: 10,
+        shadowColor: mainColors.black,
+        shadowOpacity: 0.26,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 10,
+        elevation: 5,
+        padding: 5
     },
     GlobalBackground: {
         flex: 1,
@@ -92,5 +109,11 @@ export const GlobalStyles = StyleSheet.create({
         color: mainColors.gray,
         fontSize: 20,
         alignSelf: "center"
+    },
+    GlobalLogo: {
+        width: 226.09,
+        height: 100,
+        bottom: 4,
+        alignSelf: 'center'
     },
 })

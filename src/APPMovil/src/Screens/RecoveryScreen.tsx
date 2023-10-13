@@ -2,22 +2,26 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, I
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { RecoveryStyles } from '../Styles/RecoveryStyles';
-import { ButtonGlobal } from '../Components/Shared/FormsComponents';
+import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents';
+import { GlobalStyles } from '../Styles/SharedStyles';
+import { useState } from 'react';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
 interface Props extends StackScreenProps<AuthStackParams, 'recoveryScreen'> { }
 
 export const RecoveryScreen = ({ navigation, route }: Props) => {
+    const [recovery, setRecovery] = useState('');
+
     return (
         <>
             <ImageBackground
                 source={image}
 
-                style={RecoveryStyles.backgroundImage}
+                style={GlobalStyles.GlobalBackground}
             >
-                <View style={RecoveryStyles.container}>
-                    <View style={RecoveryStyles.contenedor}>
+                <View style={GlobalStyles.Globalcontainerdad}>
+                    <View style={GlobalStyles.Globalcontainer}>
                         <Image
                             source={require('../Images/Logo.png')}
                             style={RecoveryStyles.logo}
@@ -28,13 +32,15 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
                             Introduce tu correo electrónico para recuperar tu contraseña.
                         </Text>
 
-                        <TextInput style={RecoveryStyles.input}
-                            placeholder="Correo electrónico"
-                            placeholderTextColor="grey"
-                        ></TextInput>
+                        <InputGlobal
+                            placeholder='Correo electrónico'
+                            value={recovery}
+                            onChange={setRecovery} />
 
 
-                        <ButtonGlobal text='Enviar' icon={{ name: 'send', library: 'fontAwesome' }} />
+                        <ButtonGlobal
+                            text='Enviar'
+                            icon={{ name: 'send', library: 'fontAwesome' }} />
                     </View>
                 </View>
             </ImageBackground>
