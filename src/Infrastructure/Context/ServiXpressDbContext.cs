@@ -30,21 +30,21 @@ namespace ServiXpress.Infrastructure.Context
         {
             var username = "system";
 
-            //foreach (var entry in ChangeTracker.Entries<BaseDomainModel>())
-            //{
-            //    switch (entry.State)
-            //    {
-            //        case EntityState.Added:
-            //            entry.Entity.CreatedDate = DateTime.Now;
-            //            entry.Entity.CreatedBy = username;
-            //            break;
+            foreach (var entry in ChangeTracker.Entries<BaseDomainModel>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.CreatedBy = username;
+                        break;
 
-            //        case EntityState.Modified:
-            //            entry.Entity.LastModifiedDate = DateTime.Now;
-            //            entry.Entity.LastModifiedBy = username;
-            //            break;
-            //    }
-            //}
+                    case EntityState.Modified:
+                        entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Entity.LastModifiedBy = username;
+                        break;
+                }
+            }
 
             return base.SaveChangesAsync(cancellationToken);
         }
@@ -63,10 +63,6 @@ namespace ServiXpress.Infrastructure.Context
             .WithMany(e => e.Usuarios)
             .HasForeignKey(u => u.Estatus);
 
-            //builder.Entity<Usuario>()
-            //     .HasOne(u => u.Rol)
-            //     .WithMany(r => r.Usuarios)
-            //     .HasForeignKey(u => u.Role);
 
             builder.Entity<Servicio>()
                .HasOne(s => s.Usuario)
@@ -95,12 +91,7 @@ namespace ServiXpress.Infrastructure.Context
                 .HasForeignKey(c => c.UsuarioCalificadoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.Entity<Reporte>()
-            //    .HasOne(r => r.Usuario)
-            //    .WithMany()
-            //    .HasForeignKey(r => r.UsuarioId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
-
+            
 
             builder.Entity<Reporte>()
             .HasOne(r => r.Usuario)   // La propiedad de navegación en Reporte hacia Usuario
@@ -144,7 +135,6 @@ namespace ServiXpress.Infrastructure.Context
 
         // AQUI VA LOS  public DbSet<> DE CATEGORIAS, SERVICIOS, ETC..
 
-        //public DbSet<Role> Roles { get; set; }
         public DbSet<EstatusUsuario> EstatusUsuarios { get; set; }
         public DbSet<EstatusServicio> EstatusServicios { get; set; }
         public DbSet<EstatusReporte> EstatusReportes { get; set; }

@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleProp, TextStyle, Text, TextInput, TouchableOpacity, ViewStyle } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -32,6 +32,7 @@ type ButtonProps = {
 type HipervinculoProps = {
     onClick?: () => void
     text: string
+    style?: StyleProp<ViewStyle>
 }
 
 export const InputGlobal = (props: InputProps) => {
@@ -56,7 +57,7 @@ export const TextAreaGlobal = (props: TextAreaProps) => {
             value={props.value}
             numberOfLines={props.numberOfLines}
             maxLength={props.maxLength}
-            multiline ={props.multiline}
+            multiline={props.multiline}
         />
     )
 }
@@ -79,8 +80,9 @@ export const ButtonGlobal = (props: ButtonProps) => {
 export const HipervinculoGlobal = (props: HipervinculoProps) => {
     return (
         <TouchableOpacity
-            style={GlobalStyles.GlobalHipervinculo}
+            style={[GlobalStyles.GlobalHipervinculo, props.style]}
             onPress={() => props.onClick ? props.onClick() : null}
+            activeOpacity={.7}
         >
             <Text style={GlobalStyles.GlobalHipervinculoText}>
                 {props.text}

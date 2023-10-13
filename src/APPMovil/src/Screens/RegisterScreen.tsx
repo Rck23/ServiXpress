@@ -2,20 +2,24 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, I
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../Navigation/AuthNavigator";
 import { RegisterStyles } from '../Styles/LoginRegisterStyles';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents';
+import { AuthContext } from '../Context/Auth/Context';
+import { UseRegisterUserForm } from '../Hooks/UseRegisterUserForm';
 
 const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
 
 interface Props extends StackScreenProps<AuthStackParams, 'registerScreen'> { }
 
 export const RegisterScreen = ({ navigation, route }: Props) => {
-    const [name, setName] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [typeuser, setTypeuser] = useState('');
+    const { SignUp } = useContext(AuthContext)
+    const { Nombre, Apellidos, Telefono, Email, Password, OnChange, form } = UseRegisterUserForm({
+        Rol: 0
+    })
+
+    const HandleRegister = async () => {
+        await SignUp(form)
+    }
 
     return (
         <>
@@ -32,38 +36,38 @@ export const RegisterScreen = ({ navigation, route }: Props) => {
 
                     <InputGlobal
                         placeholder='Nombre(s)'
-                        value={name}
-                        onChange={setName} />
-                    
+                        value={Nombre ?? ''}
+                        onChange={(value) => OnChange(value, 'Nombre')} />
+
                     <InputGlobal
                         placeholder='Apellidos'
-                        value={lastname}
-                        onChange={setLastname} />
-                    
+                        value={Apellidos ?? ''}
+                        onChange={(value) => OnChange(value, 'Apellidos')} />
+
                     <InputGlobal
                         placeholder='Numero de telefono'
-                        value={phone}
-                        onChange={setPhone} />
-                    
+                        value={Telefono ?? ''}
+                        onChange={(value) => OnChange(value, 'Telefono')} />
+
                     <InputGlobal
                         placeholder='Correo electrónico'
-                        value={email}
-                        onChange={setEmail} />
-                    
+                        value={Email ?? ''}
+                        onChange={(value) => OnChange(value, 'Email')} />
+
                     <InputGlobal
                         placeholder='Contraseña'
-                        value={password}
-                        onChange={setPassword} />
-                    
+                        value={Password ?? ''}
+                        onChange={(value) => OnChange(value, 'Password')} />
+                    {/* 
                     <InputGlobal
                         placeholder='Tipo de trabajador'
-                        value={typeuser}
-                        onChange={setTypeuser} />
+                        value={Role}
+                        onChange={setTypeuser} /> */}
 
                     <ButtonGlobal
                         text='Crear cuenta'
-                        icon={{name: 'adduser', library: 'antDesign'}}
-                        onClick={() => navigation.navigate("loginScreen")} />
+                        icon={{ name: 'adduser', library: 'antDesign' }}
+                        onClick={HandleRegister} />
                 </View>
             </ImageBackground>
         </>

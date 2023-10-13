@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
 
 namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
@@ -12,5 +13,22 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
         public string? Email { get; set; }
 
         public string? Password { get; set; }
+
+        //CARGAR LA IMAGEN
+        public IFormFile? Foto { get; set; }
+
+        public string? FotoUrl { get; set; }
+
+        public string? FotoId { get; set; }
+
+
+
+        public enum Roles
+        {
+            CLIENTE,
+            TRABAJADOR
+        }
+
+        public Roles? Rol { get; set; }
     }
 }

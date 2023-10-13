@@ -25,7 +25,6 @@ export const GlobalStyles = StyleSheet.create({
         fontSize: 15
     },
     GlobalButton: {
-        width: "60%",
         paddingVertical: 10,
         paddingHorizontal: 20,
         borderRadius: 50,
@@ -55,7 +54,7 @@ export const GlobalStyles = StyleSheet.create({
     },
     GlobalHipervinculo: {
         padding: 2,
-        marginTop: 10,
+        marginVertical: 5,
         borderBottomColor: mainColors.purpule,
         borderBottomWidth: 2
     },
