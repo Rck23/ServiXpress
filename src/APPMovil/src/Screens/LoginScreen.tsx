@@ -29,7 +29,7 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                     <Image
                         source={require('../Images/Logo.png')}
                         style={LoginStyles.logo}
-                    ></Image>
+                    />
 
                     <InputGlobal
                         placeholder='Correo electronico'
