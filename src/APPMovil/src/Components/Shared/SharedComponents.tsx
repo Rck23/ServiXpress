@@ -28,10 +28,20 @@ export const ButtonPrincipalGlobal = (props: ButtonPrincipalProps) => {
     )
 }
 
-
-
 export const TextComponent = (props: TextProps) => {
     return (
         <Text style={[{ color: mainColors.textColor, fontWeight: '400', fontSize: 13 }, props.style]}>{props.text ?? ''}</Text>
+    )
+}
+
+type ItemProps = {
+    name: string
+}
+
+export default function UserListItem(props: ItemProps) {
+    return (
+        <View>
+            <Text>{props.name}</Text>
+        </View>
     )
 }
