@@ -21,7 +21,8 @@ namespace ServiXpress.Domain
 
 
         public string? Estatus { get; set; }
-        public string? Role { get; set; }
+        
+        //public string? Role { get; set; }
 
         public EstatusUsuario? EstatusUsuario { get; set; }
         //public Role Rol { get; set; }

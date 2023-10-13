@@ -1,12 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { Navigator } from "./src/Navigation/Navigator";
+import { AuthProvider } from "./src/Context/Auth/Context";
 
 const AppState = ({ children }: any) => {
   return (
-    //TODO: Meter main context  
-    <>
+    <AuthProvider>
       {children}
-    </>
+    </AuthProvider>
   )
 }
 
@@ -14,18 +14,11 @@ const AppState = ({ children }: any) => {
 const App = () => {
   return (
     <NavigationContainer>
-      <Navigator />
-
+      <AppState>
+        <Navigator />
+      </AppState>
     </NavigationContainer>
   )
 }
 
 export default App;
-
-
-
-// <NavigationContainer>
-{/* <AppState> */ }
-
-{/* </AppState> */ }
-// </NavigationContainer>

@@ -13,3 +13,15 @@ export interface ResponseApi {
     data?: any
     title?: string
 }
+
+
+export interface LoginResponse {
+    id: string,
+    nombre: string,
+    apellidos: string,
+    telefono: string,
+    email: string,
+    token: string,
+    avatar: string,
+    roles: string[]
+}
