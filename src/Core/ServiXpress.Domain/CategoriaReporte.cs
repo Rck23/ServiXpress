@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiXpress.Domain
 {
-    public class CategoriaReporte : BaseDomainModel
+    public class CategoriaReporte
     {
         [Key]
         [StringLength(100)]

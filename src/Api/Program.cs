@@ -10,12 +10,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using ServiXpress.Api.Middlewares;
 using ServiXpress.Application;
+using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure;
 using ServiXpress.Infrastructure.Context;
+using ServiXpress.Infrastructure.ImageCloudinary;
 
 
 // Crear el constructor de la aplicación web
@@ -59,6 +62,11 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Agregar servicios de aplicación
 builder.Services.AddApplicationServices(builder.Configuration);
+
+
+//AGREGACION DEL SERVICIO DE IMAGENES
+builder.Services.AddScoped<IManageImageService, ManageImageService>();
+
 
 // Agregar archivo de configuración JSON basado en el entorno
 builder.Configuration.AddJsonFile($"appsettings.{_env.EnvironmentName}.json", optional: false, reloadOnChange: true);
@@ -117,6 +125,10 @@ var app = builder.Build();
 // Configurar el pipeline de solicitudes HTTP
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// AGREGACION DE ExceptionMiddleware
+app.UseMiddleware<ExceptionMiddleware>();
+
 
 app.UseHttpsRedirection();
 

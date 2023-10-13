@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServiXpress.Domain
 {
-    public class TipoServicio : BaseDomainModel
+    public class TipoServicio 
     {
         [Key]
         [StringLength(50)]

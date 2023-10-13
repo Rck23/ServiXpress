@@ -12,7 +12,7 @@
         public string? Token { get; set; }
 
 
-        //public string? Avatar { get; set; }
+        public string? Avatar { get; set; }
 
         public ICollection<string>? Roles { get; set; }
     }
