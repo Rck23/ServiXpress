@@ -1,35 +1,33 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {}
+    "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/ServiXpress.Application.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+    "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/ServiXpress.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
+        "projectUniqueName": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/ServiXpress.Application.csproj",
         "projectName": "ServiXpress.Application",
-        "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj",
-        "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\obj\\",
+        "projectPath": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/ServiXpress.Application.csproj",
+        "packagesPath": "/Users/rck23/.nuget/packages/",
+        "outputPath": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/rck23/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
-                "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj"
+              "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/ServiXpress.Domain.csproj": {
+                "projectPath": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/ServiXpress.Domain.csproj"
               }
             }
           }
@@ -137,28 +135,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.309/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj": {
+    "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/ServiXpress.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
+        "projectUniqueName": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/ServiXpress.Domain.csproj",
         "projectName": "ServiXpress.Domain",
-        "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\ServiXpress.Domain.csproj",
-        "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Domain\\obj\\",
+        "projectPath": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/ServiXpress.Domain.csproj",
+        "packagesPath": "/Users/rck23/.nuget/packages/",
+        "outputPath": "/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/rck23/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -202,7 +198,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.309/RuntimeIdentifierGraph.json"
         }
       }
     }

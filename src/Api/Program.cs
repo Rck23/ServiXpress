@@ -127,7 +127,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 // AGREGACION DE ExceptionMiddleware
- //app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<ExceptionMiddleware>();
 
 
 app.UseHttpsRedirection();

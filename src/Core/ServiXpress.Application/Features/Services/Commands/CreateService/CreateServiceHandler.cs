@@ -31,15 +31,15 @@ namespace ServiXpress.Application.Features.Services.Commands.CreateService
             var usuarioId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             // LA DATA DEL CLIENTE SE TRANSFORME A UN TIPO PRODUCTO
-            var productEntity = _mapper.Map<Servicio>(request);
+            var serviceEntity = _mapper.Map<Servicio>(request);
             // Asignar el UsuarioId al objeto Servicio
-            productEntity.UsuarioId = usuarioId;
+            serviceEntity.UsuarioId = usuarioId;
 
-            await _unitOfWork.Repository<Servicio>().AddAsync(productEntity);
+            await _unitOfWork.Repository<Servicio>().AddAsync(serviceEntity);
 
             
 
-            return _mapper.Map<ServicioVm>(productEntity);
+            return _mapper.Map<ServicioVm>(serviceEntity);
 
         }
     }

@@ -7,11 +7,15 @@
   <ItemGroup>
     <None Remove="Persistence\" />
     <None Remove="Models\Token\" />
+    <None Remove="Features\Categories\Commands\UpdateCategoryService\" />
+    <None Remove="Features\Services\Commands\UpdateService\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Services\Queries\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
+    <Folder Include="Features\Categories\Commands\UpdateCategoryService\" />
+    <Folder Include="Features\Services\Commands\UpdateService\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />

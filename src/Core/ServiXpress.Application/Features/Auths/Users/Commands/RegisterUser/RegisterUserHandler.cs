@@ -50,7 +50,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
             var existeEmail = await _userManager.FindByEmailAsync(request.Email!) is null ? false : true;
             if (existeEmail)
             {
-                throw new BadRequestException("El correo electrónico ya existe en la base de datos");
+                throw new EmailAlreadyExistsException(request.Email!);
             }
 
             // Crear un nuevo objeto de tipo Usuario con los datos proporcionados
@@ -81,9 +81,9 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     case Roles.TRABAJADOR:
                         break;
                     default:
-                        throw new BadRequestException("El rol seleccionado no es válido");
+                        throw new InvalidRoleException();
                 }
-                // Asignar el rol AGENTE al usuario recién creado
+
 
                 await _userManager.AddToRoleAsync(usuario, request.Rol.ToString());
                 // Obtener los roles del usuario
@@ -105,7 +105,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
             }
 
 
-            throw new Exception("Error al registrar el usuario");
+            throw new UserRegistrationException();
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿
 
 using AutoMapper;
-using ServiXpress.Application.Features.Categories.Commands.CreateCategory;
+using ServiXpress.Application.Features.Categories.Commands.CreateCategoryService;
 using ServiXpress.Application.Features.Categories.ViewModels;
 using ServiXpress.Application.Features.Services.Commands.CreateService;
+using ServiXpress.Application.Features.Services.Commands.UpdateService;
 using ServiXpress.Application.Features.Services.ViewModels;
 using ServiXpress.Domain;
 
@@ -19,8 +20,9 @@ namespace ServiXpress.Application.Mappings
 
 
             CreateMap<CategoriaServicio, CategoriaServicioVm>();
-            CreateMap<CreateCategory, CategoriaServicio>();
+            CreateMap<CreateCategoryService, CategoriaServicio>();
 
+            CreateMap<UpdateService, Servicio>();
 
             CreateMap<CreateService, Servicio>();
         }

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ServiXpress.Application.Features.Categories.Commands.CreateCategory;
+using ServiXpress.Application.Features.Categories.Commands.CreateCategoryService;
 using ServiXpress.Application.Features.Categories.ViewModels;
 using System.Net;
 
@@ -21,11 +21,9 @@ namespace ServiXpress.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("create", Name = "CreateCategoryServices")]
-        public async Task<ActionResult<CategoriaServicioVm>> CreateProduct([FromForm] CreateCategory createCategory)
+        public async Task<ActionResult<CategoriaServicioVm>> CreateProduct([FromForm] CreateCategoryService createCategory)
         {
             
-
-            // ENVIAR AL HANDLER
             return await _mediator.Send(createCategory);
         }
     }

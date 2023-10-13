@@ -23,7 +23,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Queries.GetUserById
 
             if (usuario is null)
             {
-                throw new BadRequestException("El usuario no existe!");
+                throw new UserNotFoundException();
             }
 
             return new AuthResponse
