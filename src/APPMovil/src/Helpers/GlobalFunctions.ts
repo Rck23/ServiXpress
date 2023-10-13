@@ -59,7 +59,8 @@ export const ShootAlertOnResult = (result: ResultData, CloseEvent: () => void): 
         icon: result.icon,
         message: result.message,
         title: result.title ?? '',
-        OnHideAlert: CloseEvent
+        OnHideAlert: CloseEvent,
+        visible: true
     }
 }
 
@@ -70,6 +71,17 @@ export const ShootAlert = (title: string, message?: string, icon?: 'success' | '
         message,
         title,
         OnHideAlert: closeEvent,
-        OnConfirmAction: confirmEvent
+        OnConfirmAction: confirmEvent,
+        visible: true
+    }
+}
+
+
+export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: 'success' | 'error' | 'info' | 'warning' | 'question'): ResultData => {
+    return {
+        ok,
+        message: constant.message,
+        title: constant.title,
+        icon: icon ?? (ok ? 'success' : 'error')
     }
 }
