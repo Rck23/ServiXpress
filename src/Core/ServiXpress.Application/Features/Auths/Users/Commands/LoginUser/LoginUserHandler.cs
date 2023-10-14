@@ -44,16 +44,16 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
             var user = await _userManager.FindByEmailAsync(request.Email!);
             if (user is null)
             {
-                throw new NotFoundException(nameof(Usuario), request.Email!);
+                throw new EmailNotFoundException(request.Email!);
             }
 
-            // Verificar la contraseña del usuario.
+            // Verificar las credenciales del usuario.
 
             var resultado = await _sigInManager.CheckPasswordSignInAsync(user, request.Password!, false);
 
             if (!resultado.Succeeded)
             {
-                throw new Exception("Las credenciales del usuario son erroneas");
+                throw new InvalidCredentialsException();
             }
 
             // Obtener los roles del usuario.

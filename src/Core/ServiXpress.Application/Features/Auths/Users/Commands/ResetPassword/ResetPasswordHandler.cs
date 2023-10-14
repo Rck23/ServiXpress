@@ -24,7 +24,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword
 
             if (updateUsuario is null)
             {
-                throw new BadRequestException("El usuario no existe");
+                throw new UserNotFoundException();
             }
 
 
@@ -34,7 +34,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword
 
             if (!(resultValidateOldPassword == PasswordVerificationResult.Success))
             {
-                throw new BadRequestException("La contraseña ingresada es erronea");
+                throw new IncorrectPasswordException();
             }
 
             // ENCRIPTAR LA NUEVA CONTRASEÑA
@@ -46,7 +46,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword
 
             if (!resultado.Succeeded)
             {
-                throw new BadRequestException("¡Algo salio mal! No se pudo cambiar la contraseña");
+                throw new PasswordChangeException();
             }
 
             return Unit.Value;

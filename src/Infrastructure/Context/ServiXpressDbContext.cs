@@ -66,8 +66,10 @@ namespace ServiXpress.Infrastructure.Context
 
             builder.Entity<Servicio>()
                .HasOne(s => s.Usuario)
-               .WithMany()
-               .HasForeignKey(s => s.UsuarioId);
+                .WithMany()
+                .HasForeignKey(s => s.UsuarioId)
+                 .OnDelete(DeleteBehavior.Restrict); // Opcional, define cómo se comporta la eliminación
+
 
             builder.Entity<Servicio>()
                 .HasOne(s => s.CategoriaServicio)
