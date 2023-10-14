@@ -82,3 +82,15 @@ C:\Users\Mago\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug
 C:\Users\Mago\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\refint\ServiXpress.Domain.dll
 C:\Users\Mago\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.pdb
 C:\Users\Mago\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ref\ServiXpress.Domain.dll
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\bin\Debug\net7.0\ServiXpress.Domain.deps.json
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\bin\Debug\net7.0\ServiXpress.Domain.dll
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\bin\Debug\net7.0\ServiXpress.Domain.pdb
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.csproj.AssemblyReference.cache
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.AssemblyInfoInputs.cache
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.AssemblyInfo.cs
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.dll
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\refint\ServiXpress.Domain.dll
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ServiXpress.Domain.pdb
+C:\Users\Isaac\Desktop\Projects\ServiXpress\src\Core\ServiXpress.Domain\obj\Debug\net7.0\ref\ServiXpress.Domain.dll
