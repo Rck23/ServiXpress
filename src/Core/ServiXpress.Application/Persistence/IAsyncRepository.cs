@@ -10,6 +10,8 @@ namespace ServiXpress.Application.Persistence
 	public interface IAsyncRepository<T> where T : class
     {
 
+        Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
+
         /// <summary>
         /// Obtiene todas las entidades de forma asíncrona.
         /// </summary>

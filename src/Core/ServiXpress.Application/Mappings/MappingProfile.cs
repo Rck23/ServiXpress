@@ -3,6 +3,7 @@
 using AutoMapper;
 using ServiXpress.Application.Features.Categories.Commands.CreateCategoryService;
 using ServiXpress.Application.Features.Categories.ViewModels;
+using ServiXpress.Application.Features.Reviews.ViewModels;
 using ServiXpress.Application.Features.Services.Commands.CreateService;
 using ServiXpress.Application.Features.Services.Commands.UpdateService;
 using ServiXpress.Application.Features.Services.ViewModels;
@@ -25,6 +26,9 @@ namespace ServiXpress.Application.Mappings
             CreateMap<UpdateService, Servicio>();
 
             CreateMap<CreateService, Servicio>();
+
+            CreateMap<Calificacion, ReviewVm>();
+
         }
     }
 }

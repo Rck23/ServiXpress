@@ -11,6 +11,8 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    
+    
     public class EmailNotFoundException : Exception
     {
         public EmailNotFoundException(string email) : base($"No se encontró una cuenta con el correo electrónico: {email}.")
@@ -60,7 +62,7 @@ namespace ServiXpress.Application.Exceptions
 
     public class UserRegistrationException : Exception
     {
-        public UserRegistrationException() : base("Error al registrar el usuario.")
+        public UserRegistrationException(string message) : base( message)
         {
         }
     }
@@ -121,6 +123,16 @@ namespace ServiXpress.Application.Exceptions
     {
         public ServiceUpdateFailedException(Exception ex)
             : base("No se pudo actualizar el servicio.", ex)
+        {
+        }
+    }
+
+    /* START Features/Categories Services */
+
+    public class CategoryServiceAlreadyExistsException : Exception
+    {
+        public CategoryServiceAlreadyExistsException()
+            : base($"La categoria que intentas crear ya existe en la base de datos.")
         {
         }
     }
