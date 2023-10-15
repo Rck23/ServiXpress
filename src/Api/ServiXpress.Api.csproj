@@ -7,9 +7,7 @@
 		<UserSecretsId>58fb702d-56a3-4e9a-b3c1-19199346da7a</UserSecretsId>
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'macbook' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Macbook' " />
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />

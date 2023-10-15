@@ -17,15 +17,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Macbook": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "http://localhost:58941",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "dotnetRunMessages": true
-    },
     "Development": {
       "commandName": "Project",
       "launchBrowser": true,

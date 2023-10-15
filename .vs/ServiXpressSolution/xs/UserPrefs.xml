@@ -1,18 +1,41 @@
 ﻿<Properties StartupConfiguration="{B2CA702F-FA6C-4245-96BD-AF4015840616}|Development">
-  <MonoDevelop.Ide.Workbench ActiveDocument="src/Api/Controllers/ServicioController.cs">
+  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/Core/ServiXpress.Application/Exceptions/NotFoundException.cs">
     <Files>
-      <File FileName="src/Api/Controllers/CategoryController.cs" Line="1" Column="1" />
-      <File FileName="src/Api/Controllers/ServicioController.cs" Line="23" Column="5" />
-      <File FileName="src/Api/Controllers/UsuarioController.cs" Line="1" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Features/Categories/Commands/CreateCategoryService/CreateCategoryServiceHandler.cs" Line="32" Column="14" />
+      <File FileName="src/Api/Middlewares/ExceptionMiddleware.cs" Line="142" Column="63" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/CustomExceptions.cs" Line="135" Column="53" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/BadRequestException.cs" Line="1" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/UserRegistrationException.cs" Line="1" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/ValidationException.cs" Line="1" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/UsuarioValidator.cs" Line="1" Column="1" />
+      <File FileName="src/Core/ServiXpress.Application/Exceptions/NotFoundException.cs" Line="10" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="ServiXpressSolution">
+          <Node name="ServiXpressSolution" expanded="True">
             <Node name="src" expanded="True">
-              <Node name="ServiXpress.Api" expanded="True">
-                <Node name="Controllers" expanded="True" />
-                <Node name="appsettings.json" expanded="True" />
+              <Node name="Core" expanded="True">
+                <Node name="ServiXpress.Application">
+                  <Node name="Exceptions" expanded="True">
+                    <Node name="NotFoundException.cs" selected="True" />
+                  </Node>
+                  <Node name="Features">
+                    <Node name="Categories">
+                      <Node name="Commands" expanded="True">
+                        <Node name="CreateCategoryService" expanded="True" />
+                      </Node>
+                    </Node>
+                  </Node>
+                </Node>
+                <Node name="ServiXpress.Domain" expanded="True" />
+              </Node>
+              <Node name="ServiXpress.Api">
+                <Node name="Errors" expanded="True" />
+              </Node>
+              <Node name="ServiXpress.Infrastructure">
+                <Node name="Data" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -20,11 +43,12 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.src.ServiXpress.Api PreferredExecutionTarget="/Applications/Firefox.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/rck23/Desktop/ServiXpress/src/Core/ServiXpress.Application/Features/Services/Commands/UpdateService/UpdateServiceHandler.cs" relfile="src/Core/ServiXpress.Application/Features/Services/Commands/UpdateService/UpdateServiceHandler.cs" line="23" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

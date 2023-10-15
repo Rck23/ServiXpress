@@ -53,10 +53,7 @@ namespace ServiXpress.Api.Middlewares
 
                 switch (ex)
                 {
-                    case NotFoundException notFoundException:
-                        statusCode = (int)HttpStatusCode.NotFound;
-                        errorResponse = new CodeErrorResponse(statusCode, new[] { "Recurso no encontrado" });
-                        break;
+                    
 
                     case FluentValidation.ValidationException validationException:
                         statusCode = (int)HttpStatusCode.BadRequest;
@@ -64,10 +61,7 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, errors);
                         break;
 
-                    case BadRequestException badRequestException:
-                        statusCode = (int)HttpStatusCode.BadRequest;
-                        errorResponse = new CodeErrorResponse(statusCode, new[] { "Solicitud incorrecta" });
-                        break;
+                    
 
                     case InvalidCredentialsException invalidCredentialsException:
                         statusCode = (int)HttpStatusCode.Unauthorized;
@@ -142,6 +136,12 @@ namespace ServiXpress.Api.Middlewares
                     case ServiceCreateFailedException serviceCreateFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceCreateFailedException.Message });
+                        break;
+
+
+                    case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { categoryServiceAlreadyExistsException.Message });
                         break;
 
 
