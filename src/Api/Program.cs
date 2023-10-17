@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using ServiXpress.Api.Middlewares;
 using ServiXpress.Application;
 using ServiXpress.Application.Contracts.Infrastructure;
+using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
 using ServiXpress.Domain;
@@ -87,6 +88,7 @@ identityBuilder.AddRoles<IdentityRole>().AddDefaultTokenProviders();
 identityBuilder.AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<Usuario, IdentityRole>>();
 
 identityBuilder.AddEntityFrameworkStores<ServiXpressDbContext>();
+identityBuilder.AddErrorDescriber<SpanishIdentityErrorDescriber>();
 identityBuilder.AddSignInManager<SignInManager<Usuario>>();
 
 builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
@@ -104,6 +106,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = false
         };
     });
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+
+    // Configuración de las reglas de validación de contraseñas
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 16; // Aumentar la longitud mínima
+    options.Password.RequiredUniqueChars = 4; // Requerir más caracteres únicos
+
+    // Configuración de las reglas de bloqueo
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(3000); // Duración del bloqueo
+    options.Lockout.MaxFailedAccessAttempts = 2; // Número máximo de intentos de acceso fallidos
+    options.Lockout.AllowedForNewUsers = true;
+
+});
+
 
 // Configurar CORS
 builder.Services.AddCors(options =>

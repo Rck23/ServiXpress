@@ -29,8 +29,8 @@ namespace ServiXpress.Domain
 
 
         // UNO A MUCHOS
-        public virtual ICollection<Calificaciones>? CalificacionesHechas { get; set; }
-        public virtual ICollection<Calificaciones>? CalificacionesRecibidas { get; set; }
+        public virtual ICollection<Calificacion>? CalificacionesHechas { get; set; }
+        public virtual ICollection<Calificacion>? CalificacionesRecibidas { get; set; }
 
 
         public ICollection<Reporte>? Reportes { get; set; }

@@ -81,13 +81,13 @@ namespace ServiXpress.Infrastructure.Context
                 .WithMany()
                 .HasForeignKey(s => s.Tipo);
 
-            builder.Entity<Calificaciones>()
+            builder.Entity<Calificacion>()
             .HasOne(c => c.UsuarioCalifica)
             .WithMany(u => u.CalificacionesHechas)
             .HasForeignKey(c => c.UsuarioCalificaId)
             .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Calificaciones>()
+            builder.Entity<Calificacion>()
                 .HasOne(c => c.UsuarioCalificado)
                 .WithMany(u => u.CalificacionesRecibidas)
                 .HasForeignKey(c => c.UsuarioCalificadoId)
@@ -145,7 +145,7 @@ namespace ServiXpress.Infrastructure.Context
         public DbSet<CategoriaServicio> CategoriasServicios { get; set; }
         public DbSet<TipoServicio> TipoServicios { get; set; }
         public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<Calificaciones> Calificaciones { get; set; }
+        public DbSet<Calificacion> Calificaciones { get; set; }
         public DbSet<Reporte> Reportes { get; set; }
 
 
