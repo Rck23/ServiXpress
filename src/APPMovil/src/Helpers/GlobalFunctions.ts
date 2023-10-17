@@ -28,23 +28,26 @@ export const HandleException = async (error: any): Promise<ResultData> => {
  * @returns ResultData [mensaje, status, titulo]
  */
 export const GenerateErrorMessage = async (statusCode: number, response: any, icon?: 'success' | 'error' | 'info' | 'warning'): Promise<ResultData> => {
-    var responseMessage: string;
+    var responseMessage = typeof response === 'string' ? response 
+    : (typeof response.message === 'string' ? response.message : typeof response.message === 'object' ? [...response.message].join('\n') : undefined) 
+    ?? undefined;
+
     switch (statusCode) {
         case 10:
             return { ok: false, title: alertStr.lostConn.title, message: alertStr.lostConn.message, icon: 'error' }
         case 503:
         case 502:
         case 500:
-            return { ok: false, message: alertStr.response500.message, title: alertStr.response500.title, icon: 'error' }
+            return { ok: false, message: responseMessage ?? alertStr.response500.message, title: alertStr.response500.title, icon: 'error' }
         case 400:
         case 404:
-            return { ok: false, message: alertStr.response400.message, title: alertStr.response400.title, icon: 'warning' }
+            return { ok: false, message: responseMessage ?? alertStr.response400.message, title: alertStr.response400.title, icon: 'warning' }
         case 401:
-            return { ok: false, message: alertStr.response401.message, title: alertStr.response401.title, icon: 'warning' }
+            return { ok: false, message: responseMessage ?? alertStr.response401.message, title: alertStr.response401.title, icon: 'warning' }
         case 300:
-            return { ok: false, message: response.data?.message ?? response.message, title: response.data?.title ?? response.title, icon: 'info' }
+            return { ok: false, message: responseMessage ?? response.data?.message ?? response.message, title: response.data?.title ?? response.title, icon: 'info' }
         case 0:
-            return { ok: false, message: response.message, title: response.title, icon: icon ?? 'info' }
+            return { ok: false, message: responseMessage ?? response.message, title: response.title, icon: icon ?? 'info' }
         case 1:
             return { ok: false, message: response, title: alertStr.internalError.title, icon: icon ?? 'error' }
         default:

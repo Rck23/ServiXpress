@@ -88,9 +88,11 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
+            console.log(error.response)
+            const resultData = await HandleException(error)
             dispatch({
                 type: 'showAlert',
-                payload: await HandleException(error)
+                payload: {...resultData, title: 'Autenticación fallida'}
             })
         }
     };
