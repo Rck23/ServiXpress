@@ -24,14 +24,14 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPasswordByT
             // EVALUAR SI LA CONTRASEÑA Y LA CONFIRMACION DE CONTRASEÑA SON IGUALES
             if (!string.Equals(request.Password, request.ConfirmPassword))
             {
-                throw new BadRequestException("La contraseña no es igual a la confirmación de contraseña");
+                throw new PasswordConfirmationMismatchException();
             }
 
             // VALIDACION DE USUARIO
             var updateUser = await _userManager.FindByEmailAsync(request.Email!);
             if (updateUser is null)
             {
-                throw new BadRequestException("El correo electrónico no esta registrado como usuario");
+                throw new UserNotFoundException();
             }
 
             //VALIDACION DE TOKEN
@@ -44,7 +44,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPasswordByT
             // COMPARAMOS
             if (!cambioResultado.Succeeded)
             {
-                throw new BadRequestException("No se pudo cambiar la contraseña");
+                throw new PasswordChangeFailedException();
             }
 
             return $"Se actualizo tu cuenta {request.Email} con tu nueva contraseña exitosamente";

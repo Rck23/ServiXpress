@@ -46,55 +46,117 @@ namespace ServiXpress.Api.Middlewares
             }
             catch (Exception ex)
             {
-                /// Si se produce una excepción, se registra en el logger utilizando _logger.LogError(ex, ex.Message). 
-                /// Se establece el tipo de contenido de la respuesta en "application/json" y se inicializan las variables statusCode y result.
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
                 var statusCode = (int)HttpStatusCode.InternalServerError;
-                var result = string.Empty;
+                CodeErrorResponse errorResponse;
 
-                /// Se utiliza una estructura switch para determinar el código de estado y el resultado de la respuesta en función 
-                /// del tipo de excepción que se produjo. Por ejemplo, si se produce una excepción NotFoundException, se establece 
-                /// el código de estado en 404 (No encontrado).
                 switch (ex)
                 {
-                    case NotFoundException notFoundException:
-                        statusCode = (int)HttpStatusCode.NotFound;
-                        break;
+                    
 
-                    /// Si no se encuentra un resultado específico para la excepción, se crea un objeto CodeErrorException 
-                    /// con el código de estado, el mensaje de error y la traza de la excepción. Este objeto se serializa a JSON 
-                    /// utilizando la biblioteca JsonConvert.
                     case FluentValidation.ValidationException validationException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         var errors = validationException.Errors.Select(ers => ers.ErrorMessage).ToArray();
-                        var validationJsons = JsonConvert.SerializeObject(errors);
-                        result = JsonConvert.SerializeObject(
-                            new CodeErrorException(statusCode, errors, validationJsons)
-                        );
+                        errorResponse = new CodeErrorResponse(statusCode, errors);
                         break;
 
-                    case BadRequestException badRequestException:
-                        statusCode = (int)HttpStatusCode.BadRequest;
+                    
+
+                    case InvalidCredentialsException invalidCredentialsException:
+                        statusCode = (int)HttpStatusCode.Unauthorized;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { invalidCredentialsException.Message });
                         break;
+
+                    case EmailNotFoundException emailNotFoundException:
+                        statusCode = (int)HttpStatusCode.NotFound;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { emailNotFoundException.Message });
+                        break;
+
+                    case EmailAlreadyExistsException emailAlreadyExistsException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { emailAlreadyExistsException.Message });
+                        break;
+
+                    case InvalidRoleException invalidRoleException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { invalidRoleException.Message });
+                        break;
+
+                    case UserRegistrationException userRegistrationException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { userRegistrationException.Message });
+                        break;
+
+                    case UserNotFoundException userNotFoundException:
+                        statusCode = (int)HttpStatusCode.NotFound;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { userNotFoundException.Message });
+                        break;
+
+                    case IncorrectPasswordException incorrectPasswordException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { incorrectPasswordException.Message });
+                        break;
+
+                    case PasswordChangeException passwordChangeException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { passwordChangeException.Message });
+                        break;
+
+                    case PasswordConfirmationMismatchException passwordConfirmationMismatchException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { passwordConfirmationMismatchException.Message });
+                        break;
+
+                    case PasswordChangeFailedException passwordChangeFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { passwordChangeFailedException.Message });
+                        break;
+
+                    case EmailSendingException emailSendingException:
+                        statusCode = (int)HttpStatusCode.InternalServerError;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { emailSendingException.Message });
+                        break;
+
+                    case UserUpdateFailedException userUpdateFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { userUpdateFailedException.Message });
+                        break;
+
+                    case ServiceNotFoundException serviceNotFoundException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { serviceNotFoundException.Message });
+                        break;
+
+                    case ServiceUpdateFailedException serviceUpdateFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { serviceUpdateFailedException.Message });
+                        break;
+
+                    case ServiceCreateFailedException serviceCreateFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { serviceCreateFailedException.Message });
+                        break;
+
+
+                    case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { categoryServiceAlreadyExistsException.Message });
+                        break;
+
 
                     default:
                         statusCode = (int)HttpStatusCode.InternalServerError;
+                        errorResponse = new CodeErrorResponse(statusCode);
                         break;
                 }
 
-                if (string.IsNullOrEmpty(result))
-                {
-                    result = JsonConvert.SerializeObject(
-                        new CodeErrorException(statusCode,
-                                                new string[] { ex.Message }, ex.StackTrace));
-                }
-
-                /// Finalmente, se establece el código de estado de la respuesta y se escribe el resultado en la respuesta.
+                var result = JsonConvert.SerializeObject(errorResponse);
                 context.Response.StatusCode = statusCode;
                 await context.Response.WriteAsync(result);
             }
-
         }
+
+
     }
 }

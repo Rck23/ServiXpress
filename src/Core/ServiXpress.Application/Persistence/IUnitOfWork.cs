@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq.Expressions;
+
 namespace ServiXpress.Application.Persistence
 {
     /// <summary>
@@ -22,6 +24,9 @@ namespace ServiXpress.Application.Persistence
         /// </summary>
         /// <returns>Una tarea que representa la operación. El resultado de la tarea contiene el número de filas afectadas.</returns>
         Task<int> Complete();
+
+
+
 
     }
 }

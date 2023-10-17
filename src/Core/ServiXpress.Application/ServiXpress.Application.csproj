@@ -7,10 +7,27 @@
   <ItemGroup>
     <None Remove="Persistence\" />
     <None Remove="Models\Token\" />
+    <None Remove="Features\Categories\Commands\UpdateCategoryService\" />
+    <None Remove="Features\Services\Commands\UpdateService\" />
+    <None Remove="Features\Categories\Queries\" />
+    <None Remove="Features\Reviews\" />
+    <None Remove="Features\Reviews\Queries\" />
+    <None Remove="Features\Reviews\Commands\" />
+    <None Remove="Features\Reviews\ViewModels\" />
+    <None Remove="Features\Reviews\Commands\CreateReviewUser\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\Services\Queries\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
+    <Folder Include="Features\Categories\Commands\UpdateCategoryService\" />
+    <Folder Include="Features\Services\Commands\UpdateService\" />
+    <Folder Include="Features\Categories\Queries\" />
+    <Folder Include="Features\Reviews\" />
+    <Folder Include="Features\Reviews\Queries\" />
+    <Folder Include="Features\Reviews\Commands\" />
+    <Folder Include="Features\Reviews\ViewModels\" />
+    <Folder Include="Features\Reviews\Commands\CreateReviewUser\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />

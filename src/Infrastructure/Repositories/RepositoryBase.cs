@@ -26,7 +26,10 @@ namespace ServiXpress.Infrastructure.Repositories
 			_context = context;
 		}
 
-
+        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
         /// <summary>
         /// Agrega una entidad al contexto de la base de datos y guarda 
         /// los cambios de forma asíncrona.
