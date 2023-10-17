@@ -45,31 +45,7 @@ export const LoginStyles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1,
-        resizeMode: 'cover',
-        justifyContent: 'center',
-    },
-    BotonRegistrar: {
-        padding: 2,
-        marginBottom: 10,
-        borderBottomColor: mainColors.purpule,
-        borderBottomWidth: 2
-    },
-    BotonRegistrarText: {
-        fontWeight: "bold",
-        color: mainColors.purpule2,
-        textAlign: 'center',
-        fontSize: 15
-    },
-    BotonRecuperar: {
-        padding: 2,
-        borderBottomColor: mainColors.purpule2,
-        borderBottomWidth: 2
-    },
-    BotonRecuperarText: {
-        fontWeight: "bold",
-        color: mainColors.purpule2,
-        textAlign: 'center',
-        fontSize: 15
+        justifyContent: 'center'
     }
 });
 

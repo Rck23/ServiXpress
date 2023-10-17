@@ -80,7 +80,8 @@ export const GlobalStyles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowRadius: 10,
         elevation: 5,
-        padding: 5
+        padding: 5,
+        bottom: 50
     },
     GlobalBackground: {
         flex: 1,
@@ -115,4 +116,34 @@ export const GlobalStyles = StyleSheet.create({
         bottom: 4,
         alignSelf: 'center'
     },
+    GlobalItem: {
+        borderColor: mainColors.purpule,
+        borderWidth: 2,
+        paddingVertical: 30,
+        paddingHorizontal: 20,
+        marginBottom: 30,
+        borderRadius: 10,
+        flexDirection: 'row'
+    },
+    GlobalItemText: {
+        fontSize: 17,
+        bottom: 2,
+        textAlign: 'justify',
+        fontWeight: 'bold',
+        color: mainColors.black
+    },
+    Globalitemicon: {
+        fontSize: 20,
+        textAlign: 'justify',
+        fontWeight: 'bold',
+        color: mainColors.black,
+        marginRight: 10
+    },
+    Globalcontaineruser: {
+        paddingVertical: 50,
+        backgroundColor: mainColors.white,
+        width: "90%",
+        borderRadius: 10,
+        padding: 10
+    }
 })

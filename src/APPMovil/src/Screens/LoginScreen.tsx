@@ -10,8 +10,7 @@ import { AlertModal } from '../Components/Modals/AlertModal';
 import { AlertModalProps } from '../Interfaces/DOMInterfaces';
 import { alertModalInitState } from '../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../Helpers/GlobalFunctions';
-
-const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
+import { GlobalStyles } from '../Styles/SharedStyles';
 
 interface Props extends StackScreenProps<AuthStackParams, 'loginScreen'> { }
 
@@ -38,13 +37,13 @@ export const LoginScreen = ({ navigation, route }: Props) => {
         <>
             <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
             <ImageBackground
-                source={image}
+                source={require('../Images/Background.jpg')}
                 style={LoginStyles.backgroundImage}
             >
-                <KeyboardAvoidingView style={LoginStyles.container}>
+                <KeyboardAvoidingView style={GlobalStyles.Globalcontainerdad}>
                     <Image resizeMode='contain' source={require('../Images/Logo.png')} style={LoginStyles.logo} />
 
-                    <View style={LoginStyles.formContainer}>
+                    <View style={GlobalStyles.Globalcontainer}>
                         <TextComponent style={LoginStyles.titleLogin} text='Iniciar sesión' />
                         <InputGlobal
                             placeholder='Correo electronico'

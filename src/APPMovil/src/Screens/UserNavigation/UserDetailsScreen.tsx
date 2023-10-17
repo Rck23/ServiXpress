@@ -11,7 +11,7 @@ interface Props extends StackScreenProps<UserStackParams, "userDetailsScreen"> {
 export const UserDetailsScreen = ({ navigation, route }: Props) => {
     return (
         <View style={GlobalStyles.Globalcontainerdad}>
-            jjaajaa
+            Que va
         </View>
     )
 }

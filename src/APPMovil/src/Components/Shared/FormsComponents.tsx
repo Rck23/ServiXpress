@@ -80,7 +80,7 @@ export const ButtonGlobal = (props: ButtonProps) => {
 export const HipervinculoGlobal = (props: HipervinculoProps) => {
     return (
         <TouchableOpacity
-            style={[GlobalStyles.GlobalHipervinculo, props.style]}
+            style={GlobalStyles.GlobalButton}
             onPress={() => props.onClick ? props.onClick() : null}
             activeOpacity={.7}
         >

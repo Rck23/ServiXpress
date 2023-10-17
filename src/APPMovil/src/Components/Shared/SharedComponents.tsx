@@ -36,12 +36,18 @@ export const TextComponent = (props: TextProps) => {
 
 type ItemProps = {
     name: string
+    onPress: () => void;
+    icon: IconProps
 }
 
 export default function UserListItem(props: ItemProps) {
     return (
-        <View>
-            <Text>{props.name}</Text>
-        </View>
+        <TouchableOpacity
+            style={GlobalStyles.GlobalItem}
+            onPress={() => props.onPress ? props.onPress() : {}}
+        >
+            <Icon name={props.icon.name} library={props.icon.library} style={GlobalStyles.Globalitemicon} />
+            <Text style={GlobalStyles.GlobalItemText}>{props.name}</Text>
+        </TouchableOpacity>
     )
 }
