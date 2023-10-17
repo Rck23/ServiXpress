@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiXpress.Domain
 {
-    public class Calificaciones : BaseDomainModel
+    public class Calificacion
     {
         public int Id { get; set; }
-        public int Calificacion { get; set; }
+        public int CalificacionServicio { get; set; }
         public string Comentarios { get; set; }
         public DateTime FechaHoraRegistro { get; set; }
 

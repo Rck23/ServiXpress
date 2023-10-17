@@ -156,7 +156,7 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ServiXpress.Domain.Calificaciones", b =>
+            modelBuilder.Entity("ServiXpress.Domain.Calificacion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,28 +164,14 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Calificacion")
+                    b.Property<int>("CalificacionServicio")
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<DateTime>("FechaHoraRegistro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UsuarioCalificaId")
@@ -354,13 +340,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -373,13 +352,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("FechaVencimiento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastModifiedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("LastModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Municipio")
@@ -513,9 +485,6 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Role")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -595,7 +564,7 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ServiXpress.Domain.Calificaciones", b =>
+            modelBuilder.Entity("ServiXpress.Domain.Calificacion", b =>
                 {
                     b.HasOne("ServiXpress.Domain.Usuario", "UsuarioCalifica")
                         .WithMany("CalificacionesHechas")
@@ -667,7 +636,7 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("CategoriaServicio");

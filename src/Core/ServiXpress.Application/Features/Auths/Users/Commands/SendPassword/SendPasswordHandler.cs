@@ -25,7 +25,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
             var usuario = await _userManager.FindByEmailAsync(request.Email!);
             if (usuario is null)
             {
-                throw new BadRequestException("El usuario no existe!");
+                throw new UserNotFoundException();
             }
 
             //AGREGACION DE TOKEN DE SEGURIDAD 
@@ -46,7 +46,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
 
             if (!result)
             {
-                throw new Exception("No se pudo enviar el correo electrónico.");
+                throw new EmailSendingException();
             }
 
             return $"Se envio el correo a la cuenta {request.Email}";

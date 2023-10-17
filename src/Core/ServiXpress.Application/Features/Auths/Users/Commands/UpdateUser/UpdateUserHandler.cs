@@ -27,7 +27,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser
 
             if (updateUsuario is null)
             {
-                throw new BadRequestException("El usuario no existe");
+                throw new UserNotFoundException();
             }
 
             updateUsuario.Nombre = request.Nombre;
@@ -48,7 +48,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser
 
             if (!resultado.Succeeded)
             {
-                throw new BadRequestException("No se pudo actualizo el usuario");
+                throw new UserUpdateFailedException();
             }
 
             // OBTENER AL USUARIO YA ACTUALIZADO 

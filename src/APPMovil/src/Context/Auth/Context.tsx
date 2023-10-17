@@ -99,10 +99,10 @@ export const AuthProvider = ({ children }: any) => {
     const SignUp = async (user: Usuario, image?: any) => {
         try {
             console.log(user)
-            const formData = new FormData();
-            formData.append('register', JSON.stringify(user));
+            // const formData = new FormData();
+            // formData.append('register', JSON.stringify(user));
 
-            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, user);
             const userData = ConvertLoginResponseToUser(data)
 
             await AsyncStorage.setItem('token', data.token);

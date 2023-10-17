@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Win32;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
-using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Domain;
 using static ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser.RegisterUser;
+
+
 
 namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
 {
@@ -18,6 +18,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
     public class RegisterUserHandler : IRequestHandler<RegisterUser, AuthResponse>
     {
         private readonly UserManager<Usuario> _userManager;
+
 
 
         private readonly IAuthService _authService;
@@ -49,7 +50,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
             var existeEmail = await _userManager.FindByEmailAsync(request.Email!) is null ? false : true;
             if (existeEmail)
             {
-                throw new BadRequestException("El correo electrónico ya existe en la base de datos");
+                throw new EmailAlreadyExistsException(request.Email!);
             }
 
             // Crear un nuevo objeto de tipo Usuario con los datos proporcionados
@@ -61,17 +62,35 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 Apellidos = request.Apellidos,
                 Telefono = request.Telefono,
                 Email = request.Email,
-                AvatarUrl = request.FotoUrl
+                //AvatarUrl = request.FotoUrl
 
             };
 
-       
+            var validator = new UsuarioValidator();
+            var validationErrors = validator.Validate(usuario);
+
+            if (validationErrors.Any())
+            {
+                var mensajeDeError = string.Join(", ", validationErrors);
+                throw new UserRegistrationException(mensajeDeError);
+            }
 
             // Crear el usuario utilizando el UserManager y la contraseña proporcionada
-
             var resultado = await _userManager.CreateAsync(usuario!, request.Password!);
-            if (resultado.Succeeded)
+
+            // Comprueba si la creación del usuario fue exitosa
+            if (!resultado.Succeeded)
             {
+                // Si la creación del usuario falló, recoge los errores de validación
+                var errores = resultado.Errors.Select(e => e.Description);
+
+                // Une los mensajes de error en una sola cadena
+                var mensajeDeError = string.Join(", ", errores);
+
+                // Lanza una excepción con los mensajes de error
+                throw new UserRegistrationException(mensajeDeError);
+            }
+            
 
                 // Validar el rol seleccionado por el usuario
                 switch (request.Rol)
@@ -80,9 +99,9 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     case Roles.TRABAJADOR:
                         break;
                     default:
-                        throw new BadRequestException("El rol seleccionado no es válido");
+                        throw new InvalidRoleException();
                 }
-                // Asignar el rol AGENTE al usuario recién creado
+
 
                 await _userManager.AddToRoleAsync(usuario, request.Rol.ToString());
                 // Obtener los roles del usuario
@@ -101,10 +120,10 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     Avatar = usuario.AvatarUrl,
                     Roles = roles
                 };
-            }
+            
 
 
-            throw new Exception("Error al registrar el usuario");
+            // throw new UserRegistrationException(message);
         }
     }
 }

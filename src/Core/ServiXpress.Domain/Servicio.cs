@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiXpress.Domain
 {
-    public class Servicio : BaseDomainModel
+    public class Servicio 
     {
         public int Id { get; set; }
         public string Estado { get; set; }
