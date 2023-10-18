@@ -9120,24 +9120,40 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "C:\\Users\\Isaac\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+=======
+    "C:\\Users\\ulimx\\.nuget\\packages\\": {}
+>>>>>>> master
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
       "projectName": "ServiXpress.Api",
       "projectPath": "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
       "packagesPath": "C:\\Users\\Isaac\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Api\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
+      "projectName": "ServiXpress.Api",
+      "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Api\\ServiXpress.Api.csproj",
+      "packagesPath": "C:\\Users\\ulimx\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Api\\obj\\",
+>>>>>>> master
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "C:\\Users\\Isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+=======
+        "C:\\Users\\ulimx\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> master
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9145,18 +9161,29 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
         "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+=======
+>>>>>>> master
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+<<<<<<< HEAD
             "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
               "projectPath": "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
             },
             "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
               "projectPath": "C:\\Users\\Isaac\\Desktop\\Projects\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj"
+=======
+            "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj": {
+              "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Core\\ServiXpress.Application\\ServiXpress.Application.csproj"
+            },
+            "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\ulimx\\OneDrive\\Escritorio\\ServiXpress\\src\\Infrastructure\\ServiXpress.Infrastructure.csproj"
+>>>>>>> master
             }
           }
         }
@@ -9205,7 +9232,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+>>>>>>> master
       }
     }
   }
