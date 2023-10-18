@@ -6,8 +6,7 @@ import { useContext } from 'react';
 import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents';
 import { AuthContext } from '../Context/Auth/Context';
 import { UseRegisterUserForm } from '../Hooks/UseRegisterUserForm';
-
-const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
+import { GlobalStyles } from '../Styles/SharedStyles';
 
 interface Props extends StackScreenProps<AuthStackParams, 'registerScreen'> { }
 
@@ -24,11 +23,10 @@ export const RegisterScreen = ({ navigation, route }: Props) => {
     return (
         <>
             <ImageBackground
-                source={image}
-
+                source={require('../Images/Background.jpg')}
                 style={RegisterStyles.backgroundImage}
             >
-                <View style={RegisterStyles.container}>
+                <View style={GlobalStyles.Globalcontainerdad}>
                     <Image
                         source={require('../Images/Logo.png')}
                         style={RegisterStyles.logo}

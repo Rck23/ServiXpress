@@ -6,8 +6,6 @@ import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents'
 import { GlobalStyles } from '../Styles/SharedStyles';
 import { useState } from 'react';
 
-const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
-
 interface Props extends StackScreenProps<AuthStackParams, 'recoveryScreen'> { }
 
 export const RecoveryScreen = ({ navigation, route }: Props) => {
@@ -16,7 +14,7 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
     return (
         <>
             <ImageBackground
-                source={image}
+                source={require('../Images/Background.jpg')}
 
                 style={GlobalStyles.GlobalBackground}
             >

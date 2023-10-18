@@ -28,10 +28,26 @@ export const ButtonPrincipalGlobal = (props: ButtonPrincipalProps) => {
     )
 }
 
-
-
 export const TextComponent = (props: TextProps) => {
     return (
         <Text style={[{ color: mainColors.textColor, fontWeight: '400', fontSize: 13 }, props.style]}>{props.text ?? ''}</Text>
+    )
+}
+
+type ItemProps = {
+    name: string
+    onPress: () => void;
+    icon: IconProps
+}
+
+export default function UserListItem(props: ItemProps) {
+    return (
+        <TouchableOpacity
+            style={GlobalStyles.GlobalItem}
+            onPress={() => props.onPress ? props.onPress() : {}}
+        >
+            <Icon name={props.icon.name} library={props.icon.library} style={GlobalStyles.Globalitemicon} />
+            <Text style={GlobalStyles.GlobalItemText}>{props.name}</Text>
+        </TouchableOpacity>
     )
 }

@@ -17,7 +17,7 @@ export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focuse
         case 'servicesMapScreen':
             iconName = focused ? 'location' : 'location-outline'
             break;
-        case 'usersManageScreen':
+        case 'userNavigatorScreen':
             iconName = focused ? 'person' : 'person-outline'
             break;
         case 'profileScreen':
