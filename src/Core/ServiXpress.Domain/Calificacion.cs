@@ -7,7 +7,7 @@ namespace ServiXpress.Domain
     public class Calificacion
     {
         public int Id { get; set; }
-        public int CalificacionServicio { get; set; }
+        public int CalificacionUser { get; set; }
         public string Comentarios { get; set; }
         public DateTime FechaHoraRegistro { get; set; }
 

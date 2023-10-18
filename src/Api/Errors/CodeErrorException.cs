@@ -19,7 +19,7 @@ namespace ServiXpress.Api.Errors
         
         [JsonProperty(PropertyName = "details")]
         public string? Details { get; set; }
-        public CodeErrorException(int statusCode, string[]? message = null, string? details = null)
+        public CodeErrorException(int statusCode, string[] message = null, string? details = null)
                                 : base(statusCode, message)
         {
             Details = details;

@@ -123,6 +123,7 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { userUpdateFailedException.Message });
                         break;
 
+                        
                     case ServiceNotFoundException serviceNotFoundException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceNotFoundException.Message });
@@ -144,6 +145,11 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { categoryServiceAlreadyExistsException.Message });
                         break;
 
+
+                    case CreateReviewFailedException createReviewFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { createReviewFailedException.Message });
+                        break;
 
                     default:
                         statusCode = (int)HttpStatusCode.InternalServerError;

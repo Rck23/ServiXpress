@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi.Extensions;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
@@ -15,9 +16,12 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
     /// Implementa la interfaz IRequestHandler para manejar la solicitud de tipo RegisterUser
     /// y devuelve una respuesta de tipo AuthResponse.
     /// </summary>
+    /// 
+ 
     public class RegisterUserHandler : IRequestHandler<RegisterUser, AuthResponse>
     {
         private readonly UserManager<Usuario> _userManager;
+
 
 
 
@@ -103,7 +107,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 }
 
 
-                await _userManager.AddToRoleAsync(usuario, request.Rol.ToString());
+                await _userManager.AddToRoleAsync(usuario, request.Rol.GetDisplayName());
                 // Obtener los roles del usuario
                 var roles = await _userManager.GetRolesAsync(usuario);
 

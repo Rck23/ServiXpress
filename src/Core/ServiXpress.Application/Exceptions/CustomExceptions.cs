@@ -136,5 +136,15 @@ namespace ServiXpress.Application.Exceptions
         {
         }
     }
+
+
+
+    public class CreateReviewFailedException : Exception
+    {
+        public CreateReviewFailedException()
+            : base("No se pudo guardar la calificación")
+        {
+        }
+    }
 }
 
