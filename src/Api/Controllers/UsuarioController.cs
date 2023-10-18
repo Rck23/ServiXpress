@@ -43,7 +43,7 @@ namespace ServiXpress.Api.Controllers
 
         [AllowAnonymous]
         [HttpPost("register", Name = "Register")]
-        public async Task<ActionResult<AuthResponse>> Register([FromForm] RegisterUser register)
+        public async Task<ActionResult<AuthResponse>> Register([FromBody] RegisterUser register)
         {
             //if (register.Foto is not null)
             //{
