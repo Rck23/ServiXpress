@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { ServicesMapScreen } from '../Screens/ServicesMapScreen';
-import { ServicesBoardScreen } from '../Screens/ServicesBoardScreen';
+import { ServicesBoardScreen } from '../Screens/ServicieDetailsNavigation/ServicesBoardScreen';
 import { ProfileScreen } from '../Screens/ProfileScreen';
 import { TabBarIconsRNode } from '../Components/Shared/NavigationComponents';
 import { NavigationStyles } from '../Styles/NavigationStyles';
 import { ServiceNavigator } from './ServiceNavigator';
 import { UserNavigator } from './UserNavigator';
+import { ServiceDetailsNavigator } from './ServiceDetailsNavigator';
 
 export type HomeStackParams = {
     serviceNavigatorScreen: undefined
     servicesMapScreen: undefined
-    servicesBoardScreen: undefined
-    usersManageScreen: undefined
     profileScreen: undefined
     userNavigatorScreen: undefined
+    servicesDetailsNavigatorScreen: undefined
 }
 
 
@@ -38,7 +38,7 @@ export const HomeNavigator = () => {
         >
             <Tab.Screen name="serviceNavigatorScreen" options={{ title: 'ServiXpress' }} component={ServiceNavigator} />
             <Tab.Screen name="servicesMapScreen" options={{ title: 'Servicios' }} component={ServicesMapScreen} />
-            <Tab.Screen name="servicesBoardScreen" options={{ title: 'Tablero servicios' }} component={ServicesBoardScreen} />
+            <Tab.Screen name="servicesDetailsNavigatorScreen" options={{ title: 'Tablero servicios' }} component={ServiceDetailsNavigator} />
             <Tab.Screen name="userNavigatorScreen" options={{ title: 'Gestión de usuarios' }} component={UserNavigator} />
             <Tab.Screen name="profileScreen" options={{ title: 'Mi perfil' }} component={ProfileScreen} />
         </Tab.Navigator>

@@ -8,7 +8,7 @@ export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focuse
     let iconName = 'ios-ellipse';
 
     switch (route.name) {
-        case 'servicesBoardScreen':
+        case 'servicesDetailsNavigatorScreen':
             iconName = focused ? 'grid' : 'grid-outline'
             break;
         case 'serviceNavigatorScreen':
@@ -41,7 +41,7 @@ export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focuse
  */
 export const ScreenContainer = ({ children }: any) => {
     return (
-        <View style={{ flex: 1, position: 'relative', paddingBottom: Platform.OS == 'ios' ? 105 : 80, marginHorizontal: 10, marginVertical: 5 }}>
+        <View style={NavigationStyles.Screencontainer}>
             {children}
         </View>
     )

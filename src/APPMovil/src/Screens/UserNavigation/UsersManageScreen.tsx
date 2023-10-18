@@ -70,7 +70,8 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
                     renderItem={({ item }) =>
                         <UserListItem name={item.name}
                             icon={{ name: 'user', library: 'fontAwesome' }}
-                            onPress={() => setSelectedId(item.id)} />}
+                            onPress={() => navigation.navigate('userDetailsScreen')} />
+                    }
                     keyExtractor={item => item.id} />
             </View>
         </View>

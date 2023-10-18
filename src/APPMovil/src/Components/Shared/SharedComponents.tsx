@@ -51,3 +51,22 @@ export default function UserListItem(props: ItemProps) {
         </TouchableOpacity>
     )
 }
+
+type InputProps = {
+    value: string
+    onChange?: (Text: string) => void
+    style?: StyleProp<TextStyle>
+    placeholder: string
+}
+
+export const InputEditable = (props: InputProps) => {
+    return (
+        <TextInput
+            style={GlobalStyles.InputEditable}
+            placeholder={props.placeholder}
+            placeholderTextColor={mainColors.purpule}
+            onChangeText={(text) => props.onChange ? props.onChange(text) : null}
+            value={props.value}
+        />
+    )
+}

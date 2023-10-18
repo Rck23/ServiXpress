@@ -53,5 +53,13 @@ export const NavigationStyles = StyleSheet.create({
     headerText: {
         color: mainColors.white,
         textTransform: "uppercase"
+    },
+    Screencontainer: {
+        flex: 1,
+        position: 'relative',
+        paddingBottom: Platform.OS == 'ios' ? 105 : 80,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        width: "100%"
     }
 })

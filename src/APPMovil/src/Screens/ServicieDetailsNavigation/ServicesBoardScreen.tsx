@@ -1,16 +1,17 @@
 import { View, ScrollView, TouchableOpacity, Text, Image, StyleSheet } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
-import { HomeStackParams } from "../Navigation/HomeNavigator"
+import { HomeStackParams } from "../../Navigation/HomeNavigator"
+import { ServiceDetailsStackParams } from '../../Navigation/ServiceDetailsNavigator';
 
 const imageprofile={ uri:"https://i.blogs.es/66b2a4/photo-1511367461989-f85a21fda167/1366_2000.jpeg" };
 
-interface Props extends StackScreenProps<HomeStackParams, 'servicesBoardScreen'> { }
+interface Props extends StackScreenProps<ServiceDetailsStackParams, 'servicesBoardScreen'> { }
 
 export const ServicesBoardScreen = ({ navigation, route }: Props) => {
     return (
         <ScrollView style={styles.container}>
           <View style={styles.sectionContainer}>
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('servicesDetailsScreen')}>
               <View style={styles.cardheader}>
                 <Image
                   source={imageprofile} style={styles.cardimage}></Image>

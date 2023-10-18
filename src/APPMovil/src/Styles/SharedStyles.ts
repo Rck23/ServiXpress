@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import { mainColors } from '../Constants/Values';
 
 export const GlobalStyles = StyleSheet.create({
@@ -145,5 +145,63 @@ export const GlobalStyles = StyleSheet.create({
         width: "90%",
         borderRadius: 10,
         padding: 10
+    },
+    UserImageProfile: {
+        width: 100,
+        height: 100,
+        alignSelf: "center",
+        marginVertical: 10,
+        borderRadius: 100
+    },
+    InputContainer: {
+        backgroundColor: mainColors.white,
+        width: 350,
+        borderRadius: 10,
+        shadowColor: mainColors.black,
+        shadowOpacity: 0.26,
+        shadowOffset: { width: 0, height: 2 },
+        elevation: 5,
+        marginBottom: 30,
+        padding: 20
+    },
+    ContenedorNombres: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: 'space-evenly',
+        right: 34,
+        marginBottom: 5
+    },
+    InputEditable: {
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        borderBottomColor: mainColors.gray,
+        borderBottomWidth: 2,
+        textAlign: 'justify',
+        marginBottom: 5,
+        color: mainColors.black
+    },
+    UserText: {
+        color: mainColors.black,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        width: "100%",
+        borderBottomColor: mainColors.gray,
+        borderBottomWidth: 2
+    },
+    Titulo: {
+        color: mainColors.purpule,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    Dato: {
+        color: mainColors.black,
+        fontSize: 17,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+        textAlign: 'justify'
+    },
+    DatCont: {
+        marginBottom: 30
     }
 })
