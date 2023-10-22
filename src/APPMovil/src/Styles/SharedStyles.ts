@@ -1,13 +1,17 @@
 import { StyleSheet } from 'react-native';
 import { mainColors } from '../Constants/Values';
 
+const shadow = {
+    shadowColor: mainColors.black,
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    elevation: 3
+};
+
 export const GlobalStyles = StyleSheet.create({
     boxShadow: {
-        shadowColor: mainColors.black,
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 3
+        ...shadow
     },
     Scrollview: {
         bottom: 20,
@@ -75,13 +79,8 @@ export const GlobalStyles = StyleSheet.create({
         backgroundColor: mainColors.white,
         width: "95%",
         borderRadius: 10,
-        shadowColor: mainColors.black,
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 5,
-        padding: 5,
-        bottom: 50
+        ...shadow,
+        padding: 5
     },
     GlobalBackground: {
         flex: 1,

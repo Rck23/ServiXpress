@@ -1,3 +1,5 @@
+import { NavigationStyles } from "../Styles/NavigationStyles"
+
 export const mainColors = {
     purpule: '#5503A6',
     purpule2: '#51168C',

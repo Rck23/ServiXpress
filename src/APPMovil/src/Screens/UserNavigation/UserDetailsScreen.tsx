@@ -4,6 +4,7 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { Text } from "react-native";
 import { UserStackParams } from '../../Navigation/UserNavigator';
 import { GlobalStyles } from "../../Styles/SharedStyles";
+import { TextComponent } from "../../Components/Shared/SharedComponents";
 
 interface Props extends StackScreenProps<UserStackParams, "userDetailsScreen"> { }
 
@@ -11,7 +12,7 @@ interface Props extends StackScreenProps<UserStackParams, "userDetailsScreen"> {
 export const UserDetailsScreen = ({ navigation, route }: Props) => {
     return (
         <View style={GlobalStyles.Globalcontainerdad}>
-            Que va
+            <TextComponent text="USER DETAIL" />
         </View>
     )
 }

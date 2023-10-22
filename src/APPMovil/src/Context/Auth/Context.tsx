@@ -14,7 +14,8 @@ type AuthContextProps = {
     result?: ResultData;
     token: string | null;
     user: Usuario | null;
-    status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
+    status: 'checking' | 'requesting' | 'authenticated' | 'not-authenticated' | 'ok';
+    messageRequest?: string
     SignIn: (email: string, password: string) => Promise<void>;
     SignUp: (user: Usuario, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
@@ -26,6 +27,7 @@ const authInicialState: AuthState = {
     status: 'checking',
     token: null,
     user: null,
+    messageRequest: undefined,
     result: undefined
 }
 
@@ -73,9 +75,12 @@ export const AuthProvider = ({ children }: any) => {
      * @param password 
      */
     const SignIn = async (email: string, password: string) => {
+        dispatch({
+            type: 'startRequest',
+            payload: 'Validando información...'
+        })
         try {
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
-            console.log(data)
             const userData = ConvertLoginResponseToUser(data)
 
             await AsyncStorage.setItem('token', data.token);
@@ -97,6 +102,10 @@ export const AuthProvider = ({ children }: any) => {
 
 
     const SignUp = async (user: Usuario, image?: any) => {
+        dispatch({
+            type: 'startRequest',
+            payload: 'Creando cuenta...'
+        })
         try {
             console.log(user)
             const formData = new FormData();
@@ -125,6 +134,11 @@ export const AuthProvider = ({ children }: any) => {
     };
 
     const LogOut = async () => {
+        dispatch({
+            type: 'startRequest',
+            payload: 'Cerrando sesión...'
+        })
+
         await AsyncStorage.removeItem('token')
         await AsyncStorage.removeItem('userData')
         dispatch({ type: 'logout' });
@@ -144,6 +158,10 @@ export const AuthProvider = ({ children }: any) => {
      * @returns 
      */
     const SendEmailResetPassword = async (email: string): Promise<ResultData> => {
+        dispatch({
+            type: 'startRequest',
+            payload: 'Enviando correo...'
+        })
         try {
             const response = await API.post<ResponseApi>(apiEnpoints.sendEmailUser, { email })
             const resCode = response.data.statusCode

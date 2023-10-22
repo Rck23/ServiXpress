@@ -1,10 +1,11 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { AuthStackParams } from "../Navigation/AuthNavigator";
-import { RecoveryStyles } from '../Styles/RecoveryStyles';
-import { ButtonGlobal, InputGlobal } from '../Components/Shared/FormsComponents';
-import { GlobalStyles } from '../Styles/SharedStyles';
+import { AuthStackParams } from "../../Navigation/AuthNavigator";
+import { RecoveryStyles } from '../../Styles/RecoveryStyles';
+import { ButtonGlobal, InputGlobal } from '../../Components/Shared/FormsComponents';
+import { GlobalStyles } from '../../Styles/SharedStyles';
 import { useState } from 'react';
+import { BackgroudImage, LogoImage } from '../../Components/Shared/SharedComponents';
 
 interface Props extends StackScreenProps<AuthStackParams, 'recoveryScreen'> { }
 
@@ -13,17 +14,11 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
 
     return (
         <>
-            <ImageBackground
-                source={require('../Images/Background.jpg')}
-
-                style={GlobalStyles.GlobalBackground}
-            >
+            <BackgroudImage>
                 <View style={GlobalStyles.Globalcontainerdad}>
                     <View style={GlobalStyles.Globalcontainer}>
-                        <Image
-                            source={require('../Images/Logo.png')}
-                            style={RecoveryStyles.logo}
-                        ></Image>
+                        <LogoImage />
+
                         <Text style={RecoveryStyles.encabezado}>Recupera tu contraseña</Text>
 
                         <Text style={RecoveryStyles.texto}>
@@ -41,7 +36,7 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
                             icon={{ name: 'send', library: 'fontAwesome' }} />
                     </View>
                 </View>
-            </ImageBackground>
+            </BackgroudImage>
         </>
     )
 }

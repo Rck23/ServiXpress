@@ -10,6 +10,7 @@ import { AlertModalProps } from '../Interfaces/DOMInterfaces';
 import { alertModalInitState } from '../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../Helpers/GlobalFunctions';
 import { AuthContext } from '../Context/Auth/Context';
+import { TextComponent } from '../Components/Shared/SharedComponents';
 
 interface Props extends StackScreenProps<HomeStackParams, 'profileScreen'> { }
 
@@ -32,7 +33,10 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
         <>
             <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
             <ScreenContainer>
-                <Text>HELLO</Text>
+                <TextComponent text={`Hi, ${user?.Nombre} ${user?.Apellidos}`} />
+                <TextComponent text={`Your email: ${user?.Email}`} />
+                <TextComponent text={`Your phone: ${user?.PhoneNumber}`} />
+
                 <ButtonGlobal onClick={() => HandleTakeImage('camera')} text="Tomar foto" icon={{ name: 'camera', library: 'entypo' }} />
                 <ButtonGlobal onClick={() => HandleTakeImage('gallery')} text="Seleccionar imagen" icon={{ name: 'images', library: 'entypo' }} />
                 <ButtonGlobal onClick={() => setAlertModal({ ...alertModal, visible: true })} text="Modal" icon={{ name: 'images', library: 'entypo' }} />

@@ -4,9 +4,9 @@ import { ServicesMapScreen } from '../Screens/ServicesMapScreen';
 import { ServicesBoardScreen } from '../Screens/ServicesBoardScreen';
 import { ProfileScreen } from '../Screens/ProfileScreen';
 import { TabBarIconsRNode } from '../Components/Shared/NavigationComponents';
-import { NavigationStyles } from '../Styles/NavigationStyles';
 import { ServiceNavigator } from './ServiceNavigator';
 import { UserNavigator } from './UserNavigator';
+import { customTabScreenOpitons } from '../Constants/Properties';
 
 export type HomeStackParams = {
     serviceNavigatorScreen: undefined
@@ -28,19 +28,14 @@ export const HomeNavigator = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     return TabBarIconsRNode(route, focused, color, size)
                 },
-                headerShown: true,
-                headerStyle: NavigationStyles.headerStyle,
-                headerTitleStyle: NavigationStyles.headerText,
-                tabBarLabelStyle: NavigationStyles.labelText,
-                tabBarStyle: NavigationStyles.styleTabBar,
-                tabBarShowLabel: false
+                ...customTabScreenOpitons
             })}
         >
-            <Tab.Screen name="serviceNavigatorScreen" options={{ title: 'ServiXpress' }} component={ServiceNavigator} />
-            <Tab.Screen name="servicesMapScreen" options={{ title: 'Servicios' }} component={ServicesMapScreen} />
-            <Tab.Screen name="servicesBoardScreen" options={{ title: 'Tablero servicios' }} component={ServicesBoardScreen} />
-            <Tab.Screen name="userNavigatorScreen" options={{ title: 'Gestión de usuarios' }} component={UserNavigator} />
-            <Tab.Screen name="profileScreen" options={{ title: 'Mi perfil' }} component={ProfileScreen} />
+            <Tab.Screen name="serviceNavigatorScreen" component={ServiceNavigator} />
+            <Tab.Screen options={{ headerShown: true, title: 'Servicios' }} name="servicesMapScreen" component={ServicesMapScreen} />
+            <Tab.Screen options={{ headerShown: true, title: 'Tablero' }} name="servicesBoardScreen" component={ServicesBoardScreen} />
+            <Tab.Screen name="userNavigatorScreen" component={UserNavigator} />
+            <Tab.Screen options={{ headerShown: true, title: 'Perfil' }} name="profileScreen" component={ProfileScreen} />
         </Tab.Navigator>
     );
 }

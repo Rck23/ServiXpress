@@ -2,7 +2,7 @@ import { View, Image, ScrollView } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { HomeStackParams } from "../../Navigation/HomeNavigator";
 import { GlobalStyles } from "../../Styles/SharedStyles";
-import { ButtonPrincipalGlobal } from '../../Components/Shared/SharedComponents';
+import { ButtonPrincipalGlobal, LogoImage } from '../../Components/Shared/SharedComponents';
 import { ServiceStackParams } from '../../Navigation/ServiceNavigator';
 import { ButtonGlobal, HipervinculoGlobal, InputGlobal, TextAreaGlobal } from "../../Components/Shared/FormsComponents";
 import { useState } from 'react';
@@ -22,10 +22,7 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
     return (
         <ScrollView style={GlobalStyles.Scrollview}>
             <View style={GlobalStyles.Globalcontainerdad}>
-                <Image
-                    source={require('../../Images/Logo.png')}
-                    style={GlobalStyles.GlobalLogo}
-                ></Image>
+                <LogoImage />
 
                 <InputGlobal
                     placeholder="Nombre(s)"

@@ -3,6 +3,8 @@ import { View } from "react-native";
 import { Icon } from "./IconComponents";
 import { NavigationStyles } from "../../Styles/NavigationStyles";
 import { Platform } from "react-native";
+import { Appbar } from "react-native-paper";
+import { TextComponent } from "./SharedComponents";
 
 export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focused: boolean, color: string, size: number) => {
     let iconName = 'ios-ellipse';
@@ -45,4 +47,17 @@ export const ScreenContainer = ({ children }: any) => {
             {children}
         </View>
     )
+}
+
+
+
+type MainScreenHeaderProps = {
+    title: string
+}
+export const MainScreenHeader = (props: MainScreenHeaderProps) => {
+    return (
+        <Appbar.Header style={NavigationStyles.headerStyle}>
+            <TextComponent text={props.title} style={NavigationStyles.headerText} />
+        </Appbar.Header>
+    );
 }

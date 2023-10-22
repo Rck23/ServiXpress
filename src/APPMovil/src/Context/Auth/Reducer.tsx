@@ -2,10 +2,11 @@ import { ResultData } from "../../Interfaces/DataResponse";
 import { Usuario } from "../../Interfaces/Usuario";
 
 export interface AuthState {
-    status: 'checking' | 'authenticated' | 'not-authenticated';
+    status: 'checking' | 'requesting' | 'authenticated' | 'not-authenticated';
     token: string | null;
     result?: ResultData;
     user: Usuario | null;
+    messageRequest?: string
 }
 
 type AuthAction =
@@ -15,6 +16,7 @@ type AuthAction =
     | { type: 'hideAlert' }
     | { type: 'notAuthenticated' }
     | { type: 'logout' }
+    | { type: 'startRequest', payload: string }
 
 
 export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => {
@@ -52,7 +54,12 @@ export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => 
                 token: null,
                 user: null
             }
-
+        case 'startRequest':
+            return {
+                ...state,
+                status: 'requesting',
+                messageRequest: action.payload
+            }
         default:
             return state;
     }

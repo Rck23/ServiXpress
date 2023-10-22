@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -10,7 +10,7 @@ type ButtonPrincipalProps = {
 }
 
 type TextProps = {
-    text?: string
+    text?: string | null
     style?: StyleProp<TextStyle>
 }
 
@@ -51,3 +51,31 @@ export default function UserListItem(props: ItemProps) {
         </TouchableOpacity>
     )
 }
+
+
+
+type ImageLogoProps = {
+    style?: StyleProp<ImageStyle>
+}
+export const LogoImage = (props: ImageLogoProps) => {
+    return (
+        <Image
+            source={require('../../Images/Logo.png')}
+            style={[GlobalStyles.GlobalLogo, props.style]}
+            resizeMode='contain'
+        />
+    )
+}
+
+
+
+export const BackgroudImage = ({ children }: any) => {
+    return (
+        <ImageBackground
+            source={require('../../Images/Background.jpg')}
+            style={GlobalStyles.GlobalBackground}
+        >
+            {children}
+        </ImageBackground>
+    )
+} 
