@@ -5,7 +5,7 @@ import { GlobalStyles } from "./SharedStyles";
 
 export const NavigationStyles = StyleSheet.create({
     tab: {
-        width: 60,
+        width: 55,
         borderRadius: 50,
         flex: 1,
         justifyContent: 'center',
@@ -24,21 +24,14 @@ export const NavigationStyles = StyleSheet.create({
         color: mainColors.gray
     },
     styleTabBar: {
-        position: 'absolute',
-        bottom: 10,
+        bottom: 5,
         ...GlobalStyles.boxShadow,
-        right: 10,
-        left: 10,
         borderRadius: 50,
-        padding: 0,
-        paddingBottom: -5,
-        paddingTop: 5,
         alignItems: 'center',
         alignContent: 'center',
-        height: 70,
+        height: 60,
         backgroundColor: mainColors.white,
-        borderWidth: 1,
-        borderColor: mainColors.blackLight
+        borderColor: mainColors.blackLight,
     },
     labelText: {
         color: mainColors.gray,

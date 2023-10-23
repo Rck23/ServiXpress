@@ -1,33 +1,27 @@
+export interface EstatusUsuario {
+    estatus: string
+}
+
 export interface Usuario {
-    // Id: string;
-    Nombre?: string | null;
-    Apellidos?: string | null;
+    Id: string;
+    Nombre: string;
+    Apellidos: string;
     Telefono?: string | null;
     AvatarUrl?: string | null;
     UserName?: string | null;
-    NormalizedUserName?: string | null;
-    Email?: string | null;
-    NormalizedEmail?: string | null;
-    EmailConfirmed?: boolean;
-    Password?: string | null;
-    SecurityStamp?: string | null;
-    ConcurrencyStamp?: string | null;
-    PhoneNumber?: string | null;
-    PhoneNumberConfirmed?: boolean;
-    TwoFactorEnabled?: boolean;
-    LockoutEnd?: Date | null;
-    LockoutEnabled?: boolean;
-    AccessFailedCount?: number;
+    Email: string;
+    Password?: string;
     Calle?: string | null;
     CodigoPostal?: string | null;
     ColoniaFraccionamiento?: string | null;
     Descripcion?: string | null;
     Estado?: string | null;
-    Estatus?: string | null;
-    FechaHoraRegistro?: Date | null;
+    Estatus: string;
+    FechaHoraRegistro: Date;
     Municipio?: string | null;
     NumExterior?: number | null;
     NumInterior?: number | null;
     Rol: number;
+    RolNombre: string;
     Foto?: any
 }

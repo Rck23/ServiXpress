@@ -8,7 +8,10 @@ export const ConvertLoginResponseToUser = (data: LoginResponse): Usuario => {
         Apellidos: data.apellidos,
         AvatarUrl: data.avatar,
         Telefono: data.telefono,
+        Estatus: '',
+        FechaHoraRegistro: new Date(),
         Email: data.email,
-        Role: data.roles?.length > 0 ? data.roles[0] : undefined,
+        RolNombre: data.roles?.length > 0 ? data.roles[0] : '',
+        Rol: 1
     }
 }

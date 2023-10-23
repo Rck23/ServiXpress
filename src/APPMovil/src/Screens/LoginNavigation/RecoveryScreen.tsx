@@ -1,4 +1,4 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, Text } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../../Navigation/AuthNavigator";
 import { RecoveryStyles } from '../../Styles/RecoveryStyles';

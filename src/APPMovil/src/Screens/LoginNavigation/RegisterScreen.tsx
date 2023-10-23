@@ -9,7 +9,7 @@ import { GlobalStyles } from '../../Styles/SharedStyles';
 import { BackgroudImage, LogoImage } from '../../Components/Shared/SharedComponents';
 import { BlockUI } from '../../Components/Shared/BlockUI';
 import { AlertModalProps } from '../../Interfaces/DOMInterfaces';
-import { alertModalInitState } from '../../Interfaces/InterfacesInitState';
+import { alertModalInitState, usuarioInitState } from '../../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../../Helpers/GlobalFunctions';
 import { AlertModal } from '../../Components/Modals/AlertModal';
 import { useIsFocused } from '@react-navigation/native';
@@ -18,9 +18,7 @@ interface Props extends StackScreenProps<AuthStackParams, 'registerScreen'> { }
 
 export const RegisterScreen = ({ navigation, route }: Props) => {
     const { SignUp, RemoveAlert, status, result, messageRequest } = useContext(AuthContext)
-    const { Nombre, Apellidos, Telefono, Email, Password, OnChange, form } = UseRegisterUserForm({
-        Rol: 0
-    })
+    const { Nombre, Apellidos, Telefono, Email, Password, OnChange, form } = UseRegisterUserForm(usuarioInitState)
     const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
     const isFocused = useIsFocused();
 

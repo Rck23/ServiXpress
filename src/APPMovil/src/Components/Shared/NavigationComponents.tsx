@@ -43,7 +43,7 @@ export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focuse
  */
 export const ScreenContainer = ({ children }: any) => {
     return (
-        <View style={{ flex: 1, position: 'relative', paddingBottom: Platform.OS == 'ios' ? 105 : 80, marginHorizontal: 10, marginVertical: 5 }}>
+        <View style={{ flex: 1, position: 'relative', paddingHorizontal: 2, marginBottom: 0, paddingTop: 5, paddingBottom: 0 }}>
             {children}
         </View>
     )

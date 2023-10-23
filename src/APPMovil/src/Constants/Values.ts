@@ -63,5 +63,6 @@ export const alertStr = {
 export const apiEnpoints = {
     authenticate: "/Usuario/Login",
     registerUser: "/Usuario/Register",
-    sendEmailUser: "/Usuario/ForgotPassword"
+    sendEmailUser: "/Usuario/ForgotPassword",
+    getCategories: "/Category/GetCategoriesServices"
 }

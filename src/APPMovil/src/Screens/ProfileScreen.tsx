@@ -1,6 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { HomeStackParams } from "../Navigation/HomeNavigator"
-import { Text } from "react-native";
 import { ScreenContainer } from "../Components/Shared/NavigationComponents";
 import { ButtonGlobal } from "../Components/Shared/FormsComponents";
 import { TakeImageFromGallery, TakePhoto } from "../Components/Shared/ImagePickerComponent";
@@ -35,7 +34,7 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
             <ScreenContainer>
                 <TextComponent text={`Hi, ${user?.Nombre} ${user?.Apellidos}`} />
                 <TextComponent text={`Your email: ${user?.Email}`} />
-                <TextComponent text={`Your phone: ${user?.PhoneNumber}`} />
+                <TextComponent text={`Your phone: ${user?.Telefono}`} />
 
                 <ButtonGlobal onClick={() => HandleTakeImage('camera')} text="Tomar foto" icon={{ name: 'camera', library: 'entypo' }} />
                 <ButtonGlobal onClick={() => HandleTakeImage('gallery')} text="Seleccionar imagen" icon={{ name: 'images', library: 'entypo' }} />

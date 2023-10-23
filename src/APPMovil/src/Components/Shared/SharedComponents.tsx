@@ -1,4 +1,4 @@
-import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground, View, ViewStyle } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -78,4 +78,27 @@ export const BackgroudImage = ({ children }: any) => {
             {children}
         </ImageBackground>
     )
-} 
+}
+
+
+export const Row = ({ children }: any) => {
+    return (
+        <View style={GlobalStyles.row}>
+            {children}
+        </View>
+    )
+}
+
+
+type ColProps = {
+    style?: StyleProp<ViewStyle>
+    children?: any
+    size?: number
+}
+export const Col = (props: ColProps) => {
+    return (
+        <View style={[{ flex: props.size || 1, margin: 2 }, props.style]}>
+            {props.children}
+        </View>
+    )
+}

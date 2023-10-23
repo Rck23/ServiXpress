@@ -1,9 +1,11 @@
+import { AlertIcons } from "../Constants/Properties"
+
 export interface ResultData {
     ok: boolean
     message?: string
     title?: string
     data?: any
-    icon: 'success' | 'error' | 'info' | 'warning' | 'question'
+    icon: AlertIcons
 }
 
 

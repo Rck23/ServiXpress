@@ -14,9 +14,9 @@ export const GlobalStyles = StyleSheet.create({
         ...shadow
     },
     Scrollview: {
-        bottom: 20,
-        marginVertical: 30,
-        padding: 10
+    },
+    globalInputContainer: {
+        width: '100%'
     },
     GlobalInput: {
         width: "100%",
@@ -144,5 +144,8 @@ export const GlobalStyles = StyleSheet.create({
         width: "90%",
         borderRadius: 10,
         padding: 10
-    }
+    },
+    row: {
+        flexDirection: 'row'
+    },
 })

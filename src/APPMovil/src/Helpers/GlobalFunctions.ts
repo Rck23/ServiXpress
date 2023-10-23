@@ -1,3 +1,4 @@
+import { AlertIcons } from "../Constants/Properties";
 import { alertStr } from "../Constants/Values";
 import { AlertModalProps } from "../Interfaces/DOMInterfaces";
 import { ResultData } from "../Interfaces/DataResponse"
@@ -27,7 +28,7 @@ export const HandleException = async (error: any): Promise<ResultData> => {
  * @param response 
  * @returns ResultData [mensaje, status, titulo]
  */
-export const GenerateErrorMessage = async (statusCode: number, response: any, icon?: 'success' | 'error' | 'info' | 'warning'): Promise<ResultData> => {
+export const GenerateErrorMessage = async (statusCode: number, response: any, icon?: AlertIcons): Promise<ResultData> => {
     var responseMessage: string;
     switch (statusCode) {
         case 10:
@@ -65,7 +66,7 @@ export const ShootAlertOnResult = (result: ResultData, CloseEvent: () => void): 
 }
 
 
-export const ShootAlert = (title: string, message?: string, icon?: 'success' | 'error' | 'info' | 'warning' | 'question', closeEvent?: () => void, confirmEvent?: () => void): AlertModalProps => {
+export const ShootAlert = (title: string, message?: string, icon?: AlertIcons, closeEvent?: () => void, confirmEvent?: () => void): AlertModalProps => {
     return {
         icon: icon ?? 'info',
         message,
@@ -77,7 +78,7 @@ export const ShootAlert = (title: string, message?: string, icon?: 'success' | '
 }
 
 
-export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: 'success' | 'error' | 'info' | 'warning' | 'question'): ResultData => {
+export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: AlertIcons): ResultData => {
     return {
         ok,
         message: constant.message,
