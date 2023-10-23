@@ -1,16 +1,15 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
-using ServiXpress.Application.Features.Services.Commands.CreateService;
-using ServiXpress.Application.Features.Services.Commands.UpdateService;
+using ServiXpress.Application.Features.Services.Queries.GetAllServices;
+using ServiXpress.Application.Features.Services.Queries.GetServicesByParameters;
 using ServiXpress.Application.Features.Services.ViewModels;
-using ServiXpress.Application.Models.ImageManagement;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure.Context;
-using System.Net;
-using System.Security.Claims;
+
 
 
 namespace ServiXpress.Api.Controllers
@@ -119,21 +118,30 @@ namespace ServiXpress.Api.Controllers
         }
 
 
-        //[HttpPost("createHandler", Name = "CreateService")]
-        //public async Task<ActionResult<ServicioVm>> CreateService([FromForm] CreateService createServ)
-        //{
+
+        [AllowAnonymous]
+        [HttpGet("GetAllServices", Name = "GetAllServices")]
+        public async Task<ActionResult<IReadOnlyList<ServicioVm>>> GetAllServices()
+        {
+            var query = new GetAllServices();
 
 
-        //    return await _mediator.Send(createServ);
-        //}
+            return Ok(await _mediator.Send(query));
+        }
 
-        //[HttpPut("update", Name = "UpdateProduct")]
-        //public async Task<ActionResult<Servicio>> UpdateProduct([FromForm] UpdateService updateService)
-        //{
+        [AllowAnonymous]
+        [HttpGet("servicesByParameters", Name = "GetServicesByParameters")]
+        public async Task<ActionResult<List<ServicioVm>>> GetServicesByParameters([FromQuery] GetServicesByParameters servicesByParameters)
+        {
 
+            var servicesResponses = await _mediator.Send(servicesByParameters);
 
-        //    return await _mediator.Send(updateService);
+            if (!servicesResponses.Any())
+            {
+                return NotFound("No se encontro ningun servicio.");
+            }
 
-        //}
+            return Ok(servicesResponses);
+        }
     }
 }

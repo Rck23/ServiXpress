@@ -16,6 +16,9 @@ using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
+using ServiXpress.Application.Features.Categories.Queries;
+using ServiXpress.Application.Features.Services.Queries.GetServicesByParameters;
+using ServiXpress.Application.Features.Services.ViewModels;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure;
 using ServiXpress.Infrastructure.Context;
@@ -55,7 +58,7 @@ builder.Services.AddControllers(opt =>
 });
 
 
-builder.Services.AddMediatR(typeof(LoginUserHandler).Assembly);
+builder.Services.AddMediatR(typeof(GetCategoryServiceList).Assembly);
 
 
 // Agregar servicios de infraestructura
@@ -67,7 +70,6 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 //AGREGACION DEL SERVICIO DE IMAGENES
 builder.Services.AddScoped<IManageImageService, ManageImageService>();
-
 
 // Agregar archivo de configuración JSON basado en el entorno
 builder.Configuration.AddJsonFile($"appsettings.{_env.EnvironmentName}.json", optional: false, reloadOnChange: true);

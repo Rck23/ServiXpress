@@ -17,7 +17,6 @@
     <None Remove="Features\Reviews\Commands\CreateReviewUser\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Services\Queries\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
     <Folder Include="Features\Categories\Commands\UpdateCategoryService\" />

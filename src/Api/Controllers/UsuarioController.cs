@@ -11,6 +11,7 @@ using ServiXpress.Application.Features.Auths.Users.Commands.SendPassword;
 using ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser;
 using ServiXpress.Application.Features.Auths.Users.Queries.GetAllUsers;
 using ServiXpress.Application.Features.Auths.Users.Queries.GetUserById;
+using ServiXpress.Application.Features.Auths.Users.Queries.GetUserByParameters;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
 using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Application.Models.ImageManagement;
@@ -129,6 +130,24 @@ namespace ServiXpress.Api.Controllers
             var query = new GetAllUsers();
 
             return await _mediator.Send(query);
+        }
+
+
+        // CONSULTA TODOS LOS USUARIOS
+        // [Authorize(Roles = RoleAPI.AGENTE)]
+        [AllowAnonymous]
+        [HttpGet("userByParameters", Name = "GetUserByParameters")]
+        public async Task<ActionResult<List<AuthResponse>>> GetUserByParameters([FromQuery] GetUserByParameters userByParameters)
+        {
+
+            var authResponses = await _mediator.Send(userByParameters);
+
+            if (!authResponses.Any())
+            {
+                return NotFound("No se encontraron usuarios con los criterios de búsqueda proporcionados.");
+            }
+
+            return Ok(authResponses);
         }
     }
 }
