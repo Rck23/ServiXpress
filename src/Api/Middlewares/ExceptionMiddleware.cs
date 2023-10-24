@@ -155,6 +155,21 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { createReviewFailedException.Message });
                         break;
 
+                    case FileNotFound1Exception fileNotFoundException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileNotFoundException.Message });
+                        break;
+
+                    case FileSizeNotSupportException fileSizeNotSupportException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileSizeNotSupportException.Message });
+                        break;
+
+                    case FileNotSupportException fileNotSupportException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileNotSupportException.Message });
+                        break;
+
                     default:
                         statusCode = (int)HttpStatusCode.InternalServerError;
                         errorResponse = new CodeErrorResponse(statusCode);
