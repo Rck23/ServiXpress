@@ -164,7 +164,7 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalificacionServicio")
+                    b.Property<int>("CalificacionUser")
                         .HasColumnType("int");
 
                     b.Property<string>("Comentarios")

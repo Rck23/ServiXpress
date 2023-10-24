@@ -3,6 +3,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using ServiXpress.Application.Contracts.Identity;
+using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Reviews.ViewModels;
 using ServiXpress.Application.Persistence;
 using ServiXpress.Domain;
@@ -35,7 +36,7 @@ namespace ServiXpress.Application.Features.Reviews.Commands.CreateReviewService
 
             var review = new Calificacion
             {
-                CalificacionServicio = request.CalificacionUser,
+                CalificacionUser = request.CalificacionUser,
                 Comentarios = request.Comentarios,
                 FechaHoraRegistro = DateTime.Now,
                 UsuarioCalificaId = UsuarioSession.Id,
@@ -50,7 +51,7 @@ namespace ServiXpress.Application.Features.Reviews.Commands.CreateReviewService
 
             if (resultado <= 0)
             {
-                throw new Exception("No se pudo guardar el comentario");
+                throw new CreateReviewFailedException();
             }
 
             return _mapper.Map<ReviewVm>(review);

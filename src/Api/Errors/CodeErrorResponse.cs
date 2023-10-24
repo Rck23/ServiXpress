@@ -31,7 +31,7 @@ namespace ServiXpress.Api.Errors
             {
                 Message = new string[0];
                 var text = GetDefaultMessageStatusCode(statusCode);
-                Message[0] = text;
+                Message = Message.Append(text).ToArray();
             }
             else
             {

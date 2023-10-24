@@ -27,7 +27,7 @@ export const Navigator = () => {
             }}
         >
             {
-                status === 'not-authenticated' ?
+                status === 'authenticated' ?
                     <Stack.Screen name="homeNavigator" component={HomeNavigator} />
                     :
                     <Stack.Screen name="authNavigator" component={AuthNavigator} />
