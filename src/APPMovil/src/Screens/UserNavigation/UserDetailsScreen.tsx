@@ -4,8 +4,12 @@ import { StackScreenProps } from '@react-navigation/stack';
 import { Text, ScrollView } from "react-native";
 import { UserStackParams } from '../../Navigation/UserNavigator';
 import { GlobalStyles } from "../../Styles/SharedStyles";
+<<<<<<< HEAD
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
 import { ButtonGlobal } from "../../Components/Shared/FormsComponents";
+=======
+import { TextComponent } from "../../Components/Shared/SharedComponents";
+>>>>>>> Isaac_Sprint4
 
 interface Props extends StackScreenProps<UserStackParams, "userDetailsScreen"> { }
 
@@ -13,6 +17,7 @@ interface Props extends StackScreenProps<UserStackParams, "userDetailsScreen"> {
 export const UserDetailsScreen = ({ navigation, route }: Props) => {
     return (
         <View style={GlobalStyles.Globalcontainerdad}>
+<<<<<<< HEAD
             <ScreenContainer>
                 <ScrollView>
                     <View style={GlobalStyles.DatCont}>
@@ -87,6 +92,9 @@ export const UserDetailsScreen = ({ navigation, route }: Props) => {
                         icon={{ name: 'verified-user', library: 'material' }} />
                 </ScrollView>
             </ScreenContainer>
+=======
+            <TextComponent text="USER DETAIL" />
+>>>>>>> Isaac_Sprint4
         </View>
     )
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { UserDetailsScreen } from '../Screens/UserNavigation/UserDetailsScreen';
 import { UsersManageScreen } from '../Screens/UserNavigation/UsersManageScreen';
+import { customScreenOpitons } from '../Constants/Properties';
 
 
 export type UserStackParams = {
@@ -13,14 +14,12 @@ const Stack = createStackNavigator<UserStackParams>();
 
 export const UserNavigator = () => {
     return (
-        <Stack.Navigator 
+        <Stack.Navigator
             initialRouteName="userManageScreen"
-            screenOptions={{
-                headerShown: false
-            }}
+            screenOptions={customScreenOpitons}
         >
-            <Stack.Screen name="userManageScreen" component={UsersManageScreen} />
-            <Stack.Screen name="userDetailsScreen" component={UserDetailsScreen} />
+            <Stack.Screen options={{ title: 'Gestión de usuarios' }} name="userManageScreen" component={UsersManageScreen} />
+            <Stack.Screen options={{ title: 'Detalle de usuario' }} name="userDetailsScreen" component={UserDetailsScreen} />
         </Stack.Navigator>
     );
 }

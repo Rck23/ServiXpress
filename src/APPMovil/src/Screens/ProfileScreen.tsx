@@ -1,6 +1,9 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { HomeStackParams } from "../Navigation/HomeNavigator"
+<<<<<<< HEAD
 import { Image, Text, View } from "react-native";
+=======
+>>>>>>> Isaac_Sprint4
 import { ScreenContainer } from "../Components/Shared/NavigationComponents";
 import { ButtonGlobal } from "../Components/Shared/FormsComponents";
 import { TakeImageFromGallery, TakePhoto } from "../Components/Shared/ImagePickerComponent";
@@ -10,8 +13,12 @@ import { AlertModalProps } from '../Interfaces/DOMInterfaces';
 import { alertModalInitState } from '../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../Helpers/GlobalFunctions';
 import { AuthContext } from '../Context/Auth/Context';
+<<<<<<< HEAD
 import { GlobalStyles } from '../Styles/SharedStyles';
 import { InputEditable } from '../Components/Shared/SharedComponents';
+=======
+import { TextComponent } from '../Components/Shared/SharedComponents';
+>>>>>>> Isaac_Sprint4
 
 interface Props extends StackScreenProps<HomeStackParams, 'profileScreen'> { }
 
@@ -41,6 +48,7 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
             <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
             
             <ScreenContainer>
+<<<<<<< HEAD
                 <Image
                     source={require("../Images/Background.jpg")}
                     style={GlobalStyles.UserImageProfile} />
@@ -78,6 +86,11 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
                     <Text style={GlobalStyles.UserText}>El usuario se unio el DD-MM-AAAA</Text>
                 </View>
 
+=======
+                <TextComponent text={`Hi, ${user?.Nombre} ${user?.Apellidos}`} />
+                <TextComponent text={`Your email: ${user?.Email}`} />
+                <TextComponent text={`Your phone: ${user?.Telefono}`} />
+>>>>>>> Isaac_Sprint4
 
                 <ButtonGlobal onClick={() => HandleTakeImage('camera')} text="Tomar foto" icon={{ name: 'camera', library: 'entypo' }} />
                 <ButtonGlobal onClick={() => HandleTakeImage('gallery')} text="Seleccionar imagen" icon={{ name: 'images', library: 'entypo' }} />

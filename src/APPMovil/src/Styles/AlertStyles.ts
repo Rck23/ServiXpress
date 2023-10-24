@@ -22,6 +22,9 @@ export const modalStyles = StyleSheet.create({
         position: 'relative',
         ...GlobalStyles.boxShadow
     },
+    modalBottom: {
+        justifyContent: 'flex-end'
+    },
     modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',

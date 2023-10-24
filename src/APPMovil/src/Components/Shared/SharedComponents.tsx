@@ -1,4 +1,4 @@
-import { StyleProp, TextStyle, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground, View, ViewStyle } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -10,7 +10,7 @@ type ButtonPrincipalProps = {
 }
 
 type TextProps = {
-    text?: string
+    text?: string | null
     style?: StyleProp<TextStyle>
 }
 
@@ -52,21 +52,53 @@ export default function UserListItem(props: ItemProps) {
     )
 }
 
-type InputProps = {
-    value: string
-    onChange?: (Text: string) => void
-    style?: StyleProp<TextStyle>
-    placeholder: string
+
+
+type ImageLogoProps = {
+    style?: StyleProp<ImageStyle>
+}
+export const LogoImage = (props: ImageLogoProps) => {
+    return (
+        <Image
+            source={require('../../Images/Logo.png')}
+            style={[GlobalStyles.GlobalLogo, props.style]}
+            resizeMode='contain'
+        />
+    )
 }
 
-export const InputEditable = (props: InputProps) => {
+
+
+export const BackgroudImage = ({ children }: any) => {
     return (
-        <TextInput
-            style={GlobalStyles.InputEditable}
-            placeholder={props.placeholder}
-            placeholderTextColor={mainColors.purpule}
-            onChangeText={(text) => props.onChange ? props.onChange(text) : null}
-            value={props.value}
-        />
+        <ImageBackground
+            source={require('../../Images/Background.jpg')}
+            style={GlobalStyles.GlobalBackground}
+        >
+            {children}
+        </ImageBackground>
+    )
+}
+
+
+export const Row = ({ children }: any) => {
+    return (
+        <View style={GlobalStyles.row}>
+            {children}
+        </View>
+    )
+}
+
+
+type ColProps = {
+    style?: StyleProp<ViewStyle>
+    children?: any
+    size?: number
+}
+export const Col = (props: ColProps) => {
+    return (
+        <View style={[{ flex: props.size || 1, margin: 2 }, props.style]}>
+            {props.children}
+        </View>
     )
 }
