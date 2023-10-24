@@ -127,6 +127,15 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    
+            public class ServiceQueryFailedException : Exception
+    {
+        public ServiceQueryFailedException(Exception ex)
+            : base("Fallo la servicios.", ex)
+        {
+        }
+    }
+
     /* START Features/Categories Services */
 
     public class CategoryServiceAlreadyExistsException : Exception

@@ -139,6 +139,10 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceCreateFailedException.Message });
                         break;
 
+                    case ServiceQueryFailedException serviceQueryFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { serviceQueryFailedException.Message });
+                        break;
 
                     case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:
                         statusCode = (int)HttpStatusCode.BadRequest;

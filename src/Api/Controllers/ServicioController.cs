@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Services.Queries.GetAllServices;
-using ServiXpress.Application.Features.Services.Queries.GetServicesByParameters;
 using ServiXpress.Application.Features.Services.ViewModels;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure.Context;
@@ -129,19 +129,37 @@ namespace ServiXpress.Api.Controllers
             return Ok(await _mediator.Send(query));
         }
 
+
+
         [AllowAnonymous]
         [HttpGet("servicesByParameters", Name = "GetServicesByParameters")]
-        public async Task<ActionResult<List<ServicioVm>>> GetServicesByParameters([FromQuery] GetServicesByParameters servicesByParameters)
+        public async Task<ActionResult<List<Servicio>>> GetServicesByParameters([FromQuery] string? estado, string? municipio,
+            string? correos, string? descripcion, string? tipo, string? telefonos, float? precio)
         {
-
-            var servicesResponses = await _mediator.Send(servicesByParameters);
-
-            if (!servicesResponses.Any())
+            try
             {
-                return NotFound("No se encontro ningun servicio.");
-            }
+                var servicios = await _context.Servicios
+                    .Where(s => (estado == null || s.Estado == estado)
+                        && (municipio == null || s.Municipio == municipio)
+                        && (correos == null || s.Correos == correos)
+                        && (descripcion == null || s.Descripcion == descripcion)
+                        && (tipo == null || s.Tipo == tipo)
+                        && (telefonos == null || s.Telefonos == telefonos)
+                        && (precio == null || s.Precio == precio))
+                    .ToListAsync();
 
-            return Ok(servicesResponses);
+                if (servicios.Count == 0)
+                {
+                    return NotFound("No se encontro ningun servicio.");
+                }
+
+                return Ok(servicios);
+            }
+            catch (Exception ex)
+            {
+                throw new ServiceQueryFailedException(ex);
+            }
         }
+
     }
 }
