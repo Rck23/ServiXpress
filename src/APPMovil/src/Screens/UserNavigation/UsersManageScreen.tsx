@@ -70,12 +70,7 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
                     renderItem={({ item }) =>
                         <UserListItem name={item.name}
                             icon={{ name: 'user', library: 'fontAwesome' }}
-<<<<<<< HEAD
-                            onPress={() => navigation.navigate('userDetailsScreen')} />
-                    }
-=======
                             onPress={() => navigation.navigate('userDetailsScreen')} />}
->>>>>>> Isaac_Sprint4
                     keyExtractor={item => item.id} />
             </View>
         </View>

@@ -32,6 +32,14 @@ const HomeState = ({ children }: any) => {
     )
 }
 
+const HomeState = ({ children }: any) => {
+    return (
+        <ServicesProvider>
+            {children}
+        </ServicesProvider>
+    )
+}
+
 
 const Tab = createBottomTabNavigator<HomeStackParams>();
 
