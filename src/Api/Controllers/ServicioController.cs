@@ -22,16 +22,18 @@ namespace ServiXpress.Api.Controllers
         private readonly ServiXpressDbContext _context;
         private readonly UserManager<Usuario> _userManager;
         private readonly IAuthService _authService;
+        private ILogger<ServicioController> _logger; 
+
 
         private IMediator _mediator;
 
         public ServicioController(IMediator mediator, ServiXpressDbContext context,
-            UserManager<Usuario> userManager, IAuthService authService)
+            UserManager<Usuario> userManager, IAuthService authService, ILogger<ServicioController> logger)
         {
             _context = context;
             _userManager = userManager;
             _authService = authService;
-
+            _logger = logger;
             _mediator = mediator;
         }
 
@@ -39,6 +41,8 @@ namespace ServiXpress.Api.Controllers
         [HttpPost("create", Name = "CreateService")]
         public async Task<ActionResult<Servicio>> Create(ServicioVm servicioVm)
         {
+            _logger.LogInformation("Creando servicio");
+
             try
             {
                 var UsuarioSession = await _userManager.FindByNameAsync(_authService.GetSessionUser());
@@ -72,7 +76,9 @@ namespace ServiXpress.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al crear servicio");
                 throw new ServiceCreateFailedException(ex);
+
             }
             
         }
@@ -82,6 +88,8 @@ namespace ServiXpress.Api.Controllers
         [HttpPut("update/{id}", Name = "UpdateService")]
         public async Task<ActionResult<Servicio>> Update(int id, ServicioVm servicioVm)
         {
+            _logger.LogInformation("Actulizando servicio");
+
             try
             {
                 // Obtén el servicio existente de la base de datos usando el id proporcionado
@@ -113,6 +121,7 @@ namespace ServiXpress.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al actualizar servicio");
                 throw new ServiceUpdateFailedException(ex);
             }
         }
@@ -123,10 +132,21 @@ namespace ServiXpress.Api.Controllers
         [HttpGet("GetAllServices", Name = "GetAllServices")]
         public async Task<ActionResult<IReadOnlyList<ServicioVm>>> GetAllServices()
         {
-            var query = new GetAllServices();
+            _logger.LogInformation("Obteniendo todos los servicios");
+
+            try
+            {
+
+                var query = new GetAllServices();
 
 
-            return Ok(await _mediator.Send(query));
+                return Ok(await _mediator.Send(query));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener los servicios");
+                throw;
+            }
         }
 
 
@@ -136,6 +156,8 @@ namespace ServiXpress.Api.Controllers
         public async Task<ActionResult<List<Servicio>>> GetServicesByParameters([FromQuery] string? estado, string? municipio,
             string? correos, string? descripcion, string? tipo, string? telefonos, float? precio)
         {
+            _logger.LogInformation("Obteniendo servicio(s) por parametro ");
+
             try
             {
                 var servicios = await _context.Servicios
@@ -157,6 +179,7 @@ namespace ServiXpress.Api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error al buscar servicio");
                 throw new ServiceQueryFailedException(ex);
             }
         }

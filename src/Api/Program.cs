@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
 using ServiXpress.Api.Middlewares;
 using ServiXpress.Application;
 using ServiXpress.Application.Contracts.Infrastructure;
@@ -25,6 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Obtener el entorno de hospedaje
 IWebHostEnvironment _env = builder.Environment;
+
+
 
 // Agregar servicios al contenedor
 
@@ -112,9 +116,9 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 16; // Aumentar la longitud mínima
-    options.Password.RequiredUniqueChars = 4; // Requerir más caracteres únicos
-
+    options.Password.RequiredLength = 8; // Aumentar la longitud mínima
+    options.Password.RequiredUniqueChars = 1; // Requerir más caracteres únicos
+    
     // Configuración de las reglas de bloqueo
     options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(60); // Duración del bloqueo
     options.Lockout.MaxFailedAccessAttempts = 3; // Número máximo de intentos de acceso fallidos
@@ -132,6 +136,17 @@ builder.Services.AddCors(options =>
                             .AllowAnyHeader()
     );
 });
+
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Configurar Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
