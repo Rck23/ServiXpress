@@ -1,6 +1,6 @@
 import { AlertModalProps, TipoServicioModalProps } from "./DOMInterfaces";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
-import { Usuario } from "./Usuario";
+import { RegisterUser, Usuario } from "./Usuario";
 
 export const alertModalInitState: AlertModalProps = {
     title: '',
@@ -21,6 +21,15 @@ export const usuarioInitState: Usuario = {
     FechaHoraRegistro: new Date(),
     Rol: 0,
     RolNombre: ''
+}
+
+export const newUsuarioInitState: RegisterUser = {
+    Nombre: '',
+    Apellidos: '',
+    Email: '',
+    Rol: 0,
+    Password: '',
+    Telefono: '',
 }
 
 
