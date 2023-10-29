@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231024192408_files")]
+    partial class files
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,9 +234,6 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("FechaCreacion")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -244,11 +244,9 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     b.Property<string>("UsuarioId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Documentos");
                 });
@@ -613,17 +611,6 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Navigation("UsuarioCalificado");
                 });
 
-            modelBuilder.Entity("ServiXpress.Domain.Documento", b =>
-                {
-                    b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
-                        .WithMany("Documentos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("ServiXpress.Domain.Reporte", b =>
                 {
                     b.HasOne("ServiXpress.Domain.Usuario", "AgenteCierraReporte")
@@ -706,8 +693,6 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Navigation("CalificacionesHechas");
 
                     b.Navigation("CalificacionesRecibidas");
-
-                    b.Navigation("Documentos");
 
                     b.Navigation("Reportes");
                 });

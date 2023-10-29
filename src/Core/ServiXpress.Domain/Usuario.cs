@@ -18,14 +18,10 @@ namespace ServiXpress.Domain
       
         public DateTime? FechaHoraRegistro { get; set; }
 
-
-
         public string? Estatus { get; set; }
         
-        //public string? Role { get; set; }
 
         public EstatusUsuario? EstatusUsuario { get; set; }
-        //public Role Rol { get; set; }
 
 
         // UNO A MUCHOS
@@ -40,5 +36,8 @@ namespace ServiXpress.Domain
 
         // PUEDE CONTENER LA IMAGEN DE PERFIL DEL USUARIO
         public string? AvatarUrl { get; set; }
+
+
+        public List<Documento> Documentos { get; set; }
     }
 }
