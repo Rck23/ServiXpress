@@ -25,3 +25,13 @@ export interface Usuario {
     RolNombre: string;
     Foto?: any
 }
+
+
+export interface RegisterUser {
+    Nombre: string;
+    Apellidos: string;
+    Telefono: string;
+    Rol: number;
+    Email: string;
+    Password: string;
+}

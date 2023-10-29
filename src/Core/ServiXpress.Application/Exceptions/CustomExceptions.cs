@@ -11,8 +11,8 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
-    
-    
+
+
     public class EmailNotFoundException : Exception
     {
         public EmailNotFoundException(string email) : base($"No se encontró una cuenta con el correo electrónico: {email}.")
@@ -62,7 +62,7 @@ namespace ServiXpress.Application.Exceptions
 
     public class UserRegistrationException : Exception
     {
-        public UserRegistrationException(string message) : base( message)
+        public UserRegistrationException(string message) : base(message)
         {
         }
     }
@@ -127,6 +127,15 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+
+    public class ServiceQueryFailedException : Exception
+    {
+        public ServiceQueryFailedException(Exception ex)
+            : base("Fallo la servicios.", ex)
+        {
+        }
+    }
+
     /* START Features/Categories Services */
 
     public class CategoryServiceAlreadyExistsException : Exception
@@ -143,6 +152,33 @@ namespace ServiXpress.Application.Exceptions
     {
         public CreateReviewFailedException()
             : base("No se pudo guardar la calificación")
+        {
+        }
+    }
+
+
+    /* START Controllers/FilesControllers */
+
+    public class FileNotFound1Exception : Exception
+    {
+        public FileNotFound1Exception()
+            : base("No se ha proporcionado ningún archivo.")
+        {
+        }
+    }
+
+    public class FileSizeNotSupportException : Exception
+    {
+        public FileSizeNotSupportException()
+            : base("El tamaño del archivo excede el límite permitido, Adjunte un archivo menor a 10 MB")
+        {
+        }
+    }
+
+    public class FileNotSupportException : Exception
+    {
+        public FileNotSupportException()
+            : base("El tipo de archivo no está permitido.")
         {
         }
     }

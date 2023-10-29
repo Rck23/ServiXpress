@@ -139,6 +139,10 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceCreateFailedException.Message });
                         break;
 
+                    case ServiceQueryFailedException serviceQueryFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { serviceQueryFailedException.Message });
+                        break;
 
                     case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:
                         statusCode = (int)HttpStatusCode.BadRequest;
@@ -149,6 +153,21 @@ namespace ServiXpress.Api.Middlewares
                     case CreateReviewFailedException createReviewFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { createReviewFailedException.Message });
+                        break;
+
+                    case FileNotFound1Exception fileNotFoundException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileNotFoundException.Message });
+                        break;
+
+                    case FileSizeNotSupportException fileSizeNotSupportException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileSizeNotSupportException.Message });
+                        break;
+
+                    case FileNotSupportException fileNotSupportException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { fileNotSupportException.Message });
                         break;
 
                     default:

@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
 using ServiXpress.Api.Middlewares;
 using ServiXpress.Application;
 using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Exceptions;
-using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
-using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
+using ServiXpress.Application.Features.Categories.Queries;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure;
 using ServiXpress.Infrastructure.Context;
@@ -27,6 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Obtener el entorno de hospedaje
 IWebHostEnvironment _env = builder.Environment;
+
+
 
 // Agregar servicios al contenedor
 
@@ -55,7 +57,7 @@ builder.Services.AddControllers(opt =>
 });
 
 
-builder.Services.AddMediatR(typeof(LoginUserHandler).Assembly);
+builder.Services.AddMediatR(typeof(GetCategoryServiceList).Assembly);
 
 
 // Agregar servicios de infraestructura
@@ -67,7 +69,6 @@ builder.Services.AddApplicationServices(builder.Configuration);
 
 //AGREGACION DEL SERVICIO DE IMAGENES
 builder.Services.AddScoped<IManageImageService, ManageImageService>();
-
 
 // Agregar archivo de configuración JSON basado en el entorno
 builder.Configuration.AddJsonFile($"appsettings.{_env.EnvironmentName}.json", optional: false, reloadOnChange: true);
@@ -115,12 +116,12 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
-    options.Password.RequiredLength = 16; // Aumentar la longitud mínima
-    options.Password.RequiredUniqueChars = 4; // Requerir más caracteres únicos
-
+    options.Password.RequiredLength = 8; // Aumentar la longitud mínima
+    options.Password.RequiredUniqueChars = 1; // Requerir más caracteres únicos
+    
     // Configuración de las reglas de bloqueo
-    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromDays(3000); // Duración del bloqueo
-    options.Lockout.MaxFailedAccessAttempts = 2; // Número máximo de intentos de acceso fallidos
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromSeconds(60); // Duración del bloqueo
+    options.Lockout.MaxFailedAccessAttempts = 3; // Número máximo de intentos de acceso fallidos
     options.Lockout.AllowedForNewUsers = true;
 
 });
@@ -129,12 +130,23 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Configurar CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy("AllowAllOrigins",
         builder => builder.AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()
     );
 });
+
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Configurar Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -157,7 +169,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors("CorsPolicy");
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 

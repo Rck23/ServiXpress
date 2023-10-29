@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ServiXpress.Domain;
 using ServiXpress.Domain.Common;
+using System.Reflection.Emit;
 
 namespace ServiXpress.Infrastructure.Context
 {
@@ -17,7 +18,6 @@ namespace ServiXpress.Infrastructure.Context
         /// <param name="dbContext">Opciones de configuración del contexto de la base de datos.</param>
         public ServiXpressDbContext(DbContextOptions<ServiXpressDbContext> dbContext) : base(dbContext)
         {
-
         }
 
 
@@ -126,6 +126,12 @@ namespace ServiXpress.Infrastructure.Context
                 .HasForeignKey(r => r.AgenteCierraReporteId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+
+            builder.Entity<Usuario>()
+              .HasMany(u => u.Documentos)
+              .WithOne(a => a.Usuario)
+              .HasForeignKey(a => a.UsuarioId);
+
             builder.Entity<Usuario>().Property(x => x.Id).HasMaxLength(36);
             builder.Entity<Usuario>().Property(x => x.NormalizedUserName).HasMaxLength(90);
 
@@ -147,6 +153,8 @@ namespace ServiXpress.Infrastructure.Context
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<Calificacion> Calificaciones { get; set; }
         public DbSet<Reporte> Reportes { get; set; }
+
+        public DbSet<Documento> Documentos { get; set; }
 
 
 
