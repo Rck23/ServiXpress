@@ -1,8 +1,7 @@
-import { View, FlatList, TouchableOpacity, Text } from "react-native"
+import { View, FlatList } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { UserStackParams } from '../../Navigation/UserNavigator';
 import { GlobalStyles } from "../../Styles/SharedStyles";
-import { HipervinculoGlobal } from "../../Components/Shared/FormsComponents";
 import UserListItem from "../../Components/Shared/SharedComponents";
 import { useState } from 'react';
 

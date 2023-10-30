@@ -1,19 +1,17 @@
 import React from 'react';
-import { FlatList, Modal, ScrollView, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
-import { TipoServicioModalProps } from '../../Interfaces/DOMInterfaces';
+import { FlatList, Modal, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { KeyValue, ModalOptionsSelectorProps } from '../../Interfaces/DOMInterfaces';
 import { Icon } from '../Shared/IconComponents';
-import { mainColors } from '../../Constants/Values';
 import { TextComponent } from '../Shared/SharedComponents';
 import { ButtonGlobal } from '../Shared/FormsComponents';
 import { modalStyles } from '../../Styles/AlertStyles';
-import { CategoriaServicio } from '../../Interfaces/Servicio';
 import { Divider, List } from 'react-native-paper';
 
 
-export const TipoServicioModalSelector = (props: TipoServicioModalProps) => {
+export const OptionsSelectorModal = (props: ModalOptionsSelectorProps) => {
 
-    const handleCloseModal = async (categorySelected?: CategoriaServicio) => {
-        props.OnHideModal ? props.OnHideModal(categorySelected) : {}
+    const handleCloseModal = async (value?: KeyValue) => {
+        props.OnHideModal ? props.OnHideModal(value) : {}
     }
 
     return (
@@ -27,9 +25,9 @@ export const TipoServicioModalSelector = (props: TipoServicioModalProps) => {
             >
                 <View style={[modalStyles.modal, modalStyles.modalBottom]}>
                     <View style={[modalStyles.modalContent]}>
-                        <TextComponent style={modalStyles.modalTitle} text='Seleccione el tipo de servicio' />
+                        <TextComponent style={modalStyles.modalTitle} text={props.title ?? 'Seleccione la opcion requerida'} />
                         <FlatList
-                            data={props.categoriesList}
+                            data={props.options}
                             keyExtractor={(item, index) => index.toString()}
                             showsVerticalScrollIndicator={false}
                             style={{ maxHeight: 250, width: '100%' }}
@@ -41,8 +39,8 @@ export const TipoServicioModalSelector = (props: TipoServicioModalProps) => {
                                 >
                                     <View>
                                         <List.Item
-                                            title={item.nombre}
-                                            left={p => <Icon name="work" library='material' />}
+                                            title={item.name}
+                                            left={p => <Icon name="circle" library='fontAwesome' />}
                                         />
                                         <Divider />
                                     </View>

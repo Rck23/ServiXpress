@@ -24,9 +24,22 @@ export interface Servicio {
 export interface CategoriaServicio {
     id: number
     nombre: string
-    fechaHoraRegistro: Date
+    fechaHoraRegistro?: Date
 }
 
 export interface TipoServicio {
     tipo: string
+}
+
+export interface ServiceCreate {
+    estado: string;
+    municipio: string;
+    telefonos: string;
+    correos: string;
+    otrosMediosContacto: string;
+    descripcion: string;
+    precio: number;
+    usuarioId: string;
+    categoriaId: number;
+    tipo: string;
 }

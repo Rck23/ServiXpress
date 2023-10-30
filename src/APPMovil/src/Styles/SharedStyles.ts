@@ -16,16 +16,16 @@ export const GlobalStyles = StyleSheet.create({
     Scrollview: {
     },
     globalInputContainer: {
-        width: '100%'
+        width: '100%',
+        marginVertical: 5
     },
     GlobalInput: {
         width: "100%",
-        borderColor: mainColors.textColor,
+        borderColor: mainColors.gray,
         borderWidth: 2,
-        borderRadius: 10,
-        paddingLeft: 20,
-        marginBottom: 20,
-        color: mainColors.textColor,
+        borderRadius: 15,
+        padding: 10,
+        color: mainColors.purpule3,
         fontSize: 15
     },
     GlobalButton: {
@@ -77,8 +77,8 @@ export const GlobalStyles = StyleSheet.create({
     },
     Globalcontainer: {
         backgroundColor: mainColors.white,
-        width: "95%",
         borderRadius: 10,
+        width: '100%',
         ...shadow,
         padding: 5
     },

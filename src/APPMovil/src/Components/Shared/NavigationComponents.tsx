@@ -2,7 +2,6 @@ import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { View } from "react-native";
 import { Icon } from "./IconComponents";
 import { NavigationStyles } from "../../Styles/NavigationStyles";
-import { Platform } from "react-native";
 import { Appbar } from "react-native-paper";
 import { TextComponent } from "./SharedComponents";
 
@@ -18,6 +17,9 @@ export const TabBarIconsRNode = (route: RouteProp<ParamListBase, string>, focuse
             break;
         case 'servicesMapScreen':
             iconName = focused ? 'location' : 'location-outline'
+            break;
+        case 'servicesBoardScreen':
+            iconName = focused ? 'grid' : 'grid-outline'
             break;
         case 'userNavigatorScreen':
             iconName = focused ? 'person' : 'person-outline'

@@ -1,3 +1,5 @@
+import { ImageRequestFormData } from "./DOMInterfaces";
+
 export interface EstatusUsuario {
     estatus: string
 }
@@ -34,4 +36,5 @@ export interface RegisterUser {
     Rol: number;
     Email: string;
     Password: string;
+    Foto?: ImageRequestFormData
 }

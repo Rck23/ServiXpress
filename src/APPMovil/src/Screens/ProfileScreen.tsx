@@ -10,6 +10,8 @@ import { alertModalInitState } from '../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../Helpers/GlobalFunctions';
 import { AuthContext } from '../Context/Auth/Context';
 import { TextComponent } from '../Components/Shared/SharedComponents';
+import { View } from 'react-native';
+import { GlobalStyles } from '../Styles/SharedStyles';
 
 interface Props extends StackScreenProps<HomeStackParams, 'profileScreen'> { }
 

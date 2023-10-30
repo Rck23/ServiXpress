@@ -1,5 +1,12 @@
+import { ImagePickerResponse } from "react-native-image-picker";
 import { AlertIcons } from "../Constants/Properties"
 import { CategoriaServicio } from "./Servicio"
+
+export interface KeyValue {
+    key: string;
+    value: any
+    name: string
+}
 
 export interface AlertModalProps {
     title: string
@@ -12,8 +19,23 @@ export interface AlertModalProps {
 }
 
 
-export interface TipoServicioModalProps {
+export interface ModalOptionsSelectorProps {
     visible?: boolean
-    categoriesList: CategoriaServicio[]
-    OnHideModal?: (category?: CategoriaServicio, params?: any) => void
+    title?: string
+    options: KeyValue[]
+    OnHideModal?: (selected?: KeyValue) => void
+}
+
+
+export interface ImageSelectorModalProps {
+    visible?: boolean
+    title?: string
+    OnHideModal?: (image?: ImageRequestFormData) => void
+}
+
+
+export interface ImageRequestFormData {
+    uri: string
+    type: string
+    name: string
 }

@@ -1,8 +1,9 @@
-import { StyleProp, TextStyle, Text, TextInput, TouchableOpacity, ViewStyle, View, KeyboardType } from 'react-native';
+import { StyleProp, TextStyle, Text, TextInput, TouchableOpacity, ViewStyle, View, KeyboardType, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
 import { TextComponent } from './SharedComponents';
+import { useState } from 'react';
 
 type InputProps = {
     value: string
@@ -12,6 +13,7 @@ type InputProps = {
     labelStyle?: StyleProp<TextStyle>
     placeholder: string
     keyboardType?: KeyboardType
+    secureText?: boolean
     showLabel?: boolean
     disabled?: boolean
     onPressIn?: () => void
@@ -55,12 +57,13 @@ export const InputGlobal = (props: InputProps) => {
             style={[GlobalStyles.globalInputContainer, props.styleContainer]}
             onPress={props.onPressIn}
         >
-            <TextComponent text={props.placeholder} style={[{ marginBottom: 0, display: props.showLabel ? 'flex' : 'none' }, props.labelStyle]} />
+            <TextComponent text={props.placeholder} style={[{ fontWeight: '500', marginBottom: 0, color: mainColors.purpule3, display: props.showLabel ? 'flex' : 'none' }, props.labelStyle]} />
             <TextInput
                 style={GlobalStyles.GlobalInput}
                 keyboardType={props.keyboardType}
+                secureTextEntry={props.secureText}
                 placeholder={props.placeholder}
-                placeholderTextColor={mainColors.purpule}
+                placeholderTextColor={mainColors.textColor}
                 onChangeText={(text) => props.onChange ? props.onChange(text) : null}
                 value={props.value}
                 editable={!props.disabled}
@@ -72,11 +75,11 @@ export const InputGlobal = (props: InputProps) => {
 export const TextAreaGlobal = (props: TextAreaProps) => {
     return (
         <View style={[GlobalStyles.globalInputContainer, props.styleContainer]}>
-            <TextComponent text={props.placeholder} style={[{ marginBottom: 0, display: props.showLabel ? 'flex' : 'none' }, props.labelStyle]} />
+            <TextComponent text={props.placeholder} style={[{ fontWeight: '500', marginBottom: 0, color: mainColors.purpule3, display: props.showLabel ? 'flex' : 'none' }, props.labelStyle]} />
             <TextInput
                 style={GlobalStyles.GlobalInput}
                 placeholder={props.placeholder}
-                placeholderTextColor={mainColors.purpule}
+                placeholderTextColor={mainColors.textColor}
                 onChangeText={(text) => props.onChange ? props.onChange(text) : null}
                 value={props.value}
                 numberOfLines={props.numberOfLines}
@@ -94,8 +97,8 @@ export const ButtonGlobal = (props: ButtonProps) => {
             onPress={() => props.onClick ? props.onClick() : {}}
             activeOpacity={0.7}
         >
-            <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.GlobalButtonIcon, { color: props.color ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonIconSmall : {}]} />
-            <Text style={[GlobalStyles.GlobalButtonText, { color: props.color ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonTextSmall : {}]}>
+            <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.GlobalButtonIcon, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonIconSmall : {}]} />
+            <Text style={[GlobalStyles.GlobalButtonText, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonTextSmall : {}]}>
                 {props.text}
             </Text>
         </TouchableOpacity>
@@ -115,3 +118,34 @@ export const HipervinculoGlobal = (props: HipervinculoProps) => {
         </TouchableOpacity>
     )
 }
+
+
+export const FormScrollContainer = ({ children }: any) => {
+    return (
+        <KeyboardAvoidingView>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {children}
+            </ScrollView>
+        </KeyboardAvoidingView>
+    )
+}
+
+
+
+export const useTogglePasswordVisibility = () => {
+    const [passwordVisibility, setPasswordVisibility] = useState(true);
+    const [rightIcon, setRightIcon] = useState('visibility');
+
+    const handlePasswordVisibility = () => {
+        if (rightIcon === 'visibility') setRightIcon('visibility-off')
+        else if (rightIcon === 'visibility-off') setRightIcon('visibility');
+
+        setPasswordVisibility(!passwordVisibility);
+    };
+
+    return {
+        passwordVisibility,
+        rightIcon,
+        handlePasswordVisibility
+    };
+};

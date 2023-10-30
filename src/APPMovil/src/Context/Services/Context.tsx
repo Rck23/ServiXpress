@@ -4,7 +4,8 @@ import { ResultData } from '../../Interfaces/DataResponse';
 import { HandleException } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
-import { CategoriaServicio } from '../../Interfaces/Servicio';
+import { CategoriaServicio, ServiceCreate, Servicio } from '../../Interfaces/Servicio';
+import { ValidateRegisterServiceForm } from '../../Helpers/FormsFunctions';
 
 
 type ServicesContextProps = {
@@ -13,15 +14,20 @@ type ServicesContextProps = {
     messageRequest?: string
 
     serviceCategories: CategoriaServicio[]
+    services: Servicio[]
 
+    CreateService: (service: ServiceCreate) => Promise<void>
     GetServicesCategories: () => Promise<void>
+    GetServices: () => Promise<void>
+    CleanResult: () => void
 }
 
 const servicesInitState: ServicesState = {
     status: 'initState',
     messageRequest: undefined,
     result: undefined,
-    serviceCategories: []
+    serviceCategories: [],
+    services: []
 }
 
 
@@ -39,7 +45,7 @@ export const ServicesProvider = ({ children }: any) => {
      * Get all services categories from API
      */
     const GetServicesCategories = async () => {
-        dispatch({ type: 'startRequest', payload: 'Cargando categorias...' })
+        dispatch({ type: 'requesting', payload: 'Cargando categorias...' })
 
         try {
             const { data } = await API.get<CategoriaServicio[]>(apiEnpoints.getCategories);
@@ -57,10 +63,61 @@ export const ServicesProvider = ({ children }: any) => {
     };
 
 
+    const GetServices = async () => {
+        dispatch({ type: 'requesting', payload: 'Cargando catálogo de servicios...' })
+
+        try {
+            const { data } = await API.get<Servicio[]>(apiEnpoints.getServices);
+
+            dispatch({ type: 'setServices', payload: data });
+        } catch (error: any) {
+            dispatch({
+                type: 'endRequest',
+                payload: {
+                    data: await HandleException(error),
+                    shootAlert: true
+                }
+            })
+        }
+    };
+
+
+    const CreateService = async (service: ServiceCreate) => {
+        dispatch({ type: 'requesting', payload: 'Registrando servicio...' })
+
+        try {
+            const validResult = ValidateRegisterServiceForm(service)
+            if (!validResult.ok) return dispatch({ type: 'endRequest', payload: { data: validResult, shootAlert: true } })
+
+            const { data } = await API.post<Servicio>(apiEnpoints.createService, service);
+
+            dispatch({
+                type: 'endRequest', payload: {
+                    data: { ok: true, icon: 'success', message: 'Se ha creado el servicio correctamente', title: 'Servicio creado y publicado' },
+                    shootAlert: true
+                }
+            });
+        } catch (error: any) {
+            dispatch({
+                type: 'endRequest',
+                payload: { data: await HandleException(error), shootAlert: true }
+            })
+        }
+    };
+
+
+    const CleanResult = () => {
+        dispatch({ type: 'cleanResult' })
+    }
+
+
     return (
         <ServicesContext.Provider value={{
             ...state,
             GetServicesCategories,
+            CreateService,
+            GetServices,
+            CleanResult
         }}>
             {children}
         </ServicesContext.Provider>

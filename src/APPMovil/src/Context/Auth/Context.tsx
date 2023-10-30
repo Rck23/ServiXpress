@@ -3,11 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthState, AuthReducer } from './Reducer';
 import { RegisterUser, Usuario } from '../../Interfaces/Usuario';
 import { LoginResponse, ResponseApi, ResultData } from '../../Interfaces/DataResponse';
-import { GetResponseDataFromConstants, HandleException } from '../../Helpers/GlobalFunctions';
+import { GetResponseDataFromConstants, HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { alertStr, apiEnpoints } from '../../Constants/Values';
 import API, { formDataHeaders } from '../../Api/Api';
 import { LocalStorageStoreData } from '../../Helpers/LocalStorage';
 import { ConvertLoginResponseToUser } from '../../Helpers/InterfaceConverter';
+import { ValidateRegisterUserForm } from '../../Helpers/FormsFunctions';
 
 
 type AuthContextProps = {
@@ -77,6 +78,12 @@ export const AuthProvider = ({ children }: any) => {
     const SignIn = async (email: string, password: string) => {
         dispatch({ type: 'startRequest', payload: 'Validando información...' })
         try {
+            if (StrIsNullOrEmpty(email) || StrIsNullOrEmpty(password))
+                return dispatch({
+                    type: 'showAlert',
+                    payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsLogin)
+                })
+
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
             const userData = ConvertLoginResponseToUser(data)
 
@@ -101,10 +108,17 @@ export const AuthProvider = ({ children }: any) => {
     const SignUp = async (user: RegisterUser, image?: any) => {
         dispatch({ type: 'startRequest', payload: 'Creando cuenta...' })
         try {
+            const resultValidation = ValidateRegisterUserForm(user)
+            if (!resultValidation.ok)
+                return dispatch({ type: 'showAlert', payload: resultValidation })
+
             const formData = new FormData();
             Object.keys(user).forEach(key => {
                 formData.append(key, (user as any)[key]);
             });
+
+
+            console.log(formData)
 
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
@@ -119,6 +133,7 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
+            console.log(error.response)
             dispatch({
                 type: 'showAlert',
                 payload: await HandleException(error)

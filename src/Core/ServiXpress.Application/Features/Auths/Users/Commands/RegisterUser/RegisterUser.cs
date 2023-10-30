@@ -24,11 +24,11 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
         public string Password { get; set; }
 
         //CARGAR LA IMAGEN
-        //public IFormFile? Foto { get; set; }
+        public IFormFile? Foto { get; set; }
 
-        //public string? FotoUrl { get; set; }
+        public string? FotoUrl { get; set; }
 
-        //public string? FotoId { get; set; }
+        public string? FotoId { get; set; }
 
 
 

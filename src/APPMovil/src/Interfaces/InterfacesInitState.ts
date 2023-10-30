@@ -1,4 +1,4 @@
-import { AlertModalProps, TipoServicioModalProps } from "./DOMInterfaces";
+import { AlertModalProps, ImageSelectorModalProps, ModalOptionsSelectorProps } from "./DOMInterfaces";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
 import { RegisterUser, Usuario } from "./Usuario";
 
@@ -7,9 +7,13 @@ export const alertModalInitState: AlertModalProps = {
     icon: 'info',
 }
 
-export const tipoServicioModalInitState: TipoServicioModalProps = {
+export const optionSelectorModalInitState: ModalOptionsSelectorProps = {
     visible: false,
-    categoriesList: []
+    options: []
+}
+
+export const imageSelectorModalInitState: ImageSelectorModalProps = {
+    visible: false
 }
 
 export const usuarioInitState: Usuario = {

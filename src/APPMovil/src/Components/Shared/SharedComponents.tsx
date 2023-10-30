@@ -1,4 +1,4 @@
-import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground, View, ViewStyle } from 'react-native';
+import { StyleProp, Image, TextStyle, ImageStyle, Text, TouchableOpacity, ImageBackground, View, ViewStyle, ScrollView } from 'react-native';
 import { mainColors } from '../../Constants/Values';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
@@ -97,8 +97,30 @@ type ColProps = {
 }
 export const Col = (props: ColProps) => {
     return (
-        <View style={[{ flex: props.size || 1, margin: 2 }, props.style]}>
+        <View style={[{ justifyContent: 'center', flex: props.size || 1, margin: 2 }, props.style]}>
             {props.children}
+        </View>
+    )
+}
+
+
+export const ScrollViewComponent = ({ children }: any) => {
+    return (
+        <ScrollView showsVerticalScrollIndicator={false}>
+            {children}
+        </ScrollView>
+    )
+}
+
+
+type ListEmptyComponentProps = {
+    text?: string
+}
+export const ListEmptyComponent = (props: ListEmptyComponentProps) => {
+    return (
+        <View>
+            <Image source={require('../../Images/noDataFound.png')} />
+            <TextComponent text={props.text ?? 'No se han encontrado resultados...'} />
         </View>
     )
 }

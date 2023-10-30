@@ -5,33 +5,69 @@ import { Col, LogoImage, Row } from '../../Components/Shared/SharedComponents';
 import { ServiceStackParams } from '../../Navigation/ServiceNavigator';
 import { ButtonGlobal, HipervinculoGlobal, InputGlobal, TextAreaGlobal } from "../../Components/Shared/FormsComponents";
 import { UseForm } from "../../Hooks/UseForm";
-import { CategoriaServicio, Servicio } from "../../Interfaces/Servicio";
-import { servicioInitState, tipoServicioModalInitState } from "../../Interfaces/InterfacesInitState";
+import { CategoriaServicio, ServiceCreate, Servicio } from "../../Interfaces/Servicio";
+import { alertModalInitState, optionSelectorModalInitState, servicioInitState } from "../../Interfaces/InterfacesInitState";
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
-import { useContext, useState } from "react";
-import { TipoServicioModalSelector } from "../../Components/Modals/TipoServicioModalSelector";
-import { TipoServicioModalProps } from "../../Interfaces/DOMInterfaces";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Context/Auth/Context";
 import { ServicesContext } from "../../Context/Services/Context";
+import { OptionsSelectorModal } from "../../Components/Modals/OptionsSelectorModal";
+import { AlertModalProps, KeyValue, ModalOptionsSelectorProps } from "../../Interfaces/DOMInterfaces";
+import { ConvertToKeyValueList } from "../../Helpers/InterfaceConverter";
+import { BlockUI } from "../../Components/Shared/BlockUI";
+import { useIsFocused } from "@react-navigation/native";
+import { ShootAlertOnResult } from "../../Helpers/GlobalFunctions";
+import { AlertModal } from "../../Components/Modals/AlertModal";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'serviceFormScreen'> { }
 
 export const ServiceFormScreen = ({ navigation, route }: Props) => {
     const { user } = useContext(AuthContext)
-    const { serviceCategories } = useContext(ServicesContext)
-    const { descripcion, estado, otrosMediosContacto, municipio, telefonos, correos, precio, onChange } = UseForm<Servicio>(servicioInitState)
+    const { serviceCategories, CreateService, result, messageRequest, status, CleanResult } = useContext(ServicesContext)
+    const { descripcion, estado, otrosMediosContacto, municipio, telefonos, correos, precio, onChange, form } = UseForm<ServiceCreate>(servicioInitState)
     const [categoriaServicio, setCategoriaServicio] = useState<CategoriaServicio>()
-    const [tipoServicioModal, setTipoServicioModal] = useState<TipoServicioModalProps>(tipoServicioModalInitState)
+    const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
+    const [selectorCategoriaModal, setSelectorCategoriaModal] = useState<ModalOptionsSelectorProps>(optionSelectorModalInitState)
+    const optionsList = ConvertToKeyValueList(serviceCategories)
+    const isFocused = useIsFocused();
+
+
+    useEffect(() => {
+        if (result && isFocused) return setAlertModal(ShootAlertOnResult({ ...result.data }, OnHideAlert))
+    }, [result])
+
+    useEffect(() => {
+        onChange(user?.Estado ?? '', 'estado')
+        onChange(user?.Municipio ?? '', 'municipio')
+        onChange(user?.Telefono ?? '', 'telefonos')
+    }, [])
 
 
 
-    const OnHideModal = (category?: CategoriaServicio) => {
-        if (category) setCategoriaServicio(category)
-        setTipoServicioModal(tipoServicioModalInitState)
+    const OnHideModal = (value?: KeyValue) => {
+        if (value) {
+            var category: CategoriaServicio = { id: value.value, nombre: value.name }
+            setCategoriaServicio(category)
+        }
+        setSelectorCategoriaModal(optionSelectorModalInitState)
     }
+
+
+    const TriggerCreateService = async () => {
+        form.categoriaId = categoriaServicio?.id ?? 0
+        form.tipo = route.params.tipoServicio
+        await CreateService(form)
+    }
+    const OnHideAlert = () => {
+        setAlertModal(alertModalInitState)
+        CleanResult()
+    }
+
     return (
         <>
-            <TipoServicioModalSelector {...tipoServicioModal} OnHideModal={(catSelected) => OnHideModal(catSelected)} />
+            <BlockUI visible={status === 'requesting'} message={messageRequest} />
+            <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
+            <OptionsSelectorModal {...selectorCategoriaModal} OnHideModal={(value) => OnHideModal(value)} />
             <ScreenContainer>
                 <ScrollView showsVerticalScrollIndicator={false} style={GlobalStyles.Scrollview}>
                     <View style={GlobalStyles.Globalcontainerdad}>
@@ -87,7 +123,8 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
                                 <InputGlobal
                                     placeholder="Precio ofertado"
                                     showLabel
-                                    value={precio.toString()}
+                                    keyboardType='number-pad'
+                                    value={precio?.toString()}
                                     onChange={(val) => onChange(val, 'precio')} />
                             </Col>
                             <Col>
@@ -95,7 +132,7 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
                                     placeholder="Tipo de servicio"
                                     showLabel
                                     disabled
-                                    onPressIn={() => setTipoServicioModal({ ...tipoServicioModal, visible: true, categoriesList: serviceCategories })}
+                                    onPressIn={() => setSelectorCategoriaModal({ ...selectorCategoriaModal, visible: true, options: optionsList })}
                                     value={categoriaServicio?.nombre ?? ''} />
                             </Col>
                         </Row>
@@ -103,7 +140,9 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
 
                         <ButtonGlobal
                             text='Enviar'
-                            icon={{ name: 'send', library: 'fontAwesome' }} />
+                            icon={{ name: 'send', library: 'fontAwesome' }}
+                            onClick={TriggerCreateService}
+                        />
 
                         <HipervinculoGlobal
                             text='Cancelar'

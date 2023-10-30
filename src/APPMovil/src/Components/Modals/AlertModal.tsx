@@ -50,7 +50,7 @@ export const AlertModal = (props: AlertModalProps) => {
                 onPress={(event) => { if (event.target === event.currentTarget) handleCloseAlert() }}
             >
                 <View style={modalStyles.modal}>
-                    <View style={[modalStyles.modalContent, { height: heightModal }]}>
+                    <View style={[modalStyles.modalContent, { maxHeight: heightModal }]}>
                         <Icon
                             library='fontAwesome'
                             name={iconName()}

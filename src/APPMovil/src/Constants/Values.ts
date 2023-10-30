@@ -1,3 +1,4 @@
+import { KeyValue } from "../Interfaces/DOMInterfaces"
 import { NavigationStyles } from "../Styles/NavigationStyles"
 
 export const mainColors = {
@@ -5,6 +6,7 @@ export const mainColors = {
     purpule2: '#51168C',
     purpule3: '#331859',
     black: '#616161',
+    dark: '#242424',
     white: '#FFF',
     light: '#E8E8E8',
     gray: '#A3A3A3',
@@ -54,15 +56,25 @@ export const alertStr = {
     tokenNotFound: {
         title: 'No se ha podido encontrar la información de la sesión.',
         message: 'Vuelva a intentar o vuelva a iniciar sesión para continuar.'
+    },
+    emptyFieldsLogin: {
+        title: 'Usuario y contraseña requeridos',
+        message: 'Llene todos los campos solicitados para continuar.'
     }
 }
 
 
+export const userRoles: KeyValue[] = [
+    { value: 0, key: "Ofrecer servicios", name: "Ofrecer servicios" },
+    { value: 1, key: "Solicitar servicios", name: "Solicitar servicios" }
+]
 
 
 export const apiEnpoints = {
     authenticate: "/Usuario/Login",
     registerUser: "/Usuario/Register",
     sendEmailUser: "/Usuario/ForgotPassword",
-    getCategories: "/Category/GetCategoriesServices"
+    getCategories: "/Category/GetCategoriesServices",
+    getServices: "/Servicio/GetAllServices",
+    createService: "/Servicio/create"
 }

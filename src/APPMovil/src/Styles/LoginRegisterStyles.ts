@@ -15,7 +15,7 @@ export const LoginStyles = StyleSheet.create({
         ...GlobalStyles.boxShadow,
         borderRadius: 15,
         width: '100%',
-        padding: 10,
+        padding: 15,
     },
     logo: {
         width: 226,
@@ -46,6 +46,9 @@ export const LoginStyles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         justifyContent: 'center'
+    },
+    footer: {
+        marginTop: 10
     }
 });
 
@@ -54,23 +57,8 @@ export const LoginStyles = StyleSheet.create({
 
 export const RegisterStyles = StyleSheet.create({
     container: {
-        paddingHorizontal: 35,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "rgba(255, 255, 255, 0.78)",
-    },
-    logo: {
-        width: 226.09,
-        height: 100,
-        bottom: 15
-    },
-    title: {
-        right: 105,
-        fontSize: 30,
-        marginBottom: 10,
-        color: mainColors.textColor,
-        fontWeight: 'bold'
+        marginHorizontal: 30,
+        marginBottom: 10
     },
     input: {
         width: 340,
