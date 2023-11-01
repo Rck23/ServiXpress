@@ -20,6 +20,27 @@ export const ConvertLoginResponseToUser = (data: LoginResponse): Usuario => {
 }
 
 
+export const ConvertLoginResponseToUserList = (data: LoginResponse[]): Usuario[] => {
+    const result: Usuario[] = []
+    data.forEach(item => {
+        result.push({
+            Id: item.id,
+            Nombre: item.nombre,
+            Apellidos: item.apellidos,
+            AvatarUrl: item.avatar,
+            Telefono: item.telefono,
+            RolNombre: item.roles[0] ?? '',
+            Email: item.email,
+            Estatus: '',
+            FechaHoraRegistro: new Date(),
+            Rol: 0
+        })
+    })
+
+    return result
+}
+
+
 export const ConvertToKeyValueList = (inputList: CategoriaServicio[]): KeyValue[] => {
     const outputList = inputList.map(item => {
         return {

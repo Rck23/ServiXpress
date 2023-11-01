@@ -1,77 +1,62 @@
-import { View, FlatList } from "react-native"
+import { View, FlatList, RefreshControl } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { UserStackParams } from '../../Navigation/UserNavigator';
 import { GlobalStyles } from "../../Styles/SharedStyles";
-import UserListItem from "../../Components/Shared/SharedComponents";
-import { useState } from 'react';
+import UserListItem, { ListEmptyComponent } from "../../Components/Shared/SharedComponents";
+import { useContext, useEffect, useState } from 'react';
+import { UsersContext } from "../../Context/Users/Context";
+import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
+import { BlockUI } from "../../Components/Shared/BlockUI";
+import { AlertModal } from "../../Components/Modals/AlertModal";
+import { useIsFocused } from "@react-navigation/native";
+import { alertModalInitState } from "../../Interfaces/InterfacesInitState";
+import { AlertModalProps } from "../../Interfaces/DOMInterfaces";
 
 interface Props extends StackScreenProps<UserStackParams, 'userManageScreen'> { }
 
-const userdata = [
-    {
-        id: '200387',
-        name: 'Yahir Allexander Manjarrez Belevin'
-    },
-    {
-        id: '200252',
-        name: 'Adrian Ramirez Sanchez'
-    },
-    {
-        id: '200456',
-        name: 'Oscar Uriel Pasillas Hernandez'
-    },
-    {
-        id: '200350',
-        name: 'Jesus Isaac Gallegos Esquivel'
-    },
-    {
-        id: '200237',
-        name: 'Brayan Emmanuel Garcia Duarte'
-    },
-    {
-        id: '190246',
-        name: 'Miguel Angel Rivera Castilo'
-    },
-    {
-        id: '200327',
-        name: 'Yahir Allexander Morales Belevin'
-    },
-    {
-        id: '200250',
-        name: 'Adrian Ramirez Ramirez'
-    },
-    {
-        id: '200411',
-        name: 'Oscar Uriel Pasillas Jimenez'
-    },
-    {
-        id: '200301',
-        name: 'Jesus Isaac Gomez Esquivel'
-    },
-    {
-        id: '200220',
-        name: 'Brayan Alejandro Garcia Duarte'
-    },
-    {
-        id: '190210',
-        name: 'Miguel Angel Cordova Rodriguez'
-    }
-]
 
 export const UsersManageScreen = ({ navigation, route }: Props) => {
-    const [selectedId, setSelectedId] = useState<string>();
+    const { users, GetAllUsers, status, messageRequest, CleanResult } = useContext(UsersContext)
+    const isFocused = useIsFocused();
+    const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
+
+    useEffect(() => {
+        GetAllUsers()
+    }, [])
+
+
+    const OnHideAlert = () => {
+        setAlertModal(alertModalInitState)
+        CleanResult()
+    }
 
     return (
-        <View style={GlobalStyles.Globalcontainerdad}>
-            <View style={GlobalStyles.Globalcontaineruser}>
-                <FlatList
-                    data={userdata}
-                    renderItem={({ item }) =>
-                        <UserListItem name={item.name}
-                            icon={{ name: 'user', library: 'fontAwesome' }}
-                            onPress={() => navigation.navigate('userDetailsScreen')} />}
-                    keyExtractor={item => item.id} />
-            </View>
-        </View>
+        <>
+            <BlockUI visible={status === 'requesting'} message={messageRequest} />
+            <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
+            <ScreenContainer>
+                <View style={GlobalStyles.Globalcontaineruser}>
+                    <FlatList
+                        data={users}
+                        keyExtractor={(item, index) => index.toString()}
+                        showsVerticalScrollIndicator={false}
+                        renderItem={({ item }) =>
+                            <UserListItem
+                                name={`${item.Nombre} ${item.Apellidos}`}
+                                icon={{ name: 'user', library: 'fontAwesome' }}
+                                onPress={() => navigation.navigate('userDetailsScreen')} />}
+                        ListEmptyComponent={() => (
+                            <ListEmptyComponent text="No se han encontrado usuarios..." />
+                        )}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={status === 'requesting'}
+                                onRefresh={GetAllUsers}
+                            />
+                        }
+                    />
+                </View>
+            </ScreenContainer>
+        </>
     )
 }

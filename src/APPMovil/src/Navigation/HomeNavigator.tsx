@@ -7,6 +7,7 @@ import { ServiceNavigator } from './ServiceNavigator';
 import { UserNavigator } from './UserNavigator';
 import { customTabScreenOpitons, customScreenOpitons } from '../Constants/Properties';
 import { ServicesProvider } from '../Context/Services/Context';
+import { UsersProvider } from '../Context/Users/Context';
 
 export type HomeStackParams = {
     serviceNavigatorScreen: undefined

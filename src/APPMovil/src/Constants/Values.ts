@@ -77,8 +77,10 @@ export const userRoles: KeyValue[] = [
 export const apiEnpoints = {
     authenticate: "/Usuario/Login",
     registerUser: "/Usuario/Register",
+    updateUser: "/Usuario/Update",
     sendEmailUser: "/Usuario/ForgotPassword",
     getCategories: "/Category/GetCategoriesServices",
     getServices: "/Servicio/GetAllServices",
-    createService: "/Servicio/create"
+    createService: "/Servicio/create",
+    getUsers: "/Usuario/All"
 }
