@@ -23,7 +23,7 @@ namespace ServiXpress.Api.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly IAuthService _authService;
         private ILogger<ServicioController> _logger; 
-
+           
 
         private IMediator _mediator;
 
@@ -52,6 +52,14 @@ namespace ServiXpress.Api.Controllers
                     return BadRequest(ModelState);
                 }
 
+                var categoria = await _context.CategoriasServicios
+                     .SingleOrDefaultAsync(c => c.Nombre == servicioVm.NombreCategoria);
+
+                if (categoria == null)
+                {
+                    return NotFound("La categoría no fue encontrada.");
+                }
+
                 var servicio = new Servicio
                 {
                     Estado = servicioVm.Estado,
@@ -65,7 +73,7 @@ namespace ServiXpress.Api.Controllers
                     FechaHoraRegistro = DateTime.Now,
                     FechaVencimiento = DateTime.Now.AddMonths(1),
                     UsuarioId = UsuarioSession.Id,
-                    CategoriaId = servicioVm.CategoriaId,
+                    CategoriaId = categoria.Id,
                     Tipo = servicioVm.Tipo
                 };
 
@@ -100,6 +108,15 @@ namespace ServiXpress.Api.Controllers
                     throw new ServiceNotFoundException(); // Devuelve un error si el servicio no existe
                 }
 
+
+                var categoria = await _context.CategoriasServicios
+                    .SingleOrDefaultAsync(c => c.Nombre == servicioVm.NombreCategoria);
+
+                if (categoria == null)
+                {
+                    return NotFound("La categoría no fue encontrada.");
+                }
+
                 // Actualiza las propiedades del servicio con los valores proporcionados en servicioVm
                 servicio.Estado = servicioVm.Estado;
                 servicio.Municipio = servicioVm.Municipio;
@@ -111,7 +128,7 @@ namespace ServiXpress.Api.Controllers
                 servicio.Precio = servicioVm.Precio;
                 servicio.FechaHoraRegistro = DateTime.Now;
                 servicio.FechaVencimiento = DateTime.Now.AddMonths(1);
-                servicio.CategoriaId = servicioVm.CategoriaId;
+                servicio.CategoriaId = categoria.Id;
                 servicio.Tipo = servicioVm.Tipo;
 
                 _context.Servicios.Update(servicio);
@@ -128,19 +145,43 @@ namespace ServiXpress.Api.Controllers
 
 
 
+        //[AllowAnonymous]
+        //[HttpGet("GetAllServices", Name = "GetAllServices")]
+        //public async Task<ActionResult<IReadOnlyList<ServicioVm>>> GetAllServices()
+        //{
+        //    _logger.LogInformation("Obteniendo todos los servicios");
+
+        //    try
+        //    {
+
+        //        var query = new GetAllServices();
+
+
+
+        //        return Ok(await _mediator.Send(query));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Error al obtener los servicios");
+        //        throw;
+        //    }
+        //}
+
+
         [AllowAnonymous]
-        [HttpGet("GetAllServices", Name = "GetAllServices")]
-        public async Task<ActionResult<IReadOnlyList<ServicioVm>>> GetAllServices()
+        [HttpGet("getAllServices", Name = "GetAllServices")]
+        public async Task<ActionResult<IEnumerable<Servicio>>> GetAllServices()
         {
             _logger.LogInformation("Obteniendo todos los servicios");
 
             try
             {
 
-                var query = new GetAllServices();
-
-
-                return Ok(await _mediator.Send(query));
+                return await _context.Servicios
+                    .Include(s => s.Usuario)          
+                    .Include(c => c.CategoriaServicio)
+                    .Include(t => t.TipoServicio)
+                    .ToListAsync();
             }
             catch (Exception ex)
             {
@@ -148,7 +189,6 @@ namespace ServiXpress.Api.Controllers
                 throw;
             }
         }
-
 
 
         [AllowAnonymous]
