@@ -103,7 +103,8 @@ export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: 
 }
 
 
-export const StrIsNullOrEmpty = (value: string) => {
+export const StrIsNullOrEmpty = (value?: string) => {
+    if (!value) return
     value = value.replace(/\s/g, '')
     return (value == "" || value == null || value.length == 0)
 }

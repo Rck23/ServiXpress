@@ -21,7 +21,7 @@ type AuthContextProps = {
     SignUp: (user: RegisterUser, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
     RemoveAlert: () => void;
-    SendEmailResetPassword: (email: string) => Promise<ResultData>
+    SendEmailResetPassword: (email: string) => Promise<void>
 }
 
 const authInicialState: AuthState = {
@@ -118,8 +118,6 @@ export const AuthProvider = ({ children }: any) => {
             });
 
 
-            console.log(formData)
-
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
 
@@ -162,15 +160,23 @@ export const AuthProvider = ({ children }: any) => {
      * @param email 
      * @returns 
      */
-    const SendEmailResetPassword = async (email: string): Promise<ResultData> => {
+    const SendEmailResetPassword = async (email?: string): Promise<void> => {
         dispatch({ type: 'startRequest', payload: 'Enviando correo...' })
+        if (StrIsNullOrEmpty(email))
+            return dispatch({ type: 'showAlert', payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail) })
         try {
-            const response = await API.post<ResponseApi>(apiEnpoints.sendEmailUser, { email })
-            const resCode = response.data.statusCode
+            const response = await API.post<string>(apiEnpoints.sendEmailUser, { email })
 
-            return { ok: resCode == 200, message: response.data.message, title: response.data.title, icon: resCode == 200 ? 'success' : 'error' }
+            dispatch({
+                type: 'showAlert',
+                payload: { ok: true, title: "Correo enviado", message: "Corrreo electrónico enviado", icon: 'success' }
+            });
         } catch (error) {
-            return await HandleException(error)
+            const resultError = await HandleException(error)
+            dispatch({
+                type: 'showAlert',
+                payload: {...resultError, title: "No se ha enviado el correo"}
+            })
         }
     }
 

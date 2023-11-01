@@ -60,6 +60,10 @@ export const alertStr = {
     emptyFieldsLogin: {
         title: 'Usuario y contraseña requeridos',
         message: 'Llene todos los campos solicitados para continuar.'
+    },
+    emptyFieldsSendEmail: {
+        title: 'Correo requerido',
+        message: 'Ingrese su correo elecrtónico con el que ha registrado su cuenta.'
     }
 }
 
