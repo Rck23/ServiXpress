@@ -2,10 +2,10 @@ import { View, Text } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../../Navigation/AuthNavigator";
 import { RecoveryStyles } from '../../Styles/RecoveryStyles';
-import { ButtonGlobal, InputGlobal } from '../../Components/Shared/FormsComponents';
+import { ButtonGlobal, FormScrollContainer, InputGlobal } from '../../Components/Shared/FormsComponents';
 import { GlobalStyles } from '../../Styles/SharedStyles';
 import { useContext, useState, useEffect } from 'react';
-import { BackgroudImage, LogoImage, TextComponent } from '../../Components/Shared/SharedComponents';
+import { BackgroudImage, LogoImage, ScrollViewComponent, TextComponent } from '../../Components/Shared/SharedComponents';
 import { AuthContext } from '../../Context/Auth/Context';
 import { useIsFocused } from '@react-navigation/native';
 import { BlockUI } from '../../Components/Shared/BlockUI';
@@ -13,6 +13,8 @@ import { AlertModal } from '../../Components/Modals/AlertModal';
 import { AlertModalProps } from '../../Interfaces/DOMInterfaces';
 import { alertModalInitState } from '../../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../../Helpers/GlobalFunctions';
+import { ScreenContainer } from '../../Components/Shared/NavigationComponents';
+import { LoginStyles } from '../../Styles/LoginRegisterStyles';
 
 interface Props extends StackScreenProps<AuthStackParams, 'recoveryScreen'> { }
 
@@ -38,11 +40,11 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
 
     return (
         <>
-            <BlockUI visible={status === 'requesting'} message={messageRequest} />
-            <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
-            <BackgroudImage>
-                <View style={GlobalStyles.Globalcontainerdad}>
-                    <View style={GlobalStyles.Globalcontainer}>
+            <ScreenContainer>
+                <BlockUI visible={status === 'requesting'} message={messageRequest} />
+                <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
+                <FormScrollContainer>
+                    <View style={LoginStyles.formContainer}>
                         <LogoImage />
                         <Text style={RecoveryStyles.encabezado}>Recupera tu contraseña</Text>
                         <TextComponent text={'Introduce tu correo electrónico para recuperar tu contraseña.'} />
@@ -59,8 +61,8 @@ export const RecoveryScreen = ({ navigation, route }: Props) => {
                             onClick={HandleSendEmail}
                         />
                     </View>
-                </View>
-            </BackgroudImage>
+                </FormScrollContainer>
+            </ScreenContainer>
         </>
     )
 }

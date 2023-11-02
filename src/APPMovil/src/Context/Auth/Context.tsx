@@ -204,7 +204,7 @@ export const AuthProvider = ({ children }: any) => {
 
             dispatch({
                 type: 'showAlert',
-                payload: { ok: true, title: "Correo enviado", message: "Corrreo electrónico enviado", icon: 'success' }
+                payload: { ok: true, title: "Corrreo electrónico enviado", message: "Revise su bandeja y siga las instrucciones.", icon: 'success' }
             });
         } catch (error) {
             const resultError = await HandleException(error)
