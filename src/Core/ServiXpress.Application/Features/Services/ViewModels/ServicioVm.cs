@@ -18,6 +18,7 @@ namespace ServiXpress.Application.Features.Services.ViewModels
 
         //public string UsuarioId { get; set; }
 
+        public string NombreCategoria { get; set; }
         public int CategoriaId { get; set; }
 
         public string? Tipo { get; set; }
