@@ -18,16 +18,22 @@ namespace ServiXpress.Infrastructure.EmailImplementation
             _emailSettings = emailSettings.Value;
             _logger = logger;
         }
-        public async Task<bool> SendEmail(EmailMessage email, string token)
+        public async Task<bool> SendEmail(EmailMessage email, string codigo)
         {
             try
             {
                 var client = new MailjetClient(_emailSettings.MailjetApiKey, _emailSettings.MailjetApiSecret);
 
+                // Leer la plantilla HTML desde un archivo
+                var htmlTemplate = File.ReadAllText("./Utilities/EmailHTML/SendCodePassword.html");
+
+                // Reemplazar el marcador de posición con el código
+                var htmlBody = htmlTemplate.Replace("{codigo}", codigo);
+
                 var emailMessage = new TransactionalEmailBuilder()
                     .WithFrom(new SendContact(_emailSettings.Email, "ServiXpress - Olvido de contraseña"))
                     .WithSubject(email.Subject)
-                    .WithHtmlPart($"{email.Body} {_emailSettings.BaseUrlClient}/password/reset/{token}")
+                    .WithHtmlPart(htmlBody)
                     .WithTo(new SendContact(email.To))
                     .Build();
 
