@@ -21,3 +21,4 @@ export const customTabScreenOpitons: BottomTabNavigationOptions = {
 
 export type AlertIcons = 'success' | 'error' | 'info' | 'warning' | 'question'
 export type IconLibraries = 'material' | 'ion' | 'zocial' | 'antDesign' | 'entypo' | 'evil' | 'fontAwesome' | 'foundation' | 'materialCommunity'
+export type HomeNavigatorConfirmAlert = 'closeSession' | 'exitApp'

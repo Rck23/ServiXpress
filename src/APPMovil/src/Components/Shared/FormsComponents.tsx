@@ -34,7 +34,7 @@ type TextAreaProps = {
 
 type ButtonProps = {
     onClick?: () => void
-    text: string
+    text?: string
     icon: IconProps
     type?: 'normal' | 'big' | 'small'
     color?: string
@@ -98,9 +98,13 @@ export const ButtonGlobal = (props: ButtonProps) => {
             activeOpacity={0.7}
         >
             <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.GlobalButtonIcon, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonIconSmall : {}]} />
-            <Text style={[GlobalStyles.GlobalButtonText, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonTextSmall : {}]}>
-                {props.text}
-            </Text>
+
+            {
+                props.text &&
+                <Text style={[GlobalStyles.GlobalButtonText, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonTextSmall : {}]}>
+                    {props.text}
+                </Text>
+            }
         </TouchableOpacity>
     )
 }

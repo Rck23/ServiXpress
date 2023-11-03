@@ -104,7 +104,15 @@ export const GetResponseDataFromConstants = (ok: boolean, constant: any, icon?: 
 
 
 export const StrIsNullOrEmpty = (value?: string) => {
-    if (!value) return
+    if (!value) return true
     value = value.replace(/\s/g, '')
     return (value == "" || value == null || value.length == 0)
+}
+
+
+export const GetSaludoFromTime = () => {
+    var date = new Date()
+    var hour = date.getHours()
+    var saludo = hour < 12 ? "Buenos días" : hour < 18 ? "Buenas tardes" : hour < 24 ? "Buenas noches" : "Buenas tardes"
+    return saludo
 }

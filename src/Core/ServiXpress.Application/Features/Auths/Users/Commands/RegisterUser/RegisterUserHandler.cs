@@ -66,7 +66,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 Apellidos = request.Apellidos,
                 Telefono = request.Telefono,
                 Email = request.Email,
-                //AvatarUrl = request.FotoUrl
+                AvatarUrl = request.FotoUrl
 
             };
 

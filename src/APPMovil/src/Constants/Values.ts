@@ -84,3 +84,8 @@ export const apiEnpoints = {
     createService: "/Servicio/create",
     getUsers: "/Usuario/All"
 }
+
+
+export const systemImages = {
+    personIcon: require('../Images/personIcon.png')
+}

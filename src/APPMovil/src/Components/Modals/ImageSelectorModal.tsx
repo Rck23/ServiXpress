@@ -9,7 +9,7 @@ import { TakeImageFromGallery, TakePhoto } from '../Shared/ImagePickerComponent'
 import { AlertModal } from './AlertModal';
 import { alertModalInitState } from '../../Interfaces/InterfacesInitState';
 import { ShootAlertOnResult } from '../../Helpers/GlobalFunctions';
-import { mainColors } from '../../Constants/Values';
+import { mainColors, systemImages } from '../../Constants/Values';
 import { Avatar } from 'react-native-paper';
 import { ConvertImgPickerToImageRequest } from '../../Helpers/InterfaceConverter';
 
@@ -17,7 +17,6 @@ import { ConvertImgPickerToImageRequest } from '../../Helpers/InterfaceConverter
 export const ImageSelectorModal = (props: ImageSelectorModalProps) => {
     const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
     const [imageSelected, setImageSelected] = useState<ImagePickerResponse>()
-    const defaultIcon = require('../../Images/personIcon.png')
 
     useEffect(() => {
         setImageSelected(undefined)
@@ -63,7 +62,7 @@ export const ImageSelectorModal = (props: ImageSelectorModalProps) => {
                             source={
                                 imageSelected && imageSelected.assets && imageSelected.assets.length > 0
                                     ? { uri: imageSelected.assets[0].uri }
-                                    : defaultIcon
+                                    : systemImages.personIcon
                             }
                         />
 

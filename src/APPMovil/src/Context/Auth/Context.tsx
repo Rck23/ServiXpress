@@ -22,7 +22,7 @@ type AuthContextProps = {
     LogOut: () => Promise<void>;
     RemoveAlert: () => void;
     SendEmailResetPassword: (email: string) => Promise<void>
-    UpdateProfile: (user:RegisterUser) => Promise<void>
+    UpdateProfile: (user: RegisterUser) => Promise<void>
 }
 
 const authInicialState: AuthState = {
@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }: any) => {
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
             const userData = ConvertLoginResponseToUser(data)
 
+            console.log(data)
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
             dispatch({
@@ -121,6 +122,8 @@ export const AuthProvider = ({ children }: any) => {
 
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
+
+            console.log(data)
 
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
@@ -198,9 +201,9 @@ export const AuthProvider = ({ children }: any) => {
     const SendEmailResetPassword = async (email?: string): Promise<void> => {
         dispatch({ type: 'startRequest', payload: 'Enviando correo...' })
         if (StrIsNullOrEmpty(email))
-            return dispatch({ type: 'showAlert', payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail) })
+            return dispatch({ type: 'showAlert', payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail, 'info') })
         try {
-            const response = await API.post<string>(apiEnpoints.sendEmailUser, { email })
+            await API.post<string>(apiEnpoints.sendEmailUser, { email })
 
             dispatch({
                 type: 'showAlert',
@@ -210,7 +213,7 @@ export const AuthProvider = ({ children }: any) => {
             const resultError = await HandleException(error)
             dispatch({
                 type: 'showAlert',
-                payload: {...resultError, title: "No se ha enviado el correo"}
+                payload: { ...resultError, title: "No se ha enviado el correo" }
             })
         }
     }
