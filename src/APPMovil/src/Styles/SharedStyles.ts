@@ -148,4 +148,18 @@ export const GlobalStyles = StyleSheet.create({
     row: {
         flexDirection: 'row'
     },
+    Titulo: {
+        color: mainColors.purpule,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    Dato: {
+        color: mainColors.black,
+        fontSize: 17,
+        textAlign: 'justify'
+    },
+    DatCont: {
+        marginBottom: 30
+    }
 })
