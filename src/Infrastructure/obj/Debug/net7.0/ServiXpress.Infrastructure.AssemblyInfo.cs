@@ -18,5 +18,5 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyTitleAttribute("ServiXpress.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
-// Généré par la classe MSBuild WriteCodeFragment.
+// Generado por la clase WriteCodeFragment de MSBuild.
 
