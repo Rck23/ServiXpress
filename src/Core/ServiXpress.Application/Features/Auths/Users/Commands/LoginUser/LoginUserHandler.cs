@@ -69,7 +69,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
                 Apellidos = user.Apellidos,
                 Telefono = user.Telefono,
                 Email = user.Email,
-                //Avatar = user.AvatarUrl,
+                Avatar = user.AvatarUrl,
                 Token = _authService.CreateToken(user, roles), // Generar un token de autenticación.
                 Roles = roles,
             };

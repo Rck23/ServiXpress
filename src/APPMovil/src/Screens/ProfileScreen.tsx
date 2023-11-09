@@ -1,17 +1,19 @@
 import { StackScreenProps } from '@react-navigation/stack';
 import { HomeStackParams } from "../Navigation/HomeNavigator"
 import { ScreenContainer } from "../Components/Shared/NavigationComponents";
-import { ButtonGlobal } from "../Components/Shared/FormsComponents";
+import { ButtonGlobal, FormScrollContainer } from "../Components/Shared/FormsComponents";
 import { TakeImageFromGallery, TakePhoto } from "../Components/Shared/ImagePickerComponent";
 import { AlertModal } from '../Components/Modals/AlertModal';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AlertModalProps } from '../Interfaces/DOMInterfaces';
 import { alertModalInitState } from '../Interfaces/InterfacesInitState';
-import { ShootAlertOnResult } from '../Helpers/GlobalFunctions';
+import { GetSaludoFromTime, ShootAlertOnResult, StrIsNullOrEmpty } from '../Helpers/GlobalFunctions';
 import { AuthContext } from '../Context/Auth/Context';
-import { TextComponent } from '../Components/Shared/SharedComponents';
+import { ScrollViewComponent, TextComponent } from '../Components/Shared/SharedComponents';
 import { View } from 'react-native';
-import { GlobalStyles } from '../Styles/SharedStyles';
+import { Avatar } from 'react-native-paper';
+import { systemImages } from '../Constants/Values';
+import { ProfileStyles } from '../Styles/ProfileStyles';
 
 interface Props extends StackScreenProps<HomeStackParams, 'profileScreen'> { }
 
@@ -20,36 +22,29 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
     const { user, LogOut } = useContext(AuthContext)
     const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
 
+
+    useEffect(() => {
+    }, [])
+
     const OnHideAlert = () => { setAlertModal(alertModalInitState) }
-    const HandleTakeImage = async (from: 'camera' | 'gallery') => {
-        const result = from == 'camera' ? await TakePhoto() : await TakeImageFromGallery();
-
-        if (!result.ok) return setAlertModal(ShootAlertOnResult(result, OnHideAlert))
-
-        console.log(result)
-        //TODO: se obtiene la ruta de la imagen en result.data (Manejar para mostrar y enviar a registrar)
-    }
-
-    const [name, setName] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [phone, setPhone] = useState('');
-    const [mail, setMail] = useState('');
-    const [password, setPassword] = useState('');
 
     return (
-        <View style={GlobalStyles.Globalcontainerdad}>
+        <>
             <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
-            
-            <ScreenContainer>
-                <TextComponent text={`Hi, ${user?.Nombre} ${user?.Apellidos}`} />
-                <TextComponent text={`Your email: ${user?.Email}`} />
-                <TextComponent text={`Your phone: ${user?.Telefono}`} />
 
-                <ButtonGlobal onClick={() => HandleTakeImage('camera')} text="Tomar foto" icon={{ name: 'camera', library: 'entypo' }} />
-                <ButtonGlobal onClick={() => HandleTakeImage('gallery')} text="Seleccionar imagen" icon={{ name: 'images', library: 'entypo' }} />
-                <ButtonGlobal onClick={() => setAlertModal({ ...alertModal, visible: true })} text="Modal" icon={{ name: 'images', library: 'entypo' }} />
-                <ButtonGlobal onClick={LogOut} text="Salir" icon={{ name: 'close', library: 'fontAwesome' }} />
+            <ScreenContainer>
+                <View style={ProfileStyles.container}>
+                    <Avatar.Image style={ProfileStyles.avatar}
+                        onTouchStart={() => console.log('TOUCH')}
+                        size={90}
+                        source={!StrIsNullOrEmpty(user?.avatarUrl) ? { uri: user?.avatarUrl } : systemImages.personIcon}
+                    />
+                    <TextComponent style={ProfileStyles.headerText} text={`👋 ${GetSaludoFromTime()}, ${user?.nombre}`} />
+                    <TextComponent style={ProfileStyles.bodyText} text={`${user?.email}`} />
+                    <TextComponent style={ProfileStyles.bodyText} text={`${user?.telefono}`} />
+
+                </View>
             </ScreenContainer>
-        </View>
+        </>
     )
 }

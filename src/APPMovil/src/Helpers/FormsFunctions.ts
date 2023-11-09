@@ -3,6 +3,24 @@ import { ServiceCreate } from "../Interfaces/Servicio";
 import { RegisterUser } from "../Interfaces/Usuario";
 import { StrIsNullOrEmpty } from "./GlobalFunctions";
 
+
+export const ValidateUpdateUserForm = (userData: RegisterUser): ResultData => {
+    const result: ResultData = { icon: 'warning', ok: false, title: 'Ingrese la información correctamente.' }
+
+    if (StrIsNullOrEmpty(userData.Nombre))
+        return { ...result, message: "Debe ingresar su nombre(s)" }
+    if (StrIsNullOrEmpty(userData.Apellidos))
+        return { ...result, message: "Debe ingresar sus apellidos" }
+    if (StrIsNullOrEmpty(userData.Telefono))
+        return { ...result, message: "Debe ingresar un número de teléfono" }
+    if (StrIsNullOrEmpty(userData.Email))
+        return { ...result, message: "Debe ingresar un correo electrónico" }
+    if (userData.Rol == null || userData.Rol == undefined)
+        return { ...result, message: "Debe seleccionar una opción de uso de la aplicación" }
+
+    return { ...result, ok: true }
+}
+
 export const ValidateRegisterUserForm = (userData: RegisterUser): ResultData => {
     const result: ResultData = { icon: 'warning', ok: false, title: 'Por favor complete la información faltante' }
 

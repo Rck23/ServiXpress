@@ -2,13 +2,13 @@ import React, { createContext, useEffect, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthState, AuthReducer } from './Reducer';
 import { RegisterUser, Usuario } from '../../Interfaces/Usuario';
-import { LoginResponse, ResponseApi, ResultData } from '../../Interfaces/DataResponse';
+import { LoginResponse, ResultData } from '../../Interfaces/DataResponse';
 import { GetResponseDataFromConstants, HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { alertStr, apiEnpoints } from '../../Constants/Values';
 import API, { formDataHeaders } from '../../Api/Api';
 import { LocalStorageStoreData } from '../../Helpers/LocalStorage';
 import { ConvertLoginResponseToUser } from '../../Helpers/InterfaceConverter';
-import { ValidateRegisterUserForm } from '../../Helpers/FormsFunctions';
+import { ValidateRegisterUserForm, ValidateUpdateUserForm } from '../../Helpers/FormsFunctions';
 
 
 type AuthContextProps = {
@@ -21,7 +21,8 @@ type AuthContextProps = {
     SignUp: (user: RegisterUser, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
     RemoveAlert: () => void;
-    SendEmailResetPassword: (email: string) => Promise<ResultData>
+    SendEmailResetPassword: (email: string) => Promise<void>
+    UpdateProfile: (user: RegisterUser) => Promise<void>
 }
 
 const authInicialState: AuthState = {
@@ -87,6 +88,7 @@ export const AuthProvider = ({ children }: any) => {
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
             const userData = ConvertLoginResponseToUser(data)
 
+            console.log(data)
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
             dispatch({
@@ -118,7 +120,42 @@ export const AuthProvider = ({ children }: any) => {
             });
 
 
-            console.log(formData)
+            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
+            const userData = ConvertLoginResponseToUser(data)
+
+            console.log(data)
+
+            await AsyncStorage.setItem('token', data.token);
+            await LocalStorageStoreData('userData', userData)
+            dispatch({
+                type: 'signUp',
+                payload: {
+                    token: data.token,
+                    usuario: userData
+                }
+            });
+        } catch (error: any) {
+            dispatch({
+                type: 'showAlert',
+                payload: await HandleException(error)
+            })
+        }
+    };
+
+
+
+    const UpdateProfile = async (user: RegisterUser) => {
+        dispatch({ type: 'startRequest', payload: 'Actualizando información...' })
+        try {
+            const resultValidation = ValidateUpdateUserForm(user)
+            if (!resultValidation.ok)
+                return dispatch({ type: 'showAlert', payload: resultValidation })
+
+            const formData = new FormData();
+            Object.keys(user).forEach(key => {
+                formData.append(key, (user as any)[key]);
+            });
+
 
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
@@ -133,7 +170,6 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
-            console.log(error.response)
             dispatch({
                 type: 'showAlert',
                 payload: await HandleException(error)
@@ -162,15 +198,23 @@ export const AuthProvider = ({ children }: any) => {
      * @param email 
      * @returns 
      */
-    const SendEmailResetPassword = async (email: string): Promise<ResultData> => {
+    const SendEmailResetPassword = async (email?: string): Promise<void> => {
         dispatch({ type: 'startRequest', payload: 'Enviando correo...' })
+        if (StrIsNullOrEmpty(email))
+            return dispatch({ type: 'showAlert', payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail, 'info') })
         try {
-            const response = await API.post<ResponseApi>(apiEnpoints.sendEmailUser, { email })
-            const resCode = response.data.statusCode
+            await API.post<string>(apiEnpoints.sendEmailUser, { email })
 
-            return { ok: resCode == 200, message: response.data.message, title: response.data.title, icon: resCode == 200 ? 'success' : 'error' }
+            dispatch({
+                type: 'showAlert',
+                payload: { ok: true, title: "Corrreo electrónico enviado", message: "Revise su bandeja y siga las instrucciones.", icon: 'success' }
+            });
         } catch (error) {
-            return await HandleException(error)
+            const resultError = await HandleException(error)
+            dispatch({
+                type: 'showAlert',
+                payload: { ...resultError, title: "No se ha enviado el correo" }
+            })
         }
     }
 
@@ -182,7 +226,8 @@ export const AuthProvider = ({ children }: any) => {
             SignUp,
             LogOut,
             RemoveAlert,
-            SendEmailResetPassword
+            SendEmailResetPassword,
+            UpdateProfile
         }}>
             {children}
         </AuthContext.Provider>

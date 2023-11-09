@@ -17,14 +17,14 @@ export const imageSelectorModalInitState: ImageSelectorModalProps = {
 }
 
 export const usuarioInitState: Usuario = {
-    Id: '',
-    Nombre: '',
-    Apellidos: '',
-    Email: '',
-    Estatus: '',
-    FechaHoraRegistro: new Date(),
-    Rol: 0,
-    RolNombre: ''
+    id: '',
+    nombre: '',
+    apellidos: '',
+    email: '',
+    estatus: '',
+    fechaHoraRegistro: new Date(),
+    rol: 0,
+    rolNombre: ''
 }
 
 export const newUsuarioInitState: RegisterUser = {
@@ -60,5 +60,5 @@ export const servicioInitState: Servicio = {
     categoriaId: 0,
     categoriaServicio: categoriaServicioInitState,
     tipo: '',
-    tipoServicio: ''
+    tipoServicio: { tipo: '' }
 }

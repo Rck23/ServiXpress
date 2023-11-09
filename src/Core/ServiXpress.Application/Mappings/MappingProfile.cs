@@ -16,7 +16,7 @@ namespace ServiXpress.Application.Mappings
         public MappingProfile()
         {
             CreateMap<Servicio, ServicioVm>()
-                .ForMember(p => p.CategoriaId, x => x.MapFrom(a => a.CategoriaServicio!.Nombre));
+                .ForMember(p => p.NombreCategoria, x => x.MapFrom(a => a.CategoriaServicio!.Nombre));
               
 
 

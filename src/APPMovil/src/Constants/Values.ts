@@ -60,6 +60,10 @@ export const alertStr = {
     emptyFieldsLogin: {
         title: 'Usuario y contraseña requeridos',
         message: 'Llene todos los campos solicitados para continuar.'
+    },
+    emptyFieldsSendEmail: {
+        title: 'Correo requerido',
+        message: 'Ingrese su correo elecrtónico con el que ha registrado su cuenta.'
     }
 }
 
@@ -73,8 +77,16 @@ export const userRoles: KeyValue[] = [
 export const apiEnpoints = {
     authenticate: "/Usuario/Login",
     registerUser: "/Usuario/Register",
+    updateUser: "/Usuario/Update",
     sendEmailUser: "/Usuario/ForgotPassword",
     getCategories: "/Category/GetCategoriesServices",
     getServices: "/Servicio/GetAllServices",
-    createService: "/Servicio/create"
+    createService: "/Servicio/create",
+    getUsers: "/Usuario/All",
+    getUserDetail: "/Usuario/"
+}
+
+
+export const systemImages = {
+    personIcon: require('../Images/personIcon.png')
 }

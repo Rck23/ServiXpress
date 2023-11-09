@@ -37,9 +37,9 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
     }, [result])
 
     useEffect(() => {
-        onChange(user?.Estado ?? '', 'estado')
-        onChange(user?.Municipio ?? '', 'municipio')
-        onChange(user?.Telefono ?? '', 'telefonos')
+        onChange(user?.estado ?? '', 'estado')
+        onChange(user?.municipio ?? '', 'municipio')
+        onChange(user?.telefono ?? '', 'telefonos')
     }, [])
 
 

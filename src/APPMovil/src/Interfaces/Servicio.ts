@@ -17,7 +17,7 @@ export interface Servicio {
     categoriaId: number;
     categoriaServicio: CategoriaServicio;
     tipo: string;
-    tipoServicio: string;
+    tipoServicio: TipoServicio;
 }
 
 

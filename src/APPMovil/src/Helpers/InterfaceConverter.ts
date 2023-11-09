@@ -6,17 +6,38 @@ import { Usuario } from "../Interfaces/Usuario";
 
 export const ConvertLoginResponseToUser = (data: LoginResponse): Usuario => {
     return {
-        Id: data.id,
-        Nombre: data.nombre,
-        Apellidos: data.apellidos,
-        AvatarUrl: data.avatar,
-        Telefono: data.telefono,
-        Estatus: '',
-        FechaHoraRegistro: new Date(),
-        Email: data.email,
-        RolNombre: data.roles?.length > 0 ? data.roles[0] : '',
-        Rol: 1
+        id: data.id,
+        nombre: data.nombre,
+        apellidos: data.apellidos,
+        avatarUrl: data.avatar,
+        telefono: data.telefono,
+        estatus: '',
+        fechaHoraRegistro: new Date(),
+        email: data.email,
+        rolNombre: data.roles?.length > 0 ? data.roles[0] : '',
+        rol: 1
     }
+}
+
+
+export const ConvertLoginResponseToUserList = (data: LoginResponse[]): Usuario[] => {
+    const result: Usuario[] = []
+    data.forEach(item => {
+        result.push({
+            id: item.id,
+            nombre: item.nombre,
+            apellidos: item.apellidos,
+            avatarUrl: item.avatar,
+            telefono: item.telefono,
+            rolNombre: item.roles[0] ?? '',
+            email: item.email,
+            estatus: '',
+            fechaHoraRegistro: new Date(),
+            rol: 0
+        })
+    })
+
+    return result
 }
 
 

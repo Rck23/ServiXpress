@@ -88,16 +88,14 @@ export const GlobalStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     GlobalButtonPrincipal: {
-        bottom: 20,
-        width: 310,
         backgroundColor: mainColors.white,
         borderColor: mainColors.gray,
+        ...shadow,
         borderWidth: 1,
         paddingVertical: 35,
+        marginVertical: 15,
         paddingHorizontal: 30,
-        borderRadius: 10,
-        marginBottom: 25,
-        flexDirection: "column"
+        borderRadius: 10
     },
     GlobalButtonIconPrincipal: {
         color: mainColors.gray,
@@ -116,13 +114,13 @@ export const GlobalStyles = StyleSheet.create({
         alignSelf: 'center'
     },
     GlobalItem: {
-        borderColor: mainColors.purpule,
-        borderWidth: 2,
-        paddingVertical: 30,
-        paddingHorizontal: 20,
-        marginBottom: 30,
-        borderRadius: 10,
-        flexDirection: 'row'
+        borderLeftWidth: 5,
+        borderLeftColor: mainColors.purpule3,
+        padding: 15,
+        marginVertical: 5,
+        borderRadius: 15,
+        backgroundColor: mainColors.white,
+        ...shadow
     },
     GlobalItemText: {
         fontSize: 17,

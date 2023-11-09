@@ -15,6 +15,7 @@ const screenDimentions = {
 export const AlertModal = (props: AlertModalProps) => {
     const [heightModalBody, setHeightModalBody] = useState(0)
     const [heightModal, setHeightModal] = useState<any>()
+    const [icon, setIcon] = useState('gear')
 
     useEffect(() => {
         const targetHeight = (screenDimentions.height / 2)
@@ -22,22 +23,28 @@ export const AlertModal = (props: AlertModalProps) => {
 
         setHeightModal(targetModalHeight)
         setHeightModalBody(targetHeight)
+        setIcon(iconName())
     }, [props.visible])
 
-    const iconName = () => {
+
+    const handleCloseAlert = async () => {
+        props.OnHideAlert ? props.OnHideAlert() : {}
+    }
+
+    const HandleConfirmAction = async () => {
+        props.OnConfirmAction ? props.OnConfirmAction() : {}
+    }
+
+
+    function iconName() {
         switch (props.icon) {
             case 'success': return 'check-circle'
-            case 'question': 'question-circle'
+            case 'question': return 'question-circle'
             case 'error': return 'times-circle'
             case 'info': return 'info-circle'
             case 'warning': return 'warning'
             default: return 'info-circle'
         }
-    }
-
-
-    const handleCloseAlert = async () => {
-        props.OnHideAlert ? props.OnHideAlert() : {}
     }
 
     return (
@@ -53,7 +60,7 @@ export const AlertModal = (props: AlertModalProps) => {
                     <View style={[modalStyles.modalContent, { maxHeight: heightModal }]}>
                         <Icon
                             library='fontAwesome'
-                            name={iconName()}
+                            name={icon}
                             size={70}
                             color={mainColors.purpule}
                             style={{ marginBottom: 10 }}
@@ -63,7 +70,12 @@ export const AlertModal = (props: AlertModalProps) => {
                             <TextComponent style={[modalStyles.modalText, { lineHeight: 20 }]} text={props.message ?? ''} />
                         </ScrollView>
                         <View style={modalStyles.modalFooter}>
-                            <ButtonGlobal type='small' onClick={handleCloseAlert} text='Cerrar' icon={{ name: 'expand-more', library: 'material' }} />
+                            <ButtonGlobal textColor={mainColors.purpule3} color={mainColors.blackLight} type='small' onClick={handleCloseAlert} text='Cerrar' icon={{ name: 'chevron-down', library: 'ion' }} />
+                            {
+                                props.icon === 'question' ?
+                                    <ButtonGlobal type='small' onClick={HandleConfirmAction} text='Aceptar' icon={{ name: 'checkmark', library: 'ion' }} />
+                                    : <></>
+                            }
                         </View>
                     </View>
                 </View>
