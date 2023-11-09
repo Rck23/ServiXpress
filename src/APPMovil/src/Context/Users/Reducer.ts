@@ -16,6 +16,7 @@ type UsersAction =
     | { type: 'cleanResult' }
     | { type: 'requesting', payload: string }
     | { type: 'setUsers', payload: Usuario[] }
+    | {type: 'setUserDetail', payload: Usuario }
 
 
 export const UsersReducer = (state: UsersState, action: UsersAction): UsersState => {
@@ -40,6 +41,12 @@ export const UsersReducer = (state: UsersState, action: UsersAction): UsersState
                 ...state,
                 users: action.payload,
                 status: 'endRequest',
+            }
+        case "setUserDetail":
+            return {
+                ...state,
+                userDetail: action.payload,
+                status: 'endRequest'
             }
         case 'cleanResult':
             return {

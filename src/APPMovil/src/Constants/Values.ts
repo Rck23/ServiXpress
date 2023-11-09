@@ -82,7 +82,8 @@ export const apiEnpoints = {
     getCategories: "/Category/GetCategoriesServices",
     getServices: "/Servicio/GetAllServices",
     createService: "/Servicio/create",
-    getUsers: "/Usuario/All"
+    getUsers: "/Usuario/All",
+    getUserDetail: "/Usuario/"
 }
 
 

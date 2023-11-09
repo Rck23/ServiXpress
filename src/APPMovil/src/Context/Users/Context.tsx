@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { LoginResponse, ResultData } from '../../Interfaces/DataResponse';
 import { HandleException } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
@@ -18,6 +18,7 @@ type UsersContextProps = {
 
     // UpdateUser: (user: RegisterUser) => Promise<void>
     GetAllUsers: () => Promise<void>
+    GetUserDetail: (id: string) => Promise<void>
     CleanResult: () => void
 }
 
@@ -36,6 +37,7 @@ export const UsersProvider = ({ children }: any) => {
     const [state, dispatch] = useReducer(UsersReducer, usersInitState);
 
     useEffect(() => {
+
     }, [])
 
 
@@ -62,6 +64,29 @@ export const UsersProvider = ({ children }: any) => {
         }
     };
 
+    const GetUserDetail = async (id: string) => {
+        dispatch({ type: 'requesting', payload: 'Cargando detalle de usuario...' })
+
+        try {
+            const { data } = await API.get<Usuario>(`${apiEnpoints.getUserDetail}${id}`);
+            console.log(data)
+
+            dispatch({ type: 'setUserDetail', payload: data });
+        } catch (error: any) {
+            const errorData = await HandleException(error)
+            dispatch({
+                type: 'endRequest',
+                payload: {
+                    data: {
+                        ...errorData,
+                        title: "Error al obtener la información del usuario"
+                    },
+                    shootAlert: true
+                }
+            })
+        }
+    };
+
 
     const CleanResult = () => {
         dispatch({ type: 'cleanResult' })
@@ -72,6 +97,7 @@ export const UsersProvider = ({ children }: any) => {
         <UsersContext.Provider value={{
             ...state,
             GetAllUsers,
+            GetUserDetail,
             CleanResult
         }}>
             {children}

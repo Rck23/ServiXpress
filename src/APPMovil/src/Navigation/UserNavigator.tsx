@@ -8,7 +8,7 @@ import { UsersProvider } from '../Context/Users/Context';
 
 export type UserStackParams = {
     userManageScreen: undefined
-    userDetailsScreen: undefined
+    userDetailsScreen: {id: string}
 }
 
 

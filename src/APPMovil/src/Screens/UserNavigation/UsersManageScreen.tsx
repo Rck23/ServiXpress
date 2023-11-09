@@ -43,7 +43,7 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
                         renderItem={({ item }) =>
                             <UserListItem
                                 user={item}
-                                onPress={() => navigation.navigate('userDetailsScreen')}
+                                onPress={() => navigation.navigate('userDetailsScreen', { id: item.id })}
                             />
                         }
                         ListEmptyComponent={() => (
