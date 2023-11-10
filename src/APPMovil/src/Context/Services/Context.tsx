@@ -89,7 +89,7 @@ export const ServicesProvider = ({ children }: any) => {
         dispatch({ type: 'requesting', payload: 'Cargando detalles de servicios...' })
 
         try {
-            const { data } = await API.get<Servicio>(apiEnpoints.getServices);
+            const { data } = await API.get<Servicio>(apiEnpoints.getServiceDetails + id);
 
             dispatch({ type: 'setServiceDetails', payload: data });
         } catch (error: any) {

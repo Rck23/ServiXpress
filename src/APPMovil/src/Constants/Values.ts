@@ -84,7 +84,7 @@ export const apiEnpoints = {
     createService: "/Servicio/create",
     getUsers: "/Usuario/All",
     getUserDetail: "/Usuario/",
-    getServiceDetails: "/Servicio/"
+    getServiceDetails: "/Servicio/getServiceById/"
 }
 
 

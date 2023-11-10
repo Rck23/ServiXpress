@@ -99,6 +99,7 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
+            console.log(error.response)
             dispatch({
                 type: 'showAlert',
                 payload: await HandleException(error)
