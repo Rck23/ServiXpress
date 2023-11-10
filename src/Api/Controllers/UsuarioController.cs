@@ -2,7 +2,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
+using Newtonsoft.Json;
 using ServiXpress.Application.Contracts.Infrastructure;
+using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser;
 using ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword;
@@ -15,7 +18,10 @@ using ServiXpress.Application.Features.Auths.Users.Queries.GetUserByParameters;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
 using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Application.Models.ImageManagement;
-
+using ServiXpress.Application.Models.Status;
+using ServiXpress.Infrastructure.Context;
+using System.Net;
+using System.Text;
 
 namespace ServiXpress.Api.Controllers
 {
@@ -24,15 +30,17 @@ namespace ServiXpress.Api.Controllers
     public class UsuarioController : ControllerBase
     {
         private IMediator _mediator;
-        
         private IManageImageService _manageImageService;
-
+        private readonly ServiXpressDbContext _context;
         private ILogger<UsuarioController> _logger;
 
-        public UsuarioController(IMediator mediator, IManageImageService manageImage, ILogger<UsuarioController> logger)
+        public UsuarioController(IMediator mediator,
+            IManageImageService manageImageService, ServiXpressDbContext context,
+            ILogger<UsuarioController> logger)
         {
-            _mediator = mediator; // Inicializa la instancia del servicio Mediator.
-            _manageImageService = manageImage; // Inicializa la instancia del servicio ManageImage.
+            _mediator = mediator;
+            _manageImageService = manageImageService;
+            _context = context;
             _logger = logger;
         }
 
@@ -104,7 +112,7 @@ namespace ServiXpress.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error en el metodo olvido de contraseña"); 
+                _logger.LogError(ex, "Error en el metodo olvido de contraseña");
                 throw;
             }
         }
@@ -122,7 +130,7 @@ namespace ServiXpress.Api.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error al resetear la contraseña"); 
+                _logger.LogError(ex, "Error al resetear la contraseña");
                 throw;
             }
         }
@@ -247,5 +255,47 @@ namespace ServiXpress.Api.Controllers
                 throw;
             }
         }
+
+        [AllowAnonymous]
+        [HttpPost("cambiarEstatusUsuario", Name = "CambiarEstatusUsuario")]
+        public async Task CambiarEstatusUsuario(string usuarioId, string nuevoEstatus)
+        {
+            _logger.LogInformation("Cambiando estatus del usuario");
+
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(usuarioId);
+
+                if (usuario != null)
+                {
+                    // Convertir el nuevo estado a minúsculas para la comparación
+                    nuevoEstatus = nuevoEstatus.ToLower();
+
+                    // Verificar si el nuevo estado es válido
+                    if (string.Equals(nuevoEstatus, EstatusUsuarioAPI.Verificado, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(nuevoEstatus, EstatusUsuarioAPI.Bloqueado, StringComparison.OrdinalIgnoreCase))
+                    {
+                        usuario.Estatus = nuevoEstatus;
+                        await _context.SaveChangesAsync();
+
+                    }
+                    else
+                    {
+                        throw new StatusNotFound();
+                    }
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en el metodo cambiar estatus de usuario");
+                throw;
+            }
+            
+        }
+
     }
 }
