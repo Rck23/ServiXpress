@@ -30,6 +30,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Uploads\" />
+	  <Folder Include="Utilities\" />
+	  <Folder Include="Utilities\EmailHTML\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Utilities\" />
+	  <None Remove="Utilities\EmailHTML\" />
+	</ItemGroup>
 </Project>

@@ -7,6 +7,7 @@ using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Services.Queries.GetAllServices;
 using ServiXpress.Application.Features.Services.ViewModels;
+using ServiXpress.Application.Models.Status;
 using ServiXpress.Domain;
 using ServiXpress.Infrastructure.Context;
 
@@ -91,7 +92,7 @@ namespace ServiXpress.Api.Controllers
             
         }
 
-
+       
 
         [HttpPut("update/{id}", Name = "UpdateService")]
         public async Task<ActionResult<Servicio>> Update(int id, ServicioVm servicioVm)
@@ -143,29 +144,35 @@ namespace ServiXpress.Api.Controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet("getServiceById/{id}", Name = "GetServiceById")]
+        public async Task<ActionResult<Servicio>> GetServiceById(int id)
+        {
+            _logger.LogInformation("Obteniendo servicio por ID");
 
+            try
+            {
+                var servicio = await _context.Servicios
+                    .Include(s => s.Usuario)
+                    .Include(c => c.CategoriaServicio)
+                    .Include(t => t.TipoServicio)
+                    .FirstOrDefaultAsync(s => s.Id == id);
 
-        //[AllowAnonymous]
-        //[HttpGet("GetAllServices", Name = "GetAllServices")]
-        //public async Task<ActionResult<IReadOnlyList<ServicioVm>>> GetAllServices()
-        //{
-        //    _logger.LogInformation("Obteniendo todos los servicios");
-
-        //    try
-        //    {
-
-        //        var query = new GetAllServices();
-
-
-
-        //        return Ok(await _mediator.Send(query));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Error al obtener los servicios");
-        //        throw;
-        //    }
-        //}
+                if (servicio != null)
+                {
+                    return Ok(servicio);
+                }
+                else
+                {
+                    throw new ServiceNotFoundException();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener el servicio por ID");
+                throw;
+            }
+        }
 
 
         [AllowAnonymous]

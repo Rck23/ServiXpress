@@ -44,6 +44,14 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    public class StatusNotFound : Exception
+    {
+        public StatusNotFound()
+            : base("El nuevo estado no es válido.")
+        {
+        }
+    }
+
     public class IncorrectPasswordException : Exception
     {
         public IncorrectPasswordException()

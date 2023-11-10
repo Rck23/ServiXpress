@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Extensions;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
+using ServiXpress.Application.Models.Status;
 using ServiXpress.Domain;
 using static ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser.RegisterUser;
 

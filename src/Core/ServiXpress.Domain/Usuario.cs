@@ -19,8 +19,6 @@ namespace ServiXpress.Domain
         public DateTime? FechaHoraRegistro { get; set; }
 
         public string? Estatus { get; set; }
-        
-
         public EstatusUsuario? EstatusUsuario { get; set; }
 
 

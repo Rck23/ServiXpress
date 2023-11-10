@@ -28,21 +28,23 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
                 throw new UserNotFoundException();
             }
 
-            //AGREGACION DE TOKEN DE SEGURIDAD 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(usuario);
-            var plainTextBytes = Encoding.UTF8.GetBytes(token);
-            token = Convert.ToBase64String(plainTextBytes);
+            // GENERACIÓN DE CÓDIGO ALEATORIO
+            var codigo = GenerarCodigoAleatorio(10);
+
+            // Establecer la fecha de vencimiento del código
+            var codigoExpiration = DateTime.UtcNow.AddMinutes(10);
+
 
             // EL MENSAJE QUE SE ENVIARA 
             var emailMessage = new EmailMessage
             {
                 To = request.Email,
-                Body = "Cambia la contraseña dando click en el siguiente enlace: ",
+                Body = "Ingresa el siguiente codigo dentro de la aplicacion: ",
                 Subject = "Cambio de contraseña"
             };
 
             // ENVIAR EL CORREO
-            var result = await _emailService.SendEmail(emailMessage, token);
+            var result = await _emailService.SendEmail(emailMessage, codigo);
 
             if (!result)
             {
@@ -51,5 +53,20 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
 
             return $"Se envio el correo a la cuenta {request.Email}";
         }
+
+        public string GenerarCodigoAleatorio(int longitud)
+        {
+            const string caracteresPermitidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            var random = new Random();
+            var caracteres = new char[longitud];
+
+            for (int i = 0; i < longitud; i++)
+            {
+                caracteres[i] = caracteresPermitidos[random.Next(0, caracteresPermitidos.Length)];
+            }
+
+            return new string(caracteres);
+        }
+
     }
 }

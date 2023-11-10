@@ -14,4 +14,7 @@ namespace ServiXpress.Application.Models.Status
 
         public const string Alta = nameof(Alta);
     }
+
+  
+
 }

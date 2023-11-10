@@ -170,6 +170,12 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { fileNotSupportException.Message });
                         break;
 
+                    case StatusNotFound statusNotFound:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { statusNotFound.Message });
+                        break;
+
+
                     default:
                         statusCode = (int)HttpStatusCode.InternalServerError;
                         errorResponse = new CodeErrorResponse(statusCode);
