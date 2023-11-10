@@ -4,11 +4,17 @@ import { Text, ScrollView } from "react-native";
 import { GlobalStyles } from "../../Styles/SharedStyles";
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
 import { ServiceStackParams } from "../../Navigation/ServiceNavigator";
+import { useContext, useEffect } from "react";
+import { ServicesContext } from "../../Context/Services/Context";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'serviceDetailsScreen'> { }
 
 
 export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
+    const { GetServiceDetails, serviceDetails } = useContext(ServicesContext)
+    useEffect(() => {
+        GetServiceDetails(route.params.id)
+    }, [])
     return (
         <View style={GlobalStyles.Globalcontainerdad}>
             <ScreenContainer>

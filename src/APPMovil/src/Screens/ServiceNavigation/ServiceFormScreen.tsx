@@ -55,6 +55,7 @@ export const ServiceFormScreen = ({ navigation, route }: Props) => {
 
     const TriggerCreateService = async () => {
         form.categoriaId = categoriaServicio?.id ?? 0
+        form.nombreCategoria = categoriaServicio?.nombre ?? ''
         form.tipo = route.params.tipoServicio
         await CreateService(form)
     }

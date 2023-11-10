@@ -24,100 +24,88 @@ export const UserDetailsScreen = ({ navigation, route }: Props) => {
     }, [])
 
     return (
-        <View style={GlobalStyles.Globalcontainerdad}>
-            <TextComponent text={userDetail?.nombre} />
-            <ScreenContainer>
-                <ScrollView>
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Nombre del usuario</Text>
-                        <Text style={GlobalStyles.Dato}>Usuario</Text>
-                    </View>
+        <ScreenContainer>
+            <ScrollView>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Nombre del usuario</Text>
+                    <TextComponent text={userDetail?.nombre} style={GlobalStyles.Dato} />
+                    <TextComponent text={userDetail?.apellidos} style={GlobalStyles.Dato} />
+                </View>
 
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Telefono</Text>
-                        <Text style={GlobalStyles.Dato}>000-000-0000</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Username</Text>
-                        <Text style={GlobalStyles.Dato}>alguienexample</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Email</Text>
-                        <Text style={GlobalStyles.Dato}>alguien@example.com</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Contraseña</Text>
-                        <Text style={GlobalStyles.Dato}>********</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Calle</Text>
-                        <Text style={GlobalStyles.Dato}>Nombre de la calle</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Número interno de la casa</Text>
-                        <Text style={GlobalStyles.Dato}>Nombre de la calle</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Número externo de la casa</Text>
-                        <Text style={GlobalStyles.Dato}>Nombre de la calle</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Código postal</Text>
-                        <Text style={GlobalStyles.Dato}>00000</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Fraccionamiento</Text>
-                        <Text style={GlobalStyles.Dato}>Santa Monica</Text>
-                    </View>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Telefono</Text>
+                    <TextComponent text={userDetail?.telefono} style={GlobalStyles.Dato} />
+                </View>
 
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Descripción</Text>
-                        <Text style={GlobalStyles.Dato}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, recusandae? Ullam officia cupiditate soluta, commodi alias esse obcaecati eos incidunt, hic velit, natus illum nisi libero doloribus perspiciatis accusantium suscipit non totam! Animi aspernatur tempora adipisci commodi labore illum expedita voluptatum vel, esse, temporibus blanditiis ratione veniam nulla doloremque. Reiciendis.
-                        </Text>
-                    </View>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Email</Text>
+                    <TextComponent text={userDetail?.email} style={GlobalStyles.Dato} />
+                </View>
 
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Estado</Text>
-                        <Text style={GlobalStyles.Dato}>Aguascalientes</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Municipo</Text>
-                        <Text style={GlobalStyles.Dato}>San Francisco</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Estatus del usuario</Text>
-                        <Text style={GlobalStyles.Dato}>activo</Text>
-                    </View>
-                    
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>El usuario se registro</Text>
-                        <Text style={GlobalStyles.Dato}>00/00/0000</Text>
-                    </View>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Calle</Text>
+                    <TextComponent text={userDetail?.calle} style={GlobalStyles.Dato} />
+                </View>
 
-                    <View style={GlobalStyles.DatCont}>
-                        <Text style={GlobalStyles.Titulo}>Rol del usuario</Text>
-                        <Text style={GlobalStyles.Dato}>cliente</Text>
-                    </View>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Número interno de la casa</Text>
+                    <TextComponent text={userDetail?.numInterior?.toString()} style={GlobalStyles.Dato} />
+                </View>
 
-                    <View style={GlobalStyles.DatCont}>
-                        <ButtonGlobal
-                            text='Modificar estatús'
-                            icon={{ name: 'update', library: 'materialCommunity' }}
-                        />
-                    </View>
-                </ScrollView>
-            </ScreenContainer>
-        </View>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Número externo de la casa</Text>
+                    <TextComponent text={userDetail?.numExterior?.toString()} style={GlobalStyles.Dato} />
+
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Código postal</Text>
+                    <TextComponent text={userDetail?.codigoPostal} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Fraccionamiento</Text>
+                    <TextComponent text={userDetail?.coloniaFraccionamiento} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Descripción</Text>
+                    <TextComponent text={userDetail?.descripcion} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Estado</Text>
+                    <TextComponent text={userDetail?.estado} style={GlobalStyles.Dato} />
+
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Municipo</Text>
+                    <TextComponent text={userDetail?.municipio} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Estatus del usuario</Text>
+                    <TextComponent text={userDetail?.estatus} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>El usuario se registro</Text>
+                    <TextComponent text={userDetail?.fechaHoraRegistro?.toString()} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Rol del usuario</Text>
+                    <TextComponent text={userDetail?.rolNombre} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <ButtonGlobal
+                        text='Modificar estatús'
+                        icon={{ name: 'update', library: 'materialCommunity' }}
+                    />
+                </View>
+            </ScrollView>
+        </ScreenContainer>
     )
 }

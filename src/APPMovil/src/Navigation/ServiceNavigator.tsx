@@ -10,7 +10,7 @@ import { ServicesDetailsScreen } from '../Screens/ServiceNavigation/SerivcesDeta
 export type ServiceStackParams = {
     homeScreen: undefined
     serviceFormScreen: { tipoServicio: string }
-    serviceDetailsScreen: undefined
+    serviceDetailsScreen: { id: string }
     servicesBoardScreen: undefined
 }
 

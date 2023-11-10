@@ -60,5 +60,6 @@ export const servicioInitState: Servicio = {
     categoriaId: 0,
     categoriaServicio: categoriaServicioInitState,
     tipo: '',
-    tipoServicio: { tipo: '' }
+    tipoServicio: { tipo: '' },
+    nombreCategoria: ''
 }

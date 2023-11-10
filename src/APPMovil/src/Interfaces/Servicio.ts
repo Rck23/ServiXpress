@@ -18,6 +18,7 @@ export interface Servicio {
     categoriaServicio: CategoriaServicio;
     tipo: string;
     tipoServicio: TipoServicio;
+    nombreCategoria: string;
 }
 
 
@@ -41,5 +42,6 @@ export interface ServiceCreate {
     precio: number;
     usuarioId: string;
     categoriaId: number;
+    nombreCategoria: string;
     tipo: string;
 }

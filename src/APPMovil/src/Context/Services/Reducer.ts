@@ -9,6 +9,7 @@ export interface ServicesState {
 
     serviceCategories: CategoriaServicio[]
     services: Servicio[]
+    serviceDetails: Servicio
 }
 
 type ServicesAction =
@@ -17,6 +18,7 @@ type ServicesAction =
     | { type: 'requesting', payload: string }
     | { type: 'setServiceCategories', payload: CategoriaServicio[] }
     | { type: 'setServices', payload: Servicio[] }
+    | { type: 'setServiceDetails', payload: Servicio }
 
 
 export const ServicesReducer = (state: ServicesState, action: ServicesAction): ServicesState => {
@@ -53,6 +55,12 @@ export const ServicesReducer = (state: ServicesState, action: ServicesAction): S
             return {
                 ...state,
                 services: action.payload,
+                status: 'endRequest',
+            }
+        case 'setServiceDetails':
+            return {
+                ...state,
+                serviceDetails: action.payload,
                 status: 'endRequest',
             }
         default:

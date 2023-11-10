@@ -6,6 +6,7 @@ import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
 import { CategoriaServicio, ServiceCreate, Servicio } from '../../Interfaces/Servicio';
 import { ValidateRegisterServiceForm } from '../../Helpers/FormsFunctions';
+import { servicioInitState } from '../../Interfaces/InterfacesInitState';
 
 
 type ServicesContextProps = {
@@ -15,11 +16,13 @@ type ServicesContextProps = {
 
     serviceCategories: CategoriaServicio[]
     services: Servicio[]
+    serviceDetails: Servicio
 
     CreateService: (service: ServiceCreate) => Promise<void>
     GetServicesCategories: () => Promise<void>
     GetServices: () => Promise<void>
     CleanResult: () => void
+    GetServiceDetails: (id: string) => Promise<void>
 }
 
 const servicesInitState: ServicesState = {
@@ -27,7 +30,8 @@ const servicesInitState: ServicesState = {
     messageRequest: undefined,
     result: undefined,
     serviceCategories: [],
-    services: []
+    services: [],
+    serviceDetails: servicioInitState
 }
 
 
@@ -81,6 +85,24 @@ export const ServicesProvider = ({ children }: any) => {
         }
     };
 
+    const GetServiceDetails = async (id: string) => {
+        dispatch({ type: 'requesting', payload: 'Cargando detalles de servicios...' })
+
+        try {
+            const { data } = await API.get<Servicio>(apiEnpoints.getServices);
+
+            dispatch({ type: 'setServiceDetails', payload: data });
+        } catch (error: any) {
+            dispatch({
+                type: 'endRequest',
+                payload: {
+                    data: await HandleException(error),
+                    shootAlert: true
+                }
+            })
+        }
+    };
+
 
     const CreateService = async (service: ServiceCreate) => {
         dispatch({ type: 'requesting', payload: 'Registrando servicio...' })
@@ -117,7 +139,8 @@ export const ServicesProvider = ({ children }: any) => {
             GetServicesCategories,
             CreateService,
             GetServices,
-            CleanResult
+            CleanResult,
+            GetServiceDetails
         }}>
             {children}
         </ServicesContext.Provider>
