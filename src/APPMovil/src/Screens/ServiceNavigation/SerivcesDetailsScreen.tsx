@@ -6,6 +6,7 @@ import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
 import { ServiceStackParams } from "../../Navigation/ServiceNavigator";
 import { useContext, useEffect } from "react";
 import { ServicesContext } from "../../Context/Services/Context";
+import { TextComponent } from "../../Components/Shared/SharedComponents";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'serviceDetailsScreen'> { }
 
@@ -16,72 +17,43 @@ export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
         GetServiceDetails(route.params.id)
     }, [])
     return (
-        <View style={GlobalStyles.Globalcontainerdad}>
-            <ScreenContainer>
-                <ScrollView>
-                    <View style={{}}>
-                        <Text style={{}}>Titular del servicio</Text>
-                        <Text style={{}}>Encargado del servicio</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Categoría del servicio</Text>
-                        <Text style={{}}>Plomeria</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Tipo de servicio</Text>
-                        <Text style={{}}>solicitado u ofrecido</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Estado</Text>
-                        <Text style={{}}>México</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Municipio</Text>
-                        <Text style={{}}>Asientos</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Telefono</Text>
-                        <Text style={{}}>000 000 0000</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Correo</Text>
-                        <Text style={{}}>servicio@servicio.com</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Otro contacto</Text>
-                        <Text style={{}}>Redes sociales</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Descripción</Text>
-                        <Text style={{}}>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, recusandae? Ullam officia cupiditate soluta, commodi alias esse obcaecati eos incidunt, hic velit, natus illum nisi libero doloribus perspiciatis accusantium suscipit non totam! Animi aspernatur tempora adipisci commodi labore illum expedita voluptatum vel, esse, temporibus blanditiis ratione veniam nulla doloremque. Reiciendis.
-                        </Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Precio del servicio</Text>
-                        <Text style={{}}>Opcional</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Registro</Text>
-                        <Text style={{}}>DD/MM/AAAA 12:00</Text>
-                    </View>
-
-                    <View style={{}}>
-                        <Text style={{}}>Fecha de vencimiento</Text>
-                        <Text style={{}}>DD/MM/AAAA 12:00</Text>
-                    </View>
-                </ScrollView>
-            </ScreenContainer>
-        </View>
+        <ScreenContainer>
+            <ScrollView style={GlobalStyles.ScrollContainer} showsVerticalScrollIndicator={false}>
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Descripcion del servicio</Text>
+                    <TextComponent text={serviceDetails?.descripcion} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Estado</Text>
+                    <TextComponent text={serviceDetails?.estado} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Municipio</Text>
+                    <TextComponent text={serviceDetails?.municipio} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Correos de contacto</Text>
+                    <TextComponent text={serviceDetails?.correos} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Telefonos de contacto</Text>
+                    <TextComponent text={serviceDetails?.telefonos} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Otros medios de contacto</Text>
+                    <TextComponent text={serviceDetails?.otrosMediosContacto} style={GlobalStyles.Dato} />
+                </View>
+                
+                <View style={GlobalStyles.DatCont}>
+                    <Text style={GlobalStyles.Titulo}>Precio por servicio</Text>
+                    <TextComponent text={serviceDetails?.precio.toString()} style={GlobalStyles.Dato} />
+                </View>
+            </ScrollView>
+        </ScreenContainer>
     )
 }

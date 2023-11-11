@@ -31,7 +31,7 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
           renderItem={({ item }) => (
             <ServiceListItem
               service={item}
-              onPress={() => navigation.navigate('serviceDetailsScreen')}
+              onPress={() => navigation.navigate('serviceDetailsScreen', {id : item.id.toString()})}
             />
           )}
           ListEmptyComponent={() => (

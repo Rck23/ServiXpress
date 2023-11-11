@@ -21,7 +21,6 @@ export type HomeStackParams = {
     profileScreen: undefined
     userNavigatorScreen: undefined
     servicesBoardScreen: undefined
-    servicesDetailsNavigatorScreen: undefined
 }
 
 const HomeState = ({ children }: any) => {

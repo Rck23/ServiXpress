@@ -159,5 +159,9 @@ export const GlobalStyles = StyleSheet.create({
     },
     DatCont: {
         marginBottom: 30
+    },
+    ScrollContainer: {
+        paddingHorizontal: 10,
+        paddingVertical: 10
     }
 })

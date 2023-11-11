@@ -25,7 +25,7 @@ export const UserDetailsScreen = ({ navigation, route }: Props) => {
 
     return (
         <ScreenContainer>
-            <ScrollView>
+            <ScrollView style={GlobalStyles.ScrollContainer} showsVerticalScrollIndicator={false}>
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Nombre del usuario</Text>
                     <TextComponent text={userDetail?.nombre} style={GlobalStyles.Dato} />
