@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Extensions;
 using ServiXpress.Application.Contracts.Identity;
+using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
+using ServiXpress.Application.Models.Email;
 using ServiXpress.Application.Models.Status;
 using ServiXpress.Domain;
 using static ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser.RegisterUser;
@@ -23,8 +25,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
     {
         private readonly UserManager<Usuario> _userManager;
 
-
-
+        private readonly IEmailService _emailService;
 
         private readonly IAuthService _authService;
 
@@ -34,10 +35,14 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
         /// <param name="userManager">UserManager utilizado para administrar los usuarios.</param>
         /// <param name="authService">Servicio de autenticación utilizado para crear tokens.</param>
 
-        public RegisterUserHandler(UserManager<Usuario> userManager, IAuthService authService)
+        public RegisterUserHandler(UserManager<Usuario> userManager,
+            IEmailService emailService,
+            IAuthService authService)
         {
             _userManager = userManager;
             _authService = authService;
+            _emailService = emailService;
+
         }
 
 
@@ -84,6 +89,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
             // Crear el usuario utilizando el UserManager y la contraseña proporcionada
             var resultado = await _userManager.CreateAsync(usuario!, request.Password!);
 
+            
             // Comprueba si la creación del usuario fue exitosa
             if (!resultado.Succeeded)
             {
@@ -126,7 +132,23 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     Avatar = usuario.AvatarUrl,
                     Roles = roles
                 };
-            
+
+            // Enviar correo electrónico de registro
+            var emailMessage = new EmailMessage
+            {
+                To = usuario.Email,
+                Subject = "Registro exitoso"
+            };
+
+            try
+            {
+                await _emailService.SendRegistrationEmail(emailMessage, usuario.UserName);
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que ocurra al enviar el correo electrónico
+                throw new ServiceCreateFailedException(ex);
+            }
 
 
             // throw new UserRegistrationException(message);

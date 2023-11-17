@@ -44,10 +44,20 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    public class RoleNotFoundException : Exception
+    {
+        public RoleNotFoundException()
+            : base("Solo los usuarios de rol Agente estan autorizados para este metodo.")
+        {
+        }
+    }
+
+    
+
     public class StatusNotFound : Exception
     {
         public StatusNotFound()
-            : base("El nuevo estado no es válido.")
+            : base("El nuevo estatus no es válido. Ingresa 'Verificado' o 'Bloqueado'.")
         {
         }
     }
@@ -106,6 +116,16 @@ namespace ServiXpress.Application.Exceptions
         {
         }
     }
+
+    public class BlockedUser : Exception
+    {
+        public BlockedUser()
+            : base("Tu cuenta ha sido bloqueada.")
+        {
+        }
+    }
+
+    
 
     /* END Features/Auths/Users */
 

@@ -1,8 +1,10 @@
-﻿using MediatR;
+﻿using CloudinaryDotNet.Actions;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.ViewModels;
+using ServiXpress.Application.Models.Status;
 using ServiXpress.Application.Persistence;
 using ServiXpress.Domain;
 
@@ -45,6 +47,11 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
             if (user is null)
             {
                 throw new EmailNotFoundException(request.Email!);
+            }
+
+            if (user.Estatus == EstatusUsuarioAPI.Bloqueado)
+            {
+                throw new BlockedUser();
             }
 
             // Verificar las credenciales del usuario.
