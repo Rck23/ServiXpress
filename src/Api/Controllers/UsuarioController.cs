@@ -41,11 +41,12 @@ namespace ServiXpress.Api.Controllers
         private ILogger<UsuarioController> _logger;
 
         private readonly UserManager<Usuario> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IAuthService _authService;
 
         public UsuarioController(IMediator mediator,
             IManageImageService manageImageService, ServiXpressDbContext context,
-             UserManager<Usuario> userManager, IAuthService authService,
+             UserManager<Usuario> userManager, IAuthService authService, RoleManager<IdentityRole> roleManager,
              ILogger<UsuarioController> logger)
         {
             _mediator = mediator;
@@ -54,6 +55,8 @@ namespace ServiXpress.Api.Controllers
             _logger = logger;
             _userManager = userManager;
             _authService = authService;
+
+            _roleManager = roleManager;
         }
 
         [AllowAnonymous]
@@ -308,6 +311,65 @@ namespace ServiXpress.Api.Controllers
             }
         }
 
+
+        [Authorize(Roles = RoleAPI.AGENTE)]
+        //[AllowAnonymous]
+        [HttpPost("changeRoleUser", Name = "ChangeRoleUser")]
+        public async Task<IActionResult> ChangeRoleUser([FromBody] ChangeRoleUser user)
+        {
+            _logger.LogInformation("Cambiando rol del usuario");
+
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(user.UsuarioId);
+
+                if (usuario != null)
+                {
+                    // Verificar si el nuevo rol es válido
+                    if (string.Equals(user.NuevoRol, RoleAPI.AGENTE, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(user.NuevoRol, RoleAPI.CLIENTE, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(user.NuevoRol, RoleAPI.TRABAJADOR, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Aquí es donde necesitas cambiar el rol del usuario
+                        var role = await _roleManager.FindByNameAsync(user.NuevoRol);
+                        if (role == null)
+                        {
+                            // Si el rol no existe, crea un nuevo rol
+                            role = new IdentityRole(user.NuevoRol);
+                            await _roleManager.CreateAsync(role);
+                        }
+
+                        // Elimina el usuario de todos los roles actuales
+                        var roles = await _userManager.GetRolesAsync(usuario);
+                        foreach (var rol in roles)
+                        {
+                            await _userManager.RemoveFromRoleAsync(usuario, rol);
+                        }
+
+                        // Agrega el usuario al nuevo rol
+                        await _userManager.AddToRoleAsync(usuario, user.NuevoRol);
+
+                        await _context.SaveChangesAsync();
+
+                        // Devolver un mensaje personalizado
+                        return Ok(new { message = $"Se cambió el rol de {usuario.Nombre} a {user.NuevoRol}" });
+                    }
+                    else
+                    {
+                        throw new RoleNotFound();
+                    }
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en el metodo cambiar rol de usuario");
+                throw;
+            }
+        }
 
 
     }

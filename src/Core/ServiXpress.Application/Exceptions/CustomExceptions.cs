@@ -62,6 +62,16 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    public class RoleNotFound : Exception
+    {
+        public RoleNotFound()
+            : base("El nuevo rol no es válido. Ingresa 'Cliente', 'Trabajador' o 'Agente'.")
+        {
+        }
+    }
+
+    
+
     public class IncorrectPasswordException : Exception
     {
         public IncorrectPasswordException()

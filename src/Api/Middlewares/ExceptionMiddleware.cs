@@ -198,6 +198,13 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { statusNotFound.Message });
                         break;
 
+                    case RoleNotFound roleNotFound:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { roleNotFound.Message });
+                        break;
+
+                        
+
                     case BlockedUser blockedUser:
                         statusCode = (int)HttpStatusCode.Forbidden;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { blockedUser.Message });
