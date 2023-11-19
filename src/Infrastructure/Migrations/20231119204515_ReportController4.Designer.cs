@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119204515_ReportController4")]
+    partial class ReportController4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,6 +329,9 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Property<DateTime>("FechaHoraRegistro")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsuarioId")
                         .IsRequired()
                         .HasColumnType("nvarchar(36)");
@@ -341,6 +347,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.HasIndex("Estatus");
+
+                    b.HasIndex("ServicioId");
 
                     b.HasIndex("UsuarioId");
 
@@ -405,6 +413,9 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("UsuarioId1")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
@@ -412,6 +423,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.HasIndex("Tipo");
 
                     b.HasIndex("UsuarioId");
+
+                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("Servicios");
                 });
@@ -634,6 +647,12 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasForeignKey("Estatus")
                         .IsRequired();
 
+                    b.HasOne("ServiXpress.Domain.Servicio", "Servicio")
+                        .WithMany()
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
                         .WithMany("Reportes")
                         .HasForeignKey("UsuarioId")
@@ -649,6 +668,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Navigation("CategoriaReporte");
 
                     b.Navigation("EstatusReporte");
+
+                    b.Navigation("Servicio");
 
                     b.Navigation("Usuario");
 
@@ -674,6 +695,10 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("ServiXpress.Domain.Usuario", null)
+                        .WithMany("Servicios")
+                        .HasForeignKey("UsuarioId1");
 
                     b.Navigation("CategoriaServicio");
 
@@ -705,6 +730,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Navigation("Documentos");
 
                     b.Navigation("Reportes");
+
+                    b.Navigation("Servicios");
                 });
 #pragma warning restore 612, 618
         }

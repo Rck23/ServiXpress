@@ -103,9 +103,18 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 throw new UserRegistrationException(mensajeDeError);
             }
             
+                // Enviar correo electrónico de registro
+                var emailMessage = new EmailMessage
+                {
+                    To = usuario.Email,
+                    Subject = "Registro exitoso"
+                };
 
-                // Validar el rol seleccionado por el usuario
-                switch (request.Rol)
+                await _emailService.SendRegistrationEmail(emailMessage, usuario.UserName);
+
+
+            // Validar el rol seleccionado por el usuario
+            switch (request.Rol)
                 {
                     case Roles.CLIENTE:
                     case Roles.TRABAJADOR:
@@ -133,22 +142,8 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     Roles = roles
                 };
 
-            // Enviar correo electrónico de registro
-            var emailMessage = new EmailMessage
-            {
-                To = usuario.Email,
-                Subject = "Registro exitoso"
-            };
 
-            try
-            {
-                await _emailService.SendRegistrationEmail(emailMessage, usuario.UserName);
-            }
-            catch (Exception ex)
-            {
-                // Manejar cualquier excepción que ocurra al enviar el correo electrónico
-                throw new ServiceCreateFailedException(ex);
-            }
+        
 
 
             // throw new UserRegistrationException(message);

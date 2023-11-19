@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119202707_ReportController3")]
+    partial class ReportController3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -326,6 +329,9 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Property<DateTime>("FechaHoraRegistro")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ServicioId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsuarioId")
                         .IsRequired()
                         .HasColumnType("nvarchar(36)");
@@ -405,6 +411,9 @@ namespace ServiXpress.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(36)");
 
+                    b.Property<string>("UsuarioId1")
+                        .HasColumnType("nvarchar(36)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoriaId");
@@ -412,6 +421,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.HasIndex("Tipo");
 
                     b.HasIndex("UsuarioId");
+
+                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("Servicios");
                 });
@@ -675,6 +686,10 @@ namespace ServiXpress.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("ServiXpress.Domain.Usuario", null)
+                        .WithMany("Servicios")
+                        .HasForeignKey("UsuarioId1");
+
                     b.Navigation("CategoriaServicio");
 
                     b.Navigation("TipoServicio");
@@ -705,6 +720,8 @@ namespace ServiXpress.Infrastructure.Migrations
                     b.Navigation("Documentos");
 
                     b.Navigation("Reportes");
+
+                    b.Navigation("Servicios");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119210154_ReportController5")]
+    partial class ReportController5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
