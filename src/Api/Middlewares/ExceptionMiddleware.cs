@@ -152,6 +152,18 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceNotFoundException.Message });
                         break;
 
+                    case ReportNotFoundException reportNotFoundException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { reportNotFoundException.Message });
+                        break;
+
+                    case NotCountReport notCountReport:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { notCountReport.Message });
+                        break;
+                        
+
+
                     case ServiceUpdateFailedException serviceUpdateFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceUpdateFailedException.Message });
@@ -165,6 +177,11 @@ namespace ServiXpress.Api.Middlewares
                     case ServiceQueryFailedException serviceQueryFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceQueryFailedException.Message });
+                        break;
+
+                    case ReportQueryFailedException reportQueryFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { reportQueryFailedException.Message });
                         break;
 
                     case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:

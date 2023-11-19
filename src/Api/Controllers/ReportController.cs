@@ -90,7 +90,7 @@ namespace ServiXpress.Api.Controllers
                 }
                 else
                 {
-                    throw new ServiceNotFoundException();
+                    throw new ReportNotFoundException();
                 }
             }
             catch (Exception ex)
@@ -148,7 +148,7 @@ namespace ServiXpress.Api.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error al buscar servicio");
-                throw new ServiceQueryFailedException(ex);
+                throw new ReportQueryFailedException(ex);
             }
         }
 
@@ -174,7 +174,7 @@ namespace ServiXpress.Api.Controllers
                     }
                     else
                     {
-                        throw new StatusNotFound();
+                        throw new StatusReportNotFound();
                     }
                 }
                 else

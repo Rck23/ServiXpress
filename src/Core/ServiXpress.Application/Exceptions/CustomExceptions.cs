@@ -149,6 +149,8 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+
+
     public class ServiceCreateFailedException : Exception
     {
         public ServiceCreateFailedException(Exception ex)
@@ -169,7 +171,7 @@ namespace ServiXpress.Application.Exceptions
     public class ServiceQueryFailedException : Exception
     {
         public ServiceQueryFailedException(Exception ex)
-            : base("Fallo la servicios.", ex)
+            : base("Fallo los servicios por parametro.", ex)
         {
         }
     }
@@ -217,6 +219,38 @@ namespace ServiXpress.Application.Exceptions
     {
         public FileNotSupportException()
             : base("El tipo de archivo no está permitido.")
+        {
+        }
+    }
+
+    public class ReportNotFoundException : Exception
+    {
+        public ReportNotFoundException()
+            : base("El reporte no existe.")
+        {
+        }
+    }
+
+    public class NotCountReport : Exception
+    {
+        public NotCountReport()
+            : base("No se encontro ningun reporte.")
+        {
+        }
+    }
+
+    public class ReportQueryFailedException : Exception
+    {
+        public ReportQueryFailedException(Exception ex)
+            : base("Fallo los reportes por parametro.", ex)
+        {
+        }
+    }
+
+    public class StatusReportNotFound : Exception
+    {
+        public StatusReportNotFound()
+            : base("El nuevo estatus no es válido. Ingresa 'Cerreado' o 'Revision'.")
         {
         }
     }
