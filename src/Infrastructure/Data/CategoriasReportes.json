@@ -1,0 +1,74 @@
+[
+  {
+
+    "Nombre": "Error de aplicacion"
+  },
+  {
+
+    "Nombre": "Reporte de cuenta"
+  },
+  {
+
+    "Nombre": "Usuario con información falsa"
+  },
+  {
+
+    "Nombre": "Cuenta robada"
+  },
+  {
+
+    "Nombre": "Reporte para usuario"
+  },
+
+  {
+
+    "Nombre": "Contenido inapropiado"
+  },
+  {
+
+    "Nombre": "Spam"
+  },
+  {
+    "Nombre": "Publicidad"
+  },
+  {
+    "Nombre": "Bullying"
+  },
+  {
+
+    "Nombre": "Acoso"
+  },
+  {
+
+    "Nombre": "Violación de derechos de autor"
+  },
+
+  {
+
+    "Nombre": "Discurso de odio"
+  },
+  {
+
+    "Nombre": "Actividad sospechosa"
+  },
+  {
+
+    "Nombre": "Estafa"
+  },
+
+  {
+
+    "Nombre": "Fraude"
+  },
+  {
+
+    "Nombre": "Problemas t�cnicos"
+  },
+  {
+    "Nombre": "Violación de las políticas de la plataforma"
+  },
+  {
+
+    "Nombre": "Otros"
+  }
+]

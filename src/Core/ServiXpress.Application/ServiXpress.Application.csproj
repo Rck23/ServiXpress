@@ -17,12 +17,12 @@
     <None Remove="Features\Reviews\Commands\CreateReviewUser\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Features\Reviews\NewFolder\" />
     <Folder Include="Persistence\" />
     <Folder Include="Models\Token\" />
     <Folder Include="Features\Categories\Commands\UpdateCategoryService\" />
     <Folder Include="Features\Services\Commands\UpdateService\" />
     <Folder Include="Features\Categories\Queries\" />
-    <Folder Include="Features\Reviews\" />
     <Folder Include="Features\Reviews\Queries\" />
     <Folder Include="Features\Reviews\Commands\" />
     <Folder Include="Features\Reviews\ViewModels\" />

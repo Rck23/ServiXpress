@@ -111,7 +111,7 @@ namespace ServiXpress.Infrastructure.Context
             builder.Entity<Reporte>()
                 .HasOne(r => r.CategoriaReporte)
                 .WithMany()
-                .HasForeignKey(r => r.Categoria)
+                .HasForeignKey(r => r.CategoriaId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<Reporte>()
