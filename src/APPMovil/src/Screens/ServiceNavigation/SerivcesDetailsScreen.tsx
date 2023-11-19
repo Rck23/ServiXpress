@@ -7,6 +7,7 @@ import { ServiceStackParams } from "../../Navigation/ServiceNavigator";
 import { useContext, useEffect } from "react";
 import { ServicesContext } from "../../Context/Services/Context";
 import { TextComponent } from "../../Components/Shared/SharedComponents";
+import { ButtonGlobal } from "../../Components/Shared/FormsComponents";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'serviceDetailsScreen'> { }
 
@@ -23,35 +24,43 @@ export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
                     <Text style={GlobalStyles.Titulo}>Descripcion del servicio</Text>
                     <TextComponent text={serviceDetails?.descripcion} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Estado</Text>
                     <TextComponent text={serviceDetails?.estado} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Municipio</Text>
                     <TextComponent text={serviceDetails?.municipio} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Correos de contacto</Text>
                     <TextComponent text={serviceDetails?.correos} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Telefonos de contacto</Text>
                     <TextComponent text={serviceDetails?.telefonos} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Otros medios de contacto</Text>
                     <TextComponent text={serviceDetails?.otrosMediosContacto} style={GlobalStyles.Dato} />
                 </View>
-                
+
                 <View style={GlobalStyles.DatCont}>
                     <Text style={GlobalStyles.Titulo}>Precio por servicio</Text>
                     <TextComponent text={serviceDetails?.precio.toString()} style={GlobalStyles.Dato} />
+                </View>
+
+                <View style={GlobalStyles.DatCont}>
+                    <ButtonGlobal
+                        text='Calificar servicio'
+                        icon={{ name: 'star', library: 'antDesign' }}
+                        onClick={() => navigation.navigate('servicesCalificationScreen')}
+                    />
                 </View>
             </ScrollView>
         </ScreenContainer>

@@ -1,4 +1,4 @@
-import { AlertModalProps, ImageSelectorModalProps, ModalOptionsSelectorProps } from "./DOMInterfaces";
+import { AlertModalProps, ImageSelectorModalProps, ModalEditProfileProps, ModalOptionsSelectorProps } from "./DOMInterfaces";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
 import { RegisterUser, Usuario } from "./Usuario";
 
@@ -62,4 +62,9 @@ export const servicioInitState: Servicio = {
     tipo: '',
     tipoServicio: { tipo: '' },
     nombreCategoria: ''
+}
+
+export const editProfileModalInitState: ModalEditProfileProps = {
+    title: '',
+    data: usuarioInitState
 }

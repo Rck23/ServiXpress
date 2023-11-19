@@ -5,6 +5,7 @@ import { ServiceFormScreen } from '../Screens/ServiceNavigation/ServiceFormScree
 import { customScreenOpitons } from '../Constants/Properties';
 import { ServicesBoardScreen } from '../Screens/ServiceNavigation/ServicesBoardScreen';
 import { ServicesDetailsScreen } from '../Screens/ServiceNavigation/SerivcesDetailsScreen';
+import { ServicesCalificationScreen } from '../Screens/ServiceNavigation/SerivcesCalificationScreen';
 
 
 export type ServiceStackParams = {
@@ -12,6 +13,7 @@ export type ServiceStackParams = {
     serviceFormScreen: { tipoServicio: string }
     serviceDetailsScreen: { id: string }
     servicesBoardScreen: undefined
+    servicesCalificationScreen: undefined
 }
 
 const Stack = createStackNavigator<ServiceStackParams>();
@@ -26,6 +28,7 @@ export const ServiceNavigator = () => {
             <Stack.Screen options={{ title: 'ServiXpress' }} name="homeScreen" component={HomeScreen} />
             <Stack.Screen options={{ title: 'Catálogo de servicios' }} name="servicesBoardScreen" component={ServicesBoardScreen} />
             <Stack.Screen options={{ title: 'Alta de servicios' }} name="serviceFormScreen" component={ServiceFormScreen} />
+            <Stack.Screen options={{ title: 'Califica el servicio' }} name="servicesCalificationScreen" component={ServicesCalificationScreen} />
         </Stack.Navigator>
     );
 }

@@ -158,10 +158,40 @@ export const GlobalStyles = StyleSheet.create({
         textAlign: 'justify'
     },
     DatCont: {
+        marginTop: 10,
         marginBottom: 30
     },
     ScrollContainer: {
         paddingHorizontal: 10,
         paddingVertical: 10
+    },
+    formContainer: {
+        backgroundColor: mainColors.white,
+        shadow,
+        borderRadius: 15,
+        width: '100%',
+        padding: 15,
+    },
+    title: {
+        marginTop: 10,
+        textAlign: 'center',
+        color: mainColors.purpule,
+        fontSize: 25,
+        fontWeight: 'bold',
+        borderBottomColor: mainColors.ligtgray,
+        borderBottomWidth: 2,
+        marginBottom: 20
+    },
+    CalificationContainer: {
+        alignSelf: 'center',
+        flexDirection: 'row',
+        marginBottom: 15
+    },
+    ButonCal: {
+        marginRight: 5
+    },
+    ButonCalIcon: {
+        color: mainColors.purpule,
+        fontSize: 30,
     }
 })

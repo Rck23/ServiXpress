@@ -10,6 +10,7 @@ export const mainColors = {
     white: '#FFF',
     light: '#E8E8E8',
     gray: '#A3A3A3',
+    ligtgray: '#DEDEDE',
     green: '#00CA12',
     greenBlue: '#00E0B4',
     red: '#CA0000',

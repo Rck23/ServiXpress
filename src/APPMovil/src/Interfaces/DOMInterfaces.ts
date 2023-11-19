@@ -1,6 +1,7 @@
 import { ImagePickerResponse } from "react-native-image-picker";
 import { AlertIcons } from "../Constants/Properties"
 import { CategoriaServicio } from "./Servicio"
+import { Usuario } from "./Usuario";
 
 export interface KeyValue {
     key: string;
@@ -24,6 +25,14 @@ export interface ModalOptionsSelectorProps {
     title?: string
     options: KeyValue[]
     OnHideModal?: (selected?: KeyValue) => void
+}
+
+export interface ModalEditProfileProps {
+    visible?: boolean
+    title?: string
+    options: KeyValue[]
+    OnHideModal?: (selected?: KeyValue) => void
+    data: Usuario | null
 }
 
 

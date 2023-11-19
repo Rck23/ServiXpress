@@ -5,6 +5,11 @@ import { Icon, IconProps } from './IconComponents';
 import { TextComponent } from './SharedComponents';
 import { useState } from 'react';
 
+type CalificationProps = {
+    onClick?: () => void
+    icon: IconProps
+}
+
 type InputProps = {
     value: string
     onChange?: (Text: string) => void
@@ -105,6 +110,18 @@ export const ButtonGlobal = (props: ButtonProps) => {
                     {props.text}
                 </Text>
             }
+        </TouchableOpacity>
+    )
+}
+
+export const ButtonCalif = (props: CalificationProps) => {
+    return (
+        <TouchableOpacity
+            style={[GlobalStyles.ButonCal]}
+            onPress={() => props.onClick ? props.onClick() : {}}
+            activeOpacity={0.7}
+        >
+            <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.ButonCalIcon]} />
         </TouchableOpacity>
     )
 }
