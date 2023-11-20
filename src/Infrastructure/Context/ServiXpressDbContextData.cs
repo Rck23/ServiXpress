@@ -106,7 +106,7 @@ namespace ServiXpress.Infrastructure.Context
                     }
                 }
 
-                // Categorias
+                // Categorias servicios
                 if (!context.CategoriasServicios!.Any())
                 {
                     // llamar al archivo JSON para poner informacion 
@@ -115,6 +115,20 @@ namespace ServiXpress.Infrastructure.Context
                     var categoriesServices = JsonConvert.DeserializeObject<List<CategoriaServicio>>(categoryServicesData);
 
                     await context.CategoriasServicios!.AddRangeAsync(categoriesServices!);
+
+                    await context.SaveChangesAsync();
+                }
+
+
+                // Categorias Reportes
+                if (!context.CategoriaReportes!.Any())
+                {
+                    // llamar al archivo JSON para poner informacion 
+                    var categoryReportsData = File.ReadAllText("../Infrastructure/Data/CategoriasReportes.json");
+
+                    var categoriesReports = JsonConvert.DeserializeObject<List<CategoriaReporte>>(categoryReportsData);
+
+                    await context.CategoriaReportes!.AddRangeAsync(categoriesReports!);
 
                     await context.SaveChangesAsync();
                 }

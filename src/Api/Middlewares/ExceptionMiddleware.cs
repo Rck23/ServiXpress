@@ -1,6 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using ServiXpress.Api.Errors;
 using ServiXpress.Application.Exceptions;
+using ServiXpress.Application.Models.Status;
+using ServiXpress.Domain;
+using System.IO;
 using System.Net;
 
 namespace ServiXpress.Api.Middlewares
@@ -24,11 +30,13 @@ namespace ServiXpress.Api.Middlewares
         /// <param name="logger"></param>
         public ExceptionMiddleware(
                 RequestDelegate next,
+                
                 ILogger<ExceptionMiddleware> logger
         )
         {
             _next = next;
             _logger = logger;
+
         }
 
         /// <summary>
@@ -38,10 +46,25 @@ namespace ServiXpress.Api.Middlewares
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context, UserManager<Usuario> userManager)
         {
             try
             {
+                if (context.User.Identity.IsAuthenticated)
+                {
+                    var user = await userManager.FindByNameAsync(context.User.Identity.Name);
+                    if (user != null)
+                    {
+                        var status = user.Estatus;
+                        if (status == EstatusUsuarioAPI.Bloqueado)
+                        {
+                            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                            context.Response.StatusCode = 403;
+                            return;
+                        }
+                    }
+                }
+
                 await _next(context);
             }
             catch (Exception ex)
@@ -129,6 +152,18 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceNotFoundException.Message });
                         break;
 
+                    case ReportNotFoundException reportNotFoundException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { reportNotFoundException.Message });
+                        break;
+
+                    case NotCountReport notCountReport:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { notCountReport.Message });
+                        break;
+                        
+
+
                     case ServiceUpdateFailedException serviceUpdateFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceUpdateFailedException.Message });
@@ -142,6 +177,11 @@ namespace ServiXpress.Api.Middlewares
                     case ServiceQueryFailedException serviceQueryFailedException:
                         statusCode = (int)HttpStatusCode.BadRequest;
                         errorResponse = new CodeErrorResponse(statusCode, new[] { serviceQueryFailedException.Message });
+                        break;
+
+                    case ReportQueryFailedException reportQueryFailedException:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { reportQueryFailedException.Message });
                         break;
 
                     case CategoryServiceAlreadyExistsException categoryServiceAlreadyExistsException:
@@ -175,7 +215,24 @@ namespace ServiXpress.Api.Middlewares
                         errorResponse = new CodeErrorResponse(statusCode, new[] { statusNotFound.Message });
                         break;
 
+                    case RoleNotFound roleNotFound:
+                        statusCode = (int)HttpStatusCode.BadRequest;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { roleNotFound.Message });
+                        break;
 
+                        
+
+                    case BlockedUser blockedUser:
+                        statusCode = (int)HttpStatusCode.Forbidden;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { blockedUser.Message });
+                        break;
+
+                    case RoleNotFoundException roleNotFoundException:
+                        statusCode = (int)HttpStatusCode.Forbidden;
+                        errorResponse = new CodeErrorResponse(statusCode, new[] { roleNotFoundException.Message });
+                        break;
+
+                        
                     default:
                         statusCode = (int)HttpStatusCode.InternalServerError;
                         errorResponse = new CodeErrorResponse(statusCode);

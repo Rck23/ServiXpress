@@ -44,13 +44,33 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
-    public class StatusNotFound : Exception
+    public class RoleNotFoundException : Exception
     {
-        public StatusNotFound()
-            : base("El nuevo estado no es válido.")
+        public RoleNotFoundException()
+            : base("Solo los usuarios de rol Agente estan autorizados para este metodo.")
         {
         }
     }
+
+    
+
+    public class StatusNotFound : Exception
+    {
+        public StatusNotFound()
+            : base("El nuevo estatus no es válido. Ingresa 'Verificado' o 'Bloqueado'.")
+        {
+        }
+    }
+
+    public class RoleNotFound : Exception
+    {
+        public RoleNotFound()
+            : base("El nuevo rol no es válido. Ingresa 'Cliente', 'Trabajador' o 'Agente'.")
+        {
+        }
+    }
+
+    
 
     public class IncorrectPasswordException : Exception
     {
@@ -107,6 +127,16 @@ namespace ServiXpress.Application.Exceptions
         }
     }
 
+    public class BlockedUser : Exception
+    {
+        public BlockedUser()
+            : base("Tu cuenta ha sido bloqueada.")
+        {
+        }
+    }
+
+    
+
     /* END Features/Auths/Users */
 
     /* START Features/Services */
@@ -118,6 +148,8 @@ namespace ServiXpress.Application.Exceptions
         {
         }
     }
+
+
 
     public class ServiceCreateFailedException : Exception
     {
@@ -139,7 +171,7 @@ namespace ServiXpress.Application.Exceptions
     public class ServiceQueryFailedException : Exception
     {
         public ServiceQueryFailedException(Exception ex)
-            : base("Fallo la servicios.", ex)
+            : base("Fallo los servicios por parametro.", ex)
         {
         }
     }
@@ -187,6 +219,38 @@ namespace ServiXpress.Application.Exceptions
     {
         public FileNotSupportException()
             : base("El tipo de archivo no está permitido.")
+        {
+        }
+    }
+
+    public class ReportNotFoundException : Exception
+    {
+        public ReportNotFoundException()
+            : base("El reporte no existe.")
+        {
+        }
+    }
+
+    public class NotCountReport : Exception
+    {
+        public NotCountReport()
+            : base("No se encontro ningun reporte.")
+        {
+        }
+    }
+
+    public class ReportQueryFailedException : Exception
+    {
+        public ReportQueryFailedException(Exception ex)
+            : base("Fallo los reportes por parametro.", ex)
+        {
+        }
+    }
+
+    public class StatusReportNotFound : Exception
+    {
+        public StatusReportNotFound()
+            : base("El nuevo estatus no es válido. Ingresa 'Cerreado' o 'Revision'.")
         {
         }
     }

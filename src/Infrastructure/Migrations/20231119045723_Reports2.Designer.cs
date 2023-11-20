@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119045723_Reports2")]
+    partial class Reports2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,18 +196,11 @@ namespace ServiXpress.Infrastructure.Migrations
 
             modelBuilder.Entity("ServiXpress.Domain.CategoriaReporte", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Nombre");
 
                     b.ToTable("CategoriaReportes");
                 });
@@ -301,23 +297,14 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AgenteCierraReporteId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("int");
+                    b.Property<string>("Categoria")
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DescripcionAgente")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
                     b.Property<string>("Estatus")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("FechaHoraCierre")
@@ -336,9 +323,7 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AgenteCierraReporteId");
-
-                    b.HasIndex("CategoriaId");
+                    b.HasIndex("Categoria");
 
                     b.HasIndex("Estatus");
 
@@ -620,19 +605,13 @@ namespace ServiXpress.Infrastructure.Migrations
 
             modelBuilder.Entity("ServiXpress.Domain.Reporte", b =>
                 {
-                    b.HasOne("ServiXpress.Domain.Usuario", "AgenteCierraReporte")
-                        .WithMany()
-                        .HasForeignKey("AgenteCierraReporteId");
-
                     b.HasOne("ServiXpress.Domain.CategoriaReporte", "CategoriaReporte")
                         .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .IsRequired();
+                        .HasForeignKey("Categoria");
 
                     b.HasOne("ServiXpress.Domain.EstatusReporte", "EstatusReporte")
                         .WithMany()
-                        .HasForeignKey("Estatus")
-                        .IsRequired();
+                        .HasForeignKey("Estatus");
 
                     b.HasOne("ServiXpress.Domain.Usuario", "Usuario")
                         .WithMany("Reportes")
@@ -643,8 +622,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioReportarId")
                         .IsRequired();
-
-                    b.Navigation("AgenteCierraReporte");
 
                     b.Navigation("CategoriaReporte");
 

@@ -70,6 +70,7 @@ builder.Services.AddApplicationServices(builder.Configuration);
 //AGREGACION DEL SERVICIO DE IMAGENES
 builder.Services.AddScoped<IManageImageService, ManageImageService>();
 
+
 // Agregar archivo de configuración JSON basado en el entorno
 builder.Configuration.AddJsonFile($"appsettings.{_env.EnvironmentName}.json", optional: false, reloadOnChange: true);
 
@@ -80,6 +81,7 @@ builder.Services.AddDbContext<ServiXpressDbContext>(options =>
         b => b.MigrationsAssembly(typeof(ServiXpressDbContext).Assembly.FullName));
     // para que aparezca en consola todos los querys que se hacen en la utilizacion del sistema.
 });
+
 
 // Configurar la identidad
 IdentityBuilder identityBuilder = builder.Services.AddIdentityCore<Usuario>();

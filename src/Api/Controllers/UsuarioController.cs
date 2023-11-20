@@ -1,9 +1,11 @@
 ﻿using CloudinaryDotNet.Actions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Extensions;
 using Newtonsoft.Json;
+using ServiXpress.Application.Contracts.Identity;
 using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Features.Auths.Users.Commands.LoginUser;
@@ -19,7 +21,11 @@ using ServiXpress.Application.Features.Auths.Users.ViewModels;
 using ServiXpress.Application.Models.Authorization;
 using ServiXpress.Application.Models.ImageManagement;
 using ServiXpress.Application.Models.Status;
+using ServiXpress.Domain;
 using ServiXpress.Infrastructure.Context;
+using ServiXpress.Infrastructure.Migrations;
+using ServiXpress.Infrastructure.Services.Auth;
+using System.IO;
 using System.Net;
 using System.Text;
 
@@ -34,14 +40,23 @@ namespace ServiXpress.Api.Controllers
         private readonly ServiXpressDbContext _context;
         private ILogger<UsuarioController> _logger;
 
+        private readonly UserManager<Usuario> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IAuthService _authService;
+
         public UsuarioController(IMediator mediator,
             IManageImageService manageImageService, ServiXpressDbContext context,
-            ILogger<UsuarioController> logger)
+             UserManager<Usuario> userManager, IAuthService authService, RoleManager<IdentityRole> roleManager,
+             ILogger<UsuarioController> logger)
         {
             _mediator = mediator;
             _manageImageService = manageImageService;
             _context = context;
             _logger = logger;
+            _userManager = userManager;
+            _authService = authService;
+
+            _roleManager = roleManager;
         }
 
         [AllowAnonymous]
@@ -256,28 +271,28 @@ namespace ServiXpress.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPost("cambiarEstatusUsuario", Name = "CambiarEstatusUsuario")]
-        public async Task CambiarEstatusUsuario(string usuarioId, string nuevoEstatus)
+
+        [Authorize(Roles = RoleAPI.AGENTE)]
+        [HttpPost("changeStatusUser", Name = "ChangeStatusUser")]
+        public async Task<IActionResult> ChangeStatusUser([FromBody] ChangeStatusUser user)
         {
             _logger.LogInformation("Cambiando estatus del usuario");
 
             try
             {
-                var usuario = await _context.Usuarios.FindAsync(usuarioId);
+                var usuario = await _context.Usuarios.FindAsync(user.UsuarioId);
 
                 if (usuario != null)
                 {
-                    // Convertir el nuevo estado a minúsculas para la comparación
-                    nuevoEstatus = nuevoEstatus.ToLower();
-
                     // Verificar si el nuevo estado es válido
-                    if (string.Equals(nuevoEstatus, EstatusUsuarioAPI.Verificado, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(nuevoEstatus, EstatusUsuarioAPI.Bloqueado, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Verificado, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Bloqueado, StringComparison.OrdinalIgnoreCase))
                     {
-                        usuario.Estatus = nuevoEstatus;
+                        usuario.Estatus = user.NuevoEstatus;
                         await _context.SaveChangesAsync();
 
+                        // Devolver un mensaje personalizado
+                        return Ok(new { message = $"Se cambió el estatus de {usuario.Nombre} a {user.NuevoEstatus}" });
                     }
                     else
                     {
@@ -294,8 +309,68 @@ namespace ServiXpress.Api.Controllers
                 _logger.LogError(ex, "Error en el metodo cambiar estatus de usuario");
                 throw;
             }
-            
         }
+
+
+        [Authorize(Roles = RoleAPI.AGENTE)]
+        //[AllowAnonymous]
+        [HttpPost("changeRoleUser", Name = "ChangeRoleUser")]
+        public async Task<IActionResult> ChangeRoleUser([FromBody] ChangeRoleUser user)
+        {
+            _logger.LogInformation("Cambiando rol del usuario");
+
+            try
+            {
+                var usuario = await _context.Usuarios.FindAsync(user.UsuarioId);
+
+                if (usuario != null)
+                {
+                    // Verificar si el nuevo rol es válido
+                    if (string.Equals(user.NuevoRol, RoleAPI.AGENTE, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(user.NuevoRol, RoleAPI.CLIENTE, StringComparison.OrdinalIgnoreCase) ||
+                        string.Equals(user.NuevoRol, RoleAPI.TRABAJADOR, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // Aquí es donde necesitas cambiar el rol del usuario
+                        var role = await _roleManager.FindByNameAsync(user.NuevoRol);
+                        if (role == null)
+                        {
+                            // Si el rol no existe, crea un nuevo rol
+                            role = new IdentityRole(user.NuevoRol);
+                            await _roleManager.CreateAsync(role);
+                        }
+
+                        // Elimina el usuario de todos los roles actuales
+                        var roles = await _userManager.GetRolesAsync(usuario);
+                        foreach (var rol in roles)
+                        {
+                            await _userManager.RemoveFromRoleAsync(usuario, rol);
+                        }
+
+                        // Agrega el usuario al nuevo rol
+                        await _userManager.AddToRoleAsync(usuario, user.NuevoRol);
+
+                        await _context.SaveChangesAsync();
+
+                        // Devolver un mensaje personalizado
+                        return Ok(new { message = $"Se cambió el rol de {usuario.Nombre} a {user.NuevoRol}" });
+                    }
+                    else
+                    {
+                        throw new RoleNotFound();
+                    }
+                }
+                else
+                {
+                    throw new UserNotFoundException();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error en el metodo cambiar rol de usuario");
+                throw;
+            }
+        }
+
 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiXpress.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using ServiXpress.Infrastructure.Context;
 namespace ServiXpress.Infrastructure.Migrations
 {
     [DbContext(typeof(ServiXpressDbContext))]
-    partial class ServiXpressDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119052703_Reports4")]
+    partial class Reports4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,20 +304,12 @@ namespace ServiXpress.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AgenteCierraReporteId")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
-
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DescripcionAgente")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Estatus")
                         .IsRequired()
@@ -335,8 +330,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .HasColumnType("nvarchar(36)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AgenteCierraReporteId");
 
                     b.HasIndex("CategoriaId");
 
@@ -620,10 +613,6 @@ namespace ServiXpress.Infrastructure.Migrations
 
             modelBuilder.Entity("ServiXpress.Domain.Reporte", b =>
                 {
-                    b.HasOne("ServiXpress.Domain.Usuario", "AgenteCierraReporte")
-                        .WithMany()
-                        .HasForeignKey("AgenteCierraReporteId");
-
                     b.HasOne("ServiXpress.Domain.CategoriaReporte", "CategoriaReporte")
                         .WithMany()
                         .HasForeignKey("CategoriaId")
@@ -643,8 +632,6 @@ namespace ServiXpress.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioReportarId")
                         .IsRequired();
-
-                    b.Navigation("AgenteCierraReporte");
 
                     b.Navigation("CategoriaReporte");
 

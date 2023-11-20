@@ -111,7 +111,7 @@ namespace ServiXpress.Infrastructure.Context
             builder.Entity<Reporte>()
                 .HasOne(r => r.CategoriaReporte)
                 .WithMany()
-                .HasForeignKey(r => r.Categoria)
+                .HasForeignKey(r => r.CategoriaId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<Reporte>()
@@ -137,6 +137,10 @@ namespace ServiXpress.Infrastructure.Context
 
             builder.Entity<IdentityRole>().Property(x => x.Id).HasMaxLength(36);
             builder.Entity<IdentityRole>().Property(x => x.NormalizedName).HasMaxLength(90);
+
+
+            builder.Entity<Reporte>().Property(r => r.AgenteCierraReporteId).HasMaxLength(36).IsRequired(false);
+            builder.Entity<Reporte>().Property(r => r.DescripcionAgente).HasMaxLength(500).IsRequired(false);
 
         }
 
