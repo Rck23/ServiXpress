@@ -65,6 +65,10 @@ export const alertStr = {
     emptyFieldsSendEmail: {
         title: 'Correo requerido',
         message: 'Ingrese su correo elecrtónico con el que ha registrado su cuenta.'
+    },
+    resetPasswordIssue: {
+        title: 'Información incorrecta',
+        message: 'Las contraseñas no coninciden o no ha completado los campos.'
     }
 }
 
@@ -85,7 +89,8 @@ export const apiEnpoints = {
     createService: "/Servicio/create",
     getUsers: "/Usuario/All",
     getUserDetail: "/Usuario/",
-    getServiceDetails: "/Servicio/getServiceById/"
+    getServiceDetails: "/Servicio/getServiceById/",
+    resetPassword: '/Usuario/ResetPassword'
 }
 
 

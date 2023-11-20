@@ -2,6 +2,7 @@ import { ImagePickerResponse } from "react-native-image-picker";
 import { AlertIcons } from "../Constants/Properties"
 import { CategoriaServicio } from "./Servicio"
 import { Usuario } from "./Usuario";
+import { ResultData } from "./DataResponse";
 
 export interface KeyValue {
     key: string;
@@ -30,7 +31,6 @@ export interface ModalOptionsSelectorProps {
 export interface ModalEditProfileProps {
     visible?: boolean
     title?: string
-    options: KeyValue[]
     OnHideModal?: (selected?: KeyValue) => void
     data: Usuario | null
 }
@@ -47,4 +47,12 @@ export interface ImageRequestFormData {
     uri: string
     type: string
     name: string
+}
+
+export interface DomState {
+    statusDom: 'requesting' | 'endRequest' | 'initState' | 'hideAlert';
+    resultDom?: { data: ResultData, shootAlert: boolean };
+    messageRequest?: string,
+    alerModal: AlertModalProps
+    callback?: () => void
 }

@@ -1,12 +1,10 @@
-import { View, ScrollView, TouchableOpacity, Text, Image, StyleSheet, FlatList } from "react-native"
+import { View, StyleSheet, FlatList } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { ServiceStackParams } from '../../Navigation/ServiceNavigator';
 import { useContext, useEffect } from "react";
 import { ServicesContext } from "../../Context/Services/Context";
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
-import { Col, ListEmptyComponent, Row, ServiceListItem, TextComponent } from "../../Components/Shared/SharedComponents";
-import { Avatar } from "react-native-paper";
-import { BlockUI } from "../../Components/Shared/BlockUI";
+import { ListEmptyComponent, ServiceListItem } from "../../Components/Shared/SharedComponents";
 import { RefreshControl } from "react-native";
 import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
 
@@ -14,7 +12,7 @@ import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
 interface Props extends StackScreenProps<ServiceStackParams, 'servicesBoardScreen'> { }
 
 export const ServicesBoardScreen = ({ navigation, route }: Props) => {
-  const { GetServices, serviceCategories, services, status, messageRequest } = useContext(ServicesContext)
+  const { GetServices, services, status } = useContext(ServicesContext)
 
   useEffect(() => {
     GetServices()
@@ -22,7 +20,6 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
 
   return (
     <ScreenContainer>
-      <BlockUI visible={status === 'requesting'} message={messageRequest} />
       <View style={ManageUsersStyles.container}>
         <FlatList
           data={services}
@@ -31,7 +28,7 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
           renderItem={({ item }) => (
             <ServiceListItem
               service={item}
-              onPress={() => navigation.navigate('serviceDetailsScreen', {id : item.id.toString()})}
+              onPress={() => navigation.navigate('serviceDetailsScreen', { id: item.id.toString() })}
             />
           )}
           ListEmptyComponent={() => (

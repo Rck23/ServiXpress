@@ -1,16 +1,12 @@
 import { View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../../Navigation/AuthNavigator";
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { ButtonGlobal, FormScrollContainer, InputGlobal, useTogglePasswordVisibility } from '../../Components/Shared/FormsComponents';
 import { AuthContext } from '../../Context/Auth/Context';
 import { Col, LogoImage, Row, TextComponent } from '../../Components/Shared/SharedComponents';
-import { BlockUI } from '../../Components/Shared/BlockUI';
-import { AlertModalProps, ImageRequestFormData, ImageSelectorModalProps, KeyValue, ModalOptionsSelectorProps } from '../../Interfaces/DOMInterfaces';
-import { alertModalInitState, imageSelectorModalInitState, newUsuarioInitState, optionSelectorModalInitState } from '../../Interfaces/InterfacesInitState';
-import { ShootAlertOnResult } from '../../Helpers/GlobalFunctions';
-import { AlertModal } from '../../Components/Modals/AlertModal';
-import { useIsFocused } from '@react-navigation/native';
+import { ImageRequestFormData, ImageSelectorModalProps, KeyValue, ModalOptionsSelectorProps } from '../../Interfaces/DOMInterfaces';
+import { imageSelectorModalInitState, newUsuarioInitState, optionSelectorModalInitState } from '../../Interfaces/InterfacesInitState';
 import { UseForm } from '../../Hooks/UseForm';
 import { RegisterUser } from '../../Interfaces/Usuario';
 import { ScreenContainer } from '../../Components/Shared/NavigationComponents';
@@ -22,30 +18,19 @@ import { ImageSelectorModal } from '../../Components/Modals/ImageSelectorModal';
 interface Props extends StackScreenProps<AuthStackParams, 'registerScreen'> { }
 
 export const RegisterScreen = ({ navigation, route }: Props) => {
-    const { SignUp, RemoveAlert, status, result, messageRequest } = useContext(AuthContext)
+    const { SignUp } = useContext(AuthContext)
     const { Nombre, Apellidos, Telefono, Email, Password, onChange, form } = UseForm<RegisterUser>(newUsuarioInitState)
-    const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
     const [selectorUserRolModal, setSelectorUserRolModal] = useState<ModalOptionsSelectorProps>(optionSelectorModalInitState)
     const [imageSelectorModal, setImageSelectorModal] = useState<ImageSelectorModalProps>(imageSelectorModalInitState)
     const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
     const [Rol, setRole] = useState(0)
     const [userImage, setUserImage] = useState<ImageRequestFormData>()
-    const isFocused = useIsFocused();
 
-
-    useEffect(() => {
-        if (result && isFocused) return setAlertModal(ShootAlertOnResult({ ...result, title: 'No se ha registrado su cuenta correctamente' }, OnHideAlert))
-    }, [result])
 
     const HandleRegister = async () => {
         form.Foto = userImage;
         form.Rol = Rol;
         await SignUp(form)
-    }
-
-    const OnHideAlert = () => {
-        setAlertModal(alertModalInitState)
-        RemoveAlert()
     }
 
     const OnHideModal = (value?: KeyValue) => {
@@ -64,8 +49,6 @@ export const RegisterScreen = ({ navigation, route }: Props) => {
         <>
             <ImageSelectorModal {...imageSelectorModal} title='Seleccione una imagen para su cuenta' OnHideModal={(result) => OnHideImageSelectorModal(result)} />
             <OptionsSelectorModal {...selectorUserRolModal} title='Seleccione el tipo de cuenta que desea crear' OnHideModal={(value) => OnHideModal(value)} />
-            <BlockUI visible={status === 'requesting'} message={messageRequest} />
-            <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
             <ScreenContainer>
                 <View style={[RegisterStyles.container]}>
                     <FormScrollContainer>

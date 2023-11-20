@@ -1,35 +1,35 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthState, AuthReducer } from './Reducer';
 import { RegisterUser, Usuario } from '../../Interfaces/Usuario';
-import { LoginResponse, ResultData } from '../../Interfaces/DataResponse';
+import { LoginResponse, ResetPassword, ResultData } from '../../Interfaces/DataResponse';
 import { GetResponseDataFromConstants, HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { alertStr, apiEnpoints } from '../../Constants/Values';
 import API, { formDataHeaders } from '../../Api/Api';
 import { LocalStorageStoreData } from '../../Helpers/LocalStorage';
 import { ConvertLoginResponseToUser } from '../../Helpers/InterfaceConverter';
 import { ValidateRegisterUserForm, ValidateUpdateUserForm } from '../../Helpers/FormsFunctions';
+import { DomContext } from '../Dom/Context';
 
 
 type AuthContextProps = {
     result?: ResultData;
     token: string | null;
     user: Usuario | null;
-    status: 'checking' | 'requesting' | 'authenticated' | 'not-authenticated' | 'ok';
-    messageRequest?: string
+    status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
+
     SignIn: (email: string, password: string) => Promise<void>;
     SignUp: (user: RegisterUser, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
-    RemoveAlert: () => void;
     SendEmailResetPassword: (email: string) => Promise<void>
     UpdateProfile: (user: RegisterUser) => Promise<void>
+    ResetPassword: (params: ResetPassword) => Promise<void>
 }
 
 const authInicialState: AuthState = {
     status: 'checking',
     token: null,
     user: null,
-    messageRequest: undefined,
     result: undefined
 }
 
@@ -38,11 +38,13 @@ const authInicialState: AuthState = {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export const AuthProvider = ({ children }: any) => {
+    const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(AuthReducer, authInicialState);
 
     useEffect(() => {
         CheckToken();
     }, [])
+
 
     /**
      * Validacion de token y datos de usuario almacenados en el dispositivo
@@ -55,6 +57,7 @@ export const AuthProvider = ({ children }: any) => {
 
             if (!token) return dispatch({ type: 'notAuthenticated' });
             const usuarioJSON: Usuario = usuarioString ? JSON.parse(usuarioString) : undefined;
+
             return dispatch({
                 type: 'ok',
                 payload: {
@@ -63,10 +66,7 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
-            return dispatch({
-                type: 'showAlert',
-                payload: GetResponseDataFromConstants(false, alertStr.tokenNotFound)
-            })
+            LocalHandleExeption(error, 'Error al validar la información de la sesión')
         }
     }
 
@@ -77,18 +77,15 @@ export const AuthProvider = ({ children }: any) => {
      * @param password 
      */
     const SignIn = async (email: string, password: string) => {
-        dispatch({ type: 'startRequest', payload: 'Validando información...' })
+        InitRequest('Validando información...')
+
         try {
             if (StrIsNullOrEmpty(email) || StrIsNullOrEmpty(password))
-                return dispatch({
-                    type: 'showAlert',
-                    payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsLogin)
-                })
+                return HandleEndrequest(GetResponseDataFromConstants(false, alertStr.emptyFieldsLogin), true)
 
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
             const userData = ConvertLoginResponseToUser(data)
 
-            console.log(data)
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
             dispatch({
@@ -99,21 +96,20 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
-            console.log(error.response)
-            dispatch({
-                type: 'showAlert',
-                payload: await HandleException(error)
-            })
+            LocalHandleExeption(error, 'Autenticación fallida')
+        } finally {
+            CleanResultDom()
         }
     };
 
 
     const SignUp = async (user: RegisterUser, image?: any) => {
-        dispatch({ type: 'startRequest', payload: 'Creando cuenta...' })
+        InitRequest('Creando cuenta...')
+
         try {
             const resultValidation = ValidateRegisterUserForm(user)
             if (!resultValidation.ok)
-                return dispatch({ type: 'showAlert', payload: resultValidation })
+                return HandleEndrequest(resultValidation, true)
 
             const formData = new FormData();
             Object.keys(user).forEach(key => {
@@ -124,10 +120,9 @@ export const AuthProvider = ({ children }: any) => {
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
 
-            console.log(data)
-
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
+
             dispatch({
                 type: 'signUp',
                 payload: {
@@ -136,21 +131,21 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
-            dispatch({
-                type: 'showAlert',
-                payload: await HandleException(error)
-            })
+            LocalHandleExeption(error, 'No se ha podido crear su cuenta')
+        } finally {
+            CleanResultDom()
         }
     };
 
 
 
     const UpdateProfile = async (user: RegisterUser) => {
-        dispatch({ type: 'startRequest', payload: 'Actualizando información...' })
+        InitRequest('Actualizando información...')
+
         try {
             const resultValidation = ValidateUpdateUserForm(user)
             if (!resultValidation.ok)
-                return dispatch({ type: 'showAlert', payload: resultValidation })
+                return HandleEndrequest(resultValidation, true)
 
             const formData = new FormData();
             Object.keys(user).forEach(key => {
@@ -171,26 +166,23 @@ export const AuthProvider = ({ children }: any) => {
                 }
             });
         } catch (error: any) {
-            dispatch({
-                type: 'showAlert',
-                payload: await HandleException(error)
-            })
+            LocalHandleExeption(error, 'No se ha actualizado su información correctamente')
+        } finally {
+            CleanResultDom()
         }
     };
 
+
+
     const LogOut = async () => {
-        dispatch({ type: 'startRequest', payload: 'Cerrando sesión...' })
+        InitRequest('Cerrando sesión...')
 
         await AsyncStorage.removeItem('token')
         await AsyncStorage.removeItem('userData')
         dispatch({ type: 'logout' });
+        CleanResultDom()
     };
 
-
-
-    const RemoveAlert = () => {
-        dispatch({ type: 'hideAlert' });
-    };
 
 
 
@@ -200,23 +192,44 @@ export const AuthProvider = ({ children }: any) => {
      * @returns 
      */
     const SendEmailResetPassword = async (email?: string): Promise<void> => {
-        dispatch({ type: 'startRequest', payload: 'Enviando correo...' })
+        InitRequest('Enviando correo...')
+
         if (StrIsNullOrEmpty(email))
-            return dispatch({ type: 'showAlert', payload: GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail, 'info') })
+            return HandleEndrequest(GetResponseDataFromConstants(false, alertStr.emptyFieldsSendEmail, 'info'), true)
         try {
             await API.post<string>(apiEnpoints.sendEmailUser, { email })
 
-            dispatch({
-                type: 'showAlert',
-                payload: { ok: true, title: "Corrreo electrónico enviado", message: "Revise su bandeja y siga las instrucciones.", icon: 'success' }
-            });
+            HandleEndrequest({ ok: true, title: "Corrreo electrónico enviado", message: "Revise su bandeja y siga las instrucciones.", icon: 'success' }, true);
         } catch (error) {
-            const resultError = await HandleException(error)
-            dispatch({
-                type: 'showAlert',
-                payload: { ...resultError, title: "No se ha enviado el correo" }
-            })
+            LocalHandleExeption(error, "No se ha enviado el correo")
+        } finally {
+            CleanResultDom()
         }
+    }
+
+    const ResetPassword = async (params: ResetPassword): Promise<void> => {
+        InitRequest('Aplicando cambios, espere...')
+
+        if (StrIsNullOrEmpty(params.password) || StrIsNullOrEmpty(params.confirmPassword) || StrIsNullOrEmpty(params.token) || params.password != params.confirmPassword)
+            return HandleEndrequest(GetResponseDataFromConstants(false, alertStr.resetPasswordIssue, 'info'), true)
+
+        try {
+            await API.post<string>(apiEnpoints.resetPassword, params)
+
+            HandleEndrequest({ ok: true, title: "Contraseña actualizda", message: "Se ha cambiado su contraseña, ahora puede ingresar con su nueva contraseña.", icon: 'success' }, true);
+        } catch (error) {
+            LocalHandleExeption(error, "No ha sido posible actualizar su contraseña")
+        } finally {
+            CleanResultDom()
+        }
+    }
+
+
+    const LocalHandleExeption = async (ex: any, headMsg?: string) => {
+        const data = await HandleException(ex)
+        if (headMsg) data.title = headMsg
+
+        HandleEndrequest(data, true)
     }
 
 
@@ -226,9 +239,9 @@ export const AuthProvider = ({ children }: any) => {
             SignIn,
             SignUp,
             LogOut,
-            RemoveAlert,
             SendEmailResetPassword,
-            UpdateProfile
+            UpdateProfile,
+            ResetPassword
         }}>
             {children}
         </AuthContext.Provider>

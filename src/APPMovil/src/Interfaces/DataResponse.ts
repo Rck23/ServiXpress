@@ -27,3 +27,11 @@ export interface LoginResponse {
     avatar: string,
     roles: string[]
 }
+
+
+export interface ResetPassword {
+    email: string,
+    token: string,
+    password: string,
+    confirmPassword: string
+}

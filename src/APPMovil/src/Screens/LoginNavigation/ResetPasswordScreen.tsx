@@ -1,68 +1,108 @@
-import { Image, Text, View } from "react-native"
+import { FlatListComponent, Text, TextInput, TouchableOpacity, View } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { AuthStackParams } from "../../Navigation/AuthNavigator";
-import { useEffect, useState } from "react";
-import { GlobalStyles } from "../../Styles/SharedStyles";
+import { useContext, useEffect, useState } from "react";
 import { RecoveryStyles } from "../../Styles/RecoveryStyles";
+import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
+import { TextComponent } from "../../Components/Shared/SharedComponents";
+import { GlobalStyles } from "../../Styles/SharedStyles";
+import { ButtonGlobal, FormScrollContainer, InputGlobal } from "../../Components/Shared/FormsComponents";
+import { UseForm } from "../../Hooks/UseForm";
+import { mainColors } from "../../Constants/Values";
+import { IconProps } from "../../Components/Shared/IconComponents";
+import { AuthContext } from "../../Context/Auth/Context";
+import { ResetPassword } from "../../Interfaces/DataResponse";
+
+type buttonConfirm = {
+    enabled: boolean,
+    icon: IconProps,
+    text: string
+    countdown: number
+    color: { text: string, back: string }
+}
+
+const buttonInitState: buttonConfirm = {
+    enabled: false,
+    countdown: 10,
+    icon: { name: 'clock', library: 'materialCommunity' },
+    text: 'Espere... 10s',
+    color: { text: mainColors.textColor, back: mainColors.blackLight }
+}
 
 interface Props extends StackScreenProps<AuthStackParams, 'resetPasswordScreen'> { }
 
-const image = { uri: 'https://neetwork.com/wp-content/uploads/2019/10/marketing-de-servicios.jpg' };
-
 export const ResetPasswordScreen = ({ navigation, route }: Props) => {
-    const [buttonEnabled, setButtonEnabled] = useState(false);
-    const [countdown, setCountdown] = useState(30); // tiempo del contador del boton
+    const { ResetPassword } = useContext(AuthContext)
+    const [buttonConfirm, setButtonConfirm] = useState<buttonConfirm>(buttonInitState)
+    const { token, password, confirmPassword, form, onChange } = UseForm<ResetPassword>({ token: '', password: '', confirmPassword: '', email: '' })
 
     useEffect(() => {
         const timer = setInterval(() => {
-            if (countdown > 0 && !buttonEnabled) {
-                setCountdown(countdown - 1);
-            } else if (countdown === 0 && !buttonEnabled) {
-                setCountdown(30); // tiempo del contador del boton
-                setButtonEnabled(true);
+            if (buttonConfirm.countdown > 0 && !buttonConfirm.enabled) {
+                const newCountdown = buttonConfirm.countdown - 1
+                setButtonConfirm({ ...buttonConfirm, text: `Espere... ${newCountdown}s`, countdown: newCountdown })
+            } else if (buttonConfirm.countdown == 0 && !buttonConfirm.enabled) {
+                setButtonConfirm({ ...buttonConfirm, color: { text: mainColors.white, back: mainColors.purpule3 }, icon: { name: 'check-all', library: 'materialCommunity' }, text: `Guardar`, countdown: 30, enabled: true })
             }
         }, 1000);
 
         return () => {
             clearInterval(timer);
         };
-    }, [countdown, buttonEnabled]);
+    }, [buttonConfirm]);
 
-    const handleButtonPress = () => {
-        if (buttonEnabled) {
-            setButtonEnabled(false);
-        }
+    const handleButtonPress = async () => {
+        await ResetPassword(form)
     };
 
     return (
-        <View style={GlobalStyles.Globalcontainer}>
-            <View style={GlobalStyles.Globalcontainerdad}>
-                <Image
-                    source={require('./Images/Logo.png')}
-                    style={GlobalStyles.GlobalLogo}
-                ></Image>
-                <Text style={RecoveryStyles.encabezado}>Correo Enviado</Text>
-                <Text style={RecoveryStyles.texto}>
-                    Enviamos un codigo de verificacion a tu correo electronico, introduce tu codigo aquí
-                </Text>
-                <TextInput style={RecoveryStyles.input}
-                    placeholder="Codigo"
-                    placeholderTextColor="grey"
-                    keyboardType="numeric"
-                ></TextInput>
-                <TouchableOpacity onPress={handleButtonPress} disabled={!buttonEnabled} style={{
-                    backgroundColor: buttonEnabled ? 'blue' : 'gray',
-                    padding: 10,
-                    borderRadius: 50,
-                    marginBottom: 10,
-                    marginHorizontal: 20
-                }}>
-                    <Text style={RecoveryStyles.botonText}>{buttonEnabled ? 'Reenviar codigo' : `Espera... (${countdown})`}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={RecoveryStyles.boton}>
-                    <Text style={RecoveryStyles.botonText}>Enviar</Text>
-                </TouchableOpacity>
+        <ScreenContainer>
+            <View style={RecoveryStyles.container}>
+                <View style={[GlobalStyles.cardContainer]}>
+                    <FormScrollContainer>
+                        <TextComponent style={RecoveryStyles.encabezado} text='Introduce el código que te enviamos por correo y tu nueva contraseña' />
+                        <InputGlobal
+                            placeholder="Código"
+                            showLabel
+                            value={token}
+                            onChange={(value) => onChange(value, 'token')}
+                        />
+                        <InputGlobal
+                            placeholder="Contraseña"
+                            showLabel
+                            secureText
+                            value={password}
+                            onChange={(value) => onChange(value, 'password')}
+                        />
+                        <InputGlobal
+                            placeholder="Confirma la contrasña"
+                            showLabel
+                            secureText
+                            value={confirmPassword}
+                            onChange={(value) => onChange(value, 'confirmPassword')}
+                        />
+
+                        <View style={RecoveryStyles.footer}>
+                            <ButtonGlobal
+                                color={buttonConfirm.color.back}
+                                disabled={!buttonConfirm.enabled}
+                                textColor={buttonConfirm.color.text}
+                                onClick={handleButtonPress}
+                                icon={buttonConfirm.icon}
+                                text={buttonConfirm.text}
+                            />
+                            <ButtonGlobal
+                                icon={{ name: 'arrow-left', library: 'fontAwesome' }}
+                                text="Regresar"
+                                onClick={() => navigation.goBack()}
+                                color={mainColors.light}
+                                textColor={mainColors.textColor}
+                            />
+                        </View>
+                    </FormScrollContainer>
+                </View>
+
             </View>
-        </View>
+        </ScreenContainer>
     )
 }

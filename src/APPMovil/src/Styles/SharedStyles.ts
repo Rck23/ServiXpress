@@ -193,5 +193,12 @@ export const GlobalStyles = StyleSheet.create({
     ButonCalIcon: {
         color: mainColors.purpule,
         fontSize: 30,
+    },
+    cardContainer: {
+        backgroundColor: mainColors.white,
+        shadow,
+        borderRadius: 15,
+        width: '100%',
+        padding: 15,
     }
 })

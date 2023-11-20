@@ -6,6 +6,7 @@ import API from '../../Api/Api';
 import { Usuario } from '../../Interfaces/Usuario';
 import { UsersReducer, UsersState } from './Reducer';
 import { ConvertLoginResponseToUserList } from '../../Helpers/InterfaceConverter';
+import { DomContext } from '../Dom/Context';
 
 
 type UsersContextProps = {
@@ -34,15 +35,15 @@ const usersInitState: UsersState = {
 export const UsersContext = createContext({} as UsersContextProps);
 
 export const UsersProvider = ({ children }: any) => {
+    const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(UsersReducer, usersInitState);
 
     useEffect(() => {
-
     }, [])
 
 
     const GetAllUsers = async () => {
-        dispatch({ type: 'requesting', payload: 'Cargando catálogo de usuarios...' })
+        InitRequest('Cargando catálogo de usuarios...')
 
         try {
             const { data } = await API.get<LoginResponse[]>(apiEnpoints.getUsers);
@@ -50,46 +51,36 @@ export const UsersProvider = ({ children }: any) => {
 
             dispatch({ type: 'setUsers', payload: usersData });
         } catch (error: any) {
-            const errorData = await HandleException(error)
-            dispatch({
-                type: 'endRequest',
-                payload: {
-                    data: {
-                        ...errorData,
-                        title: "Error al obtener el catalogo de usuarios"
-                    },
-                    shootAlert: true
-                }
-            })
+            LocalHandleExeption(error, "Error al obtener el catalogo de usuarios")
+        } finally {
+            CleanResultDom()
         }
     };
 
     const GetUserDetail = async (id: string) => {
-        dispatch({ type: 'requesting', payload: 'Cargando detalle de usuario...' })
+        InitRequest('Cargando detalle de usuario...')
 
         try {
             const { data } = await API.get<Usuario>(`${apiEnpoints.getUserDetail}${id}`);
-            console.log(data)
 
             dispatch({ type: 'setUserDetail', payload: data });
         } catch (error: any) {
-            const errorData = await HandleException(error)
-            dispatch({
-                type: 'endRequest',
-                payload: {
-                    data: {
-                        ...errorData,
-                        title: "Error al obtener la información del usuario"
-                    },
-                    shootAlert: true
-                }
-            })
+            LocalHandleExeption(error, "Error al obtener la información del usuario")
+        } finally {
+            CleanResultDom()
         }
     };
 
 
     const CleanResult = () => {
         dispatch({ type: 'cleanResult' })
+    }
+
+    const LocalHandleExeption = async (ex: any, headMsg?: string) => {
+        const data = await HandleException(ex)
+        if (headMsg) data.title = headMsg
+
+        HandleEndrequest(data, true)
     }
 
 

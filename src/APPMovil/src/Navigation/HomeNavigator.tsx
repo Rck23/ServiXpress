@@ -6,7 +6,7 @@ import { ProfileScreen } from '../Screens/ProfileScreen';
 import { TabBarIconsRNode } from '../Components/Shared/NavigationComponents';
 import { ServiceNavigator } from './ServiceNavigator';
 import { UserNavigator } from './UserNavigator';
-import { customTabScreenOpitons, customScreenOpitons, HomeNavigatorConfirmAlert } from '../Constants/Properties';
+import { customTabScreenOpitons, customScreenOpitons } from '../Constants/Properties';
 import { ServicesProvider } from '../Context/Services/Context';
 import { AuthContext } from '../Context/Auth/Context';
 import { mainColors } from '../Constants/Values';
@@ -28,6 +28,7 @@ const HomeState = ({ children }: any) => {
         <ServicesProvider>
             {children}
         </ServicesProvider>
+
     )
 }
 
@@ -38,7 +39,6 @@ const Tab = createBottomTabNavigator<HomeStackParams>();
 export const HomeNavigator = () => {
     const { user, LogOut } = useContext(AuthContext)
     const [alertModal, setAlertModal] = useState<AlertModalProps>(alertModalInitState)
-
 
     return (
         <HomeState>
@@ -56,7 +56,12 @@ export const HomeNavigator = () => {
                 <Tab.Screen name="serviceNavigatorScreen" component={ServiceNavigator} />
                 <Tab.Screen options={{ ...customScreenOpitons, title: 'Servicios por ubicación' }} name="servicesMapScreen" component={ServicesMapScreen} />
                 <Tab.Screen options={{ ...customScreenOpitons, title: 'Tablero de servicios' }} name="servicesBoardScreen" component={ServicesBoardScreen} />
-                <Tab.Screen name="userNavigatorScreen" component={UserNavigator} />
+
+                {
+                    user?.rolNombre?.toLowerCase() === 'agente' &&
+                    <Tab.Screen name="userNavigatorScreen" component={UserNavigator} />
+                }
+
                 <Tab.Screen
                     options={{
                         ...customScreenOpitons,

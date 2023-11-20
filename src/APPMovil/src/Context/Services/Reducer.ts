@@ -15,7 +15,6 @@ export interface ServicesState {
 type ServicesAction =
     | { type: 'endRequest', payload: { data: ResultData, shootAlert: boolean } }
     | { type: 'cleanResult' }
-    | { type: 'requesting', payload: string }
     | { type: 'setServiceCategories', payload: CategoriaServicio[] }
     | { type: 'setServices', payload: Servicio[] }
     | { type: 'setServiceDetails', payload: Servicio }
@@ -30,13 +29,6 @@ export const ServicesReducer = (state: ServicesState, action: ServicesAction): S
                 messageRequest: undefined,
                 status: 'endRequest',
                 result: action.payload
-            }
-        case 'requesting':
-            return {
-                ...state,
-                status: 'requesting',
-                messageRequest: action.payload,
-                result: undefined
             }
         case 'cleanResult':
             return {

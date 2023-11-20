@@ -4,6 +4,7 @@ import { LoginScreen } from '../Screens/LoginNavigation/LoginScreen';
 import { RegisterScreen } from '../Screens/LoginNavigation/RegisterScreen';
 import { RecoveryScreen } from '../Screens/LoginNavigation/RecoveryScreen';
 import { customScreenOpitons } from '../Constants/Properties';
+import { ResetPasswordScreen } from '../Screens/LoginNavigation/ResetPasswordScreen';
 
 
 export type AuthStackParams = {
@@ -23,7 +24,8 @@ export const AuthNavigator = () => {
         >
             <Stack.Screen options={{ title: 'Crear cuenta' }} name="registerScreen" component={RegisterScreen} />
             <Stack.Screen options={{ title: 'Recuperar contraseña' }} name="recoveryScreen" component={RecoveryScreen} />
-            <Stack.Screen options={{ headerShown: false, title: 'Ingresar' }} name="loginScreen" component={LoginScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="loginScreen" component={LoginScreen} />
+            <Stack.Screen options={{ title: 'Actualizar contraseña' }} name='resetPasswordScreen' component={ResetPasswordScreen} />
         </Stack.Navigator>
     );
 }

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { ServicesReducer, ServicesState } from './Reducer';
 import { ResultData } from '../../Interfaces/DataResponse';
 import { HandleException } from '../../Helpers/GlobalFunctions';
@@ -7,6 +7,7 @@ import API from '../../Api/Api';
 import { CategoriaServicio, ServiceCreate, Servicio } from '../../Interfaces/Servicio';
 import { ValidateRegisterServiceForm } from '../../Helpers/FormsFunctions';
 import { servicioInitState } from '../../Interfaces/InterfacesInitState';
+import { DomContext } from '../Dom/Context';
 
 
 type ServicesContextProps = {
@@ -38,6 +39,7 @@ const servicesInitState: ServicesState = {
 export const ServicesContext = createContext({} as ServicesContextProps);
 
 export const ServicesProvider = ({ children }: any) => {
+    const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(ServicesReducer, servicesInitState);
 
     useEffect(() => {
@@ -49,87 +51,77 @@ export const ServicesProvider = ({ children }: any) => {
      * Get all services categories from API
      */
     const GetServicesCategories = async () => {
-        dispatch({ type: 'requesting', payload: 'Cargando categorias...' })
+        InitRequest('Cargando categorias...')
 
         try {
             const { data } = await API.get<CategoriaServicio[]>(apiEnpoints.getCategories);
 
             dispatch({ type: 'setServiceCategories', payload: data });
         } catch (error: any) {
-            dispatch({
-                type: 'endRequest',
-                payload: {
-                    data: await HandleException(error),
-                    shootAlert: true
-                }
-            })
+            LocalHandleExeption(error, 'Error al cargar las categorias')
+        }
+        finally {
+            CleanResultDom()
         }
     };
 
 
     const GetServices = async () => {
-        dispatch({ type: 'requesting', payload: 'Cargando catálogo de servicios...' })
+        InitRequest('Cargando catálogo de servicios...')
 
         try {
             const { data } = await API.get<Servicio[]>(apiEnpoints.getServices);
 
             dispatch({ type: 'setServices', payload: data });
         } catch (error: any) {
-            dispatch({
-                type: 'endRequest',
-                payload: {
-                    data: await HandleException(error),
-                    shootAlert: true
-                }
-            })
+            LocalHandleExeption(error, 'Error al cargar servicios')
+        } finally {
+            CleanResultDom()
         }
     };
 
     const GetServiceDetails = async (id: string) => {
-        dispatch({ type: 'requesting', payload: 'Cargando detalles de servicios...' })
+        InitRequest('Cargando detalles de servicios...')
 
         try {
             const { data } = await API.get<Servicio>(apiEnpoints.getServiceDetails + id);
 
             dispatch({ type: 'setServiceDetails', payload: data });
         } catch (error: any) {
-            dispatch({
-                type: 'endRequest',
-                payload: {
-                    data: await HandleException(error),
-                    shootAlert: true
-                }
-            })
+            LocalHandleExeption(error, 'Error al obtener el detalle del servicio')
+        } finally {
+            CleanResultDom()
         }
     };
 
 
     const CreateService = async (service: ServiceCreate) => {
-        dispatch({ type: 'requesting', payload: 'Registrando servicio...' })
+        InitRequest('Registrando servicio...')
 
         try {
             const validResult = ValidateRegisterServiceForm(service)
             if (!validResult.ok) return dispatch({ type: 'endRequest', payload: { data: validResult, shootAlert: true } })
 
-            const { data } = await API.post<Servicio>(apiEnpoints.createService, service);
+            await API.post<Servicio>(apiEnpoints.createService, service);
 
-            dispatch({
-                type: 'endRequest', payload: {
-                    data: { ok: true, icon: 'success', message: 'Se ha creado el servicio correctamente', title: 'Servicio creado y publicado' },
-                    shootAlert: true
-                }
-            });
+            HandleEndrequest({ ok: true, icon: 'success', message: 'Se ha creado el servicio correctamente', title: 'Servicio creado y publicado' }, true);
         } catch (error: any) {
-            dispatch({
-                type: 'endRequest',
-                payload: { data: await HandleException(error), shootAlert: true }
-            })
+            LocalHandleExeption(error, 'Error al crear el servicio')
+        } finally {
+            CleanResultDom()
         }
     };
 
 
     const CleanResult = () => {
         dispatch({ type: 'cleanResult' })
+    }
+
+    const LocalHandleExeption = async (ex: any, headMsg?: string) => {
+        const data = await HandleException(ex)
+        if (headMsg) data.title = headMsg
+
+        HandleEndrequest(data, true)
     }
 
 

@@ -35,7 +35,7 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
 
     return (
         <>
-            <AlertModal {...alertModal} OnHideAlert={OnHideAlert} />
+            {/* <AlertModal {...alertModal} OnHideAlert={OnHideAlert} /> */}
             <EditProfileModal {...editProfileModal}/>
             <ScreenContainer>
                 <View style={ProfileStyles.container}>

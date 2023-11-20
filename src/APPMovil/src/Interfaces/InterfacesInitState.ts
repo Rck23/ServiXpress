@@ -1,4 +1,5 @@
 import { AlertModalProps, ImageSelectorModalProps, ModalEditProfileProps, ModalOptionsSelectorProps } from "./DOMInterfaces";
+import { ResultData } from "./DataResponse";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
 import { RegisterUser, Usuario } from "./Usuario";
 

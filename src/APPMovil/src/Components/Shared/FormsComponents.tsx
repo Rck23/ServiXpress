@@ -43,6 +43,7 @@ type ButtonProps = {
     icon: IconProps
     type?: 'normal' | 'big' | 'small'
     color?: string
+    disabled?: boolean
     textColor?: string
 }
 
@@ -101,6 +102,7 @@ export const ButtonGlobal = (props: ButtonProps) => {
             style={[GlobalStyles.GlobalButton, { backgroundColor: props.color ?? mainColors.purpule }]}
             onPress={() => props.onClick ? props.onClick() : {}}
             activeOpacity={0.7}
+            disabled={props.disabled}
         >
             <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.GlobalButtonIcon, { color: props.textColor ?? mainColors.white }, props.type == 'small' ? GlobalStyles.globalButtonIconSmall : {}]} />
 
