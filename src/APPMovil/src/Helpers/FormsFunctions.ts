@@ -60,3 +60,11 @@ export const ValidateRegisterServiceForm = (service: ServiceCreate): ResultData 
 
     return { ...result, ok: true }
 }
+
+
+
+export const FillObjectWithdata = <T extends Object>(object: T, objectWithValues: T) => {
+    Object.keys(object).forEach(key => {
+        object[(key as keyof T)] = objectWithValues[(key as keyof T)]
+    })
+}

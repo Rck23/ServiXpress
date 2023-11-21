@@ -31,8 +31,7 @@ export interface ModalOptionsSelectorProps {
 export interface ModalEditProfileProps {
     visible?: boolean
     title?: string
-    OnHideModal?: (selected?: KeyValue) => void
-    data: Usuario | null
+    OnHideModal?: () => void
 }
 
 

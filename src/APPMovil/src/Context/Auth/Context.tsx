@@ -7,29 +7,29 @@ import { GetResponseDataFromConstants, HandleException, StrIsNullOrEmpty } from 
 import { alertStr, apiEnpoints } from '../../Constants/Values';
 import API, { formDataHeaders } from '../../Api/Api';
 import { LocalStorageStoreData } from '../../Helpers/LocalStorage';
-import { ConvertLoginResponseToUser } from '../../Helpers/InterfaceConverter';
-import { ValidateRegisterUserForm, ValidateUpdateUserForm } from '../../Helpers/FormsFunctions';
+import { ConvertLoginResponseToUser, ConvertUserToUpdateUser } from '../../Helpers/InterfaceConverter';
+import { ValidateRegisterUserForm } from '../../Helpers/FormsFunctions';
 import { DomContext } from '../Dom/Context';
 
 
 type AuthContextProps = {
     result?: ResultData;
     token: string | null;
-    user: Usuario | null;
+    user?: Usuario;
     status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
 
     SignIn: (email: string, password: string) => Promise<void>;
     SignUp: (user: RegisterUser, image?: any) => Promise<void>
     LogOut: () => Promise<void>;
     SendEmailResetPassword: (email: string) => Promise<void>
-    UpdateProfile: (user: RegisterUser) => Promise<void>
+    UpdateProfile: (user: Usuario) => Promise<void>
     ResetPassword: (params: ResetPassword) => Promise<void>
 }
 
 const authInicialState: AuthState = {
     status: 'checking',
     token: null,
-    user: null,
+    user: undefined,
     result: undefined
 }
 
@@ -139,13 +139,11 @@ export const AuthProvider = ({ children }: any) => {
 
 
 
-    const UpdateProfile = async (user: RegisterUser) => {
+    const UpdateProfile = async (paramUser: Usuario) => {
         InitRequest('Actualizando información...')
 
         try {
-            const resultValidation = ValidateUpdateUserForm(user)
-            if (!resultValidation.ok)
-                return HandleEndrequest(resultValidation, true)
+            const user = ConvertUserToUpdateUser(paramUser)
 
             const formData = new FormData();
             Object.keys(user).forEach(key => {
@@ -153,18 +151,13 @@ export const AuthProvider = ({ children }: any) => {
             });
 
 
-            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
+            const { data } = await API.put<LoginResponse>(apiEnpoints.updateUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
 
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
-            dispatch({
-                type: 'signUp',
-                payload: {
-                    token: data.token,
-                    usuario: userData
-                }
-            });
+
+            HandleEndrequest({ ok: true, icon: 'success', title: 'Información actualizada', message: 'Se ha guardado su información correctamente.' }, true)
         } catch (error: any) {
             LocalHandleExeption(error, 'No se ha actualizado su información correctamente')
         } finally {

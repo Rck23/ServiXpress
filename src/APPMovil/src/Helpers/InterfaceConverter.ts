@@ -2,7 +2,7 @@ import { ImagePickerResponse } from "react-native-image-picker";
 import { ImageRequestFormData, KeyValue } from "../Interfaces/DOMInterfaces";
 import { LoginResponse } from "../Interfaces/DataResponse";
 import { CategoriaServicio } from "../Interfaces/Servicio";
-import { Usuario } from "../Interfaces/Usuario";
+import { RegisterUser, UpdateUser, Usuario } from "../Interfaces/Usuario";
 
 export const ConvertLoginResponseToUser = (data: LoginResponse): Usuario => {
     return {
@@ -66,5 +66,26 @@ export const ConvertImgPickerToImageRequest = (inputImage?: ImagePickerResponse)
         uri: '',
         type: '',
         name: ''
+    }
+}
+
+
+export const ConvertUserToUpdateUser = (input: Usuario): UpdateUser => {
+    return {
+        nombre: input.nombre,
+        apellidos: input.apellidos,
+        telefono: input.telefono ?? '',
+        rol: input.rol,
+        email: input.email,
+        password: input.password ?? '',
+        calle: input.calle ?? '',
+        codigoPostal: input.codigoPostal ?? '',
+        coloniaFraccionamiento: input.coloniaFraccionamiento ?? '',
+        descripcion: input.descripcion ?? '',
+        estado: input.estado ?? '',
+        municipio: input.municipio ?? '',
+        numExterior: input.numExterior ?? 0,
+        numInterior: input.numInterior ?? 0,
+        foto: input.foto
     }
 }

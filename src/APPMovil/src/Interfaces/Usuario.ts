@@ -38,3 +38,22 @@ export interface RegisterUser {
     Password: string;
     Foto?: ImageRequestFormData
 }
+
+
+export interface UpdateUser {
+    nombre: string;
+    apellidos: string;
+    telefono: string;
+    calle: string
+    rol: number;
+    coloniaFraccionamiento: string
+    codigoPostal: string
+    numExterior: number
+    numInterior: number
+    municipio: string
+    estado: string
+    descripcion: string
+    email: string;
+    password: string;
+    foto?: ImageRequestFormData
+}

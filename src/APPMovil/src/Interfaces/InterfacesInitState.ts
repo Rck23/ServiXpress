@@ -66,6 +66,5 @@ export const servicioInitState: Servicio = {
 }
 
 export const editProfileModalInitState: ModalEditProfileProps = {
-    title: '',
     data: usuarioInitState
 }

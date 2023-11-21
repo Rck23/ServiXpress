@@ -5,7 +5,7 @@ export interface AuthState {
     status: 'checking' | 'authenticated' | 'not-authenticated';
     token: string | null;
     result?: ResultData;
-    user: Usuario | null;
+    user?: Usuario;
     messageRequest?: string
 }
 
@@ -35,7 +35,7 @@ export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => 
                 ...state,
                 status: 'not-authenticated',
                 token: null,
-                user: null
+                user: undefined
             }
         default:
             return state;
