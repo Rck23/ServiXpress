@@ -8,7 +8,7 @@ import { editProfileModalInitState } from '../Interfaces/InterfacesInitState';
 import { GetSaludoFromTime, StrIsNullOrEmpty } from '../Helpers/GlobalFunctions';
 import { AuthContext } from '../Context/Auth/Context';
 import { TextComponent } from '../Components/Shared/SharedComponents';
-import { View } from 'react-native';
+import { View, ImageBackground, Text, ScrollView } from 'react-native';
 import { Avatar } from 'react-native-paper';
 import { systemImages } from '../Constants/Values';
 import { ProfileStyles } from '../Styles/ProfileStyles';
@@ -32,22 +32,80 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
         <>
             <EditProfileModal {...editProfileModal} OnHideModal={() => setEditProfileModal(editProfileModalInitState)} />
             <ScreenContainer>
-                <View style={ProfileStyles.container}>
+                <ImageBackground
+                    source={{ uri: 'https://e1.pxfuel.com/desktop-wallpaper/984/514/desktop-wallpaper-teal-blue-purple-gradient-teal-and-purple.jpg' }}
+                    style={ProfileStyles.Header}>
                     <Avatar.Image style={ProfileStyles.avatar}
                         onTouchStart={() => console.log('TOUCH')}
                         size={90}
                         source={!StrIsNullOrEmpty(user?.avatarUrl) ? { uri: user?.avatarUrl } : systemImages.personIcon}
                     />
-                    <TextComponent style={ProfileStyles.headerText} text={`👋 ${GetSaludoFromTime()}, ${user?.nombre}`} />
-                    <TextComponent style={ProfileStyles.bodyText} text={`${user?.email}`} />
-                    <TextComponent style={ProfileStyles.bodyText} text={`${user?.telefono}`} />
 
-                    <View style={GlobalStyles.DatCont}>
-                        <ButtonGlobal
-                            text='Editar perfil'
-                            icon={{ name: 'edit', library: 'antDesign' }}
-                            onClick={() => setEditProfileModal({ ...editProfileModal, visible: true })} />
-                    </View>
+                    <TextComponent style={ProfileStyles.headerText} text={`👋 ${GetSaludoFromTime()}, ${user?.nombre}`} />
+
+                    <ButtonGlobal
+                        text='Editar perfil'
+                        icon={{ name: 'edit', library: 'antDesign' }}
+                        onClick={() => setEditProfileModal({ ...editProfileModal, visible: true })}
+                        type='small' />
+                </ImageBackground>
+                <View style={ProfileStyles.container}>
+                    <ScrollView style={GlobalStyles.ScrollContainer} showsVerticalScrollIndicator={false}>
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Nombre:</Text>
+                            <TextComponent text={`${user?.nombre}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Apellidos:</Text>
+                            <TextComponent text={`${user?.apellidos}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Telefono:</Text>
+                            <TextComponent text={`${user?.telefono}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Correo:</Text>
+                            <TextComponent text={`${user?.email}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Estado:</Text>
+                            <TextComponent text={`${user?.estado}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Municipio:</Text>
+                            <TextComponent text={`${user?.municipio}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Colonia:</Text>
+                            <TextComponent text={`${user?.coloniaFraccionamiento}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Código postal:</Text>
+                            <TextComponent text={`${user?.codigoPostal}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Calle:</Text>
+                            <TextComponent text={`${user?.calle}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Numero exterior:</Text>
+                            <TextComponent text={`${user?.numExterior}`} style={ProfileStyles.DataValue} />
+                        </View>
+
+                        <View style={ProfileStyles.DataContainer}>
+                            <Text style={ProfileStyles.DataTitle}>Numero interior:</Text>
+                            <TextComponent text={`${user?.numInterior}`} style={ProfileStyles.DataValue} />
+                        </View>
+                    </ScrollView>
                 </View>
             </ScreenContainer>
         </>

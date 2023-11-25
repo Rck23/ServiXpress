@@ -86,6 +86,8 @@ export const AuthProvider = ({ children }: any) => {
             const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
             const userData = ConvertLoginResponseToUser(data)
 
+            console.log(data)
+
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
             dispatch({
@@ -97,6 +99,7 @@ export const AuthProvider = ({ children }: any) => {
             });
         } catch (error: any) {
             LocalHandleExeption(error, 'Autenticación fallida')
+            console.log(error)
         } finally {
             CleanResultDom()
         }
@@ -120,6 +123,9 @@ export const AuthProvider = ({ children }: any) => {
             const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
             const userData = ConvertLoginResponseToUser(data)
 
+            console.log(data)
+            
+
             await AsyncStorage.setItem('token', data.token);
             await LocalStorageStoreData('userData', userData)
 
@@ -132,6 +138,7 @@ export const AuthProvider = ({ children }: any) => {
             });
         } catch (error: any) {
             LocalHandleExeption(error, 'No se ha podido crear su cuenta')
+            console.log(error)
         } finally {
             CleanResultDom()
         }

@@ -97,7 +97,7 @@ export const ServicesProvider = ({ children }: any) => {
 
     const CreateService = async (service: ServiceCreate) => {
         InitRequest('Registrando servicio...')
-
+        console.log(service)
         try {
             const validResult = ValidateRegisterServiceForm(service)
             if (!validResult.ok) return dispatch({ type: 'endRequest', payload: { data: validResult, shootAlert: true } })
@@ -107,6 +107,7 @@ export const ServicesProvider = ({ children }: any) => {
             HandleEndrequest({ ok: true, icon: 'success', message: 'Se ha creado el servicio correctamente', title: 'Servicio creado y publicado' }, true);
         } catch (error: any) {
             LocalHandleExeption(error, 'Error al crear el servicio')
+            console.log(error)
         } finally {
             CleanResultDom()
         }

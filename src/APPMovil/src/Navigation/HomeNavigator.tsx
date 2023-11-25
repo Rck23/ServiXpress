@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ServicesMapScreen } from '../Screens/ServicesMapScreen';
 import { ServicesBoardScreen } from '../Screens/ServiceNavigation/ServicesBoardScreen';
 import { ProfileScreen } from '../Screens/ProfileScreen';
 import { TabBarIconsRNode } from '../Components/Shared/NavigationComponents';
@@ -17,7 +16,6 @@ import { AlertModal } from '../Components/Modals/AlertModal';
 
 export type HomeStackParams = {
     serviceNavigatorScreen: undefined
-    servicesMapScreen: undefined
     profileScreen: undefined
     userNavigatorScreen: undefined
     servicesBoardScreen: undefined
@@ -54,7 +52,6 @@ export const HomeNavigator = () => {
                 })}
             >
                 <Tab.Screen name="serviceNavigatorScreen" component={ServiceNavigator} />
-                <Tab.Screen options={{ ...customScreenOpitons, title: 'Servicios por ubicación' }} name="servicesMapScreen" component={ServicesMapScreen} />
                 <Tab.Screen options={{ ...customScreenOpitons, title: 'Tablero de servicios' }} name="servicesBoardScreen" component={ServicesBoardScreen} />
 
                 {

@@ -2,7 +2,7 @@ import { Platform, StyleSheet } from "react-native";
 import { mainColors } from "../Constants/Values";
 import { GlobalStyles } from "./SharedStyles";
 
-export const ProfileStyles = StyleSheet.create({
+export const ServicesStyles = StyleSheet.create({
     Header: {
         height: 300,
         backgroundColor: mainColors.blue,
