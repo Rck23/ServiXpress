@@ -14,6 +14,7 @@ type AuthAction =
     | { type: 'ok', payload: { token: string, usuario: Usuario } }
     | { type: 'notAuthenticated' }
     | { type: 'logout' }
+    | { type: 'setUserSession', payload: Usuario }
 
 
 export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => {
@@ -36,6 +37,11 @@ export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => 
                 status: 'not-authenticated',
                 token: null,
                 user: undefined
+            }
+        case "setUserSession":
+            return {
+                ...state,
+                user: action.payload
             }
         default:
             return state;

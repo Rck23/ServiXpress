@@ -1,11 +1,10 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import { LoginResponse, ResultData } from '../../Interfaces/DataResponse';
+import { ResultData } from '../../Interfaces/DataResponse';
 import { HandleException } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
 import { Usuario } from '../../Interfaces/Usuario';
 import { UsersReducer, UsersState } from './Reducer';
-import { ConvertLoginResponseToUserList } from '../../Helpers/InterfaceConverter';
 import { DomContext } from '../Dom/Context';
 
 
@@ -46,10 +45,9 @@ export const UsersProvider = ({ children }: any) => {
         InitRequest('Cargando catálogo de usuarios...')
 
         try {
-            const { data } = await API.get<LoginResponse[]>(apiEnpoints.getUsers);
-            const usersData = ConvertLoginResponseToUserList(data)
+            const { data } = await API.get<Usuario[]>(apiEnpoints.getUsers);
 
-            dispatch({ type: 'setUsers', payload: usersData });
+            dispatch({ type: 'setUsers', payload: data });
         } catch (error: any) {
             LocalHandleExeption(error, "Error al obtener el catalogo de usuarios")
         } finally {

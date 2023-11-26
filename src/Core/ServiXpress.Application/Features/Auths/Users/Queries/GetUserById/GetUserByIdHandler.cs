@@ -33,7 +33,17 @@ namespace ServiXpress.Application.Features.Auths.Users.Queries.GetUserById
                 Apellidos = usuario.Apellidos,
                 Telefono = usuario.Telefono,
                 Email = usuario.Email,
-                Avatar = usuario.AvatarUrl,
+                Calle = usuario.Calle,
+                Estatus = usuario.Estatus,
+                Estado = usuario.Estado,
+                FechaHoraRegistro = usuario.FechaHoraRegistro,
+                Municipio = usuario.Municipio,
+                NumInterior = usuario.NumInterior,
+                ColoniaFraccionamiento = usuario.ColoniaFraccionamiento,
+                NumExterior = usuario.NumExterior,
+                CodigoPostal = usuario.CodigoPostal,
+                Descripcion = usuario.Descripcion,
+                AvatarUrl = usuario.AvatarUrl,
                 Roles = await _userManager.GetRolesAsync(usuario)
             };
          

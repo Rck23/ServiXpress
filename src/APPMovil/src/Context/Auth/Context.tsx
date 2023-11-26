@@ -2,12 +2,12 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthState, AuthReducer } from './Reducer';
 import { RegisterUser, Usuario } from '../../Interfaces/Usuario';
-import { LoginResponse, ResetPassword, ResultData } from '../../Interfaces/DataResponse';
+import { ResetPassword, ResultData } from '../../Interfaces/DataResponse';
 import { GetResponseDataFromConstants, HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { alertStr, apiEnpoints } from '../../Constants/Values';
 import API, { formDataHeaders } from '../../Api/Api';
 import { LocalStorageStoreData } from '../../Helpers/LocalStorage';
-import { ConvertLoginResponseToUser, ConvertUserToUpdateUser } from '../../Helpers/InterfaceConverter';
+import { ConvertUserToUpdateUser } from '../../Helpers/InterfaceConverter';
 import { ValidateRegisterUserForm } from '../../Helpers/FormsFunctions';
 import { DomContext } from '../Dom/Context';
 
@@ -16,7 +16,7 @@ type AuthContextProps = {
     result?: ResultData;
     token: string | null;
     user?: Usuario;
-    status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok';
+    status: 'checking' | 'authenticated' | 'not-authenticated' | 'ok'
 
     SignIn: (email: string, password: string) => Promise<void>;
     SignUp: (user: RegisterUser, image?: any) => Promise<void>
@@ -71,11 +71,6 @@ export const AuthProvider = ({ children }: any) => {
     }
 
 
-    /**
-     * Metodo para autenticar el usaurio por el correo y contraseña
-     * @param email 
-     * @param password 
-     */
     const SignIn = async (email: string, password: string) => {
         InitRequest('Validando información...')
 
@@ -83,18 +78,15 @@ export const AuthProvider = ({ children }: any) => {
             if (StrIsNullOrEmpty(email) || StrIsNullOrEmpty(password))
                 return HandleEndrequest(GetResponseDataFromConstants(false, alertStr.emptyFieldsLogin), true)
 
-            const { data } = await API.post<LoginResponse>(apiEnpoints.authenticate, { email, password });
-            const userData = ConvertLoginResponseToUser(data)
-
-            console.log(data)
+            const { data } = await API.post<Usuario>(apiEnpoints.authenticate, { email, password });
 
             await AsyncStorage.setItem('token', data.token);
-            await LocalStorageStoreData('userData', userData)
+            await LocalStorageStoreData('userData', data)
             dispatch({
                 type: 'signUp',
                 payload: {
                     token: data.token,
-                    usuario: userData
+                    usuario: data
                 }
             });
         } catch (error: any) {
@@ -120,20 +112,16 @@ export const AuthProvider = ({ children }: any) => {
             });
 
 
-            const { data } = await API.post<LoginResponse>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
-            const userData = ConvertLoginResponseToUser(data)
-
-            console.log(data)
-            
+            const { data } = await API.post<Usuario>(apiEnpoints.registerUser, formData, { headers: formDataHeaders });
 
             await AsyncStorage.setItem('token', data.token);
-            await LocalStorageStoreData('userData', userData)
+            await LocalStorageStoreData('userData', data)
 
             dispatch({
                 type: 'signUp',
                 payload: {
                     token: data.token,
-                    usuario: userData
+                    usuario: data
                 }
             });
         } catch (error: any) {
@@ -158,11 +146,11 @@ export const AuthProvider = ({ children }: any) => {
             });
 
 
-            const { data } = await API.put<LoginResponse>(apiEnpoints.updateUser, formData, { headers: formDataHeaders });
-            const userData = ConvertLoginResponseToUser(data)
+            const { data } = await API.put<Usuario>(apiEnpoints.updateUser, formData, { headers: formDataHeaders });
 
             await AsyncStorage.setItem('token', data.token);
-            await LocalStorageStoreData('userData', userData)
+            await LocalStorageStoreData('userData', data)
+            dispatch({ type: 'setUserSession', payload: data })
 
             HandleEndrequest({ ok: true, icon: 'success', title: 'Información actualizada', message: 'Se ha guardado su información correctamente.' }, true)
         } catch (error: any) {

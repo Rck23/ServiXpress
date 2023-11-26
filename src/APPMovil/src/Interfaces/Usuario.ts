@@ -24,8 +24,10 @@ export interface Usuario {
     numExterior?: number;
     numInterior?: number;
     rol: number;
+    roles: string[]
     rolNombre: string;
     foto?: any;
+    token: string
 }
 
 

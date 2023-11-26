@@ -14,18 +14,19 @@ import { systemImages } from '../Constants/Values';
 import { ProfileStyles } from '../Styles/ProfileStyles';
 import { GlobalStyles } from '../Styles/SharedStyles';
 import { EditProfileModal } from '../Components/Modals/EditProfileModal';
+import { Usuario } from '../Interfaces/Usuario';
 
 interface Props extends StackScreenProps<HomeStackParams, 'profileScreen'> { }
 
 
 export const ProfileScreen = ({ navigation, route }: Props) => {
-    const { user, LogOut } = useContext(AuthContext)
-
+    const { user: userSession, LogOut } = useContext(AuthContext)
     const [editProfileModal, setEditProfileModal] = useState<ModalEditProfileProps>(editProfileModalInitState)
-
+    const [user, setUser] = useState<Usuario>()
 
     useEffect(() => {
-    }, [])
+        setUser(userSession)
+    }, [userSession])
 
 
     return (
@@ -63,7 +64,7 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Telefono:</Text>
-                            <TextComponent text={`${user?.telefono}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.telefono ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
@@ -73,37 +74,37 @@ export const ProfileScreen = ({ navigation, route }: Props) => {
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Estado:</Text>
-                            <TextComponent text={`${user?.estado}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.estado ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Municipio:</Text>
-                            <TextComponent text={`${user?.municipio}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.municipio ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Colonia:</Text>
-                            <TextComponent text={`${user?.coloniaFraccionamiento}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.coloniaFraccionamiento ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Código postal:</Text>
-                            <TextComponent text={`${user?.codigoPostal}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.codigoPostal ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Calle:</Text>
-                            <TextComponent text={`${user?.calle}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.calle ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Numero exterior:</Text>
-                            <TextComponent text={`${user?.numExterior}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.numExterior ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
 
                         <View style={ProfileStyles.DataContainer}>
                             <Text style={ProfileStyles.DataTitle}>Numero interior:</Text>
-                            <TextComponent text={`${user?.numInterior}`} style={ProfileStyles.DataValue} />
+                            <TextComponent text={`${user?.numInterior ?? ''}`} style={ProfileStyles.DataValue} />
                         </View>
                     </ScrollView>
                 </View>

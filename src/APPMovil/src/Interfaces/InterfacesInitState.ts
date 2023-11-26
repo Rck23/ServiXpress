@@ -25,7 +25,9 @@ export const usuarioInitState: Usuario = {
     estatus: '',
     fechaHoraRegistro: new Date(),
     rol: 0,
-    rolNombre: ''
+    rolNombre: '',
+    token: '',
+    roles: []
 }
 
 export const newUsuarioInitState: RegisterUser = {
