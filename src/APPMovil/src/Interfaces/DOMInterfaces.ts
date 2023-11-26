@@ -1,6 +1,4 @@
-import { ImagePickerResponse } from "react-native-image-picker";
 import { AlertIcons } from "../Constants/Properties"
-import { CategoriaServicio } from "./Servicio"
 import { Usuario } from "./Usuario";
 import { ResultData } from "./DataResponse";
 
@@ -30,6 +28,7 @@ export interface ModalOptionsSelectorProps {
 
 export interface ModalEditProfileProps {
     visible?: boolean
+    data: Usuario,
     title?: string
     OnHideModal?: () => void
 }

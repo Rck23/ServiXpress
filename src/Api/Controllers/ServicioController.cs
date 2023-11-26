@@ -23,8 +23,8 @@ namespace ServiXpress.Api.Controllers
         private readonly ServiXpressDbContext _context;
         private readonly UserManager<Usuario> _userManager;
         private readonly IAuthService _authService;
-        private ILogger<ServicioController> _logger; 
-           
+        private ILogger<ServicioController> _logger;
+
 
         private IMediator _mediator;
 
@@ -38,7 +38,7 @@ namespace ServiXpress.Api.Controllers
             _mediator = mediator;
         }
 
-        
+
         [HttpPost("create", Name = "CreateService")]
         public async Task<ActionResult<Servicio>> Create(ServicioVm servicioVm)
         {
@@ -89,10 +89,10 @@ namespace ServiXpress.Api.Controllers
                 throw new ServiceCreateFailedException(ex);
 
             }
-            
+
         }
 
-       
+
 
         [HttpPut("update/{id}", Name = "UpdateService")]
         public async Task<ActionResult<Servicio>> Update(int id, ServicioVm servicioVm)
@@ -185,7 +185,7 @@ namespace ServiXpress.Api.Controllers
             {
 
                 return await _context.Servicios
-                    .Include(s => s.Usuario)          
+                    .Include(s => s.Usuario)
                     .Include(c => c.CategoriaServicio)
                     .Include(t => t.TipoServicio)
                     .ToListAsync();
@@ -200,27 +200,20 @@ namespace ServiXpress.Api.Controllers
 
         [AllowAnonymous]
         [HttpGet("servicesByParameters", Name = "GetServicesByParameters")]
-        public async Task<ActionResult<List<Servicio>>> GetServicesByParameters([FromQuery] string? estado, string? municipio,
-            string? correos, string? descripcion, string? tipo, string? telefonos, float? precio)
+        public async Task<ActionResult<List<Servicio>>> GetServicesByParameters([FromQuery] string text)
         {
             _logger.LogInformation("Obteniendo servicio(s) por parametro ");
 
             try
             {
-                var servicios = await _context.Servicios
-                    .Where(s => (estado == null || s.Estado == estado)
-                        && (municipio == null || s.Municipio == municipio)
-                        && (correos == null || s.Correos == correos)
-                        && (descripcion == null || s.Descripcion == descripcion)
-                        && (tipo == null || s.Tipo == tipo)
-                        && (telefonos == null || s.Telefonos == telefonos)
-                        && (precio == null || s.Precio == precio))
-                    .ToListAsync();
+                if (string.IsNullOrEmpty(text)) return Ok(new List<Servicio>());
 
-                if (servicios.Count == 0)
-                {
-                    return NotFound("No se encontro ningun servicio.");
-                }
+                var servicios = await _context.Servicios.Where(s =>
+                    s.Estado.Contains(text)
+                    || s.Municipio.Contains(text)
+                    || s.Descripcion.Contains(text)
+                    || s.Tipo.Contains(text)
+                ).ToListAsync();
 
                 return Ok(servicios);
             }

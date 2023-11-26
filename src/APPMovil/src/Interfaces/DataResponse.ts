@@ -17,18 +17,6 @@ export interface ResponseApi {
 }
 
 
-export interface LoginResponse {
-    id: string,
-    nombre: string,
-    apellidos: string,
-    telefono: string,
-    email: string,
-    token: string,
-    avatar: string,
-    roles: string[]
-}
-
-
 export interface ResetPassword {
     email: string,
     token: string,

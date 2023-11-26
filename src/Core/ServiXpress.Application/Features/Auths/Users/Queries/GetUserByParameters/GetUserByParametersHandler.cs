@@ -38,7 +38,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Queries.GetUserByParamete
                     Apellidos = usuario.Apellidos,
                     Telefono = usuario.Telefono,
                     Email = usuario.Email,
-                    Avatar = usuario.AvatarUrl,
+                    AvatarUrl = usuario.AvatarUrl,
                     Roles = await _userManager.GetRolesAsync(usuario)
                 });
             }

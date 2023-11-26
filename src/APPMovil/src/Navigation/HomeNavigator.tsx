@@ -55,7 +55,7 @@ export const HomeNavigator = () => {
                 <Tab.Screen options={{ ...customScreenOpitons, title: 'Tablero de servicios' }} name="servicesBoardScreen" component={ServicesBoardScreen} />
 
                 {
-                    user?.rolNombre?.toLowerCase() === 'agente' &&
+                    user?.roles[0]?.toLowerCase() === 'agente' &&
                     <Tab.Screen name="userNavigatorScreen" component={UserNavigator} />
                 }
 
