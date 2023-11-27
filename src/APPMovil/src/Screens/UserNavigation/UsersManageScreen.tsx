@@ -6,6 +6,9 @@ import { useContext, useEffect } from 'react';
 import { UsersContext } from "../../Context/Users/Context";
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
 import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
+import { Searchbar } from "react-native-paper";
+import { ServicesStyles } from "../../Styles/ServicesStyles";
+import { mainColors } from "../../Constants/Values";
 
 interface Props extends StackScreenProps<UserStackParams, 'userManageScreen'> { }
 
@@ -21,6 +24,13 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
     return (
         <>
             <ScreenContainer>
+                <Searchbar
+                    placeholder="Buscar usuarios...."
+                    placeholderTextColor={mainColors.purpule}
+                    style={ServicesStyles.Filter}
+                    textAlignVertical='top'
+                    onChangeText={(text) => { }}
+                    value={''} />
                 <View style={ManageUsersStyles.container}>
                     <FlatList
                         data={users}

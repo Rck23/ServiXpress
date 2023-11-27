@@ -126,7 +126,6 @@ export const AuthProvider = ({ children }: any) => {
             });
         } catch (error: any) {
             LocalHandleExeption(error, 'No se ha podido crear su cuenta')
-            console.log(error)
         } finally {
             CleanResultDom()
         }

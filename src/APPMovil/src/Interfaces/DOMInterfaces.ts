@@ -37,6 +37,7 @@ export interface ModalEditProfileProps {
 export interface ImageSelectorModalProps {
     visible?: boolean
     title?: string
+    imageUrl?: string
     OnHideModal?: (image?: ImageRequestFormData) => void
 }
 
@@ -51,6 +52,7 @@ export interface DomState {
     statusDom: 'requesting' | 'endRequest' | 'initState' | 'hideAlert';
     resultDom?: { data: ResultData, shootAlert: boolean };
     messageRequest?: string,
+    requestWithoutBlockUI?: boolean
     alerModal: AlertModalProps
     callback?: () => void
 }

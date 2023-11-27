@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, TextInput, Text } from "react-native"
+import { View, FlatList } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { ServiceStackParams } from '../../Navigation/ServiceNavigator';
 import { useContext, useEffect, useState } from "react";
@@ -9,39 +9,42 @@ import { RefreshControl } from "react-native";
 import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
 import { ServicesStyles } from "../../Styles/ServicesStyles";
 import { mainColors } from "../../Constants/Values";
+import { Searchbar } from "react-native-paper";
+import { DomContext } from "../../Context/Dom/Context";
 
 
 interface Props extends StackScreenProps<ServiceStackParams, 'servicesBoardScreen'> { }
 
 export const ServicesBoardScreen = ({ navigation, route }: Props) => {
-  const { SearchServices, GetServices, services, status } = useContext(ServicesContext)
+  const { SearchServices, GetServices, services } = useContext(ServicesContext)
+  const { statusDom } = useContext(DomContext)
   const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
-    GetServices(),
-      SearchServices
+    GetServices()
   }, [])
 
-  const handleSearch = (text: string) => {
-    setSearchText(text);
+  const handleSearch = async (text: string) => {
+    setSearchText(text)
+    SearchServices(text)
   };
 
-  const filteredData = services.filter((text) =>
-    text.categoriaServicio.nombre.toLowerCase().includes(searchText.toLowerCase())
-  );
+  // const filteredData = services.filter((text) =>
+  //   text.categoriaServicio.nombre.toLowerCase().includes(searchText.toLowerCase())
+  // );
 
   return (
     <ScreenContainer>
+      <Searchbar
+        placeholder="Buscar servicios..."
+        placeholderTextColor={mainColors.purpule}
+        style={ServicesStyles.Filter}
+        textAlignVertical='top'
+        onChangeText={(text) => handleSearch(text)}
+        value={searchText} />
       <View style={ManageUsersStyles.container}>
-        <TextInput
-          placeholder="Buscar servicio...."
-          placeholderTextColor={mainColors.purpule}
-          style={ServicesStyles.Filter}
-          onChangeText={handleSearch}
-          value={searchText} />
-
         <FlatList
-          data={filteredData}
+          data={services}
           keyExtractor={(item, index) => index.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
@@ -55,7 +58,7 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
           )}
           refreshControl={
             <RefreshControl
-              refreshing={status === 'requesting'}
+              refreshing={statusDom === 'requesting'}
               onRefresh={GetServices}
             />
           }
@@ -64,69 +67,3 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
     </ScreenContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 10,
-  },
-  container: {
-    padding: 10,
-    backgroundColor: "white"
-  },
-  card: {
-    borderRadius: 15,
-    backgroundColor: '#fff',
-    marginBottom: 20,
-    overflow: 'hidden',
-    borderColor: "black",
-    borderWidth: 1,
-    width: "100%",
-    height: 160,
-  },
-  image: {
-    width: '100%',
-    height: 200,
-  },
-  details: {
-    padding: 20,
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: "black",
-  },
-  occupation: {
-    fontSize: 14,
-    marginBottom: 10,
-    color: "#3C3C3C"
-  },
-  description: {
-    fontSize: 12,
-    color: 'black',
-  },
-  cardheader: {
-    width: "100%",
-    height: "40%",
-    flexDirection: 'row',
-    padding: 10,
-  },
-  cardbody: {
-    width: "100%",
-    height: "60%",
-    padding: 10,
-  },
-  cardimage: {
-    width: "15%",
-    height: "100%",
-    marginRight: 10,
-    borderRadius: 50
-  },
-  datos: {
-    width: "65%",
-    height: "100%",
-    flexDirection: 'column',
-    padding: 5,
-    bottom: 7,
-  },
-});

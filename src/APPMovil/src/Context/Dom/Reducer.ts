@@ -4,7 +4,7 @@ import { ResultData } from "../../Interfaces/DataResponse";
 type DomAction =
     | { type: 'endRequest', payload: { data: ResultData, shootAlert: boolean } }
     | { type: 'cleanResult' }
-    | { type: 'requesting', payload: string }
+    | { type: 'requesting', payload: { text: string, withoutBlockUI?: boolean } }
     | { type: 'hideAlert' }
     | { type: 'addEventOnHideAlert', payload: () => void }
     | { type: 'addEventOnConfirmAlert', payload: () => void }
@@ -23,8 +23,9 @@ export const DomReducer = (state: DomState, action: DomAction): DomState => {
             return {
                 ...state,
                 statusDom: 'requesting',
-                messageRequest: action.payload,
-                resultDom: undefined
+                messageRequest: action.payload.text,
+                resultDom: undefined,
+                requestWithoutBlockUI: action.payload.withoutBlockUI
             }
         case 'cleanResult':
             return {

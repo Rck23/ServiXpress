@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { ServicesReducer, ServicesState } from './Reducer';
 import { ResultData } from '../../Interfaces/DataResponse';
-import { HandleException } from '../../Helpers/GlobalFunctions';
+import { HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
 import { CategoriaServicio, ServiceCreate, Servicio } from '../../Interfaces/Servicio';
@@ -96,16 +96,18 @@ export const ServicesProvider = ({ children }: any) => {
             CleanResultDom()
         }
     };
-    
+
     const SearchServices = async (text: string) => {
-        InitRequest('Buscando servicios...')
+        InitRequest('Buscando servicios...', true)
+        if (StrIsNullOrEmpty(text) || text.trim().length <= 3)
+            return dispatch({ type: 'endRequest', payload: { data: { ok: true, icon: 'info' }, shootAlert: false } })
 
         try {
-            const { data } = await API.get<Servicio>(apiEnpoints.searchServices + text);
+            const { data } = await API.get<Servicio[]>(apiEnpoints.searchServices + text);
 
-            dispatch({ type: 'setSearchServicios', payload: data });
+            dispatch({ type: 'setServices', payload: data });
         } catch (error: any) {
-            LocalHandleExeption(error, 'Error al obtener el detalle del servicio')
+            LocalHandleExeption(error, 'Error al consultar servicios')
         } finally {
             CleanResultDom()
         }

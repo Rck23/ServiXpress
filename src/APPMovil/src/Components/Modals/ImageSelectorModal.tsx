@@ -8,7 +8,7 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 import { TakeImageFromGallery, TakePhoto } from '../Shared/ImagePickerComponent';
 import { AlertModal } from './AlertModal';
 import { alertModalInitState } from '../../Interfaces/InterfacesInitState';
-import { ShootAlertOnResult } from '../../Helpers/GlobalFunctions';
+import { ShootAlertOnResult, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { mainColors, systemImages } from '../../Constants/Values';
 import { Avatar } from 'react-native-paper';
 import { ConvertImgPickerToImageRequest } from '../../Helpers/InterfaceConverter';
@@ -23,9 +23,9 @@ export const ImageSelectorModal = (props: ImageSelectorModalProps) => {
     }, [props.visible])
 
 
-    const handleCloseModal = async () => {
+    const handleCloseModal = async (save = false) => {
         const resultImage = ConvertImgPickerToImageRequest(imageSelected)
-        props.OnHideModal ? props.OnHideModal(resultImage) : {}
+        props.OnHideModal && props.OnHideModal(save ? resultImage : undefined)
     }
 
     const OnHideAlert = () => setAlertModal(alertModalInitState)
@@ -40,7 +40,7 @@ export const ImageSelectorModal = (props: ImageSelectorModalProps) => {
 
     const OnConfirmSelection = () => {
         setImageSelected(imageSelected)
-        handleCloseModal()
+        handleCloseModal(true)
     }
 
     return (
@@ -59,9 +59,9 @@ export const ImageSelectorModal = (props: ImageSelectorModalProps) => {
 
                         <Avatar.Image style={{ marginVertical: 10 }}
                             size={100}
-                            source={
-                                imageSelected && imageSelected.assets && imageSelected.assets.length > 0
-                                    ? { uri: imageSelected.assets[0].uri }
+                            source={imageSelected && imageSelected.assets && imageSelected.assets.length > 0
+                                ? { uri: imageSelected.assets[0].uri }
+                                : props.imageUrl ? { uri: props.imageUrl }
                                     : systemImages.personIcon
                             }
                         />

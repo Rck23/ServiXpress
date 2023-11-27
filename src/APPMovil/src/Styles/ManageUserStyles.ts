@@ -5,6 +5,6 @@ export const ManageUsersStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         marginHorizontal: 10,
-        marginVertical: 10
+        marginVertical: 2
     },
 })

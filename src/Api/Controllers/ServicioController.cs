@@ -208,11 +208,19 @@ namespace ServiXpress.Api.Controllers
             {
                 if (string.IsNullOrEmpty(text)) return Ok(new List<Servicio>());
 
-                var servicios = await _context.Servicios.Where(s =>
-                    s.Estado.Contains(text)
-                    || s.Municipio.Contains(text)
-                    || s.Descripcion.Contains(text)
-                    || s.Tipo.Contains(text)
+                text = text.Trim().ToLower();
+
+                var servicios = await _context.Servicios
+                    .Include(x => x.Usuario)
+                    .Include(x => x.TipoServicio)
+                    .Include(x => x.CategoriaServicio)
+                    .Where(s =>
+                        s.Estado.ToLower().Contains(text)
+                        || s.Municipio.ToLower().Contains(text)
+                        || s.Descripcion.ToLower().Contains(text)
+                        || s.Tipo.ToLower().Contains(text)
+                        || s.Usuario.Nombre.ToLower().Contains(text)
+                        || s.CategoriaServicio.Nombre.ToLower().Contains(text)
                 ).ToListAsync();
 
                 return Ok(servicios);

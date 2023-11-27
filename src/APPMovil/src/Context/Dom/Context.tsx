@@ -16,12 +16,13 @@ type DomContextProps = {
     statusDom: 'requesting' | 'endRequest' | 'initState' | 'hideAlert';
     messageRequest?: string
     alertModal: AlertModalProps
+    requestWithoutBlockUI?: boolean
 
     CleanResultDom: () => void
     RemoveAlertDom: () => void
     AddEventOnConfirmAlert: (callback: () => void) => void
     AddEventOnCloseAlert: (callback: () => void) => void
-    InitRequest: (msg?: string) => void
+    InitRequest: (msg?: string, withoutBlockUI?: boolean) => void
     HandleEndrequest: (data: ResultData, shootAlert: boolean) => void
 }
 
@@ -62,12 +63,11 @@ export const DomProvider = ({ children }: any) => {
         dispatch({ type: 'addEventOnHideAlert', payload: callback })
     }
 
-    const InitRequest = (msg?: string) => {
-        dispatch({ type: 'requesting', payload: msg ?? '' })
+    const InitRequest = (msg?: string, withoutBlockUI?: boolean) => {
+        dispatch({ type: 'requesting', payload: { text: msg ?? '', withoutBlockUI } })
     }
 
     const HandleEndrequest = (data: ResultData, shootAlert: boolean) => {
-        console.log(alertModal)
         setAlertModal({
             ...alertModal,
             visible: true,

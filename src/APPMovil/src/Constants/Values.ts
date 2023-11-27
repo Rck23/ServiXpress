@@ -92,7 +92,7 @@ export const apiEnpoints = {
     getUserDetail: "/Usuario/",
     getServiceDetails: "/Servicio/getServiceById/",
     resetPassword: '/Usuario/ResetPassword',
-    searchServices: '/Servicio/servicesByParameters'
+    searchServices: '/Servicio/servicesByParameters?text='
 }
 
 

@@ -13,8 +13,8 @@ import { AlertModal } from '../Components/Modals/AlertModal';
 const Stack = createStackNavigator();
 
 export const Navigator = () => {
-    const { user, status } = useContext(AuthContext)
-    const { messageRequest, statusDom, alertModal, AddEventOnCloseAlert } = useContext(DomContext)
+    const { status } = useContext(AuthContext)
+    const { messageRequest, statusDom, alertModal, requestWithoutBlockUI } = useContext(DomContext)
 
     if (status == 'checking')
         return (<LoadingScreen visible />)
@@ -23,7 +23,7 @@ export const Navigator = () => {
     return (
         <>
             <AlertModal {...alertModal} />
-            <BlockUI visible={statusDom === 'requesting'} message={messageRequest} />
+            <BlockUI visible={statusDom === 'requesting' && !requestWithoutBlockUI} message={messageRequest} />
 
             <Stack.Navigator screenOptions={{ headerShown: false }} >
                 {
