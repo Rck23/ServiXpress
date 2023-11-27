@@ -101,7 +101,7 @@ export const ServicesProvider = ({ children }: any) => {
         InitRequest('Buscando servicios...')
 
         try {
-            const { data } = await API.get<Servicio>(apiEnpoints.searchServices);
+            const { data } = await API.get<Servicio>(apiEnpoints.searchServices + text);
 
             dispatch({ type: 'setSearchServicios', payload: data });
         } catch (error: any) {

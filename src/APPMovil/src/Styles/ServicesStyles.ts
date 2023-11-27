@@ -64,5 +64,26 @@ export const ServicesStyles = StyleSheet.create({
     },
     DescriptionContainer: {
         width: "88%"
+    },
+    Filter: {
+        width: "85%",
+        borderColor: mainColors.purpule,
+        borderWidth: 2,
+        alignSelf: "center",
+        marginBottom: 10,
+        borderRadius: 10,
+        padding: 10,
+        color: mainColors.purpule,
+        fontSize: 20
+    },
+    emptyList: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+    },
+    emptyListText: {
+        fontSize: 20,
+        color: 'gray',
     }
 })
