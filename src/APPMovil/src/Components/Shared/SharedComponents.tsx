@@ -76,7 +76,7 @@ type ServiceItemProps = {
 
 export const UserListItem = (props: UserItemProps) => {
     const user = props.user
-    const styleTextInfo: StyleProp<TextStyle> = { color: mainColors.pink2, fontSize: 10, fontWeight: '600', textAlign: 'right' }
+    const styleTextInfo: StyleProp<TextStyle> = { color: mainColors.pink2, fontSize: 9, fontWeight: '600', textAlign: 'right' }
 
     return (
         <TouchableOpacity
@@ -96,7 +96,7 @@ export const UserListItem = (props: UserItemProps) => {
                         text={`${user.nombre} ${user.apellidos}`} />
                 </Col>
                 <Col size={1}>
-                    <TextComponent style={styleTextInfo} text={user.rolNombre} />
+                    <TextComponent style={styleTextInfo} text={user.roles.toString()} />
                 </Col>
             </Row>
             <View>
@@ -112,7 +112,7 @@ export const UserListItem = (props: UserItemProps) => {
 
 export const ServiceListItem = (props: ServiceItemProps) => {
     const service = props.service
-    const styleTextInfo: StyleProp<TextStyle> = { color: mainColors.pink2, fontSize: 10, fontWeight: '600', textAlign: 'right' }
+    const styleTextInfo: StyleProp<TextStyle> = { color: mainColors.pink2, fontSize: 9, fontWeight: '600', textAlign: 'right' }
 
     return (
         <TouchableOpacity

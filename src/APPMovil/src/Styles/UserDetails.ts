@@ -1,7 +1,8 @@
 import { Platform, StyleSheet } from "react-native";
 import { mainColors } from "../Constants/Values";
+import { GlobalStyles } from "./SharedStyles";
 
-export const ServicesStyles = StyleSheet.create({
+export const UserDetailsStyles = StyleSheet.create({
     Header: {
         height: 350,
         backgroundColor: mainColors.lightpurple,
@@ -9,8 +10,7 @@ export const ServicesStyles = StyleSheet.create({
         marginHorizontal: -10,
         borderBottomRightRadius: 350,
         justifyContent: 'center',
-        alignItems: "center",
-        marginBottom: 2
+        alignItems: "center"
     },
     UserContainer: {
         flexDirection: "row",
@@ -44,25 +44,25 @@ export const ServicesStyles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 20,
+        padding: 10,
         backgroundColor: mainColors.white
     },
     DataContainer: {
-        flexDirection: "row",
+        width: "100%",
+        flexDirection: "column",
         marginBottom: 10,
-        textAlign: "justify",
-        alignItems: "center"
+        textAlign: "justify"
     },
     DataTitle: {
         fontSize: 20,
-        color: mainColors.purpule3
+        marginBottom: 5,
+        color: mainColors.purpule3,
+        fontWeight: "bold"
     },
     DataValue: {
         fontSize: 18,
-        marginLeft: 10,
+        borderBottomColor: mainColors.ligtgray,
+        borderBottomWidth: 2,
         textAlign: "justify"
-    },
-    DescriptionContainer: {
-        width: "88%"
     }
 })

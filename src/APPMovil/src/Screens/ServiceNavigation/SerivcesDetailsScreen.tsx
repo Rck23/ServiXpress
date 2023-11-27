@@ -8,6 +8,11 @@ import { useContext, useEffect } from "react";
 import { ServicesContext } from "../../Context/Services/Context";
 import { TextComponent } from "../../Components/Shared/SharedComponents";
 import { ButtonGlobal } from "../../Components/Shared/FormsComponents";
+import { ServicesStyles } from "../../Styles/ServicesStyles";
+import { Avatar } from "react-native-paper";
+import { StrIsNullOrEmpty } from "../../Helpers/GlobalFunctions";
+import { systemImages } from "../../Constants/Values";
+import { Icon } from "../../Components/Shared/IconComponents";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'serviceDetailsScreen'> { }
 
@@ -19,50 +24,67 @@ export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
     }, [])
     return (
         <ScreenContainer>
-            <ScrollView style={GlobalStyles.ScrollContainer} showsVerticalScrollIndicator={false}>
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Descripcion del servicio</Text>
-                    <TextComponent text={serviceDetails?.descripcion} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Estado</Text>
-                    <TextComponent text={serviceDetails?.estado} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Municipio</Text>
-                    <TextComponent text={serviceDetails?.municipio} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Correos de contacto</Text>
-                    <TextComponent text={serviceDetails?.correos} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Telefonos de contacto</Text>
-                    <TextComponent text={serviceDetails?.telefonos} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Otros medios de contacto</Text>
-                    <TextComponent text={serviceDetails?.otrosMediosContacto} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <Text style={GlobalStyles.Titulo}>Precio por servicio</Text>
-                    <TextComponent text={serviceDetails?.precio.toString()} style={GlobalStyles.Dato} />
-                </View>
-
-                <View style={GlobalStyles.DatCont}>
-                    <ButtonGlobal
-                        text='Calificar servicio'
-                        icon={{ name: 'star', library: 'antDesign' }}
-                        onClick={() => navigation.navigate('servicesCalificationScreen')}
+            <View style={ServicesStyles.Header}>
+                <View style={ServicesStyles.UserContainer}>
+                    <Avatar.Image style={ServicesStyles.avatar}
+                        onTouchStart={() => console.log('TOUCH')}
+                        size={90}
+                        source={!StrIsNullOrEmpty(serviceDetails?.usuario.avatarUrl) ? { uri: serviceDetails?.usuario.avatarUrl } : systemImages.personIcon}
                     />
+
+                    <View style={ServicesStyles.UserText}>
+                        <TextComponent style={ServicesStyles.nombre} text={`${serviceDetails?.usuario.nombre}`} />
+                        <TextComponent style={ServicesStyles.servicio} text={`${serviceDetails?.categoriaServicio.nombre}`} />
+                    </View>
                 </View>
-            </ScrollView>
+
+                <ButtonGlobal
+                    text='Calificar'
+                    icon={{ name: 'star', library: 'antDesign' }}
+                    onClick={() => navigation.navigate('servicesCalificationScreen')}
+                    type="small"
+                />
+            </View>
+            <View style={ServicesStyles.container}>
+                <ScrollView style={GlobalStyles.ScrollContainer} showsVerticalScrollIndicator={false}>
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"info-circle"} library={"fontAwesome"} style={ServicesStyles.DataTitle} />
+                        <View style={ServicesStyles.DescriptionContainer}>
+                            <TextComponent text={serviceDetails?.descripcion} style={ServicesStyles.DataValue} />
+                        </View>
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"location"} library={"entypo"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.estado} style={ServicesStyles.DataValue} />
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"location"} library={"entypo"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.municipio} style={ServicesStyles.DataValue} />
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"mail"} library={"antDesign"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.correos} style={ServicesStyles.DataValue} />
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"phone"} library={"antDesign"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.telefonos} style={ServicesStyles.DataValue} />
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"share-social"} library={"ion"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.otrosMediosContacto} style={ServicesStyles.DataValue} />
+                    </View>
+
+                    <View style={ServicesStyles.DataContainer}>
+                        <Icon name={"money"} library={"fontAwesome"} style={ServicesStyles.DataTitle} />
+                        <TextComponent text={serviceDetails?.precio.toString()} style={ServicesStyles.DataValue} />
+                    </View>
+                </ScrollView>
+            </View>
         </ScreenContainer>
     )
 }

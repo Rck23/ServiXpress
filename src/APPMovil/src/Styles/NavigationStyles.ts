@@ -5,20 +5,22 @@ import { GlobalStyles } from "./SharedStyles";
 
 export const NavigationStyles = StyleSheet.create({
     tab: {
-        width: 55,
-        borderRadius: 50,
+        width: 53,
+        borderRadius: 100,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     focusedTab: {
-        backgroundColor: mainColors.purpule3,
+        backgroundColor: mainColors.white,
+        borderColor: mainColors.purpule3,
+        borderWidth: 3,
         top: -10,
         ...GlobalStyles.boxShadow
     },
     focusedTabIcon: {
-        color: mainColors.white,
-        fontSize: 30
+        color: mainColors.purpule3,
+        fontSize: 35
     },
     tabIcon: {
         color: mainColors.gray
@@ -29,7 +31,7 @@ export const NavigationStyles = StyleSheet.create({
         borderRadius: 50,
         alignItems: 'center',
         alignContent: 'center',
-        height: 60,
+        height: 53,
         backgroundColor: mainColors.white,
         borderColor: mainColors.blackLight,
     },

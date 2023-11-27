@@ -18,12 +18,14 @@ type ServicesContextProps = {
     serviceCategories: CategoriaServicio[]
     services: Servicio[]
     serviceDetails: Servicio
+    searchServices: Servicio
 
     CreateService: (service: ServiceCreate) => Promise<void>
     GetServicesCategories: () => Promise<void>
     GetServices: () => Promise<void>
     CleanResult: () => void
     GetServiceDetails: (id: string) => Promise<void>
+    SearchServices: (text: string) => Promise<void>
 }
 
 const servicesInitState: ServicesState = {
@@ -32,7 +34,8 @@ const servicesInitState: ServicesState = {
     result: undefined,
     serviceCategories: [],
     services: [],
-    serviceDetails: servicioInitState
+    serviceDetails: servicioInitState,
+    searchServices: servicioInitState
 }
 
 
@@ -93,6 +96,20 @@ export const ServicesProvider = ({ children }: any) => {
             CleanResultDom()
         }
     };
+    
+    const SearchServices = async (text: string) => {
+        InitRequest('Buscando servicios...')
+
+        try {
+            const { data } = await API.get<Servicio>(apiEnpoints.searchServices);
+
+            dispatch({ type: 'setSearchServicios', payload: data });
+        } catch (error: any) {
+            LocalHandleExeption(error, 'Error al obtener el detalle del servicio')
+        } finally {
+            CleanResultDom()
+        }
+    };
 
 
     const CreateService = async (service: ServiceCreate) => {
@@ -133,7 +150,8 @@ export const ServicesProvider = ({ children }: any) => {
             CreateService,
             GetServices,
             CleanResult,
-            GetServiceDetails
+            GetServiceDetails,
+            SearchServices
         }}>
             {children}
         </ServicesContext.Provider>

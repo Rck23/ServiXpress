@@ -5,6 +5,7 @@ export const mainColors = {
     purpule: '#5503A6',
     purpule2: '#51168C',
     purpule3: '#331859',
+    lightpurple: '#9D5EDB',
     black: '#616161',
     dark: '#242424',
     white: '#FFF',
@@ -90,7 +91,8 @@ export const apiEnpoints = {
     getUsers: "/Usuario/All",
     getUserDetail: "/Usuario/",
     getServiceDetails: "/Servicio/getServiceById/",
-    resetPassword: '/Usuario/ResetPassword'
+    resetPassword: '/Usuario/ResetPassword',
+    searchServices: '/Servicio/servicesByParameters'
 }
 
 

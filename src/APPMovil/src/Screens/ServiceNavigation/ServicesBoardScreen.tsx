@@ -12,10 +12,11 @@ import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
 interface Props extends StackScreenProps<ServiceStackParams, 'servicesBoardScreen'> { }
 
 export const ServicesBoardScreen = ({ navigation, route }: Props) => {
-  const { GetServices, services, status } = useContext(ServicesContext)
+  const { SearchServices, GetServices, services, status } = useContext(ServicesContext)
 
   useEffect(() => {
-    GetServices()
+    GetServices(),
+    SearchServices
   }, [])
 
   return (
