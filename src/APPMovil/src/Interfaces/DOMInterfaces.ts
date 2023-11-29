@@ -25,6 +25,12 @@ export interface ModalOptionsSelectorProps {
     options: KeyValue[]
     OnHideModal?: (selected?: KeyValue) => void
 }
+export interface ModalStatusUserProps {
+    visible?: boolean
+    title?: string
+    options: KeyValue[]
+    OnHideModal?: (selected?: KeyValue) => void
+}
 
 export interface ModalEditProfileProps {
     visible?: boolean

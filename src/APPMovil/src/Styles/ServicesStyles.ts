@@ -17,8 +17,8 @@ export const ServicesStyles = StyleSheet.create({
         justifyContent: "center"
     },
     avatar: {
-        width: 150,
-        height: 150,
+        width: 120,
+        height: 120,
         alignItems: "center",
         justifyContent: "center",
         borderRadius: 200,
@@ -40,7 +40,8 @@ export const ServicesStyles = StyleSheet.create({
     servicio: {
         fontSize: 12,
         color: mainColors.ligtgray,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        textTransform: "capitalize"
     },
     container: {
         flex: 1,
