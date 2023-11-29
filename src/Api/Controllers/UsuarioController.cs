@@ -270,18 +270,14 @@ namespace ServiXpress.Api.Controllers
         // [Authorize(Roles = RoleAPI.AGENTE)]
         [AllowAnonymous]
         [HttpGet("userByParameters", Name = "GetUserByParameters")]
-        public async Task<ActionResult<List<AuthResponse>>> GetUserByParameters([FromQuery] GetUserByParameters userByParameters)
+        public async Task<ActionResult<List<AuthResponse>>> GetUserByParameters([FromQuery] string text)
         {
             _logger.LogInformation("Obteniendo usuario(s) por parametro");
 
             try
             {
-                var authResponses = await _mediator.Send(userByParameters);
-
-                if (!authResponses.Any())
-                {
-                    return NotFound("No se encontraron usuarios con los criterios de búsqueda proporcionados.");
-                }
+                var request = new GetUserByParameters { Text = text };
+                var authResponses = await _mediator.Send(request);
 
                 return Ok(authResponses);
 

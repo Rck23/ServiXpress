@@ -17,12 +17,13 @@ namespace ServiXpress.Application.Features.Auths.Users.Queries.GetUserByParamete
 
         public async Task<List<AuthResponse>> Handle(GetUserByParameters request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.Text)) return new List<AuthResponse>();
+            var text = request.Text.ToLower().Trim();
             var usuarios = await _userManager.Users
-                .Where(u =>
-                    (request.Nombre != null && u.Nombre.Contains(request.Nombre)) ||
-                    (request.Apellidos != null && u.Apellidos.Contains(request.Apellidos)) ||
-                    (request.Telefono != null && u.Telefono.Contains(request.Telefono)) ||
-                    (request.Email != null && u.Email.Contains(request.Email))
+                .Where(u => u.Nombre.ToLower().Contains(text)
+                || u.Apellidos.ToLower().Contains(text)
+                || u.Telefono.ToLower().Contains(text)
+                || u.Email.ToLower().Contains(text)
                 )
                 .ToListAsync();
 
