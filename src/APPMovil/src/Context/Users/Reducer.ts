@@ -16,7 +16,7 @@ type UsersAction =
     | { type: 'cleanResult' }
     | { type: 'requesting', payload: string }
     | { type: 'setUsers', payload: Usuario[] }
-    | {type: 'setUserDetail', payload: Usuario }
+    | { type: 'setUserDetail', payload: Usuario }
 
 
 export const UsersReducer = (state: UsersState, action: UsersAction): UsersState => {

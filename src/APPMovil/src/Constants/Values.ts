@@ -79,6 +79,12 @@ export const userRoles: KeyValue[] = [
     { value: 1, key: "Solicitar servicios", name: "Solicitar servicios" }
 ]
 
+export const userStatus: KeyValue[] = [
+    { value: 0, key: "Alta", name: "Alta" },
+    { value: 1, key: "Verificado", name: "Verificado" },
+    { value: 2, key: "Bloqueado", name: "Bloqueado" }
+]
+
 
 export const apiEnpoints = {
     authenticate: "/Usuario/Login",
@@ -92,7 +98,9 @@ export const apiEnpoints = {
     getUserDetail: "/Usuario/",
     getServiceDetails: "/Servicio/getServiceById/",
     resetPassword: '/Usuario/ResetPassword',
-    searchServices: '/Servicio/servicesByParameters?text='
+    searchServices: '/Servicio/servicesByParameters?text=',
+    searchUsers: '/Usuario/userByParameters?text=',
+    changeUserStatus: '/Usuario/changeStatusUser'
 }
 
 

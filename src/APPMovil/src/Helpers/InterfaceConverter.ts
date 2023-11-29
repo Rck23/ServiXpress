@@ -1,7 +1,7 @@
 import { ImagePickerResponse } from "react-native-image-picker";
 import { ImageRequestFormData, KeyValue } from "../Interfaces/DOMInterfaces";
 import { CategoriaServicio } from "../Interfaces/Servicio";
-import { RegisterUser, UpdateUser, Usuario } from "../Interfaces/Usuario";
+import { EstatusUsuario, RegisterUser, UpdateUser, Usuario } from "../Interfaces/Usuario";
 
 
 export const ConvertToKeyValueList = (inputList: CategoriaServicio[]): KeyValue[] => {
@@ -15,7 +15,6 @@ export const ConvertToKeyValueList = (inputList: CategoriaServicio[]): KeyValue[
 
     return outputList
 }
-
 
 export const ConvertImgPickerToImageRequest = (inputImage?: ImagePickerResponse): ImageRequestFormData => {
     if (inputImage && inputImage.assets)

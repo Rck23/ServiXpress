@@ -2,24 +2,31 @@ import { View, FlatList, RefreshControl } from "react-native"
 import { StackScreenProps } from '@react-navigation/stack';
 import { UserStackParams } from '../../Navigation/UserNavigator';
 import { ListEmptyComponent, UserListItem } from "../../Components/Shared/SharedComponents";
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UsersContext } from "../../Context/Users/Context";
 import { ScreenContainer } from "../../Components/Shared/NavigationComponents";
 import { ManageUsersStyles } from "../../Styles/ManageUserStyles";
 import { Searchbar } from "react-native-paper";
 import { ServicesStyles } from "../../Styles/ServicesStyles";
 import { mainColors } from "../../Constants/Values";
+import { DomContext } from "../../Context/Dom/Context";
 
 interface Props extends StackScreenProps<UserStackParams, 'userManageScreen'> { }
 
 
 export const UsersManageScreen = ({ navigation, route }: Props) => {
-    const { users, GetAllUsers, status } = useContext(UsersContext)
+    const { users, GetAllUsers, SearchUsers } = useContext(UsersContext)
+    const { statusDom } = useContext(DomContext)
+    const [ searchText, setSearchText] = useState<string>('');
 
     useEffect(() => {
         GetAllUsers()
     }, [])
 
+    const handleSearch = async (text: string) => {
+        setSearchText(text)
+        SearchUsers(text)
+    };
 
     return (
         <>
@@ -29,8 +36,8 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
                     placeholderTextColor={mainColors.purpule}
                     style={ServicesStyles.Filter}
                     textAlignVertical='top'
-                    onChangeText={(text) => { }}
-                    value={''} />
+                    onChangeText={(text) => handleSearch(text)}
+                    value={searchText} />
                 <View style={ManageUsersStyles.container}>
                     <FlatList
                         data={users}
@@ -47,7 +54,7 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
                         )}
                         refreshControl={
                             <RefreshControl
-                                refreshing={status === 'requesting'}
+                                refreshing={statusDom === 'requesting'}
                                 onRefresh={GetAllUsers}
                             />
                         }

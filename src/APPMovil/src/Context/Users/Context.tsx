@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { ResultData } from '../../Interfaces/DataResponse';
-import { HandleException } from '../../Helpers/GlobalFunctions';
+import { HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
 import { Usuario } from '../../Interfaces/Usuario';
 import { UsersReducer, UsersState } from './Reducer';
 import { DomContext } from '../Dom/Context';
+import { usuarioInitState } from '../../Interfaces/InterfacesInitState';
 
 
 type UsersContextProps = {
@@ -20,6 +21,8 @@ type UsersContextProps = {
     GetAllUsers: () => Promise<void>
     GetUserDetail: (id: string) => Promise<void>
     CleanResult: () => void
+    SearchUsers: (text: string) => Promise<void>
+    ChangeUserStatus: (id: string, estatus: string) => Promise<void>
 }
 
 const usersInitState: UsersState = {
@@ -69,6 +72,39 @@ export const UsersProvider = ({ children }: any) => {
         }
     };
 
+    const SearchUsers = async (text: string) => {
+        InitRequest('Buscando usuarios...', true)
+        if (StrIsNullOrEmpty(text) || text.trim().length <= 3)
+            return dispatch({ type: 'endRequest', payload: { data: { ok: true, icon: 'info' }, shootAlert: false } })
+
+        try {
+            const { data } = await API.get<Usuario[]>(apiEnpoints.searchUsers + text);
+
+            dispatch({ type: 'setUsers', payload: data });
+        } catch (error: any) {
+            LocalHandleExeption(error, 'Error al encontrar usuarios')
+        } finally {
+            CleanResultDom()
+        }
+    };
+    
+    const ChangeUserStatus = async (id: string, estatus: string) => {
+        InitRequest('Cambiando status del usuario...')
+
+        try {
+            const { data } = await API.post(`${apiEnpoints.changeUserStatus}`, {
+                usuarioId: id,
+                nuevoEstatus: estatus
+            });
+
+            HandleEndrequest({icon: 'success', ok: true, message:'Se ha actualizado el estatus', title:'Status actualizado'}, true);
+        } catch (error: any) {
+            LocalHandleExeption(error, "Error al actualizar el status del usuario")
+        } finally {
+            CleanResultDom()
+        }
+    };
+
 
     const CleanResult = () => {
         dispatch({ type: 'cleanResult' })
@@ -87,7 +123,9 @@ export const UsersProvider = ({ children }: any) => {
             ...state,
             GetAllUsers,
             GetUserDetail,
-            CleanResult
+            CleanResult,
+            SearchUsers,
+            ChangeUserStatus
         }}>
             {children}
         </UsersContext.Provider>

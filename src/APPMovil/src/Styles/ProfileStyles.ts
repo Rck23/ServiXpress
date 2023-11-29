@@ -9,7 +9,7 @@ export const ProfileStyles = StyleSheet.create({
         marginVertical: -10,
         marginHorizontal: -10,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
     },
     avatar: {
         width: 150,
@@ -31,7 +31,10 @@ export const ProfileStyles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 10,
-        backgroundColor: mainColors.white
+        backgroundColor: mainColors.white,
+        borderTopEndRadius: 30,
+        borderTopStartRadius: 30,
+        ...GlobalStyles.boxShadow
     },
     DataContainer: {
         width: "100%",

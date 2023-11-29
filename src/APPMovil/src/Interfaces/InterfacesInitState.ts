@@ -1,4 +1,4 @@
-import { AlertModalProps, ImageSelectorModalProps, ModalEditProfileProps, ModalOptionsSelectorProps } from "./DOMInterfaces";
+import { AlertModalProps, ImageSelectorModalProps, ModalEditProfileProps, ModalOptionsSelectorProps, ModalStatusUserProps } from "./DOMInterfaces";
 import { ResultData } from "./DataResponse";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
 import { RegisterUser, Usuario } from "./Usuario";
@@ -9,6 +9,10 @@ export const alertModalInitState: AlertModalProps = {
 }
 
 export const optionSelectorModalInitState: ModalOptionsSelectorProps = {
+    visible: false,
+    options: []
+}
+export const statusUsersModalInitState: ModalStatusUserProps = {
     visible: false,
     options: []
 }
