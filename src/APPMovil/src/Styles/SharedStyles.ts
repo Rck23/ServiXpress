@@ -182,18 +182,6 @@ export const GlobalStyles = StyleSheet.create({
         borderBottomWidth: 2,
         marginBottom: 20
     },
-    CalificationContainer: {
-        alignSelf: 'center',
-        flexDirection: 'row',
-        marginBottom: 15
-    },
-    ButonCal: {
-        marginRight: 5
-    },
-    ButonCalIcon: {
-        color: mainColors.purpule,
-        fontSize: 30,
-    },
     cardContainer: {
         backgroundColor: mainColors.white,
         shadow,

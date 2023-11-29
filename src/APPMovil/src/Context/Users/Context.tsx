@@ -23,6 +23,7 @@ type UsersContextProps = {
     CleanResult: () => void
     SearchUsers: (text: string) => Promise<void>
     ChangeUserStatus: (id: string, estatus: string) => Promise<void>
+    UserReview: (id: string, calificacion: string, comentarios: string) => Promise<void>
 }
 
 const usersInitState: UsersState = {
@@ -87,7 +88,7 @@ export const UsersProvider = ({ children }: any) => {
             CleanResultDom()
         }
     };
-    
+
     const ChangeUserStatus = async (id: string, estatus: string) => {
         InitRequest('Cambiando status del usuario...')
 
@@ -97,13 +98,38 @@ export const UsersProvider = ({ children }: any) => {
                 nuevoEstatus: estatus
             });
 
-            HandleEndrequest({icon: 'success', ok: true, message:'Se ha actualizado el estatus', title:'Status actualizado'}, true);
+            HandleEndrequest({ icon: 'success', ok: true, message: 'Se ha actualizado el estatus', title: 'Status actualizado' }, true);
         } catch (error: any) {
             LocalHandleExeption(error, "Error al actualizar el status del usuario")
         } finally {
             CleanResultDom()
         }
     };
+
+    const UserReview = async (id: string, calificacion: string, comentarios: string) => {
+        InitRequest('Creando calificación del usuario...')
+
+        try {
+            const { data } = await API.post(`${apiEnpoints.userReview}`, {
+                calificacionUser: calificacion,
+                comentarios: comentarios,
+                usuarioCalificaId: id,
+                usuarioCalificadoId: "string"
+            });
+
+            HandleEndrequest({
+                icon: 'success',
+                ok: true,
+                message: 'Se ha calificado el usuario',
+                title: 'Calificacion exitosa'
+            }, true);
+        } catch (error: any) {
+            LocalHandleExeption(error, "Error al calificar al usuario")
+        } finally {
+            CleanResultDom()
+        }
+    };
+
 
 
     const CleanResult = () => {
@@ -125,7 +151,8 @@ export const UsersProvider = ({ children }: any) => {
             GetUserDetail,
             CleanResult,
             SearchUsers,
-            ChangeUserStatus
+            ChangeUserStatus,
+            UserReview
         }}>
             {children}
         </UsersContext.Provider>

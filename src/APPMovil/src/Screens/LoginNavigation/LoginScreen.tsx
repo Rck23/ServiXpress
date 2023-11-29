@@ -39,7 +39,7 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                             value={password}
                             secureText={passwordVisibility}
                             showLabel
-                            onChange={setPassword} />
+                            onChange={setPassword} />                        
 
                         <View style={LoginStyles.footer}>
                             <ButtonGlobal
