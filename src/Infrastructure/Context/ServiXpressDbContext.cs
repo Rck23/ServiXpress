@@ -21,6 +21,23 @@ namespace ServiXpress.Infrastructure.Context
         }
 
 
+        // AQUI VA LOS  public DbSet<> DE CATEGORIAS, SERVICIOS, ETC..
+
+        public virtual DbSet<EstatusUsuario> EstatusUsuarios { get; set; }
+        public virtual DbSet<EstatusServicio> EstatusServicios { get; set; }
+        public virtual DbSet<EstatusReporte> EstatusReportes { get; set; }
+        public virtual DbSet<CategoriaReporte> CategoriaReportes { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<CategoriaServicio> CategoriasServicios { get; set; }
+        public virtual DbSet<TipoServicio> TipoServicios { get; set; }
+        public virtual DbSet<Servicio> Servicios { get; set; }
+        public virtual DbSet<Calificacion> Calificaciones { get; set; }
+        public virtual DbSet<Reporte> Reportes { get; set; }
+        public virtual DbSet<Documento> Documentos { get; set; }
+        public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; }
+
+
+
         /// <summary>
         /// Guarda los cambios asincrónicamente en la base de datos.
         /// </summary>
@@ -93,7 +110,7 @@ namespace ServiXpress.Infrastructure.Context
                 .HasForeignKey(c => c.UsuarioCalificadoId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            
+
 
             builder.Entity<Reporte>()
             .HasOne(r => r.Usuario)   // La propiedad de navegación en Reporte hacia Usuario
@@ -142,25 +159,19 @@ namespace ServiXpress.Infrastructure.Context
             builder.Entity<Reporte>().Property(r => r.AgenteCierraReporteId).HasMaxLength(36).IsRequired(false);
             builder.Entity<Reporte>().Property(r => r.DescripcionAgente).HasMaxLength(500).IsRequired(false);
 
+
+            builder.Ignore<IdentityUserToken<string>>();
+
+            builder.Entity<AspNetUserToken>(entity =>
+            {
+                entity.ToTable("AspNetUserTokens"); // Ensure the correct table name
+
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.Property(e => e.UserId).HasMaxLength(36);
+
+                entity.HasOne(d => d.Usuario).WithMany(p => p.AspNetUserTokens).HasForeignKey(d => d.UserId);
+            });
         }
-
-
-        // AQUI VA LOS  public DbSet<> DE CATEGORIAS, SERVICIOS, ETC..
-
-        public DbSet<EstatusUsuario> EstatusUsuarios { get; set; }
-        public DbSet<EstatusServicio> EstatusServicios { get; set; }
-        public DbSet<EstatusReporte> EstatusReportes { get; set; }
-        public DbSet<CategoriaReporte> CategoriaReportes { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<CategoriaServicio> CategoriasServicios { get; set; }
-        public DbSet<TipoServicio> TipoServicios { get; set; }
-        public DbSet<Servicio> Servicios { get; set; }
-        public DbSet<Calificacion> Calificaciones { get; set; }
-        public DbSet<Reporte> Reportes { get; set; }
-
-        public DbSet<Documento> Documentos { get; set; }
-
-
-
     }
 }

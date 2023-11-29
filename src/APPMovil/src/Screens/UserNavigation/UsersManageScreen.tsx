@@ -25,7 +25,7 @@ export const UsersManageScreen = ({ navigation, route }: Props) => {
 
     const handleSearch = async (text: string) => {
         setSearchText(text)
-        SearchUsers(text)
+        await SearchUsers(text)
     };
 
     return (

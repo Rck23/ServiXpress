@@ -22,7 +22,10 @@ type InputProps = {
     secureText?: boolean
     showLabel?: boolean
     disabled?: boolean
+    rightButton?: boolean
+    rightIcon?: IconProps
     onPressIn?: () => void
+    OnRightButtonPress?: () => void
 }
 
 type TextAreaProps = {
@@ -60,7 +63,7 @@ type HipervinculoProps = {
 export const InputGlobal = (props: InputProps) => {
     return (
         <TouchableOpacity
-            activeOpacity={1}
+            activeOpacity={0.5}
             style={[GlobalStyles.globalInputContainer, props.styleContainer]}
             onPress={props.onPressIn}
         >
@@ -75,6 +78,13 @@ export const InputGlobal = (props: InputProps) => {
                 value={props.value}
                 editable={!props.disabled}
             />
+            <TouchableOpacity
+                activeOpacity={0.5}
+                style={GlobalStyles.globalInputRightItem}
+                onPress={props.OnRightButtonPress}
+            >
+                {props.rightIcon && <Icon style={GlobalStyles.globalInputRightItemIcon} {...props.rightIcon} />}
+            </TouchableOpacity>
         </TouchableOpacity >
     )
 }
