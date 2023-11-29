@@ -29,9 +29,6 @@ export const ServicesBoardScreen = ({ navigation, route }: Props) => {
     SearchServices(text)
   };
 
-  // const filteredData = services.filter((text) =>
-  //   text.categoriaServicio.nombre.toLowerCase().includes(searchText.toLowerCase())
-  // );
 
   return (
     <ScreenContainer>

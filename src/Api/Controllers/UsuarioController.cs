@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
 using Newtonsoft.Json;
 using ServiXpress.Application.Contracts.Identity;
@@ -122,7 +123,21 @@ namespace ServiXpress.Api.Controllers
 
             try
             {
-                return await _mediator.Send(sendPassword);
+                var result = await _mediator.Send(sendPassword);
+                if (!string.IsNullOrEmpty(result) && result.Contains("envio el correo"))
+                {
+                    var userData = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == sendPassword.Email);
+                    _context.AspNetUserTokens.Add(new AspNetUserToken
+                    {
+                        UserId = userData?.Id,
+                        LoginProvider = DateTime.Now.ToString(),
+                        Name = "Reset Password",
+                        Value = result.Split("resultCode").Last()
+                    });
+                    await _context.SaveChangesAsync();
+                }
+
+                return result?.Split("resultCode")?.First() ?? "No se envió el correo correctamente,por favor intente nuevamente.";
 
             }
             catch (Exception ex)
@@ -140,8 +155,15 @@ namespace ServiXpress.Api.Controllers
 
             try
             {
+                if (resetPasswordByToken.Password != resetPasswordByToken.ConfirmPassword)
+                    throw new Exception("Las contraseñas no coinciden, revise y vuelva a intentar.");
 
-                return await _mediator.Send(resetPasswordByToken);
+                var dateNow = DateTime.Now;
+                var resetInfo = await _context.AspNetUserTokens.Where(x => x.Value == resetPasswordByToken.Token).ToListAsync();
+                var targetResetInfo = resetInfo.FirstOrDefault(x => Convert.ToDateTime(x.LoginProvider).ToShortDateString() == dateNow.ToShortDateString()) ?? throw new Exception("No se ha encontrado una solicitud para actualización de contraseña o ya ha expirado.");
+                var updatePassword = new ResetPassword { ConfirmPassword = resetPasswordByToken.ConfirmPassword, NewPassword = resetPasswordByToken.Password, UserId = targetResetInfo.UserId };
+                await _mediator.Send(updatePassword);
+                return "Se ha actualizado su contraseña, ahora puede ingresar con su nueva contraseña.";
             }
             catch (Exception ex)
             {

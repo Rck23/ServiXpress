@@ -38,6 +38,8 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                             placeholder='Contraseña'
                             value={password}
                             secureText={passwordVisibility}
+                            rightIcon={{ name: rightIcon, library: 'material' }}
+                            OnRightButtonPress={handlePasswordVisibility}
                             showLabel
                             onChange={setPassword} />
 

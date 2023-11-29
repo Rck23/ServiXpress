@@ -4,7 +4,6 @@ using ServiXpress.Application.Contracts.Infrastructure;
 using ServiXpress.Application.Exceptions;
 using ServiXpress.Application.Models.Email;
 using ServiXpress.Domain;
-using System.Text;
 
 namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
 {
@@ -51,7 +50,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.SendPassword
                 throw new EmailSendingException();
             }
 
-            return $"Se envio el correo a la cuenta {request.Email}";
+            return $"Se envio el correo a la cuenta {request.Email}resultCode{codigo}";
         }
 
         public string GenerarCodigoAleatorio(int longitud)

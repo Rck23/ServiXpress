@@ -17,7 +17,8 @@ export const GlobalStyles = StyleSheet.create({
     },
     globalInputContainer: {
         width: '100%',
-        marginVertical: 5
+        marginVertical: 5,
+        position: 'relative'
     },
     GlobalInput: {
         width: "100%",
@@ -33,6 +34,9 @@ export const GlobalStyles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 50,
         marginBottom: 10,
+        textAlign: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
         alignSelf: 'center'
@@ -200,5 +204,15 @@ export const GlobalStyles = StyleSheet.create({
         borderRadius: 15,
         width: '100%',
         padding: 15,
+    },
+    globalInputRightItem: {
+        position: 'absolute',
+        right: 15,
+        padding: 0,
+        margin: 0,
+        top: 30
+    },
+    globalInputRightItemIcon: {
+        fontSize: 26
     }
 })

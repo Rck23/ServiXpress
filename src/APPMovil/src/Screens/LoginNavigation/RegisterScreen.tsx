@@ -80,6 +80,8 @@ export const RegisterScreen = ({ navigation, route }: Props) => {
                         <InputGlobal
                             placeholder='Contraseña'
                             secureText={passwordVisibility}
+                            rightIcon={{ name: rightIcon, library: 'material' }}
+                            OnRightButtonPress={handlePasswordVisibility}
                             showLabel
                             value={Password ?? ''}
                             onChange={(value) => onChange(value, 'Password')} />

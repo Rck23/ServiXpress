@@ -28,6 +28,8 @@ namespace ServiXpress.Domain
 
 
         public ICollection<Reporte>? Reportes { get; set; }
+        public virtual ICollection<AspNetUserToken> AspNetUserTokens { get; } = new List<AspNetUserToken>();
+
 
 
 

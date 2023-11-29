@@ -20,22 +20,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.ResetPassword
         public async Task<Unit> Handle(ResetPassword request, CancellationToken cancellationToken)
         {
             // VALIDAR USUARIO
-            var updateUsuario = await _userManager.FindByNameAsync(_authService.GetSessionUser());
-
-            if (updateUsuario is null)
-            {
-                throw new UserNotFoundException();
-            }
-
-
-            // VALIDAR LA CONTRASEÑA ANTIGUA
-            var resultValidateOldPassword = _userManager.PasswordHasher
-                .VerifyHashedPassword(updateUsuario, updateUsuario.PasswordHash!, request.OldPassword!);
-
-            if (!(resultValidateOldPassword == PasswordVerificationResult.Success))
-            {
-                throw new IncorrectPasswordException();
-            }
+            var updateUsuario = await _userManager.FindByIdAsync(request.UserId ?? "") ?? throw new UserNotFoundException();
 
             // ENCRIPTAR LA NUEVA CONTRASEÑA
             var hashedNewPassword = _userManager.PasswordHasher.HashPassword(updateUsuario, request.NewPassword!);
