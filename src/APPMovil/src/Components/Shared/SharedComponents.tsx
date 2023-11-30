@@ -6,6 +6,7 @@ import { Usuario } from '../../Interfaces/Usuario';
 import { Avatar } from 'react-native-paper';
 import { StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { Servicio } from '../../Interfaces/Servicio';
+import { useEffect, useState } from 'react';
 
 type ButtonPrincipalProps = {
     onClick?: () => void
@@ -75,8 +76,12 @@ type ServiceItemProps = {
 }
 
 export const UserListItem = (props: UserItemProps) => {
-    const user = props.user
+    const [user, setUser] = useState(props.user)
     const styleTextInfo: StyleProp<TextStyle> = { color: mainColors.pink2, fontSize: 9, fontWeight: '600', textAlign: 'right' }
+
+    useEffect(() => {
+        setUser(props.user)
+    },[props.user])
 
     return (
         <TouchableOpacity
