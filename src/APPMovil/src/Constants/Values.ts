@@ -101,7 +101,7 @@ export const apiEnpoints = {
     searchServices: '/Servicio/servicesByParameters?text=',
     searchUsers: '/Usuario/userByParameters?text=',
     changeUserStatus: '/Usuario/changeStatusUser',
-    userReview: '/Review/create'
+    reviewUserSend: '/Review/create'
 }
 
 

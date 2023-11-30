@@ -3,10 +3,11 @@ import { ResultData } from '../../Interfaces/DataResponse';
 import { HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
-import { Usuario } from '../../Interfaces/Usuario';
+import { UserReview, Usuario } from '../../Interfaces/Usuario';
 import { UsersReducer, UsersState } from './Reducer';
 import { DomContext } from '../Dom/Context';
 import { usuarioInitState } from '../../Interfaces/InterfacesInitState';
+import { AuthContext } from '../Auth/Context';
 
 
 type UsersContextProps = {
@@ -23,7 +24,6 @@ type UsersContextProps = {
     CleanResult: () => void
     SearchUsers: (text: string) => Promise<void>
     ChangeUserStatus: (id: string, estatus: string) => Promise<void>
-    UserReview: (id: string, calificacion: string, comentarios: string) => Promise<void>
 }
 
 const usersInitState: UsersState = {
@@ -40,6 +40,7 @@ export const UsersContext = createContext({} as UsersContextProps);
 export const UsersProvider = ({ children }: any) => {
     const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(UsersReducer, usersInitState);
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
     }, [])
@@ -106,30 +107,6 @@ export const UsersProvider = ({ children }: any) => {
         }
     };
 
-    const UserReview = async (id: string, calificacion: string, comentarios: string) => {
-        InitRequest('Creando calificación del usuario...')
-
-        try {
-            const { data } = await API.post(`${apiEnpoints.userReview}`, {
-                calificacionUser: calificacion,
-                comentarios: comentarios,
-                usuarioCalificaId: id,
-                usuarioCalificadoId: "string"
-            });
-
-            HandleEndrequest({
-                icon: 'success',
-                ok: true,
-                message: 'Se ha calificado el usuario',
-                title: 'Calificacion exitosa'
-            }, true);
-        } catch (error: any) {
-            LocalHandleExeption(error, "Error al calificar al usuario")
-        } finally {
-            CleanResultDom()
-        }
-    };
-
 
 
     const CleanResult = () => {
@@ -151,8 +128,7 @@ export const UsersProvider = ({ children }: any) => {
             GetUserDetail,
             CleanResult,
             SearchUsers,
-            ChangeUserStatus,
-            UserReview
+            ChangeUserStatus
         }}>
             {children}
         </UsersContext.Provider>

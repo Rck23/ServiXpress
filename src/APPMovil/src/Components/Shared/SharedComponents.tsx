@@ -102,6 +102,7 @@ export const UserListItem = (props: UserItemProps) => {
             <View>
                 <TextComponent text={user.email} />
                 <TextComponent text={user.telefono} />
+                <TextComponent text={`Estado de la cuenta: ${user.estatus}`} />
             </View>
 
         </TouchableOpacity>

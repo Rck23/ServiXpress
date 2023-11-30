@@ -1,7 +1,7 @@
 import { AlertModalProps, ImageSelectorModalProps, ModalEditProfileProps, ModalOptionsSelectorProps, ModalStatusUserProps } from "./DOMInterfaces";
 import { ResultData } from "./DataResponse";
 import { CategoriaServicio, Servicio, TipoServicio } from "./Servicio";
-import { RegisterUser, Usuario } from "./Usuario";
+import { RegisterUser, UserReview, Usuario } from "./Usuario";
 
 export const alertModalInitState: AlertModalProps = {
     title: '',
@@ -32,6 +32,14 @@ export const usuarioInitState: Usuario = {
     rolNombre: '',
     token: '',
     roles: []
+}
+
+export const userReviewInitState: UserReview = {
+    calificacionUser: 0,
+    comentarios: ' ',
+    fechaHoraRegistro: new Date(),
+    usuarioCalificadoId: '',
+    usuarioCalificaId: ''
 }
 
 export const newUsuarioInitState: RegisterUser = {

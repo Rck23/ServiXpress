@@ -14,6 +14,8 @@ import { Avatar } from "react-native-paper";
 import { StrIsNullOrEmpty } from "../../Helpers/GlobalFunctions";
 import { mainColors, systemImages } from "../../Constants/Values";
 import { UsersContext } from "../../Context/Users/Context";
+import { UserReview } from "../../Interfaces/Usuario";
+import { userReviewInitState } from "../../Interfaces/InterfacesInitState";
 
 interface Props extends StackScreenProps<ServiceStackParams, 'servicesCalificationScreen'> { }
 
@@ -22,8 +24,8 @@ export const ServicesCalificationScreen = ({ navigation, route }: Props) => {
     const [comment, setComment] = useState('');
     const [ratings, setRatings] = useState([false, false, false, false, false]);
     const [currentRating, setCurrentRating] = useState(0);
-    const { GetServiceDetails, serviceDetails } = useContext(ServicesContext)
-    const { UserReview } = useContext(UsersContext)
+    const { GetServiceDetails, serviceDetails, ReviewUserSend } = useContext(ServicesContext)
+    const [calificacion, setCalificacion] = useState<UserReview>(userReviewInitState)
 
     const handleStarPress = (index: number) => {
         // Actualiza el estado de las estrellas hasta la posición seleccionada
@@ -32,6 +34,14 @@ export const ServicesCalificationScreen = ({ navigation, route }: Props) => {
 
         // Almacena la calificación actual
         setCurrentRating(index + 1);
+
+        setCalificacion({...calificacion, CalificacionUser: index + 1})
+    };
+
+    const handleSendComments = async () => {
+        calificacion.Comentarios = comment
+        calificacion.UsuarioCalificadoId = serviceDetails.usuario.id
+        await ReviewUserSend(calificacion)
     };
 
 
@@ -57,9 +67,6 @@ export const ServicesCalificationScreen = ({ navigation, route }: Props) => {
                         />
                     ))}
                 </View>
-
-                <TextComponent style={ServicesCalifStyles.Title} text={`${serviceDetails?.usuario.nombre}`} />
-                <TextComponent style={ServicesCalifStyles.Title} text={`${serviceDetails?.categoriaServicio.nombre}`} />
             </ImageBackground>
 
             <View style={ServicesCalifStyles.container}>
@@ -76,7 +83,7 @@ export const ServicesCalificationScreen = ({ navigation, route }: Props) => {
                         icon={{ name: 'send', library: 'fontAwesome' }}
                         text="Enviar comentarios"
                         type="small"
-                        onClick={() => UserReview} />
+                        onClick={handleSendComments} />
                 </View>
             </View>
         </ScreenContainer>
