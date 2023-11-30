@@ -14,7 +14,6 @@ import { StrIsNullOrEmpty } from "../../Helpers/GlobalFunctions";
 import { systemImages } from "../../Constants/Values";
 import { Icon } from "../../Components/Shared/IconComponents";
 import { KeyValue, ModalStatusUserProps } from "../../Interfaces/DOMInterfaces";
-import { statusUsersModalInitState } from "../../Interfaces/InterfacesInitState";
 import { EstatusUsuario } from "../../Interfaces/Usuario";
 import { StatusUsersModal } from "../../Components/Modals/StatusModal";
 
@@ -22,25 +21,14 @@ interface Props extends StackScreenProps<ServiceStackParams, 'serviceDetailsScre
 
 
 export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
-    const [selectorStatusModal, setSelectorStatusModal] = useState<ModalStatusUserProps>(statusUsersModalInitState)
     const { GetServiceDetails, serviceDetails } = useContext(ServicesContext)
-    const [statusUsuario, setStatusUsuario] = useState<EstatusUsuario>()
 
     useEffect(() => {
         GetServiceDetails(route.params.id)
     }, [])
 
-    const OnHideModal = (value?: KeyValue) => {
-        if (value) {
-            var statusUser: EstatusUsuario = { estatus: value.value }
-            setStatusUsuario(statusUser)
-        }
-        setSelectorStatusModal(statusUsersModalInitState)
-    }
-
     return (
         <>
-            <StatusUsersModal {...selectorStatusModal} OnHideModal={(value) => OnHideModal(value)} />
             <ScreenContainer>
                 <View style={ServicesStyles.Header}>
                     <View style={ServicesStyles.UserContainer}>
@@ -61,7 +49,6 @@ export const ServicesDetailsScreen = ({ navigation, route }: Props) => {
                         icon={{ name: 'star', library: 'antDesign' }}
                         onClick={() => navigation.navigate('servicesCalificationScreen')}
                         type="small"
-                        disabled
                     />
                 </View>
                 <View style={ServicesStyles.container}>

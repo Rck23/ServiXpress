@@ -41,7 +41,7 @@ export const LoginScreen = ({ navigation, route }: Props) => {
                             rightIcon={{ name: rightIcon, library: 'material' }}
                             OnRightButtonPress={handlePasswordVisibility}
                             showLabel
-                            onChange={setPassword} />
+                            onChange={setPassword} />                        
 
                         <View style={LoginStyles.footer}>
                             <ButtonGlobal

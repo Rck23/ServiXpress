@@ -3,10 +3,11 @@ import { ResultData } from '../../Interfaces/DataResponse';
 import { HandleException, StrIsNullOrEmpty } from '../../Helpers/GlobalFunctions';
 import { apiEnpoints } from '../../Constants/Values';
 import API from '../../Api/Api';
-import { Usuario } from '../../Interfaces/Usuario';
+import { UserReview, Usuario } from '../../Interfaces/Usuario';
 import { UsersReducer, UsersState } from './Reducer';
 import { DomContext } from '../Dom/Context';
 import { usuarioInitState } from '../../Interfaces/InterfacesInitState';
+import { AuthContext } from '../Auth/Context';
 
 
 type UsersContextProps = {
@@ -39,6 +40,7 @@ export const UsersContext = createContext({} as UsersContextProps);
 export const UsersProvider = ({ children }: any) => {
     const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(UsersReducer, usersInitState);
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
     }, [])
@@ -87,7 +89,7 @@ export const UsersProvider = ({ children }: any) => {
             CleanResultDom()
         }
     };
-    
+
     const ChangeUserStatus = async (id: string, estatus: string) => {
         InitRequest('Cambiando status del usuario...')
 
@@ -97,13 +99,14 @@ export const UsersProvider = ({ children }: any) => {
                 nuevoEstatus: estatus
             });
 
-            HandleEndrequest({icon: 'success', ok: true, message:'Se ha actualizado el estatus', title:'Status actualizado'}, true);
+            HandleEndrequest({ icon: 'success', ok: true, message: 'Se ha actualizado el estatus', title: 'Status actualizado' }, true);
         } catch (error: any) {
             LocalHandleExeption(error, "Error al actualizar el status del usuario")
         } finally {
             CleanResultDom()
         }
     };
+
 
 
     const CleanResult = () => {

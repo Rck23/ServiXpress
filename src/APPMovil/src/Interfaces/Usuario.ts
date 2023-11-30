@@ -41,6 +41,12 @@ export interface RegisterUser {
     Foto?: ImageRequestFormData
 }
 
+export interface UserReview {
+    CalificacionUser: number,
+    Comentarios: string,
+    UsuarioCalificadoId: string
+}
+
 
 export interface UpdateUser {
     nombre: string;

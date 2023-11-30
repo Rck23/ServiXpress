@@ -28,7 +28,6 @@ export const UserDetailsScreen = ({ navigation, route }: Props) => {
     const { status, userDetail, result, GetUserDetail, ChangeUserStatus } = useContext(UsersContext)
     const [selectorStatusModal, setSelectorStatusModal] = useState<ModalStatusUserProps>(statusUsersModalInitState)
     const [statusUsuario, setStatusUsuario] = useState<EstatusUsuario>()
-    const [buttonText, setButtonText] = useState(`Modificar estatús, ${userDetail?.estatus}`);
 
 
     useEffect(() => {

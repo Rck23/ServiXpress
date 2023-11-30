@@ -4,6 +4,7 @@ import { GlobalStyles } from '../../Styles/SharedStyles';
 import { Icon, IconProps } from './IconComponents';
 import { TextComponent } from './SharedComponents';
 import { useState } from 'react';
+import { ServicesCalifStyles } from '../../Styles/ServicesStyles';
 
 type CalificationProps = {
     onClick?: () => void
@@ -129,11 +130,11 @@ export const ButtonGlobal = (props: ButtonProps) => {
 export const ButtonCalif = (props: CalificationProps) => {
     return (
         <TouchableOpacity
-            style={[GlobalStyles.ButonCal]}
+            style={[ServicesCalifStyles.ButonCal]}
             onPress={() => props.onClick ? props.onClick() : {}}
             activeOpacity={0.7}
         >
-            <Icon name={props.icon.name} library={props.icon.library} style={[GlobalStyles.ButonCalIcon]} />
+            <Icon name={props.icon.name} library={props.icon.library} style={[ServicesCalifStyles.ButonCalIcon]} />
         </TouchableOpacity>
     )
 }

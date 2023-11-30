@@ -8,6 +8,8 @@ import { CategoriaServicio, ServiceCreate, Servicio } from '../../Interfaces/Ser
 import { ValidateRegisterServiceForm } from '../../Helpers/FormsFunctions';
 import { servicioInitState } from '../../Interfaces/InterfacesInitState';
 import { DomContext } from '../Dom/Context';
+import { UserReview } from '../../Interfaces/Usuario';
+import { AuthContext } from '../Auth/Context';
 
 
 type ServicesContextProps = {
@@ -26,6 +28,7 @@ type ServicesContextProps = {
     CleanResult: () => void
     GetServiceDetails: (id: string) => Promise<void>
     SearchServices: (text: string) => Promise<void>
+    ReviewUserSend: (calificacion: UserReview) => Promise<void>
 }
 
 const servicesInitState: ServicesState = {
@@ -44,6 +47,7 @@ export const ServicesContext = createContext({} as ServicesContextProps);
 export const ServicesProvider = ({ children }: any) => {
     const { InitRequest, CleanResultDom, HandleEndrequest } = useContext(DomContext)
     const [state, dispatch] = useReducer(ServicesReducer, servicesInitState);
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
         GetServicesCategories()
@@ -132,6 +136,35 @@ export const ServicesProvider = ({ children }: any) => {
         }
     };
 
+    const ReviewUserSend = async (calificacion: UserReview) => {
+        InitRequest('Creando calificación del usuario...')
+
+        console.log(calificacion)
+        try {
+            if (calificacion.CalificacionUser == 0 || StrIsNullOrEmpty(calificacion.Comentarios)) {
+                return HandleEndrequest({
+                    icon: 'error',
+                    ok: true,
+                    message: 'Debes enviar una calificacion y comentarios validos',
+                    title: 'Datos requeridos'
+                }, true);
+            }
+
+            const { data } = await API.post(`${apiEnpoints.reviewUserSend}`, calificacion);
+
+            HandleEndrequest({
+                icon: 'success',
+                ok: true,
+                message: 'Se ha calificado el usuario',
+                title: 'Calificacion exitosa'
+            }, true);
+        } catch (error: any) {
+            LocalHandleExeption(error, "Error al calificar al usuario")
+        } finally {
+            CleanResultDom()
+        }
+    };
+
 
     const CleanResult = () => {
         dispatch({ type: 'cleanResult' })
@@ -153,7 +186,8 @@ export const ServicesProvider = ({ children }: any) => {
             GetServices,
             CleanResult,
             GetServiceDetails,
-            SearchServices
+            SearchServices,
+            ReviewUserSend
         }}>
             {children}
         </ServicesContext.Provider>

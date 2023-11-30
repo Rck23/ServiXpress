@@ -88,3 +88,57 @@ export const ServicesStyles = StyleSheet.create({
         color: 'gray',
     }
 })
+
+export const ServicesCalifStyles = StyleSheet.create({
+    Header: {
+        height: 350,
+        backgroundColor: mainColors.lightpurple,
+        marginVertical: -10,
+        marginHorizontal: -10,
+        justifyContent: 'center',
+        alignItems: "center",
+        padding: 5
+    },
+    Title: {
+        color: mainColors.red,
+        fontWeight: "bold",
+        fontSize: 20
+    },
+    avatar: {
+        width: 120,
+        height: 120,
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 200,
+        backgroundColor: mainColors.black,
+        borderColor: mainColors.white,
+        borderWidth: 4,
+        marginBottom: 10
+    },
+    Descripcion: {
+        color: mainColors.purpule,
+        fontSize: 16,
+        textAlign: "justify",
+        fontWeight: "bold"
+    },
+    CalificationContainer: {
+        alignSelf: 'center',
+        flexDirection: 'row',
+        marginTop: 15,
+        marginBottom: 15
+    },
+    ButonCal: {
+        marginRight: 5
+    },
+    ButonCalIcon: {
+        color: mainColors.purpule,
+        fontSize: 30,
+    },
+    container: {
+        flex: 1,
+        padding: 20,
+        backgroundColor: mainColors.white,
+        borderTopStartRadius: 20,
+        borderTopEndRadius: 20
+    }
+})
