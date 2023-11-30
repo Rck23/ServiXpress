@@ -28,7 +28,7 @@ namespace ServiXpress.Api.Controllers
 
 
         [HttpPost("create", Name = "CreateReviewii")]
-        public async Task<ActionResult<ReviewVm>> CreateReview([FromForm] CreateReviewUser createReview)
+        public async Task<ActionResult<ReviewVm>> CreateReview([FromBody] CreateReviewUser createReview)
         {
             _logger.LogInformation("Creando calificacion a usuario");
 

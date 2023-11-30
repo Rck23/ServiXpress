@@ -302,20 +302,12 @@ namespace ServiXpress.Api.Controllers
 
                 if (usuario != null)
                 {
-                    // Verificar si el nuevo estado es válido
-                    if (string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Verificado, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Bloqueado, StringComparison.OrdinalIgnoreCase))
-                    {
+                    
                         usuario.Estatus = user.NuevoEstatus;
                         await _context.SaveChangesAsync();
 
                         // Devolver un mensaje personalizado
                         return Ok(new { message = $"Se cambió el estatus de {usuario.Nombre} a {user.NuevoEstatus}" });
-                    }
-                    else
-                    {
-                        throw new StatusNotFound();
-                    }
                 }
                 else
                 {
