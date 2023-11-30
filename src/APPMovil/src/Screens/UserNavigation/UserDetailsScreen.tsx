@@ -37,6 +37,7 @@ export const UserDetailsScreen = ({ navigation, route }: Props) => {
     const OnHideModal = async (value?: KeyValue) => {
         setSelectorStatusModal(statusUsersModalInitState)
         if (StrIsNullOrEmpty(value?.key)) return;
+        if (userDetail) userDetail.estatus = value?.key ?? ''
         await ChangeUserStatus(route.params.id, value?.key ?? '')
     }
 
