@@ -23,7 +23,7 @@ type DomContextProps = {
     AddEventOnConfirmAlert: (callback: () => void) => void
     AddEventOnCloseAlert: (callback: () => void) => void
     InitRequest: (msg?: string, withoutBlockUI?: boolean) => void
-    HandleEndrequest: (data: ResultData, shootAlert: boolean) => void
+    HandleEndrequest: (data: ResultData, shootAlert: boolean, onSucces?: () => void) => void
 }
 
 
@@ -67,13 +67,18 @@ export const DomProvider = ({ children }: any) => {
         dispatch({ type: 'requesting', payload: { text: msg ?? '', withoutBlockUI } })
     }
 
-    const HandleEndrequest = (data: ResultData, shootAlert: boolean) => {
+    const HandleEndrequest = (data: ResultData, shootAlert: boolean, onSucces?: () => void) => {
+        const realFunction = () => {
+            alertModal.OnHideAlert && alertModal.OnHideAlert();
+            data.ok && onSucces && onSucces();
+        }
         setAlertModal({
             ...alertModal,
             visible: true,
             message: data.message,
             title: data.title ?? '',
-            icon: data.icon
+            icon: data.icon,
+            OnHideAlert: realFunction
         })
 
         dispatch({ type: 'endRequest', payload: { data, shootAlert } })

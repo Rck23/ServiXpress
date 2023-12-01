@@ -28,7 +28,7 @@ type ServicesContextProps = {
     CleanResult: () => void
     GetServiceDetails: (id: string) => Promise<void>
     SearchServices: (text: string) => Promise<void>
-    ReviewUserSend: (calificacion: UserReview) => Promise<void>
+    ReviewUserSend: (calificacion: UserReview, onSucces?: () => void) => Promise<void>
 }
 
 const servicesInitState: ServicesState = {
@@ -136,7 +136,7 @@ export const ServicesProvider = ({ children }: any) => {
         }
     };
 
-    const ReviewUserSend = async (calificacion: UserReview) => {
+    const ReviewUserSend = async (calificacion: UserReview, onSucces?: () => void) => {
         InitRequest('Creando calificación del usuario...')
 
         console.log(calificacion)
@@ -147,7 +147,7 @@ export const ServicesProvider = ({ children }: any) => {
                     ok: true,
                     message: 'Debes enviar una calificacion y comentarios validos',
                     title: 'Datos requeridos'
-                }, true);
+                }, true, onSucces);
             }
 
             const { data } = await API.post(`${apiEnpoints.reviewUserSend}`, calificacion);

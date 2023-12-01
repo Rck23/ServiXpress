@@ -41,7 +41,7 @@ export const ServicesCalificationScreen = ({ navigation, route }: Props) => {
     const handleSendComments = async () => {
         calificacion.Comentarios = comment
         calificacion.UsuarioCalificadoId = serviceDetails.usuario.id
-        await ReviewUserSend(calificacion)
+        await ReviewUserSend(calificacion, () => navigation.navigate('servicesBoardScreen'))
     };
 
 
