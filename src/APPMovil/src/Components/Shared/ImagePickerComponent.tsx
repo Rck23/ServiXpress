@@ -16,7 +16,7 @@ export const TakeImageFromGallery = async (): Promise<ResultData> => {
             mediaType: 'photo',
             quality: 0.5,
         }).then(response => {
-            if (response.didCancel) return { ...result, data: 'aborted' }
+            if (response.didCancel) return { ...result, ok: true }
             if (response.assets && response.assets[0].uri) {
                 result.data = response
                 result.ok = true

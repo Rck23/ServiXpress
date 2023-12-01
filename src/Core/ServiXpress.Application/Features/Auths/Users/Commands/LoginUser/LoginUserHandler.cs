@@ -76,9 +76,19 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.LoginUser
                 Apellidos = user.Apellidos,
                 Telefono = user.Telefono,
                 Email = user.Email,
-                //Avatar = user.AvatarUrl,
-                Token = _authService.CreateToken(user, roles), // Generar un token de autenticación.
+                AvatarUrl = user.AvatarUrl,
+                Token = _authService.CreateToken(user, roles),
                 Roles = roles,
+                Estado = user.Estado,
+                Estatus = user.Estatus,
+                Calle = user.Calle,
+                CodigoPostal = user.CodigoPostal,
+                ColoniaFraccionamiento = user.ColoniaFraccionamiento,
+                Descripcion = user.Descripcion,
+                FechaHoraRegistro = user.FechaHoraRegistro,
+                Municipio = user.Municipio,
+                NumExterior = user.NumExterior,
+                NumInterior = user.NumInterior
             };
 
             return authRes; // Devolver la respuesta de autenticación.

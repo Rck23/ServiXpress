@@ -132,7 +132,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Configurar CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("CorsPolicy",
+    options.AddPolicy("AllowAllOrigins",
         builder => builder.AllowAnyOrigin()
                             .AllowAnyMethod()
                             .AllowAnyHeader()
@@ -171,7 +171,7 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseCors("CorsPolicy");
+app.UseCors("AllowAllOrigins");
 
 app.MapControllers();
 

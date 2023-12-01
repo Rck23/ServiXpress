@@ -9,5 +9,6 @@ namespace ServiXpress.Application.Features.Auths.Users.Queries.GetUserByParamete
         public string? Apellidos { get; set; }
         public string? Telefono { get; set; }
         public string? Email { get; set; }
+        public string? Text { get; set; }
     }
 }

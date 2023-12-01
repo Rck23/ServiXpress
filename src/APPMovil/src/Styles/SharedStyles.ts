@@ -1,27 +1,32 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 import { mainColors } from '../Constants/Values';
+
+const shadow = {
+    shadowColor: mainColors.black,
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    elevation: 3
+};
 
 export const GlobalStyles = StyleSheet.create({
     boxShadow: {
-        shadowColor: mainColors.black,
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 3
+        ...shadow
     },
     Scrollview: {
-        bottom: 20,
-        marginVertical: 30,
-        padding: 10
+    },
+    globalInputContainer: {
+        width: '100%',
+        marginVertical: 5,
+        position: 'relative'
     },
     GlobalInput: {
         width: "100%",
-        borderColor: mainColors.textColor,
+        borderColor: mainColors.gray,
         borderWidth: 2,
-        borderRadius: 10,
-        paddingLeft: 20,
-        marginBottom: 20,
-        color: mainColors.textColor,
+        borderRadius: 15,
+        padding: 10,
+        color: mainColors.purpule3,
         fontSize: 15
     },
     GlobalButton: {
@@ -29,6 +34,9 @@ export const GlobalStyles = StyleSheet.create({
         paddingHorizontal: 20,
         borderRadius: 50,
         marginBottom: 10,
+        textAlign: 'center',
+        alignItems: 'center',
+        alignContent: 'center',
         flexDirection: 'row',
         justifyContent: 'center',
         alignSelf: 'center'
@@ -73,15 +81,10 @@ export const GlobalStyles = StyleSheet.create({
     },
     Globalcontainer: {
         backgroundColor: mainColors.white,
-        width: "95%",
         borderRadius: 10,
-        shadowColor: mainColors.black,
-        shadowOpacity: 0.26,
-        shadowOffset: { width: 0, height: 2 },
-        shadowRadius: 10,
-        elevation: 5,
-        padding: 5,
-        bottom: 50
+        width: '100%',
+        ...shadow,
+        padding: 5
     },
     GlobalBackground: {
         flex: 1,
@@ -89,16 +92,14 @@ export const GlobalStyles = StyleSheet.create({
         justifyContent: 'center',
     },
     GlobalButtonPrincipal: {
-        bottom: 20,
-        width: 310,
         backgroundColor: mainColors.white,
         borderColor: mainColors.gray,
+        ...shadow,
         borderWidth: 1,
         paddingVertical: 35,
+        marginVertical: 15,
         paddingHorizontal: 30,
-        borderRadius: 10,
-        marginBottom: 25,
-        flexDirection: "column"
+        borderRadius: 10
     },
     GlobalButtonIconPrincipal: {
         color: mainColors.gray,
@@ -117,13 +118,13 @@ export const GlobalStyles = StyleSheet.create({
         alignSelf: 'center'
     },
     GlobalItem: {
-        borderColor: mainColors.purpule,
-        borderWidth: 2,
-        paddingVertical: 30,
-        paddingHorizontal: 20,
-        marginBottom: 30,
-        borderRadius: 10,
-        flexDirection: 'row'
+        borderLeftWidth: 5,
+        borderLeftColor: mainColors.purpule3,
+        padding: 15,
+        marginVertical: 5,
+        borderRadius: 15,
+        backgroundColor: mainColors.white,
+        ...shadow
     },
     GlobalItemText: {
         fontSize: 17,
@@ -145,5 +146,61 @@ export const GlobalStyles = StyleSheet.create({
         width: "90%",
         borderRadius: 10,
         padding: 10
+    },
+    row: {
+        flexDirection: 'row'
+    },
+    Titulo: {
+        color: mainColors.purpule,
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 10
+    },
+    Dato: {
+        color: mainColors.black,
+        fontSize: 17,
+        textAlign: 'justify'
+    },
+    DatCont: {
+        marginTop: 10,
+        marginBottom: 30
+    },
+    ScrollContainer: {
+        paddingHorizontal: 10,
+        paddingVertical: 10
+    },
+    formContainer: {
+        backgroundColor: mainColors.white,
+        shadow,
+        borderRadius: 15,
+        width: '100%',
+        padding: 15,
+    },
+    title: {
+        marginTop: 10,
+        textAlign: 'center',
+        color: mainColors.purpule,
+        fontSize: 25,
+        fontWeight: 'bold',
+        borderBottomColor: mainColors.ligtgray,
+        borderBottomWidth: 2,
+        marginBottom: 20
+    },
+    cardContainer: {
+        backgroundColor: mainColors.white,
+        shadow,
+        borderRadius: 15,
+        width: '100%',
+        padding: 15,
+    },
+    globalInputRightItem: {
+        position: 'absolute',
+        right: 15,
+        padding: 0,
+        margin: 0,
+        top: 30
+    },
+    globalInputRightItemIcon: {
+        fontSize: 26
     }
 })

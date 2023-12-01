@@ -57,14 +57,24 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.UpdateUser
 
             return new AuthResponse
             {
-                Id = userById!.Id,
+                Id = userById.Id,
                 Nombre = userById.Nombre,
                 Apellidos = userById.Apellidos,
                 Telefono = userById.Telefono,
                 Email = userById.Email,
-                Avatar = userById.AvatarUrl,
-                Token = _authService.CreateToken(userById, roles),
-                Roles = roles
+                Calle = userById.Calle,
+                Estatus = userById.Estatus,
+                Estado = userById.Estado,
+                FechaHoraRegistro = userById.FechaHoraRegistro,
+                Municipio = userById.Municipio,
+                NumInterior = userById.NumInterior,
+                ColoniaFraccionamiento = userById.ColoniaFraccionamiento,
+                NumExterior = userById.NumExterior,
+                CodigoPostal = userById.CodigoPostal,
+                Descripcion = userById.Descripcion,
+                AvatarUrl = userById.AvatarUrl,
+                Roles = roles,
+                Token = _authService.CreateToken(userById, roles)  
             };
         }
     }

@@ -1,33 +1,67 @@
+import { ImageRequestFormData } from "./DOMInterfaces";
+
+export interface EstatusUsuario {
+    estatus: string
+}
+
 export interface Usuario {
-    // Id: string;
-    Nombre?: string | null;
-    Apellidos?: string | null;
-    Telefono?: string | null;
-    AvatarUrl?: string | null;
-    UserName?: string | null;
-    NormalizedUserName?: string | null;
-    Email?: string | null;
-    NormalizedEmail?: string | null;
-    EmailConfirmed?: boolean;
-    Password?: string | null;
-    SecurityStamp?: string | null;
-    ConcurrencyStamp?: string | null;
-    PhoneNumber?: string | null;
-    PhoneNumberConfirmed?: boolean;
-    TwoFactorEnabled?: boolean;
-    LockoutEnd?: Date | null;
-    LockoutEnabled?: boolean;
-    AccessFailedCount?: number;
-    Calle?: string | null;
-    CodigoPostal?: string | null;
-    ColoniaFraccionamiento?: string | null;
-    Descripcion?: string | null;
-    Estado?: string | null;
-    Estatus?: string | null;
-    FechaHoraRegistro?: Date | null;
-    Municipio?: string | null;
-    NumExterior?: number | null;
-    NumInterior?: number | null;
+    id: string;
+    nombre: string;
+    apellidos: string;
+    telefono?: string;
+    avatarUrl?: string;
+    userName?: string;
+    email: string;
+    password?: string;
+    calle?: string;
+    codigoPostal?: string;
+    coloniaFraccionamiento?: string;
+    descripcion?: string;
+    estado?: string;
+    estatus: string;
+    fechaHoraRegistro: Date;
+    municipio?: string;
+    numExterior?: number;
+    numInterior?: number;
+    rol: number;
+    roles: string[]
+    rolNombre: string;
+    foto?: any;
+    token: string
+}
+
+
+export interface RegisterUser {
+    Nombre: string;
+    Apellidos: string;
+    Telefono: string;
     Rol: number;
-    Foto?: any
+    Email: string;
+    Password: string;
+    Foto?: ImageRequestFormData
+}
+
+export interface UserReview {
+    CalificacionUser: number,
+    Comentarios: string,
+    UsuarioCalificadoId: string
+}
+
+
+export interface UpdateUser {
+    nombre: string;
+    apellidos: string;
+    telefono: string;
+    calle: string
+    rol: number;
+    coloniaFraccionamiento: string
+    codigoPostal: string
+    numExterior: number
+    numInterior: number
+    municipio: string
+    estado: string
+    descripcion: string
+    email: string;
+    password: string;
+    foto?: ImageRequestFormData
 }

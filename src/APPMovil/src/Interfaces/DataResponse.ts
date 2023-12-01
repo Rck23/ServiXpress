@@ -1,9 +1,11 @@
+import { AlertIcons } from "../Constants/Properties"
+
 export interface ResultData {
     ok: boolean
     message?: string
     title?: string
     data?: any
-    icon: 'success' | 'error' | 'info' | 'warning' | 'question'
+    icon: AlertIcons
 }
 
 
@@ -15,13 +17,9 @@ export interface ResponseApi {
 }
 
 
-export interface LoginResponse {
-    id: string,
-    nombre: string,
-    apellidos: string,
-    telefono: string,
+export interface ResetPassword {
     email: string,
     token: string,
-    avatar: string,
-    roles: string[]
+    password: string,
+    confirmPassword: string
 }

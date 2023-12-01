@@ -1,32 +1,31 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { LoginScreen } from '../Screens/LoginScreen';
-import { RegisterScreen } from '../Screens/RegisterScreen';
-import { RecoveryScreen } from '../Screens/RecoveryScreen';
-import { RequestScreen } from '../Screens/RequestScreen';
+import { LoginScreen } from '../Screens/LoginNavigation/LoginScreen';
+import { RegisterScreen } from '../Screens/LoginNavigation/RegisterScreen';
+import { RecoveryScreen } from '../Screens/LoginNavigation/RecoveryScreen';
+import { customScreenOpitons } from '../Constants/Properties';
+import { ResetPasswordScreen } from '../Screens/LoginNavigation/ResetPasswordScreen';
 
 
 export type AuthStackParams = {
     loginScreen: undefined
     registerScreen: undefined
     recoveryScreen: undefined
-    requestScreen: undefined
+    resetPasswordScreen: undefined
 }
 
 const Stack = createStackNavigator<AuthStackParams>();
 
 export const AuthNavigator = () => {
     return (
-        <Stack.Navigator 
+        <Stack.Navigator
             initialRouteName="loginScreen"
-            screenOptions={{
-                headerShown: false
-            }}
+            screenOptions={{ ...customScreenOpitons }}
         >
-            <Stack.Screen name="registerScreen" component={RegisterScreen} />
-            <Stack.Screen name="recoveryScreen" component={RecoveryScreen} />
-            <Stack.Screen name="loginScreen" component={LoginScreen} />
-            <Stack.Screen name="requestScreen" component={RequestScreen} />
+            <Stack.Screen options={{ title: 'Crear cuenta' }} name="registerScreen" component={RegisterScreen} />
+            <Stack.Screen options={{ title: 'Recuperar contraseña' }} name="recoveryScreen" component={RecoveryScreen} />
+            <Stack.Screen options={{ headerShown: false }} name="loginScreen" component={LoginScreen} />
+            <Stack.Screen options={{ title: 'Actualizar contraseña' }} name='resetPasswordScreen' component={ResetPasswordScreen} />
         </Stack.Navigator>
     );
 }

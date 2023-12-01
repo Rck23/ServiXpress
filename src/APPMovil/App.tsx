@@ -1,12 +1,15 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { Navigator } from "./src/Navigation/Navigator";
 import { AuthProvider } from "./src/Context/Auth/Context";
+import { DomProvider } from "./src/Context/Dom/Context";
 
 const AppState = ({ children }: any) => {
   return (
-    <AuthProvider>
-      {children}
-    </AuthProvider>
+    <DomProvider>
+      <AuthProvider>
+        {children}
+      </AuthProvider>
+    </DomProvider>
   )
 }
 

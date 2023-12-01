@@ -5,35 +5,21 @@ export interface AuthState {
     status: 'checking' | 'authenticated' | 'not-authenticated';
     token: string | null;
     result?: ResultData;
-    user: Usuario | null;
+    user?: Usuario;
+    messageRequest?: string
 }
 
 type AuthAction =
     | { type: 'signUp', payload: { token: string, usuario: Usuario } }
     | { type: 'ok', payload: { token: string, usuario: Usuario } }
-    | { type: 'showAlert', payload: ResultData }
-    | { type: 'hideAlert' }
     | { type: 'notAuthenticated' }
     | { type: 'logout' }
+    | { type: 'setUserSession', payload: Usuario }
 
 
 export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => {
 
     switch (action.type) {
-        case 'showAlert':
-            return {
-                ...state,
-                status: 'not-authenticated',
-                token: null,
-                result: action.payload
-            }
-
-        case 'hideAlert':
-            return {
-                ...state,
-                result: undefined
-            };
-
         case 'signUp':
         case 'ok':
             return {
@@ -50,9 +36,13 @@ export const AuthReducer = (state: AuthState, action: AuthAction): AuthState => 
                 ...state,
                 status: 'not-authenticated',
                 token: null,
-                user: null
+                user: undefined
             }
-
+        case "setUserSession":
+            return {
+                ...state,
+                user: action.payload
+            }
         default:
             return state;
     }

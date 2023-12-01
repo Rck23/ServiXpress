@@ -12,7 +12,7 @@ export const RecoveryStyles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "rgba(255, 255, 255, 0.78)",
+        paddingHorizontal: 10
     },
     logo: {
         alignSelf: "center",
@@ -21,13 +21,15 @@ export const RecoveryStyles = StyleSheet.create({
         marginBottom: 20
     },
     encabezado: {
-        fontSize: 25,
-        color: mainColors.textColor,
+        fontSize: 18,
+        color: mainColors.dark,
         textAlign: 'center',
         padding: 8,
-        fontWeight: "bold",
+        fontWeight: "500",
         borderBottomColor: mainColors.blackLight,
         borderBottomWidth: 1,
+        backgroundColor: mainColors.light,
+        borderRadius: 10,
         marginBottom: 15
     },
     texto: {
@@ -37,5 +39,8 @@ export const RecoveryStyles = StyleSheet.create({
         color: "black",
         textAlign: "justify",
         marginBottom: 20
+    },
+    footer: {
+        marginTop: 15
     }
 });

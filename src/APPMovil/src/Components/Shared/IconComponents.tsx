@@ -10,11 +10,12 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ZocialIcon from 'react-native-vector-icons/Zocial'
 import { mainColors } from '../../Constants/Values';
+import { IconLibraries } from '../../Constants/Properties';
 
 
 export type IconProps = {
     name: string
-    library: 'material' | 'ion' | 'zocial' | 'antDesign' | 'entypo' | 'evil' | 'fontAwesome' | 'foundation' | 'materialCommunity'
+    library: IconLibraries
     size?: number
     color?: string
     style?: StyleProp<TextStyle>

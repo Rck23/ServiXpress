@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
 using Newtonsoft.Json;
 using ServiXpress.Application.Contracts.Identity;
@@ -82,19 +83,19 @@ namespace ServiXpress.Api.Controllers
         [HttpPost("register", Name = "Register")]
         public async Task<ActionResult<AuthResponse>> Register([FromForm] RegisterUser register)
         {
-            //if (register.Foto is not null)
-            //{
-            //    // Si se proporciona una imagen en el formulario de registro, sube la imagen al servicio ManageImage.
-            //    var resultImage = await _manageImageService.UploadImage(new ImageData
-            //    {
-            //        ImageStream = register.Foto!.OpenReadStream(), // Abre el flujo de datos de la imagen.
-            //        Nombre = register.Foto.Name // Obtiene el nombre de la imagen.
-            //    }
-            //    );
+            if (register.Foto is not null)
+            {
+                // Si se proporciona una imagen en el formulario de registro, sube la imagen al servicio ManageImage.
+                var resultImage = await _manageImageService.UploadImage(new ImageData
+                {
+                    ImageStream = register.Foto!.OpenReadStream(), // Abre el flujo de datos de la imagen.
+                    Nombre = register.Foto.Name // Obtiene el nombre de la imagen.
+                }
+                );
 
-            //    register.FotoId = resultImage.PublicId; // Establece el ID público de la imagen en el registro del usuario.
-            //    register.FotoUrl = resultImage.Url; // Establece la URL de la imagen en el registro del usuario.
-            //}
+                register.FotoId = resultImage.PublicId; // Establece el ID público de la imagen en el registro del usuario.
+                register.FotoUrl = resultImage.Url; // Establece la URL de la imagen en el registro del usuario.
+            }
             _logger.LogInformation("Registrando usuario");
 
             try
@@ -122,7 +123,21 @@ namespace ServiXpress.Api.Controllers
 
             try
             {
-                return await _mediator.Send(sendPassword);
+                var result = await _mediator.Send(sendPassword);
+                if (!string.IsNullOrEmpty(result) && result.Contains("envio el correo"))
+                {
+                    var userData = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == sendPassword.Email);
+                    _context.AspNetUserTokens.Add(new AspNetUserToken
+                    {
+                        UserId = userData?.Id,
+                        LoginProvider = DateTime.Now.ToString(),
+                        Name = "Reset Password",
+                        Value = result.Split("resultCode").Last()
+                    });
+                    await _context.SaveChangesAsync();
+                }
+
+                return result?.Split("resultCode")?.First() ?? "No se envió el correo correctamente,por favor intente nuevamente.";
 
             }
             catch (Exception ex)
@@ -140,8 +155,15 @@ namespace ServiXpress.Api.Controllers
 
             try
             {
+                if (resetPasswordByToken.Password != resetPasswordByToken.ConfirmPassword)
+                    throw new Exception("Las contraseñas no coinciden, revise y vuelva a intentar.");
 
-                return await _mediator.Send(resetPasswordByToken);
+                var dateNow = DateTime.Now;
+                var resetInfo = await _context.AspNetUserTokens.Where(x => x.Value == resetPasswordByToken.Token).ToListAsync();
+                var targetResetInfo = resetInfo.FirstOrDefault(x => Convert.ToDateTime(x.LoginProvider).ToShortDateString() == dateNow.ToShortDateString()) ?? throw new Exception("No se ha encontrado una solicitud para actualización de contraseña o ya ha expirado.");
+                var updatePassword = new ResetPassword { ConfirmPassword = resetPasswordByToken.ConfirmPassword, NewPassword = resetPasswordByToken.Password, UserId = targetResetInfo.UserId };
+                await _mediator.Send(updatePassword);
+                return "Se ha actualizado su contraseña, ahora puede ingresar con su nueva contraseña.";
             }
             catch (Exception ex)
             {
@@ -248,18 +270,14 @@ namespace ServiXpress.Api.Controllers
         // [Authorize(Roles = RoleAPI.AGENTE)]
         [AllowAnonymous]
         [HttpGet("userByParameters", Name = "GetUserByParameters")]
-        public async Task<ActionResult<List<AuthResponse>>> GetUserByParameters([FromQuery] GetUserByParameters userByParameters)
+        public async Task<ActionResult<List<AuthResponse>>> GetUserByParameters([FromQuery] string text)
         {
             _logger.LogInformation("Obteniendo usuario(s) por parametro");
 
             try
             {
-                var authResponses = await _mediator.Send(userByParameters);
-
-                if (!authResponses.Any())
-                {
-                    return NotFound("No se encontraron usuarios con los criterios de búsqueda proporcionados.");
-                }
+                var request = new GetUserByParameters { Text = text };
+                var authResponses = await _mediator.Send(request);
 
                 return Ok(authResponses);
 
@@ -284,20 +302,12 @@ namespace ServiXpress.Api.Controllers
 
                 if (usuario != null)
                 {
-                    // Verificar si el nuevo estado es válido
-                    if (string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Verificado, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(user.NuevoEstatus, EstatusUsuarioAPI.Bloqueado, StringComparison.OrdinalIgnoreCase))
-                    {
+                    
                         usuario.Estatus = user.NuevoEstatus;
                         await _context.SaveChangesAsync();
 
                         // Devolver un mensaje personalizado
                         return Ok(new { message = $"Se cambió el estatus de {usuario.Nombre} a {user.NuevoEstatus}" });
-                    }
-                    else
-                    {
-                        throw new StatusNotFound();
-                    }
                 }
                 else
                 {

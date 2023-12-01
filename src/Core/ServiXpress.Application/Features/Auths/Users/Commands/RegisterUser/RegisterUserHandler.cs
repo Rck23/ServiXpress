@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Mailjet.Client.Resources;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Extensions;
 using ServiXpress.Application.Contracts.Identity;
@@ -72,9 +73,7 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                 Apellidos = request.Apellidos,
                 Telefono = request.Telefono,
                 Email = request.Email,
-                Estatus = EstatusUsuarioAPI.Alta // Asignar el estado "Alta"
-                //AvatarUrl = request.FotoUrl
-
+                AvatarUrl = request.FotoUrl
             };
 
             var validator = new UsuarioValidator();
@@ -137,9 +136,19 @@ namespace ServiXpress.Application.Features.Auths.Users.Commands.RegisterUser
                     Apellidos = usuario.Apellidos,
                     Telefono = usuario.Telefono,
                     Email = usuario.Email,
+                    AvatarUrl = usuario.AvatarUrl,
                     Token = _authService.CreateToken(usuario, roles),
-                    Avatar = usuario.AvatarUrl,
-                    Roles = roles
+                    Roles = roles,
+                    Estado = usuario.Estado,
+                    Estatus = usuario.Estatus,
+                    Calle = usuario.Calle,
+                    CodigoPostal = usuario.CodigoPostal,
+                    ColoniaFraccionamiento = usuario.ColoniaFraccionamiento,
+                    Descripcion = usuario.Descripcion,
+                    FechaHoraRegistro = usuario.FechaHoraRegistro,
+                    Municipio = usuario.Municipio,
+                    NumExterior = usuario.NumExterior,
+                    NumInterior = usuario.NumInterior
                 };
 
 
